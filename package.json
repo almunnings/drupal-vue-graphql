@@ -1,0 +1,33 @@
+{
+  "name": "@almunnings/drupal-vue-graphql",
+  "description": "Drupal via Apollo GraphQL and Vue.js",
+  "license": "MIT",
+  "version": "0.0.1",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/almunnings/drupal-vue-graphql.git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@apollo/client": "^3.7.10",
+    "@vitejs/plugin-vue": "^4.1.0",
+    "@vue/apollo-composable": "^4.0.0-beta.4",
+    "graphql": "^16.6.0",
+    "graphql-tag": "^2.12.6",
+    "pinia": "^2.0.33",
+    "vite": "^4.2.1",
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
+  },
+  "keywords": [
+    "drupal",
+    "vue",
+    "graphql"
+  ]
+}
