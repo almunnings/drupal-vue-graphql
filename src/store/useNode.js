@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import apolloClient from '../plugins/apollo'
+import apolloClient from '@/plugins/apollo'
 import gql from 'graphql-tag'
 
 export const useNodeStore = defineStore('node', {
@@ -24,11 +24,11 @@ export const useNodeStore = defineStore('node', {
           `,
         })
         .then(({ data }) => {
-          this.node = data.node;
-          localStorage.setItem('node', JSON.stringify(this.node));
-        });
+          this.node = data.node
+          localStorage.setItem('node', JSON.stringify(this.node))
+        })
     },
   },
 
   getters: {},
-});
+})

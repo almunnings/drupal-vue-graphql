@@ -2,15 +2,15 @@ import {
   ApolloClient,
   createHttpLink,
   InMemoryCache,
-} from "@apollo/client/core";
+} from "@apollo/client/core"
 
-import { setContext } from "@apollo/client/link/context";
+import { setContext } from "@apollo/client/link/context"
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
-  uri: process.env.VUE_APP_GRAPHQL_ENDPOINT,
+  uri: import.meta.env.VUE_APP_GRAPHQL_ENDPOINT,
   credentials: "include",
-});
+})
 
 const authLink = setContext((_, { headers }) => {
   return {
@@ -18,8 +18,8 @@ const authLink = setContext((_, { headers }) => {
       ...headers,
       authorization: localStorage.getItem("token"),
     },
-  };
-});
+  }
+})
 
 // Cache implementation
 const cache = new InMemoryCache();
@@ -28,6 +28,6 @@ const cache = new InMemoryCache();
 const apolloClient = new ApolloClient({
   link: authLink.concat(httpLink),
   cache,
-});
+})
 
-export default apolloClient;
+export default apolloClient

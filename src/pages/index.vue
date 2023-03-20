@@ -4,5 +4,5 @@
 </template>
 
 <script setup>
-import MenuBase from "@/components/MenuBase.vue";
+import MenuBase from "@/components/MenuBase.vue"
 </script>

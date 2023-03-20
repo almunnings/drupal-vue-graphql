@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router"
 
 const routes = [
   {
@@ -10,11 +10,11 @@ const routes = [
   //   path: "/:pathMatch(.*)*",
   //   component: () => import("@/pages/404.vue"),
   // },
-];
+]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-});
+})
 
-export default router;
+export default router
