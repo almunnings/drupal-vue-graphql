@@ -1,4 +1,10 @@
+<script setup lang="ts">
+import { RouterView } from 'vue-router'
+</script>
+
 <template>
-  <router-view />
+  <main class="container my-5">
+    <RouterView :key="$route.path" />
+  </main>
 </template>
 

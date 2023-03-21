@@ -1,6 +1,6 @@
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import path from "path";
+import { fileURLToPath, URL } from 'node:url'
+import { defineConfig } from "vite"
+import vue from "@vitejs/plugin-vue"
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -8,9 +8,27 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      "@": path.resolve(__dirname + "/src/"),
-      "store": path.resolve(__dirname + "/src/store/"),
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
-    extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue"],
+    extensions: [".js", ".ts", ".vue"],
   },
-});
+
+  css: {
+    devSourcemap: true,
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import '@/assets/scss/variables.scss';`,
+      },
+    },
+  },
+
+  server: {
+    https: false,
+    host: true,
+    port: 3009,
+    hmr: {
+      host: 'localhost',
+      protocol: 'ws'
+    },
+  },
+})

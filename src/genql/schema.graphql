@@ -1,0 +1,944 @@
+"""Complex address data."""
+type Address {
+  additionalName: String
+  addressLine1: String
+  addressLine2: String
+  administrativeArea: String
+  countryCode: String
+  dependentLocality: String
+  familyName: String
+  givenName: String
+  langcode: String
+  locality: String
+  organization: String
+  postalCode: String
+  sortingCode: String
+}
+
+"""Untyped attribute data. Eg configuration, settings."""
+scalar Attributes
+
+"""Block field information."""
+interface Block {
+  id: ID!
+  render: Html
+  title: String
+}
+
+"""Block field information."""
+type BlockContent implements Block & Node {
+  entity: TypeBlockContentUnion
+  id: ID!
+  render: Html
+  title: String
+}
+
+"""Another example block type for testing of Unions in GraphQL."""
+type BlockContentAnotherType implements Node & TypeBlockContentInterface {
+  """Body"""
+  body: TextSummary
+
+  """The time that the custom block was last edited."""
+  changed: DateTime!
+
+  """The custom block UUID."""
+  id: ID!
+
+  """The custom block language code."""
+  langcode: Language!
+
+  """A boolean indicating whether this block is reusable."""
+  reusable: Boolean!
+
+  """A brief description of your block."""
+  title: String!
+}
+
+"""A basic block with a title and content."""
+type BlockContentBasicBlock implements Node & TypeBlockContentInterface {
+  """Body"""
+  body: TextSummary
+
+  """The time that the custom block was last edited."""
+  changed: DateTime!
+
+  """The custom block UUID."""
+  id: ID!
+
+  """The custom block language code."""
+  langcode: Language!
+
+  """A boolean indicating whether this block is reusable."""
+  reusable: Boolean!
+
+  """A brief description of your block."""
+  title: String!
+}
+
+"""Block field information."""
+type BlockField {
+  block: Block
+  configuration: Attributes
+  plugin_id: ID
+}
+
+"""Block field information."""
+type BlockPlugin implements Block & Node {
+  id: ID!
+  render: Html
+  title: String
+}
+
+"""Block types that can exist in the system."""
+union BlockUnion = BlockContent | BlockPlugin
+
+"""A paginated set of results."""
+interface Connection {
+  """The edges of this connection."""
+  edges: [Edge!]!
+
+  """The nodes of the edges of this connection."""
+  nodes: [Node!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+}
+
+"""A cursor for use in pagination."""
+scalar Cursor
+
+"""A DateTime object."""
+type DateTime {
+  offset: UtcOffset!
+  time: Time!
+  timestamp: Timestamp!
+  timezone: TimeZone!
+}
+
+"""
+An edge in a connection.
+Provides the cursor to fetch data based on the position of the associated
+node. Specific edge implementations may provide more information about the
+relationship they represent.
+"""
+interface Edge {
+  cursor: Cursor!
+  node: Node!
+}
+
+"""An email address."""
+scalar Email
+
+"""A file object to represent an managed file."""
+type File {
+  description: String
+  mime: String
+  name: String
+  size: Int
+  url: String
+}
+
+"""
+An HTML string
+
+Content of this type is deemed safe by the server for raw output given the
+origin and the context of its usage. The HTML can still contain scripts or style
+tags where the creating user had permission to input these.
+"""
+scalar Html
+
+"""A image object to represent an managed file."""
+type Image {
+  alt: String
+  height: Int!
+
+  """Fetch an image style."""
+  style(
+    """Image styles available via the CMS."""
+    name: ImageStyleAvailable
+  ): ImageStyleDerivative
+  title: String
+  url: String!
+  width: Int!
+}
+
+"""Entity type image_style."""
+type ImageStyle {
+  name: String
+  uuid: ID
+}
+
+"""List of image styles available to use."""
+enum ImageStyleAvailable {
+  """No image styles have been enabled."""
+  UNDEFINED
+}
+
+"""ImageStyle derivative for an Image."""
+type ImageStyleDerivative {
+  height: Int
+  style: ImageStyle
+  url: String
+  width: Int
+}
+
+"""A langauge definition provided by the CMS."""
+type Language {
+  direction: String
+  id: ID
+  name: String
+}
+
+"""A layout defined by the CMS."""
+type Layout implements Node {
+  """Human readable category of the layout definition."""
+  category: String!
+
+  """A default region as fallback for convenience."""
+  defaultRegion: String!
+
+  """Machine readable name of the layout definition."""
+  id: ID!
+
+  """Human readable name of the layout definition."""
+  label: String!
+
+  """Regions represent where a User can place content within the CMS."""
+  regions: [String!]!
+}
+
+"""
+If this component has been designed by a User extra information will be available here.
+"""
+type LayoutParagraphs {
+  layout: Layout
+  position: LayoutParagraphsPosition
+}
+
+"""This content has been arranged by a User using a layout builder."""
+interface LayoutParagraphsInterface {
+  composition: LayoutParagraphs!
+}
+
+"""This component positionally belongs to another component's layout."""
+type LayoutParagraphsPosition {
+  """Parent component this component belongs to."""
+  parentId: ID
+
+  """
+  There this component is suggested to live within the parent component's regions.
+  """
+  region: String
+}
+
+"""This component positionally belongs to another component's layout."""
+type LayoutPosition {
+  """Parent component this component belongs to."""
+  parentId: ID
+
+  """
+  There this component is suggested to live within the parent component's regions.
+  """
+  region: String
+}
+
+type Link {
+  route: RouteUnion
+  title: String
+  url: String
+}
+
+"""A locally hosted audio file."""
+type MediaAudio implements Node & TypeMediaInterface {
+  """Audio file"""
+  audio: File!
+
+  """The time the media item was last edited."""
+  changed: DateTime!
+
+  """The time the media item was created."""
+  created: DateTime!
+
+  """UUID"""
+  id: ID!
+
+  """Name"""
+  name: String!
+
+  """Published"""
+  status: Boolean!
+}
+
+"""An uploaded file or document, such as a PDF."""
+type MediaDocument implements Node & TypeMediaInterface {
+  """The time the media item was last edited."""
+  changed: DateTime!
+
+  """The time the media item was created."""
+  created: DateTime!
+
+  """Document"""
+  document: File!
+
+  """UUID"""
+  id: ID!
+
+  """Name"""
+  name: String!
+
+  """Published"""
+  status: Boolean!
+}
+
+"""Use local images for reusable media."""
+type MediaImage implements Node & TypeMediaInterface {
+  """The time the media item was last edited."""
+  changed: DateTime!
+
+  """The time the media item was created."""
+  created: DateTime!
+
+  """UUID"""
+  id: ID!
+
+  """Image"""
+  image: Image!
+
+  """Name"""
+  name: String!
+
+  """Published"""
+  status: Boolean!
+}
+
+"""A remotely hosted video from YouTube or Vimeo."""
+type MediaRemoteVideo implements Node & TypeMediaInterface {
+  """The time the media item was last edited."""
+  changed: DateTime!
+
+  """The time the media item was created."""
+  created: DateTime!
+
+  """UUID"""
+  id: ID!
+
+  """Name"""
+  name: String!
+
+  """Video URL"""
+  oembed: String!
+
+  """Published"""
+  status: Boolean!
+}
+
+"""A locally hosted video file."""
+type MediaVideo implements Node & TypeMediaInterface {
+  """The time the media item was last edited."""
+  changed: DateTime!
+
+  """The time the media item was created."""
+  created: DateTime!
+
+  """UUID"""
+  id: ID!
+
+  """Name"""
+  name: String!
+
+  """Published"""
+  status: Boolean!
+
+  """Video file"""
+  video: File!
+}
+
+"""Entity type menu."""
+type Menu {
+  items: [MenuItem]
+  name: String
+}
+
+"""List of menus available to load."""
+enum MenuAvailable {
+  """Footer"""
+  FOOTER
+
+  """Main navigation"""
+  MAIN
+}
+
+"""A menu item defined in the CMS."""
+type MenuItem {
+  children: [MenuItem]
+  description: String
+  expanded: Boolean
+  route: RouteUnion
+  title: String
+}
+
+"""
+Meta elements are tags used in HTML and XHTML documents to provide structured metadata about a Web page.
+"""
+interface MetaTag {
+  tag: String!
+}
+
+type MetaTagLink implements MetaTag {
+  attributes: MetaTagLinkAttributes!
+  tag: String!
+}
+
+type MetaTagLinkAttributes {
+  href: String
+  rel: String
+}
+
+type MetaTagProperty implements MetaTag {
+  attributes: MetaTagPropertyAttributes!
+  tag: String!
+}
+
+type MetaTagPropertyAttributes {
+  content: String
+  property: String
+}
+
+union MetaTagUnion = MetaTagLink | MetaTagProperty | MetaTagValue
+
+type MetaTagValue implements MetaTag {
+  attributes: MetaTagValueAttributes!
+  tag: String!
+}
+
+type MetaTagValueAttributes {
+  content: String
+  name: String
+}
+
+"""A concrete fetchable type that is addressable by an id."""
+interface Node {
+  id: ID!
+}
+
+"""
+Use <em>basic pages</em> for your static content, such as an 'About us' page.
+"""
+type NodePage implements Node & TypeNodeInterface {
+  """The username of the content author."""
+  author: User!
+
+  """The time that the node was last edited."""
+  changed: DateTime!
+
+  """Content"""
+  content: [TypeParagraphUnion]
+
+  """The time that the node was created."""
+  created: DateTime!
+
+  """UUID"""
+  id: ID!
+
+  """Language"""
+  langcode: Language!
+
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion]!
+
+  """URL alias"""
+  path: String!
+
+  """Promoted to front page"""
+  promote: Boolean!
+
+  """Published"""
+  status: Boolean!
+
+  """Sticky at top of lists"""
+  sticky: Boolean!
+
+  """Title"""
+  title: String!
+}
+
+"""A paginated set of results for NodePage."""
+type NodePageConnection implements Connection {
+  edges: [NodePageEdge!]!
+  nodes: [NodePage!]!
+  pageInfo: PageInfo!
+}
+
+"""Edge for NodePage."""
+type NodePageEdge implements Edge {
+  cursor: Cursor!
+  node: NodePage!
+}
+
+"""The set of valid sort keys for the NodePage query."""
+enum NodePageSortKeys {
+  """Sort by event creation date"""
+  CREATED_AT
+}
+
+"""Information about the page in a connection."""
+type PageInfo {
+  """The cursor for the last element in this page."""
+  endCursor: Cursor!
+
+  """Whether there are more pages in this connection."""
+  hasNextPage: Boolean!
+
+  """Whether there are previous pages in this connection."""
+  hasPreviousPage: Boolean!
+
+  """The cursor for the first element in this page."""
+  startCursor: Cursor!
+}
+
+"""
+Choose a block to display. Edit this fields settings to allow different blocks.
+"""
+type ParagraphBlock implements LayoutParagraphsInterface & Node & TypeParagraphInterface {
+  """Block"""
+  block: BlockUnion
+
+  """Layout metadata for this paragraph."""
+  composition: LayoutParagraphs!
+
+  """Feature"""
+  feature: String
+
+  """UUID"""
+  id: ID!
+}
+
+"""Add a title, text content with formatting and link."""
+type ParagraphCallToAction implements LayoutParagraphsInterface & Node & TypeParagraphInterface {
+  """Layout metadata for this paragraph."""
+  composition: LayoutParagraphs!
+
+  """UUID"""
+  id: ID!
+
+  """Link"""
+  link: Link
+
+  """Text"""
+  text: Text
+
+  """Title"""
+  title: String
+}
+
+"""Add Audio, Documents, Images or Videos and Embed YouTube videos."""
+type ParagraphMedia implements LayoutParagraphsInterface & Node & TypeParagraphInterface {
+  """Layout metadata for this paragraph."""
+  composition: LayoutParagraphs!
+
+  """Description"""
+  description: Text
+
+  """UUID"""
+  id: ID!
+
+  """Media"""
+  media: TypeMediaUnion!
+
+  """Title"""
+  title: String
+}
+
+"""Add a quote. Add citation and citation link"""
+type ParagraphQuote implements LayoutParagraphsInterface & Node & TypeParagraphInterface {
+  """Give credit for the quote."""
+  citation: String
+
+  """Layout metadata for this paragraph."""
+  composition: LayoutParagraphs!
+
+  """UUID"""
+  id: ID!
+
+  """Enter an optional link for the citation."""
+  link: Link
+
+  """Quote"""
+  quote: Text!
+}
+
+"""
+Sections are layout containers with composition for embedding more components.
+"""
+type ParagraphSection implements LayoutParagraphsInterface & Node & TypeParagraphInterface {
+  """Layout metadata for this paragraph."""
+  composition: LayoutParagraphs!
+
+  """UUID"""
+  id: ID!
+}
+
+"""Create a table with your own columns and rows."""
+type ParagraphTable implements LayoutParagraphsInterface & Node & TypeParagraphInterface {
+  """Layout metadata for this paragraph."""
+  composition: LayoutParagraphs!
+
+  """UUID"""
+  id: ID!
+
+  """Table"""
+  table: Table!
+
+  """Add a title to your block"""
+  title: String
+}
+
+"""Text based content with formatting."""
+type ParagraphText implements LayoutParagraphsInterface & Node & TypeParagraphInterface {
+  """Layout metadata for this paragraph."""
+  composition: LayoutParagraphs!
+
+  """UUID"""
+  id: ID!
+
+  """Text"""
+  text: Text!
+}
+
+"""A field whose value conforms to the standard E.164"""
+scalar PhoneNumber
+
+"""
+The schema's entry-point for queries. This acts as the public, top-level API
+from which all queries must start.
+"""
+type Query {
+  """Load a Block plugin."""
+  block(
+    """Block plugin name. Eg page_title_block, block_content:uuid"""
+    block_plugin_id: String!
+  ): BlockUnion
+
+  """Schema generator version."""
+  info: SchemaInformation!
+
+  """Load a Route by path."""
+  menu(
+    """Internal menu name. Eg main"""
+    name: MenuAvailable!
+  ): Menu
+
+  """Fetch data for a specific NodePage"""
+  nodePage(
+    """The id of the NodePage to load."""
+    id: ID!
+  ): NodePage
+
+  """List of all NodePage on the platform. Results are access controlled."""
+  nodePages(
+    """Returns the elements that come after the specified cursor."""
+    after: Cursor
+
+    """Returns the elements that come before the specified cursor."""
+    before: Cursor
+
+    """Returns up to the first n elements from the list."""
+    first: Int
+
+    """Returns up to the last n elements from the list."""
+    last: Int
+
+    """Reverse the order of the underlying list."""
+    reverse: Boolean = false
+
+    """Sort the underlying list by the given key."""
+    sortKey: NodePageSortKeys = CREATED_AT
+  ): NodePageConnection!
+
+  """Load a Route by path."""
+  route(
+    """Internal path to load. Eg /about"""
+    path: String!
+  ): RouteUnion
+
+  """
+  Get information about the currently authenticated user. NULL if not logged in.
+  """
+  viewer: User
+}
+
+"""The base GraphQL Response class"""
+interface Response {
+  errors: [Violation]
+}
+
+"""Routes represent incoming requests that resolve to content."""
+interface Route {
+  internal: Boolean!
+  url: String!
+}
+
+"""A list of possible entites that can be returned by URL."""
+union RouteEntityUnion = NodePage
+
+"""Route outside of this website."""
+type RouteExternal implements Route {
+  internal: Boolean!
+  url: String!
+}
+
+"""Route within this website."""
+type RouteInternal implements Route {
+  """Content assigned to this route."""
+  entity: RouteEntityUnion
+  internal: Boolean!
+  url: String!
+}
+
+"""Redirect to another URL with status."""
+type RouteRedirect implements Route {
+  internal: Boolean!
+
+  """Utility prop. Always true for redirects."""
+  redirect: Boolean!
+
+  """Suggested status for redirect. Eg 301."""
+  status: Int!
+  url: String!
+}
+
+"""Route types that can exist in the system."""
+union RouteUnion = RouteExternal | RouteInternal | RouteRedirect
+
+"""Schema generator version."""
+type SchemaInformation {
+  """Description of the API as set by an administrator."""
+  description: String!
+}
+
+type Table {
+  caption: String
+
+  """A text format associated with the row data."""
+  format: String
+  rows: [TableRow]
+}
+
+type TableRow {
+  data: [String]
+  weight: Int
+}
+
+"""A processed text format defined by the CMS."""
+type Text {
+  format: String
+  processed: Html
+  value: String
+}
+
+"""A processed text format with summary defined by the CMS."""
+type TextSummary {
+  format: String
+  processed: Html
+  summary: Html
+  value: String
+}
+
+"""RFC 3339 compliant time string."""
+scalar Time
+
+"""A field whose value exists in the standard IANA Time Zone Database."""
+scalar TimeZone
+
+"""
+Type represents date and time as number of milliseconds from start of the UNIX epoch.
+"""
+scalar Timestamp
+
+"""Entity type block_content."""
+interface TypeBlockContentInterface {
+  """The time that the custom block was last edited."""
+  changed: DateTime
+
+  """The custom block UUID."""
+  id: ID
+
+  """The custom block language code."""
+  langcode: Language
+
+  """A boolean indicating whether this block is reusable."""
+  reusable: Boolean
+
+  """A brief description of your block."""
+  title: String!
+}
+
+union TypeBlockContentUnion = BlockContentAnotherType | BlockContentBasicBlock
+
+"""Entity type media."""
+interface TypeMediaInterface {
+  """The time the media item was last edited."""
+  changed: DateTime
+
+  """The time the media item was created."""
+  created: DateTime
+
+  """UUID"""
+  id: ID
+
+  """Name"""
+  name: String!
+
+  """Published"""
+  status: Boolean
+}
+
+union TypeMediaUnion = MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo
+
+"""Entity type node."""
+interface TypeNodeInterface {
+  """The username of the content author."""
+  author: User
+
+  """The time that the node was last edited."""
+  changed: DateTime
+
+  """The time that the node was created."""
+  created: DateTime
+
+  """UUID"""
+  id: ID
+
+  """Language"""
+  langcode: Language
+
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion]
+
+  """URL alias"""
+  path: String
+
+  """Promoted to front page"""
+  promote: Boolean
+
+  """Published"""
+  status: Boolean
+
+  """Sticky at top of lists"""
+  sticky: Boolean
+
+  """Title"""
+  title: String!
+}
+
+"""Entity type paragraph."""
+interface TypeParagraphInterface {
+  """UUID"""
+  id: ID
+}
+
+union TypeParagraphUnion = ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText
+
+"""Entity type taxonomy_term."""
+interface TypeTermInterface {
+  """The time that the term was last edited."""
+  changed: DateTime
+
+  """Description"""
+  description: Text
+
+  """The term UUID."""
+  id: ID
+
+  """The term language code."""
+  langcode: Language
+
+  """Name"""
+  name: String!
+
+  """URL alias"""
+  path: String
+
+  """Published"""
+  status: Boolean
+}
+
+"""Entity type user."""
+interface TypeUserInterface {
+  """The time that the user was last edited."""
+  changed: DateTime
+
+  """The time that the user was created."""
+  created: DateTime
+
+  """The user UUID."""
+  id: ID
+
+  """The email of this user."""
+  mail: Email
+
+  """The name of this user."""
+  name: String!
+
+  """The roles the user has."""
+  roles: [UserRoles]
+
+  """Whether the user is active or blocked."""
+  status: UserStatus
+}
+
+"""
+Unsupported entity or field type in the schema.
+This entity may not have been enabled in the schema yet and is being referenced via entity reference.
+"""
+type UnsupportedType {
+  """Unsupported type, always TRUE."""
+  unsupported: Boolean
+}
+
+"""Entity type user."""
+type User implements Node & TypeUserInterface {
+  """The time that the user was last edited."""
+  changed: DateTime!
+
+  """The time that the user was created."""
+  created: DateTime!
+
+  """The user UUID."""
+  id: ID!
+
+  """The email of this user."""
+  mail: Email!
+
+  """The name of this user."""
+  name: String!
+
+  """The roles the user has."""
+  roles: [UserRoles]!
+
+  """Whether the user is active or blocked."""
+  status: UserStatus!
+}
+
+"""User roles."""
+scalar UserRoles
+
+"""Whether the user is active or blocked."""
+enum UserStatus {
+  """An active user is able to login on the platform and view content"""
+  ACTIVE
+
+  """
+  A blocked user is unable to access the platform, although their content will still be visible until it's deleted.
+  """
+  BLOCKED
+}
+
+"""A string that will have a value of format ±hh:mm"""
+scalar UtcOffset
+
+"""
+A violation indicates an error in the GraphQL query or other incorrect
+circumstances such as missing permissions.
+"""
+scalar Violation
