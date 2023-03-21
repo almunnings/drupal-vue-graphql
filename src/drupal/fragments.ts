@@ -1,4 +1,7 @@
-import type { RouteGenqlSelection, TypeNodeInterfaceGenqlSelection } from './gen'
+import type {
+  RouteGenqlSelection,
+  TypeNodeInterfaceGenqlSelection
+} from './gen'
 
 /**
  * Custom fragments to use in queries.

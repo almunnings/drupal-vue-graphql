@@ -7,4 +7,3 @@ import { RouterView } from 'vue-router'
     <RouterView :key="$route.path" />
   </main>
 </template>
-

@@ -10,9 +10,10 @@ const routeStore = useRouteStore()
 const currentRoute = computed(() => routeStore.routes.get(route.path))
 
 // Get the entity off the current route if it's internal.
-const entity = computed(() => currentRoute.value && isRouteInternal(currentRoute.value)
-  ? currentRoute.value.entity
-  : undefined
+const entity = computed(() =>
+  currentRoute.value && isRouteInternal(currentRoute.value)
+    ? currentRoute.value.entity
+    : undefined
 )
 </script>
 
@@ -31,16 +32,14 @@ const entity = computed(() => currentRoute.value && isRouteInternal(currentRoute
             'bg-secondary': !currentRoute.internal
           }"
         >
-        {{ currentRoute.internal ? 'Internal' : 'External' }}
+          {{ currentRoute.internal ? 'Internal' : 'External' }}
         </span>
-
       </li>
     </template>
     <template v-if="entity && isTypeNodeInterface(entity)">
-        <li class="list-group-item">UUID: {{ entity.id }}</li>
-        <li class="list-group-item">Title: {{ entity.title }}</li>
-        <li class="list-group-item">Type: {{ entity.__typename }}</li>
+      <li class="list-group-item">UUID: {{ entity.id }}</li>
+      <li class="list-group-item">Title: {{ entity.title }}</li>
+      <li class="list-group-item">Type: {{ entity.__typename }}</li>
     </template>
   </ul>
 </template>
-
