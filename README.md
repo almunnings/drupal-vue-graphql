@@ -1,4 +1,4 @@
-# Drupal Vue 3, GenQL GraphQL, Pinia, Vite, Typescript
+# Headless Drupal Vue 3, GenQL GraphQL, Pinia, Vite, Typescript
 
 Combine all the things together to get a great development experience.
 
