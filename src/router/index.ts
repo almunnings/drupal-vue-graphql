@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useRouteStore } from '@/stores/useRouteStore'
+import { useRouteStore } from '@/stores/route'
 import ContentView from '@/views/ContentView'
 
 const router = createRouter({
@@ -14,7 +14,6 @@ const router = createRouter({
 
         // Prefetch the route before going to a url.
         await routeStore.fetchRoute(to.path)
-        routeStore.setCurrentPath(to.path)
 
         next()
       }
