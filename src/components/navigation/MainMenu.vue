@@ -30,7 +30,7 @@ const menu = computed(() => menuStore.menus.get(props.name))
           >
             {{ item.title || 'Untitled' }}
           </router-link>
-          <a v-else :href="item.route?.url" class="btn btn-outline-secondary">
+          <a v-else :href="item.route.url" class="btn btn-outline-secondary">
             {{ item.title || 'Untitled' }}
           </a>
         </template>
