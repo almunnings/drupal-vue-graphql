@@ -1,6 +1,6 @@
-import { createClient } from './gen'
+import { createClient } from './generated'
 
-export * from './gen/schema'
+export * from './generated/schema'
 export * from './fragments'
 
 const host = import.meta.env.VITE_DRUPAL_BASE_URL

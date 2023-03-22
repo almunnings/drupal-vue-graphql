@@ -1,7 +1,7 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
-import { drupalClient, MenuFragment } from '@/drupal'
-import type { Menu, MenuAvailable } from '@/drupal'
+import { drupalClient, MenuFragment } from '@/services/drupal'
+import type { Menu, MenuAvailable } from '@/services/drupal'
 
 export const useMenuStore = defineStore('menu', () => {
   const menus = reactive(new Map<string, Menu>())
@@ -35,7 +35,6 @@ export const useMenuStore = defineStore('menu', () => {
 
       return menus.set(name, menu)
     } catch (e: Error) {
-      console.error(e)
       return errors.set(name, e)
     } finally {
       loading.value = false

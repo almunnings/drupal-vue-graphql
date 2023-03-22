@@ -1,7 +1,11 @@
 import { reactive } from 'vue'
 import { defineStore } from 'pinia'
-import { drupalClient, RouteFragment, TypeNodeFragment } from '@/drupal'
-import type { Route } from '@/drupal'
+import {
+  drupalClient,
+  RouteFragment,
+  TypeNodeFragment
+} from '@/services/drupal'
+import type { Route } from '@/services/drupal'
 
 export const useRouteStore = defineStore('route', () => {
   const routes = reactive(new Map<string, Route>())

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { isRouteInternal, isTypeNodeInterface } from '@/drupal'
+import { isRouteInternal, isTypeNodeInterface } from '@/services/drupal'
 import { useRouteStore } from '@/stores/route'
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 

@@ -18,7 +18,7 @@ tooling:
 
   genql:
     service: node
-    cmd: genql --sort --endpoint "$VITE_DRUPAL_BASE_URL/$VITE_GRAPHQL_PATH" --output ./src/drupal/gen
+    cmd: genql --sort --endpoint "$VITE_DRUPAL_BASE_URL/$VITE_GRAPHQL_PATH" --output ./src/services/drupal/generated
 
 services:
   node:
@@ -27,6 +27,7 @@ services:
     ports:
       - 3009:3009
     build:
+      - npm i -g @genql/cli
       - npm ci
     overrides:
       environment:

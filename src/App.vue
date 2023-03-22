@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useRouteStore } from '@/stores/route'
-import { isRouteInternal } from './drupal'
+import { isRouteInternal } from '@/services/drupal'
 import MainMenu from '@/components/navigation/MainMenu.vue'
 
 const routeStore = useRouteStore()

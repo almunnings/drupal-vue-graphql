@@ -19,3 +19,7 @@ lando dev
 ```bash
 lando genql
 ```
+
+## Environment
+
+See `.env.example` for environment variables. Create your own `.env` file locally or ensure env exists at deployment endpoint.

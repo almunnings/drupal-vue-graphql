@@ -3,7 +3,7 @@ import type {
   MenuItemGenqlSelection,
   RouteGenqlSelection,
   TypeNodeInterfaceGenqlSelection
-} from './gen'
+} from './generated'
 
 /**
  * Custom fragments to use in queries.

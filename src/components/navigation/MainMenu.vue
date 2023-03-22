@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, PropType } from 'vue'
 import { useMenuStore } from '@/stores/menu'
-import type { MenuAvailable } from '@/drupal'
+import type { MenuAvailable } from '@/services/drupal'
 
 const props = defineProps({
   name: {
