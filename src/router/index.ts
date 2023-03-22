@@ -10,8 +10,7 @@ const router = createRouter({
       component: ContentView,
 
       beforeEnter: async (to, from, next) => {
-        const routeStore = useRouteStore()
-        await routeStore.fetchRoute(to.path)
+        useRouteStore().fetchRoute(to.path)
         next()
       }
     }

@@ -355,7 +355,7 @@ type MediaVideo implements Node & TypeMediaInterface {
 
 """Entity type menu."""
 type Menu {
-  items: [MenuItem]
+  items: [MenuItem!]
   name: String
 }
 
@@ -370,10 +370,10 @@ enum MenuAvailable {
 
 """A menu item defined in the CMS."""
 type MenuItem {
-  children: [MenuItem]
+  children: [MenuItem!]
   description: String
-  expanded: Boolean
-  route: RouteUnion
+  expanded: Boolean!
+  route: RouteUnion!
   title: String
 }
 
@@ -432,7 +432,7 @@ type NodePage implements Node & TypeNodeInterface {
   changed: DateTime!
 
   """Content"""
-  content: [TypeParagraphUnion]
+  content: [TypeParagraphUnion!]
 
   """The time that the node was created."""
   created: DateTime!
@@ -444,7 +444,7 @@ type NodePage implements Node & TypeNodeInterface {
   langcode: Language!
 
   """The computed meta tags for the entity."""
-  metatag: [MetaTagUnion]!
+  metatag: [MetaTagUnion!]!
 
   """URL alias"""
   path: String!
@@ -813,7 +813,7 @@ interface TypeNodeInterface {
   langcode: Language
 
   """The computed meta tags for the entity."""
-  metatag: [MetaTagUnion]
+  metatag: [MetaTagUnion!]
 
   """URL alias"""
   path: String
@@ -881,7 +881,7 @@ interface TypeUserInterface {
   name: String!
 
   """The roles the user has."""
-  roles: [UserRoles]
+  roles: [UserRoles!]
 
   """Whether the user is active or blocked."""
   status: UserStatus
@@ -914,7 +914,7 @@ type User implements Node & TypeUserInterface {
   name: String!
 
   """The roles the user has."""
-  roles: [UserRoles]!
+  roles: [UserRoles!]!
 
   """Whether the user is active or blocked."""
   status: UserStatus!

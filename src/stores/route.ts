@@ -1,12 +1,12 @@
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import { defineStore } from 'pinia'
-
-import { drupalClient, Route, RouteFragment, TypeNodeFragment } from '@/drupal'
+import { drupalClient, RouteFragment, TypeNodeFragment } from '@/drupal'
+import type { Route } from '@/drupal'
 
 export const useRouteStore = defineStore('route', () => {
   const routes = reactive(new Map<string, Route>())
   const errors = reactive(new Map<string, Error>())
-  const loading = ref(false)
+  const loading = reactive(new Map<string, boolean>())
 
   /**
    * Fetch a route from the API.
@@ -20,7 +20,7 @@ export const useRouteStore = defineStore('route', () => {
     }
 
     try {
-      loading.value = true
+      loading.set(path, true)
 
       const { route } = await drupalClient.query({
         route: {
@@ -40,10 +40,9 @@ export const useRouteStore = defineStore('route', () => {
 
       return routes.set(path, route)
     } catch (e: Error) {
-      console.error(e)
       return errors.set(path, e)
     } finally {
-      loading.value = false
+      loading.set(path, false)
     }
   }
 

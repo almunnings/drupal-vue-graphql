@@ -334,7 +334,7 @@ export interface MediaVideo {
 
 /** Entity type menu. */
 export interface Menu {
-    items?: (MenuItem | undefined)[]
+    items?: MenuItem[]
     name?: Scalars['String']
     __typename: 'Menu'
 }
@@ -346,10 +346,10 @@ export type MenuAvailable = 'FOOTER' | 'MAIN'
 
 /** A menu item defined in the CMS. */
 export interface MenuItem {
-    children?: (MenuItem | undefined)[]
+    children?: MenuItem[]
     description?: Scalars['String']
-    expanded?: Scalars['Boolean']
-    route?: RouteUnion
+    expanded: Scalars['Boolean']
+    route: RouteUnion
     title?: Scalars['String']
     __typename: 'MenuItem'
 }
@@ -408,7 +408,7 @@ export interface NodePage {
     /** The time that the node was last edited. */
     changed: DateTime
     /** Content */
-    content?: (TypeParagraphUnion | undefined)[]
+    content?: TypeParagraphUnion[]
     /** The time that the node was created. */
     created: DateTime
     /** UUID */
@@ -416,7 +416,7 @@ export interface NodePage {
     /** Language */
     langcode: Language
     /** The computed meta tags for the entity. */
-    metatag: (MetaTagUnion | undefined)[]
+    metatag: MetaTagUnion[]
     /** URL alias */
     path: Scalars['String']
     /** Promoted to front page */
@@ -747,7 +747,7 @@ export interface User {
     /** The name of this user. */
     name: Scalars['String']
     /** The roles the user has. */
-    roles: (Scalars['UserRoles'] | undefined)[]
+    roles: Scalars['UserRoles'][]
     /** Whether the user is active or blocked. */
     status: UserStatus
     __typename: 'User'
