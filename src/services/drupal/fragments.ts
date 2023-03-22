@@ -9,19 +9,19 @@ import type {
  * Custom fragments to use in queries.
  */
 
-const RouteFragment: RouteGenqlSelection = {
+export const RouteFragment: RouteGenqlSelection = {
   __typename: true,
   url: true,
   internal: true
 }
 
-const TypeNodeFragment: TypeNodeInterfaceGenqlSelection = {
+export const TypeNodeFragment: TypeNodeInterfaceGenqlSelection = {
   __typename: true,
   id: true,
   title: true
 }
 
-const MenuItemFragment: MenuItemGenqlSelection = {
+export const MenuItemFragment: MenuItemGenqlSelection = {
   __typename: true,
   title: true,
   description: true,
@@ -31,10 +31,8 @@ const MenuItemFragment: MenuItemGenqlSelection = {
   }
 }
 
-const MenuFragment: MenuGenqlSelection = {
+export const MenuFragment: MenuGenqlSelection = {
   __typename: true,
   name: true,
   items: MenuItemFragment
 }
-
-export { RouteFragment, TypeNodeFragment, MenuFragment, MenuItemFragment }

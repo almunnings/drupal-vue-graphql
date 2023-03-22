@@ -16,7 +16,7 @@ const entity = computed(() =>
 
 // View isnt changing, but the data source is.
 // So we need to fetch the data again.
-onBeforeRouteUpdate((to, from) => {
+onBeforeRouteUpdate((to) => {
   useRouteStore().fetchRoute(to.path)
 })
 </script>

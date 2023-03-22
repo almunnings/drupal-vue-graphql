@@ -20,7 +20,7 @@ const menu = computed(() => menuStore.menus.get(props.name))
   <div class="card" v-if="menu">
     <h5 class="card-header">{{ menu.name }}</h5>
     <div class="card-body">
-      <div class="btn-group" role="group" aria-label="Basic outlined example">
+      <div class="btn-group" role="group">
         <template v-for="item in menu.items" :key="item.title">
           <router-link
             v-if="item.route.internal"
