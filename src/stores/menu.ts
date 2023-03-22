@@ -1,4 +1,4 @@
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import { defineStore } from 'pinia'
 import { drupalClient, MenuFragment } from '@/services/drupal'
 import type { Menu, MenuAvailable } from '@/services/drupal'
@@ -6,7 +6,7 @@ import type { Menu, MenuAvailable } from '@/services/drupal'
 export const useMenuStore = defineStore('menu', () => {
   const menus = reactive(new Map<string, Menu>())
   const errors = reactive(new Map<string, Error>())
-  const loading = ref(false)
+  const loading = reactive(new Map<string, boolean>())
 
   /**
    * Fetch a menu from the API.
@@ -20,7 +20,7 @@ export const useMenuStore = defineStore('menu', () => {
     }
 
     try {
-      loading.value = true
+      loading.set(name, true)
 
       const { menu } = await drupalClient.query({
         menu: {
@@ -37,7 +37,7 @@ export const useMenuStore = defineStore('menu', () => {
     } catch (e: Error) {
       return errors.set(name, e)
     } finally {
-      loading.value = false
+      loading.set(name, false)
     }
   }
 
