@@ -16,15 +16,13 @@ const entity = computed(() =>
 
 // View isnt changing, but the data source is.
 // So we need to fetch the data again.
-onBeforeRouteUpdate(async (to, from) => {
+onBeforeRouteUpdate((to, from) => {
   useRouteStore().fetchRoute(to.path)
 })
 </script>
 
 <template>
   <div>
-    <!-- Page details -->
-
     <ul class="list-group" v-if="route">
       <li class="list-group-item">URL: {{ route.url }}</li>
       <li class="list-group-item">

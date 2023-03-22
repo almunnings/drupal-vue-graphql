@@ -18,7 +18,7 @@ tooling:
 
   genql:
     service: node
-    cmd: genql --sort --endpoint "$VITE_GRAPHQL_ENDPOINT" --output ./src/drupal/gen
+    cmd: genql --sort --endpoint "$VITE_DRUPAL_BASE_URL/$VITE_GRAPHQL_PATH" --output ./src/drupal/gen
 
 services:
   node:
