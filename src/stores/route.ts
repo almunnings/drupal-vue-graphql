@@ -5,8 +5,8 @@ import { drupalClient, Route, RouteFragment, TypeNodeFragment } from '@/drupal'
 
 export const useRouteStore = defineStore('route', () => {
   const routes = reactive(new Map<string, Route>())
+  const errors = reactive(new Map<string, Error>())
   const loading = ref(false)
-  const error = ref()
 
   /**
    * Fetch a route from the API.
@@ -34,20 +34,23 @@ export const useRouteStore = defineStore('route', () => {
         }
       })
 
-      routes.set(path, route)
-    } catch (error) {
-      error.value = error
+      if (!route) {
+        throw new Error(`Route not found: ${path}`)
+      }
+
+      return routes.set(path, route)
+    } catch (e: Error) {
+      console.error(e)
+      return errors.set(path, e)
     } finally {
       loading.value = false
     }
-
-    return routes.get(path)
   }
 
   return {
     routes,
+    errors,
     loading,
-    error,
     fetchRoute
   }
 })

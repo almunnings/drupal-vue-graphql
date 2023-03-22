@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import { RouterView } from 'vue-router'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <main class="container my-5">

@@ -11,10 +11,7 @@ const router = createRouter({
 
       beforeEnter: async (to, from, next) => {
         const routeStore = useRouteStore()
-
-        // Prefetch the route before going to a url.
         await routeStore.fetchRoute(to.path)
-
         next()
       }
     }
