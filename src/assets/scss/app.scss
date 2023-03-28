@@ -2,3 +2,9 @@
 
 // Import transitionss
 @import "transitions/fade";
+
+p,ol,ul,table,figure,picture,blockquote {
+  &:is(:last-child) {
+    margin-bottom: 0;
+  }
+}

@@ -1,8 +1,16 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { isRouteInternal, isTypeNodeInterface } from '@/services/drupal'
+import {
+  isNodePage,
+  isRouteInternal,
+  isTypeNodeInterface,
+  isParagraphSection,
+  isTypeParagraphUnion
+} from '@/services/drupal'
 import { useRouteStore } from '@/stores/route'
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
+
+import ParagraphSection from '@/components/paragraphs/ParagraphSection.vue'
 
 // Get the currrent route from the store.
 const $route = useRoute()
@@ -13,6 +21,20 @@ const route = computed(() => routeStore.routes.get($route.path))
 const entity = computed(() =>
   route.value && isRouteInternal(route.value) ? route.value.entity : undefined
 )
+
+const paragraphContent = computed(() =>
+  entity.value && isNodePage(entity.value) ? entity.value.content || [] : []
+)
+
+const contentSections = computed(() =>
+  paragraphContent.value.filter(isParagraphSection)
+)
+
+const sectionChildren = (id: string) => {
+  return paragraphContent.value
+    .filter(isTypeParagraphUnion)
+    .filter((item) => item.composition.position?.parentId === id)
+}
 
 // View isnt changing, but the data source is.
 // So we need to fetch the data again.
@@ -44,5 +66,12 @@ onBeforeRouteUpdate((to) => {
         <li class="list-group-item">Type: {{ entity.__typename }}</li>
       </template>
     </ul>
+
+    <ParagraphSection
+      v-for="section in contentSections"
+      :key="section.id"
+      :paragraph="section"
+      :children="sectionChildren(section.id)"
+    />
   </div>
 </template>
