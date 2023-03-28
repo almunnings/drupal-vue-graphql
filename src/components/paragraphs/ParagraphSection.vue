@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { PropType } from 'vue'
-import {
+import { getParagraphComponent, getLayoutComponent } from '.'
+
+import type {
   ParagraphSection,
-  isParagraphText,
   TypeParagraphInterface
 } from '@/services/drupal'
-
-import ParagraphText from './ParagraphText.vue'
-import LayoutOneColumn from '../layouts/LayoutOneColumn.vue'
-import LayoutTwoColumn from '../layouts/LayoutTwoColumn.vue'
 
 const props = defineProps({
   paragraph: {
@@ -18,41 +15,28 @@ const props = defineProps({
   },
   children: {
     type: Array as PropType<TypeParagraphInterface[]>,
-    required: true
+    required: false
   }
 })
 
-const layout = computed(() => {
-  switch (props.paragraph.composition.layout?.id) {
-    case 'layout_twocol':
-      return LayoutTwoColumn
-    default:
-    case 'layout_onecol':
-      return LayoutOneColumn
-  }
-})
+const layout = computed(() => getLayoutComponent(props.paragraph))
 
-// Get unique regions.
-const regions = computed(() => {
-  const regions = props.children.map(
-    (child) => child.composition.position?.region || 'content'
-  )
+const regions = computed(() => props.paragraph.composition.layout?.regions)
 
-  return [...new Set(regions)]
-})
-
-const regionChildren = (region: string) => {
-  return props.children.filter((child) => {
+const getRegionChildren = (region: string) =>
+  (props.children || []).filter((child) => {
     return child.composition.position?.region === region
   })
-}
 </script>
 
 <template>
-  <component :is="layout">
+  <component :is="layout" v-if="children">
+    <!-- Loop through each defined region on the paragraph -->
     <template #[region] v-for="region in regions" :key="region">
-      <template v-for="child in regionChildren(region)" :key="child.id">
-        <ParagraphText v-if="isParagraphText(child)" :paragraph="child" />
+      <!-- Get each child assigned to this region -->
+      <template v-for="child in getRegionChildren(region)" :key="child.id">
+        <!-- Generate a dynamic component based on child __typename -->
+        <component :is="getParagraphComponent(child)" :paragraph="child" />
       </template>
     </template>
   </component>

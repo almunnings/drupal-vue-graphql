@@ -1,40 +1,43 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRoute, onBeforeRouteUpdate } from 'vue-router'
+import { useRouteStore } from '@/stores/route'
 import {
   isNodePage,
   isRouteInternal,
   isTypeNodeInterface,
   isParagraphSection,
-  isTypeParagraphUnion
+  isLayoutParagraphsInterface
 } from '@/services/drupal'
-import { useRouteStore } from '@/stores/route'
-import { useRoute, onBeforeRouteUpdate } from 'vue-router'
+
+import type { TypeParagraphInterface } from '@/services/drupal'
 
 import ParagraphSection from '@/components/paragraphs/ParagraphSection.vue'
 
 // Get the currrent route from the store.
-const $route = useRoute()
-const routeStore = useRouteStore()
-const route = computed(() => routeStore.routes.get($route.path))
+const route = computed(() => useRouteStore().routes.get(useRoute().path))
 
 // Get the entity off the current route if it's internal.
 const entity = computed(() =>
   route.value && isRouteInternal(route.value) ? route.value.entity : undefined
 )
 
-const paragraphContent = computed(() =>
-  entity.value && isNodePage(entity.value) ? entity.value.content || [] : []
+// Get the content field from the node content if its a node page.
+const content = computed(() =>
+  entity.value && isNodePage(entity.value) ? entity.value.content : undefined
 )
 
-const contentSections = computed(() =>
-  paragraphContent.value.filter(isParagraphSection)
+// Get the section types from the content.
+const sections = computed(
+  () => content.value && content.value.filter(isParagraphSection)
 )
 
-const sectionChildren = (id: string) => {
-  return paragraphContent.value
-    .filter(isTypeParagraphUnion)
-    .filter((item) => item.composition.position?.parentId === id)
-}
+// Get the children of a section.
+const getParagraphChildren = (section: TypeParagraphInterface) =>
+  content.value &&
+  content.value
+    .filter(isLayoutParagraphsInterface)
+    .filter((item) => item.composition.position?.parentId === section.id)
 
 // View isnt changing, but the data source is.
 // So we need to fetch the data again.
@@ -48,16 +51,7 @@ onBeforeRouteUpdate((to) => {
     <ul class="list-group" v-if="route">
       <li class="list-group-item">URL: {{ route.url }}</li>
       <li class="list-group-item">
-        Route Internal:
-        <span
-          class="badge"
-          :class="{
-            'bg-primary': route.internal,
-            'bg-secondary': !route.internal
-          }"
-        >
-          {{ route.internal ? 'Internal' : 'External' }}
-        </span>
+        Route: {{ route.internal ? 'Internal' : 'External' }}
       </li>
 
       <template v-if="entity && isTypeNodeInterface(entity)">
@@ -68,10 +62,10 @@ onBeforeRouteUpdate((to) => {
     </ul>
 
     <ParagraphSection
-      v-for="section in contentSections"
+      v-for="section in sections"
       :key="section.id"
       :paragraph="section"
-      :children="sectionChildren(section.id)"
+      :children="getParagraphChildren(section)"
     />
   </div>
 </template>

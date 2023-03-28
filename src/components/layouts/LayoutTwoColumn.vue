@@ -1,23 +1,29 @@
+<script setup lang="ts"></script>
+
 <template>
   <section class="border border-info rounded my-4 p-4">
-    <header class="border rounded p-2">
+    <header class="border rounded d-grid p-3 gap-3" v-if="$slots.top">
       <slot name="top"></slot>
     </header>
 
-    <div class="row my-4">
-      <div class="col">
-        <div class="border rounded p-2 h-100">
-          <slot name="first"></slot>
+    <div class="row my-4" v-if="$slots.first || $slots.second">
+      <div class="col" v-if="$slots.first">
+        <div class="border rounded h-100">
+          <div class="d-grid p-3 gap-3">
+            <slot name="first"></slot>
+          </div>
         </div>
       </div>
-      <div class="col">
-        <div class="border rounded p-2 h-100">
-          <slot name="second"></slot>
+      <div class="col" v-if="$slots.second">
+        <div class="border rounded h-100">
+          <div class="d-grid p-3 gap-3">
+            <slot name="second"></slot>
+          </div>
         </div>
       </div>
     </div>
 
-    <footer class="border rounded p-2">
+    <footer class="border rounded d-grid p-3 gap-3" v-if="$slots.bottom">
       <slot name="bottom"></slot>
     </footer>
   </section>
