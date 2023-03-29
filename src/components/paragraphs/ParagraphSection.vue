@@ -30,7 +30,11 @@ const getRegionChildren = (region: string) =>
 </script>
 
 <template>
-  <component :is="layout" v-if="children">
+  <component
+    :is="layout"
+    v-if="children"
+    class="border border-info rounded my-4 p-4"
+  >
     <!-- Loop through each defined region on the paragraph -->
     <template #[region] v-for="region in regions" :key="region">
       <!-- Get each child assigned to this region -->

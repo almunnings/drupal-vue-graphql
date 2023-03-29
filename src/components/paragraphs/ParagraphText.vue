@@ -12,5 +12,9 @@ defineProps({
 </script>
 
 <template>
-  <div v-html="paragraph.text.processed" v-wysiwyg-links />
+  <div
+    class="text-processed"
+    v-html="paragraph.text.processed"
+    v-wysiwyg-links
+  />
 </template>
