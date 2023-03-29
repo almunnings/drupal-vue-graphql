@@ -4,7 +4,8 @@ import type {
   RouteGenqlSelection,
   NodePageGenqlSelection,
   TypeNodeInterfaceGenqlSelection,
-  TypeParagraphInterfaceGenqlSelection
+  TypeParagraphInterfaceGenqlSelection,
+  LinkGenqlSelection
 } from './generated'
 
 /**
@@ -17,14 +18,28 @@ export const RouteFragment: RouteGenqlSelection = {
   internal: true
 }
 
+export const LinkFragment: LinkGenqlSelection = {
+  url: true,
+  title: true,
+  route: {
+    on_Route: RouteFragment
+  }
+}
+
 export const TypeParagraphFragment: TypeParagraphInterfaceGenqlSelection = {
   __typename: true,
   id: true,
   on_ParagraphText: {
-    __typename: true,
     text: {
       processed: true
     }
+  },
+  on_ParagraphQuote: {
+    quote: {
+      processed: true
+    },
+    citation: true,
+    link: LinkFragment
   }
 }
 

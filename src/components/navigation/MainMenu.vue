@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { computed, PropType } from 'vue'
+import { computed } from 'vue'
+import type { PropType } from 'vue'
 import { useMenuStore } from '@/stores/menu'
 import type { MenuAvailable } from '@/services/drupal'
+import RouteLink from '@/components/navigation/RouteLink.vue'
 
 const props = defineProps({
   name: {
@@ -22,17 +24,11 @@ const menu = computed(() => menuStore.menus.get(props.name))
     <div class="card-body">
       <div class="btn-group" role="group">
         <template v-for="item in menu.items" :key="item.title">
-          <router-link
-            v-if="item.route.internal"
-            :to="item.route.url"
+          <RouteLink
+            :route="item.route"
+            :title="item.title"
             class="btn btn-outline-secondary"
-            active-class="active"
-          >
-            {{ item.title || 'Untitled' }}
-          </router-link>
-          <a v-else :href="item.route.url" class="btn btn-outline-secondary">
-            {{ item.title || 'Untitled' }}
-          </a>
+          />
         </template>
 
         <router-link to="/force/error" class="btn btn-outline-secondary">

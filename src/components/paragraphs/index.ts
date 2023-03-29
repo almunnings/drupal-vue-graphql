@@ -22,6 +22,10 @@ export const getParagraphComponent = (paragraph: TypeParagraphInterface) => {
       return defineAsyncComponent(
         () => import('@/components/paragraphs/ParagraphText.vue')
       )
+    case 'ParagraphQuote':
+      return defineAsyncComponent(
+        () => import('@/components/paragraphs/ParagraphQuote.vue')
+      )
     default:
       return defineAsyncComponent(
         () => import('@/components/paragraphs/ParagraphUnknown.vue')
