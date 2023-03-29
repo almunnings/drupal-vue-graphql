@@ -5,6 +5,7 @@ import type {
   NodePageGenqlSelection,
   TypeNodeInterfaceGenqlSelection,
   TypeParagraphInterfaceGenqlSelection,
+  LayoutParagraphsInterfaceGenqlSelection,
   LinkGenqlSelection
 } from './generated'
 
@@ -48,10 +49,12 @@ export const LayoutParagraphFragment: LayoutParagraphsInterfaceGenqlSelection =
     __typename: true,
     composition: {
       layout: {
-        __scalar: true
+        id: true,
+        regions: true
       },
       position: {
-        __scalar: true
+        parentId: true,
+        region: true
       }
     }
   }
