@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import type { PropType } from 'vue'
 import type { ParagraphQuote } from '@/services/drupal'
+import vWysiwygLinks from '@/directives/v-wysiwyg-links'
 import RouteLink from '@/components/navigation/RouteLink.vue'
 
 const props = defineProps({
@@ -17,7 +18,11 @@ const route = computed(() => link.value?.route)
 
 <template>
   <blockquote class="blockquote border border-secondary rounded p-3">
-    <div class="text-processed" v-html="paragraph.quote.processed"></div>
+    <div
+      class="text-processed"
+      v-html="paragraph.quote.processed"
+      v-wysiwyg-links
+    ></div>
 
     <p v-if="paragraph.citation || paragraph.link" class="text-secondary small">
       {{ paragraph.citation }}

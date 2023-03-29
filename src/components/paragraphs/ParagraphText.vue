@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import type { ParagraphText } from '@/services/drupal'
+import vWysiwygLinks from '@/directives/v-wysiwyg-links'
+
 defineProps({
   paragraph: {
     type: Object as PropType<ParagraphText>,
@@ -10,5 +12,5 @@ defineProps({
 </script>
 
 <template>
-  <div class="text-processed" v-html="paragraph.text.processed"></div>
+  <div v-html="paragraph.text.processed" v-wysiwyg-links />
 </template>
