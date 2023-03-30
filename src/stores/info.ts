@@ -18,7 +18,6 @@ export const useInfoStore = defineStore('info', () => {
     })
 
     home.value = info.home
-    console.log(home)
   }
 
   return {
