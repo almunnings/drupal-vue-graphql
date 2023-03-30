@@ -712,8 +712,14 @@ union RouteUnion = RouteExternal | RouteInternal | RouteRedirect
 
 """Schema generator version."""
 type SchemaInformation {
-  """Description of the API as set by an administrator."""
+  """Schema description."""
   description: String!
+
+  """Path to the homepage."""
+  home: String
+
+  """Schema module version."""
+  version: String!
 }
 
 type Table {

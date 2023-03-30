@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useRouteStore } from '@/stores/route'
+import { useInfoStore } from '@/stores/info'
 import { isRouteInternal } from '@/services/drupal'
 import MainMenu from '@/components/navigation/MainMenu.vue'
 
@@ -11,6 +12,9 @@ const $route = useRoute()
 const error = computed(() => routeStore.errors.get($route.path))
 const loading = computed(() => routeStore.loading.get($route.path))
 const route = computed(() => routeStore.routes.get($route.path))
+
+// Get site information like homepage url.
+useInfoStore().fetchInfo()
 
 // Get the entity off the current route if it's internal.
 const entity = computed(() =>

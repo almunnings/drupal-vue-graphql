@@ -1128,6 +1128,12 @@ export default {
             "description": [
                 70
             ],
+            "home": [
+                70
+            ],
+            "version": [
+                70
+            ],
             "__typename": [
                 70
             ]

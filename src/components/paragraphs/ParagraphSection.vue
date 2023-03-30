@@ -35,13 +35,15 @@ const getRegionChildren = (region: string) =>
     v-if="children"
     class="border border-info rounded my-4 p-4"
   >
-    <!-- Loop through each defined region on the paragraph -->
+    <!-- Loop through each region on paragraph and inject into region slot -->
     <template #[region] v-for="region in regions" :key="region">
-      <!-- Get each child assigned to this region -->
-      <template v-for="child in getRegionChildren(region)" :key="child.id">
-        <!-- Generate a dynamic component based on child __typename -->
-        <component :is="getParagraphComponent(child)" :paragraph="child" />
-      </template>
+      <!-- Generate a dynamic component based on child __typename -->
+      <component
+        v-for="child in getRegionChildren(region)"
+        :is="getParagraphComponent(child)"
+        :paragraph="child"
+        :key="child.id"
+      />
     </template>
   </component>
 </template>
