@@ -3,10 +3,7 @@ import { computed } from 'vue'
 import type { PropType } from 'vue'
 import { getParagraphComponent, getLayoutComponent } from '.'
 
-import type {
-  ParagraphSection,
-  TypeParagraphInterface
-} from '@/services/drupal'
+import type { ParagraphSection, ParagraphInterface } from '@/services/drupal'
 
 const props = defineProps({
   paragraph: {
@@ -14,7 +11,7 @@ const props = defineProps({
     required: true
   },
   children: {
-    type: Array as PropType<TypeParagraphInterface[]>,
+    type: Array as PropType<ParagraphInterface[]>,
     required: false
   }
 })

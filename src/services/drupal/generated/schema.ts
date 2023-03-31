@@ -43,7 +43,7 @@ export type Block = (BlockContent | BlockPlugin) & { __isUnion?: true }
 
 /** Block field information. */
 export interface BlockContent {
-    entity?: TypeBlockContentUnion
+    entity?: UnsupportedType
     id: Scalars['ID']
     render?: Scalars['Html']
     title?: Scalars['String']
@@ -87,6 +87,12 @@ export interface BlockContentBasicBlock {
 }
 
 
+/** Entity type block_content. */
+export type BlockContentInterface = (BlockContentAnotherType | BlockContentBasicBlock) & { __isUnion?: true }
+
+export type BlockContentUnion = (BlockContentAnotherType | BlockContentBasicBlock) & { __isUnion?: true }
+
+
 /** Block field information. */
 export interface BlockField {
     block?: Block
@@ -111,6 +117,10 @@ export type BlockUnion = (BlockContent | BlockPlugin) & { __isUnion?: true }
 
 /** A paginated set of results. */
 export type Connection = (NodePageConnection) & { __isUnion?: true }
+
+
+/** Choose how your sorts will occur and on which field. */
+export type ConnectionSortKeys = 'CREATED_AT' | 'PROMOTED' | 'STICKY' | 'TITLE' | 'UPDATED_AT'
 
 
 /** A DateTime object. */
@@ -158,24 +168,26 @@ export interface Image {
 
 /** Entity type image_style. */
 export interface ImageStyle {
+    id: Scalars['ID']
     name?: Scalars['String']
-    uuid?: Scalars['ID']
     __typename: 'ImageStyle'
 }
 
 
 /** List of image styles available to use. */
-export type ImageStyleAvailable = 'UNDEFINED'
+export type ImageStyleAvailable = 'LARGE' | 'MEDIUM' | 'THUMBNAIL' | 'WIDE'
 
 
 /** ImageStyle derivative for an Image. */
 export interface ImageStyleDerivative {
-    height?: Scalars['Int']
-    style?: ImageStyle
-    url?: Scalars['String']
-    width?: Scalars['Int']
+    height: Scalars['Int']
+    style: ImageStyle
+    url: Scalars['String']
+    width: Scalars['Int']
     __typename: 'ImageStyleDerivative'
 }
+
+export type ImageStyleUnion = (ImageStyle) & { __isUnion?: true }
 
 
 /** A langauge definition provided by the CMS. */
@@ -296,6 +308,10 @@ export interface MediaImage {
 }
 
 
+/** Entity type media. */
+export type MediaInterface = (MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo) & { __isUnion?: true }
+
+
 /** A remotely hosted video from YouTube or Vimeo. */
 export interface MediaRemoteVideo {
     /** The time the media item was last edited. */
@@ -312,6 +328,8 @@ export interface MediaRemoteVideo {
     status: Scalars['Boolean']
     __typename: 'MediaRemoteVideo'
 }
+
+export type MediaUnion = (MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo) & { __isUnion?: true }
 
 
 /** A locally hosted video file. */
@@ -353,6 +371,8 @@ export interface MenuItem {
     title?: Scalars['String']
     __typename: 'MenuItem'
 }
+
+export type MenuUnion = (Menu) & { __isUnion?: true }
 
 
 /** Meta elements are tags used in HTML and XHTML documents to provide structured metadata about a Web page. */
@@ -398,7 +418,11 @@ export interface MetaTagValueAttributes {
 
 
 /** A concrete fetchable type that is addressable by an id. */
-export type Node = (BlockContent | BlockContentAnotherType | BlockContentBasicBlock | BlockPlugin | Layout | MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo | NodePage | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText | User) & { __isUnion?: true }
+export type Node = (BlockContent | BlockContentAnotherType | BlockContentBasicBlock | BlockPlugin | Layout | MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo | NodePage | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText | TermTags | TermTester | User) & { __isUnion?: true }
+
+
+/** Entity type node. */
+export type NodeInterface = (NodePage) & { __isUnion?: true }
 
 
 /** Use <em>basic pages</em> for your static content, such as an 'About us' page. */
@@ -408,7 +432,7 @@ export interface NodePage {
     /** The time that the node was last edited. */
     changed: DateTime
     /** Content */
-    content?: TypeParagraphUnion[]
+    content?: ParagraphUnion[]
     /** The time that the node was created. */
     created: DateTime
     /** UUID */
@@ -425,6 +449,8 @@ export interface NodePage {
     status: Scalars['Boolean']
     /** Sticky at top of lists */
     sticky: Scalars['Boolean']
+    /** Tags */
+    tags?: TermUnion[]
     /** Title */
     title: Scalars['String']
     __typename: 'NodePage'
@@ -447,9 +473,7 @@ export interface NodePageEdge {
     __typename: 'NodePageEdge'
 }
 
-
-/** The set of valid sort keys for the NodePage query. */
-export type NodePageSortKeys = 'CREATED_AT'
+export type NodeUnion = (NodePage) & { __isUnion?: true }
 
 
 /** Information about the page in a connection. */
@@ -472,6 +496,8 @@ export interface ParagraphBlock {
     block?: BlockUnion
     /** Layout metadata for this paragraph. */
     composition: LayoutParagraphs
+    /** The time that the Paragraph was created. */
+    created: DateTime
     /** Feature */
     feature?: Scalars['String']
     /** UUID */
@@ -484,6 +510,8 @@ export interface ParagraphBlock {
 export interface ParagraphCallToAction {
     /** Layout metadata for this paragraph. */
     composition: LayoutParagraphs
+    /** The time that the Paragraph was created. */
+    created: DateTime
     /** UUID */
     id: Scalars['ID']
     /** Link */
@@ -496,16 +524,22 @@ export interface ParagraphCallToAction {
 }
 
 
+/** Entity type paragraph. */
+export type ParagraphInterface = (ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText) & { __isUnion?: true }
+
+
 /** Add Audio, Documents, Images or Videos and Embed YouTube videos. */
 export interface ParagraphMedia {
     /** Layout metadata for this paragraph. */
     composition: LayoutParagraphs
+    /** The time that the Paragraph was created. */
+    created: DateTime
     /** Description */
     description?: Text
     /** UUID */
     id: Scalars['ID']
     /** Media */
-    media: TypeMediaUnion
+    media: MediaUnion
     /** Title */
     title?: Scalars['String']
     __typename: 'ParagraphMedia'
@@ -518,6 +552,8 @@ export interface ParagraphQuote {
     citation?: Scalars['String']
     /** Layout metadata for this paragraph. */
     composition: LayoutParagraphs
+    /** The time that the Paragraph was created. */
+    created: DateTime
     /** UUID */
     id: Scalars['ID']
     /** Enter an optional link for the citation. */
@@ -532,6 +568,8 @@ export interface ParagraphQuote {
 export interface ParagraphSection {
     /** Layout metadata for this paragraph. */
     composition: LayoutParagraphs
+    /** The time that the Paragraph was created. */
+    created: DateTime
     /** UUID */
     id: Scalars['ID']
     __typename: 'ParagraphSection'
@@ -542,6 +580,8 @@ export interface ParagraphSection {
 export interface ParagraphTable {
     /** Layout metadata for this paragraph. */
     composition: LayoutParagraphs
+    /** The time that the Paragraph was created. */
+    created: DateTime
     /** UUID */
     id: Scalars['ID']
     /** Table */
@@ -556,12 +596,16 @@ export interface ParagraphTable {
 export interface ParagraphText {
     /** Layout metadata for this paragraph. */
     composition: LayoutParagraphs
+    /** The time that the Paragraph was created. */
+    created: DateTime
     /** UUID */
     id: Scalars['ID']
     /** Text */
     text: Text
     __typename: 'ParagraphText'
 }
+
+export type ParagraphUnion = (ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText) & { __isUnion?: true }
 
 
 /**
@@ -599,7 +643,7 @@ export type Route = (RouteExternal | RouteInternal | RouteRedirect) & { __isUnio
 
 
 /** A list of possible entites that can be returned by URL. */
-export type RouteEntityUnion = (NodePage) & { __isUnion?: true }
+export type RouteEntityUnion = (NodePage | TermTags | TermTester) & { __isUnion?: true }
 
 
 /** Route outside of this website. */
@@ -662,6 +706,52 @@ export interface TableRow {
 }
 
 
+/** Entity type taxonomy_term. */
+export type TermInterface = (TermTags | TermTester) & { __isUnion?: true }
+
+
+/** Tag content to group it together. */
+export interface TermTags {
+    /** The time that the term was last edited. */
+    changed: DateTime
+    /** Description */
+    description: Text
+    /** The term UUID. */
+    id: Scalars['ID']
+    /** The term language code. */
+    langcode: Language
+    /** Name */
+    name: Scalars['String']
+    /** URL alias */
+    path: Scalars['String']
+    /** Published */
+    status: Scalars['Boolean']
+    __typename: 'TermTags'
+}
+
+
+/** More testing tags. */
+export interface TermTester {
+    /** The time that the term was last edited. */
+    changed: DateTime
+    /** Description */
+    description: Text
+    /** The term UUID. */
+    id: Scalars['ID']
+    /** The term language code. */
+    langcode: Language
+    /** Name */
+    name: Scalars['String']
+    /** URL alias */
+    path: Scalars['String']
+    /** Published */
+    status: Scalars['Boolean']
+    __typename: 'TermTester'
+}
+
+export type TermUnion = (TermTags | TermTester) & { __isUnion?: true }
+
+
 /** A processed text format defined by the CMS. */
 export interface Text {
     format?: Scalars['String']
@@ -679,52 +769,6 @@ export interface TextSummary {
     value?: Scalars['String']
     __typename: 'TextSummary'
 }
-
-
-/** Entity type block_content. */
-export type TypeBlockContentInterface = (BlockContentAnotherType | BlockContentBasicBlock) & { __isUnion?: true }
-
-export type TypeBlockContentUnion = (BlockContentAnotherType | BlockContentBasicBlock) & { __isUnion?: true }
-
-
-/** Entity type media. */
-export type TypeMediaInterface = (MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo) & { __isUnion?: true }
-
-export type TypeMediaUnion = (MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo) & { __isUnion?: true }
-
-
-/** Entity type node. */
-export type TypeNodeInterface = (NodePage) & { __isUnion?: true }
-
-
-/** Entity type paragraph. */
-export type TypeParagraphInterface = (ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText) & { __isUnion?: true }
-
-export type TypeParagraphUnion = (ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText) & { __isUnion?: true }
-
-
-/** Entity type taxonomy_term. */
-export interface TypeTermInterface {
-    /** The time that the term was last edited. */
-    changed?: DateTime
-    /** Description */
-    description?: Text
-    /** The term UUID. */
-    id?: Scalars['ID']
-    /** The term language code. */
-    langcode?: Language
-    /** Name */
-    name: Scalars['String']
-    /** URL alias */
-    path?: Scalars['String']
-    /** Published */
-    status?: Scalars['Boolean']
-    __typename: string
-}
-
-
-/** Entity type user. */
-export type TypeUserInterface = (User) & { __isUnion?: true }
 
 
 /**
@@ -758,8 +802,14 @@ export interface User {
 }
 
 
+/** Entity type user. */
+export type UserInterface = (User) & { __isUnion?: true }
+
+
 /** Whether the user is active or blocked. */
 export type UserStatus = 'ACTIVE' | 'BLOCKED'
+
+export type UserUnion = (User) & { __isUnion?: true }
 
 
 /** Complex address data. */
@@ -796,7 +846,7 @@ export interface BlockGenqlSelection{
 
 /** Block field information. */
 export interface BlockContentGenqlSelection{
-    entity?: TypeBlockContentUnionGenqlSelection
+    entity?: UnsupportedTypeGenqlSelection
     id?: boolean | number
     render?: boolean | number
     title?: boolean | number
@@ -840,6 +890,33 @@ export interface BlockContentBasicBlockGenqlSelection{
     title?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
+}
+
+
+/** Entity type block_content. */
+export interface BlockContentInterfaceGenqlSelection{
+    /** The time that the custom block was last edited. */
+    changed?: DateTimeGenqlSelection
+    /** The custom block UUID. */
+    id?: boolean | number
+    /** The custom block language code. */
+    langcode?: LanguageGenqlSelection
+    /** A boolean indicating whether this block is reusable. */
+    reusable?: boolean | number
+    /** A brief description of your block. */
+    title?: boolean | number
+    on_BlockContentAnotherType?: BlockContentAnotherTypeGenqlSelection
+    on_BlockContentBasicBlock?: BlockContentBasicBlockGenqlSelection
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+export interface BlockContentUnionGenqlSelection{
+    on_BlockContentAnotherType?:BlockContentAnotherTypeGenqlSelection,
+    on_BlockContentBasicBlock?:BlockContentBasicBlockGenqlSelection,
+    on_BlockContentInterface?: BlockContentInterfaceGenqlSelection,
+    on_Node?: NodeGenqlSelection,
+    __typename?: boolean | number
 }
 
 
@@ -943,8 +1020,8 @@ export interface ImageGenqlSelection{
 
 /** Entity type image_style. */
 export interface ImageStyleGenqlSelection{
+    id?: boolean | number
     name?: boolean | number
-    uuid?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -958,6 +1035,11 @@ export interface ImageStyleDerivativeGenqlSelection{
     width?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
+}
+
+export interface ImageStyleUnionGenqlSelection{
+    on_ImageStyle?:ImageStyleGenqlSelection,
+    __typename?: boolean | number
 }
 
 
@@ -1099,6 +1181,28 @@ export interface MediaImageGenqlSelection{
 }
 
 
+/** Entity type media. */
+export interface MediaInterfaceGenqlSelection{
+    /** The time the media item was last edited. */
+    changed?: DateTimeGenqlSelection
+    /** The time the media item was created. */
+    created?: DateTimeGenqlSelection
+    /** UUID */
+    id?: boolean | number
+    /** Name */
+    name?: boolean | number
+    /** Published */
+    status?: boolean | number
+    on_MediaAudio?: MediaAudioGenqlSelection
+    on_MediaDocument?: MediaDocumentGenqlSelection
+    on_MediaImage?: MediaImageGenqlSelection
+    on_MediaRemoteVideo?: MediaRemoteVideoGenqlSelection
+    on_MediaVideo?: MediaVideoGenqlSelection
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
 /** A remotely hosted video from YouTube or Vimeo. */
 export interface MediaRemoteVideoGenqlSelection{
     /** The time the media item was last edited. */
@@ -1115,6 +1219,17 @@ export interface MediaRemoteVideoGenqlSelection{
     status?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
+}
+
+export interface MediaUnionGenqlSelection{
+    on_MediaAudio?:MediaAudioGenqlSelection,
+    on_MediaDocument?:MediaDocumentGenqlSelection,
+    on_MediaImage?:MediaImageGenqlSelection,
+    on_MediaRemoteVideo?:MediaRemoteVideoGenqlSelection,
+    on_MediaVideo?:MediaVideoGenqlSelection,
+    on_MediaInterface?: MediaInterfaceGenqlSelection,
+    on_Node?: NodeGenqlSelection,
+    __typename?: boolean | number
 }
 
 
@@ -1155,6 +1270,11 @@ export interface MenuItemGenqlSelection{
     title?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
+}
+
+export interface MenuUnionGenqlSelection{
+    on_Menu?:MenuGenqlSelection,
+    __typename?: boolean | number
 }
 
 
@@ -1240,20 +1360,20 @@ export interface NodeGenqlSelection{
     on_ParagraphSection?: ParagraphSectionGenqlSelection
     on_ParagraphTable?: ParagraphTableGenqlSelection
     on_ParagraphText?: ParagraphTextGenqlSelection
+    on_TermTags?: TermTagsGenqlSelection
+    on_TermTester?: TermTesterGenqlSelection
     on_User?: UserGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
 
-/** Use <em>basic pages</em> for your static content, such as an 'About us' page. */
-export interface NodePageGenqlSelection{
+/** Entity type node. */
+export interface NodeInterfaceGenqlSelection{
     /** The username of the content author. */
     author?: UserGenqlSelection
     /** The time that the node was last edited. */
     changed?: DateTimeGenqlSelection
-    /** Content */
-    content?: TypeParagraphUnionGenqlSelection
     /** The time that the node was created. */
     created?: DateTimeGenqlSelection
     /** UUID */
@@ -1270,6 +1390,40 @@ export interface NodePageGenqlSelection{
     status?: boolean | number
     /** Sticky at top of lists */
     sticky?: boolean | number
+    /** Title */
+    title?: boolean | number
+    on_NodePage?: NodePageGenqlSelection
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Use <em>basic pages</em> for your static content, such as an 'About us' page. */
+export interface NodePageGenqlSelection{
+    /** The username of the content author. */
+    author?: UserGenqlSelection
+    /** The time that the node was last edited. */
+    changed?: DateTimeGenqlSelection
+    /** Content */
+    content?: ParagraphUnionGenqlSelection
+    /** The time that the node was created. */
+    created?: DateTimeGenqlSelection
+    /** UUID */
+    id?: boolean | number
+    /** Language */
+    langcode?: LanguageGenqlSelection
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
+    /** URL alias */
+    path?: boolean | number
+    /** Promoted to front page */
+    promote?: boolean | number
+    /** Published */
+    status?: boolean | number
+    /** Sticky at top of lists */
+    sticky?: boolean | number
+    /** Tags */
+    tags?: TermUnionGenqlSelection
     /** Title */
     title?: boolean | number
     __typename?: boolean | number
@@ -1295,6 +1449,13 @@ export interface NodePageEdgeGenqlSelection{
     __scalar?: boolean | number
 }
 
+export interface NodeUnionGenqlSelection{
+    on_NodePage?:NodePageGenqlSelection,
+    on_Node?: NodeGenqlSelection,
+    on_NodeInterface?: NodeInterfaceGenqlSelection,
+    __typename?: boolean | number
+}
+
 
 /** Information about the page in a connection. */
 export interface PageInfoGenqlSelection{
@@ -1317,6 +1478,8 @@ export interface ParagraphBlockGenqlSelection{
     block?: BlockUnionGenqlSelection
     /** Layout metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
+    /** The time that the Paragraph was created. */
+    created?: DateTimeGenqlSelection
     /** Feature */
     feature?: boolean | number
     /** UUID */
@@ -1330,6 +1493,8 @@ export interface ParagraphBlockGenqlSelection{
 export interface ParagraphCallToActionGenqlSelection{
     /** Layout metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
+    /** The time that the Paragraph was created. */
+    created?: DateTimeGenqlSelection
     /** UUID */
     id?: boolean | number
     /** Link */
@@ -1343,16 +1508,36 @@ export interface ParagraphCallToActionGenqlSelection{
 }
 
 
+/** Entity type paragraph. */
+export interface ParagraphInterfaceGenqlSelection{
+    /** The time that the Paragraph was created. */
+    created?: DateTimeGenqlSelection
+    /** UUID */
+    id?: boolean | number
+    on_ParagraphBlock?: ParagraphBlockGenqlSelection
+    on_ParagraphCallToAction?: ParagraphCallToActionGenqlSelection
+    on_ParagraphMedia?: ParagraphMediaGenqlSelection
+    on_ParagraphQuote?: ParagraphQuoteGenqlSelection
+    on_ParagraphSection?: ParagraphSectionGenqlSelection
+    on_ParagraphTable?: ParagraphTableGenqlSelection
+    on_ParagraphText?: ParagraphTextGenqlSelection
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
 /** Add Audio, Documents, Images or Videos and Embed YouTube videos. */
 export interface ParagraphMediaGenqlSelection{
     /** Layout metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
+    /** The time that the Paragraph was created. */
+    created?: DateTimeGenqlSelection
     /** Description */
     description?: TextGenqlSelection
     /** UUID */
     id?: boolean | number
     /** Media */
-    media?: TypeMediaUnionGenqlSelection
+    media?: MediaUnionGenqlSelection
     /** Title */
     title?: boolean | number
     __typename?: boolean | number
@@ -1366,6 +1551,8 @@ export interface ParagraphQuoteGenqlSelection{
     citation?: boolean | number
     /** Layout metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
+    /** The time that the Paragraph was created. */
+    created?: DateTimeGenqlSelection
     /** UUID */
     id?: boolean | number
     /** Enter an optional link for the citation. */
@@ -1381,6 +1568,8 @@ export interface ParagraphQuoteGenqlSelection{
 export interface ParagraphSectionGenqlSelection{
     /** Layout metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
+    /** The time that the Paragraph was created. */
+    created?: DateTimeGenqlSelection
     /** UUID */
     id?: boolean | number
     __typename?: boolean | number
@@ -1392,6 +1581,8 @@ export interface ParagraphSectionGenqlSelection{
 export interface ParagraphTableGenqlSelection{
     /** Layout metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
+    /** The time that the Paragraph was created. */
+    created?: DateTimeGenqlSelection
     /** UUID */
     id?: boolean | number
     /** Table */
@@ -1407,12 +1598,28 @@ export interface ParagraphTableGenqlSelection{
 export interface ParagraphTextGenqlSelection{
     /** Layout metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
+    /** The time that the Paragraph was created. */
+    created?: DateTimeGenqlSelection
     /** UUID */
     id?: boolean | number
     /** Text */
     text?: TextGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
+}
+
+export interface ParagraphUnionGenqlSelection{
+    on_ParagraphBlock?:ParagraphBlockGenqlSelection,
+    on_ParagraphCallToAction?:ParagraphCallToActionGenqlSelection,
+    on_ParagraphMedia?:ParagraphMediaGenqlSelection,
+    on_ParagraphQuote?:ParagraphQuoteGenqlSelection,
+    on_ParagraphSection?:ParagraphSectionGenqlSelection,
+    on_ParagraphTable?:ParagraphTableGenqlSelection,
+    on_ParagraphText?:ParagraphTextGenqlSelection,
+    on_LayoutParagraphsInterface?: LayoutParagraphsInterfaceGenqlSelection,
+    on_Node?: NodeGenqlSelection,
+    on_ParagraphInterface?: ParagraphInterfaceGenqlSelection,
+    __typename?: boolean | number
 }
 
 
@@ -1448,7 +1655,7 @@ export interface QueryGenqlSelection{
     /** Reverse the order of the underlying list. */
     reverse?: (Scalars['Boolean'] | null), 
     /** Sort the underlying list by the given key. */
-    sortKey?: (NodePageSortKeys | null)} })
+    sortKey?: (ConnectionSortKeys | null)} })
     /** Load a Route by path. */
     route?: (RouteUnionGenqlSelection & { __args: {
     /** Internal path to load. Eg /about */
@@ -1483,8 +1690,11 @@ export interface RouteGenqlSelection{
 /** A list of possible entites that can be returned by URL. */
 export interface RouteEntityUnionGenqlSelection{
     on_NodePage?:NodePageGenqlSelection,
+    on_TermTags?:TermTagsGenqlSelection,
+    on_TermTester?:TermTesterGenqlSelection,
     on_Node?: NodeGenqlSelection,
-    on_TypeNodeInterface?: TypeNodeInterfaceGenqlSelection,
+    on_NodeInterface?: NodeInterfaceGenqlSelection,
+    on_TermInterface?: TermInterfaceGenqlSelection,
     __typename?: boolean | number
 }
 
@@ -1561,149 +1771,31 @@ export interface TableRowGenqlSelection{
 }
 
 
-/** A processed text format defined by the CMS. */
-export interface TextGenqlSelection{
-    format?: boolean | number
-    processed?: boolean | number
-    value?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** A processed text format with summary defined by the CMS. */
-export interface TextSummaryGenqlSelection{
-    format?: boolean | number
-    processed?: boolean | number
-    summary?: boolean | number
-    value?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Entity type block_content. */
-export interface TypeBlockContentInterfaceGenqlSelection{
-    /** The time that the custom block was last edited. */
+/** Entity type taxonomy_term. */
+export interface TermInterfaceGenqlSelection{
+    /** The time that the term was last edited. */
     changed?: DateTimeGenqlSelection
-    /** The custom block UUID. */
+    /** Description */
+    description?: TextGenqlSelection
+    /** The term UUID. */
     id?: boolean | number
-    /** The custom block language code. */
+    /** The term language code. */
     langcode?: LanguageGenqlSelection
-    /** A boolean indicating whether this block is reusable. */
-    reusable?: boolean | number
-    /** A brief description of your block. */
-    title?: boolean | number
-    on_BlockContentAnotherType?: BlockContentAnotherTypeGenqlSelection
-    on_BlockContentBasicBlock?: BlockContentBasicBlockGenqlSelection
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-export interface TypeBlockContentUnionGenqlSelection{
-    on_BlockContentAnotherType?:BlockContentAnotherTypeGenqlSelection,
-    on_BlockContentBasicBlock?:BlockContentBasicBlockGenqlSelection,
-    on_Node?: NodeGenqlSelection,
-    on_TypeBlockContentInterface?: TypeBlockContentInterfaceGenqlSelection,
-    __typename?: boolean | number
-}
-
-
-/** Entity type media. */
-export interface TypeMediaInterfaceGenqlSelection{
-    /** The time the media item was last edited. */
-    changed?: DateTimeGenqlSelection
-    /** The time the media item was created. */
-    created?: DateTimeGenqlSelection
-    /** UUID */
-    id?: boolean | number
     /** Name */
     name?: boolean | number
-    /** Published */
-    status?: boolean | number
-    on_MediaAudio?: MediaAudioGenqlSelection
-    on_MediaDocument?: MediaDocumentGenqlSelection
-    on_MediaImage?: MediaImageGenqlSelection
-    on_MediaRemoteVideo?: MediaRemoteVideoGenqlSelection
-    on_MediaVideo?: MediaVideoGenqlSelection
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-export interface TypeMediaUnionGenqlSelection{
-    on_MediaAudio?:MediaAudioGenqlSelection,
-    on_MediaDocument?:MediaDocumentGenqlSelection,
-    on_MediaImage?:MediaImageGenqlSelection,
-    on_MediaRemoteVideo?:MediaRemoteVideoGenqlSelection,
-    on_MediaVideo?:MediaVideoGenqlSelection,
-    on_Node?: NodeGenqlSelection,
-    on_TypeMediaInterface?: TypeMediaInterfaceGenqlSelection,
-    __typename?: boolean | number
-}
-
-
-/** Entity type node. */
-export interface TypeNodeInterfaceGenqlSelection{
-    /** The username of the content author. */
-    author?: UserGenqlSelection
-    /** The time that the node was last edited. */
-    changed?: DateTimeGenqlSelection
-    /** The time that the node was created. */
-    created?: DateTimeGenqlSelection
-    /** UUID */
-    id?: boolean | number
-    /** Language */
-    langcode?: LanguageGenqlSelection
-    /** The computed meta tags for the entity. */
-    metatag?: MetaTagUnionGenqlSelection
     /** URL alias */
     path?: boolean | number
-    /** Promoted to front page */
-    promote?: boolean | number
     /** Published */
     status?: boolean | number
-    /** Sticky at top of lists */
-    sticky?: boolean | number
-    /** Title */
-    title?: boolean | number
-    on_NodePage?: NodePageGenqlSelection
+    on_TermTags?: TermTagsGenqlSelection
+    on_TermTester?: TermTesterGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
 
-/** Entity type paragraph. */
-export interface TypeParagraphInterfaceGenqlSelection{
-    /** UUID */
-    id?: boolean | number
-    on_ParagraphBlock?: ParagraphBlockGenqlSelection
-    on_ParagraphCallToAction?: ParagraphCallToActionGenqlSelection
-    on_ParagraphMedia?: ParagraphMediaGenqlSelection
-    on_ParagraphQuote?: ParagraphQuoteGenqlSelection
-    on_ParagraphSection?: ParagraphSectionGenqlSelection
-    on_ParagraphTable?: ParagraphTableGenqlSelection
-    on_ParagraphText?: ParagraphTextGenqlSelection
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-export interface TypeParagraphUnionGenqlSelection{
-    on_ParagraphBlock?:ParagraphBlockGenqlSelection,
-    on_ParagraphCallToAction?:ParagraphCallToActionGenqlSelection,
-    on_ParagraphMedia?:ParagraphMediaGenqlSelection,
-    on_ParagraphQuote?:ParagraphQuoteGenqlSelection,
-    on_ParagraphSection?:ParagraphSectionGenqlSelection,
-    on_ParagraphTable?:ParagraphTableGenqlSelection,
-    on_ParagraphText?:ParagraphTextGenqlSelection,
-    on_LayoutParagraphsInterface?: LayoutParagraphsInterfaceGenqlSelection,
-    on_Node?: NodeGenqlSelection,
-    on_TypeParagraphInterface?: TypeParagraphInterfaceGenqlSelection,
-    __typename?: boolean | number
-}
-
-
-/** Entity type taxonomy_term. */
-export interface TypeTermInterfaceGenqlSelection{
+/** Tag content to group it together. */
+export interface TermTagsGenqlSelection{
     /** The time that the term was last edited. */
     changed?: DateTimeGenqlSelection
     /** Description */
@@ -1723,23 +1815,51 @@ export interface TypeTermInterfaceGenqlSelection{
 }
 
 
-/** Entity type user. */
-export interface TypeUserInterfaceGenqlSelection{
-    /** The time that the user was last edited. */
+/** More testing tags. */
+export interface TermTesterGenqlSelection{
+    /** The time that the term was last edited. */
     changed?: DateTimeGenqlSelection
-    /** The time that the user was created. */
-    created?: DateTimeGenqlSelection
-    /** The user UUID. */
+    /** Description */
+    description?: TextGenqlSelection
+    /** The term UUID. */
     id?: boolean | number
-    /** The email of this user. */
-    mail?: boolean | number
-    /** The name of this user. */
+    /** The term language code. */
+    langcode?: LanguageGenqlSelection
+    /** Name */
     name?: boolean | number
-    /** The roles the user has. */
-    roles?: boolean | number
-    /** Whether the user is active or blocked. */
+    /** URL alias */
+    path?: boolean | number
+    /** Published */
     status?: boolean | number
-    on_User?: UserGenqlSelection
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+export interface TermUnionGenqlSelection{
+    on_TermTags?:TermTagsGenqlSelection,
+    on_TermTester?:TermTesterGenqlSelection,
+    on_Node?: NodeGenqlSelection,
+    on_TermInterface?: TermInterfaceGenqlSelection,
+    __typename?: boolean | number
+}
+
+
+/** A processed text format defined by the CMS. */
+export interface TextGenqlSelection{
+    format?: boolean | number
+    processed?: boolean | number
+    value?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** A processed text format with summary defined by the CMS. */
+export interface TextSummaryGenqlSelection{
+    format?: boolean | number
+    processed?: boolean | number
+    summary?: boolean | number
+    value?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1775,6 +1895,35 @@ export interface UserGenqlSelection{
     status?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
+}
+
+
+/** Entity type user. */
+export interface UserInterfaceGenqlSelection{
+    /** The time that the user was last edited. */
+    changed?: DateTimeGenqlSelection
+    /** The time that the user was created. */
+    created?: DateTimeGenqlSelection
+    /** The user UUID. */
+    id?: boolean | number
+    /** The email of this user. */
+    mail?: boolean | number
+    /** The name of this user. */
+    name?: boolean | number
+    /** The roles the user has. */
+    roles?: boolean | number
+    /** Whether the user is active or blocked. */
+    status?: boolean | number
+    on_User?: UserGenqlSelection
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+export interface UserUnionGenqlSelection{
+    on_User?:UserGenqlSelection,
+    on_Node?: NodeGenqlSelection,
+    on_UserInterface?: UserInterfaceGenqlSelection,
+    __typename?: boolean | number
 }
 
 
@@ -1814,6 +1963,22 @@ export interface UserGenqlSelection{
     export const isBlockContentBasicBlock = (obj?: { __typename?: any } | null): obj is BlockContentBasicBlock => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isBlockContentBasicBlock"')
       return BlockContentBasicBlock_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const BlockContentInterface_possibleTypes: string[] = ['BlockContentAnotherType','BlockContentBasicBlock']
+    export const isBlockContentInterface = (obj?: { __typename?: any } | null): obj is BlockContentInterface => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isBlockContentInterface"')
+      return BlockContentInterface_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const BlockContentUnion_possibleTypes: string[] = ['BlockContentAnotherType','BlockContentBasicBlock']
+    export const isBlockContentUnion = (obj?: { __typename?: any } | null): obj is BlockContentUnion => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isBlockContentUnion"')
+      return BlockContentUnion_possibleTypes.includes(obj.__typename)
     }
     
 
@@ -1898,6 +2063,14 @@ export interface UserGenqlSelection{
     
 
 
+    const ImageStyleUnion_possibleTypes: string[] = ['ImageStyle']
+    export const isImageStyleUnion = (obj?: { __typename?: any } | null): obj is ImageStyleUnion => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isImageStyleUnion"')
+      return ImageStyleUnion_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
     const Language_possibleTypes: string[] = ['Language']
     export const isLanguage = (obj?: { __typename?: any } | null): obj is Language => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isLanguage"')
@@ -1978,10 +2151,26 @@ export interface UserGenqlSelection{
     
 
 
+    const MediaInterface_possibleTypes: string[] = ['MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo']
+    export const isMediaInterface = (obj?: { __typename?: any } | null): obj is MediaInterface => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isMediaInterface"')
+      return MediaInterface_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
     const MediaRemoteVideo_possibleTypes: string[] = ['MediaRemoteVideo']
     export const isMediaRemoteVideo = (obj?: { __typename?: any } | null): obj is MediaRemoteVideo => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isMediaRemoteVideo"')
       return MediaRemoteVideo_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const MediaUnion_possibleTypes: string[] = ['MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo']
+    export const isMediaUnion = (obj?: { __typename?: any } | null): obj is MediaUnion => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isMediaUnion"')
+      return MediaUnion_possibleTypes.includes(obj.__typename)
     }
     
 
@@ -2006,6 +2195,14 @@ export interface UserGenqlSelection{
     export const isMenuItem = (obj?: { __typename?: any } | null): obj is MenuItem => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isMenuItem"')
       return MenuItem_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const MenuUnion_possibleTypes: string[] = ['Menu']
+    export const isMenuUnion = (obj?: { __typename?: any } | null): obj is MenuUnion => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isMenuUnion"')
+      return MenuUnion_possibleTypes.includes(obj.__typename)
     }
     
 
@@ -2074,10 +2271,18 @@ export interface UserGenqlSelection{
     
 
 
-    const Node_possibleTypes: string[] = ['BlockContent','BlockContentAnotherType','BlockContentBasicBlock','BlockPlugin','Layout','MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo','NodePage','ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText','User']
+    const Node_possibleTypes: string[] = ['BlockContent','BlockContentAnotherType','BlockContentBasicBlock','BlockPlugin','Layout','MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo','NodePage','ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText','TermTags','TermTester','User']
     export const isNode = (obj?: { __typename?: any } | null): obj is Node => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isNode"')
       return Node_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const NodeInterface_possibleTypes: string[] = ['NodePage']
+    export const isNodeInterface = (obj?: { __typename?: any } | null): obj is NodeInterface => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isNodeInterface"')
+      return NodeInterface_possibleTypes.includes(obj.__typename)
     }
     
 
@@ -2106,6 +2311,14 @@ export interface UserGenqlSelection{
     
 
 
+    const NodeUnion_possibleTypes: string[] = ['NodePage']
+    export const isNodeUnion = (obj?: { __typename?: any } | null): obj is NodeUnion => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isNodeUnion"')
+      return NodeUnion_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
     const PageInfo_possibleTypes: string[] = ['PageInfo']
     export const isPageInfo = (obj?: { __typename?: any } | null): obj is PageInfo => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isPageInfo"')
@@ -2126,6 +2339,14 @@ export interface UserGenqlSelection{
     export const isParagraphCallToAction = (obj?: { __typename?: any } | null): obj is ParagraphCallToAction => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isParagraphCallToAction"')
       return ParagraphCallToAction_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const ParagraphInterface_possibleTypes: string[] = ['ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText']
+    export const isParagraphInterface = (obj?: { __typename?: any } | null): obj is ParagraphInterface => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isParagraphInterface"')
+      return ParagraphInterface_possibleTypes.includes(obj.__typename)
     }
     
 
@@ -2170,6 +2391,14 @@ export interface UserGenqlSelection{
     
 
 
+    const ParagraphUnion_possibleTypes: string[] = ['ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText']
+    export const isParagraphUnion = (obj?: { __typename?: any } | null): obj is ParagraphUnion => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isParagraphUnion"')
+      return ParagraphUnion_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
     const Query_possibleTypes: string[] = ['Query']
     export const isQuery = (obj?: { __typename?: any } | null): obj is Query => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isQuery"')
@@ -2194,7 +2423,7 @@ export interface UserGenqlSelection{
     
 
 
-    const RouteEntityUnion_possibleTypes: string[] = ['NodePage']
+    const RouteEntityUnion_possibleTypes: string[] = ['NodePage','TermTags','TermTester']
     export const isRouteEntityUnion = (obj?: { __typename?: any } | null): obj is RouteEntityUnion => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isRouteEntityUnion"')
       return RouteEntityUnion_possibleTypes.includes(obj.__typename)
@@ -2258,6 +2487,38 @@ export interface UserGenqlSelection{
     
 
 
+    const TermInterface_possibleTypes: string[] = ['TermTags','TermTester']
+    export const isTermInterface = (obj?: { __typename?: any } | null): obj is TermInterface => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isTermInterface"')
+      return TermInterface_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const TermTags_possibleTypes: string[] = ['TermTags']
+    export const isTermTags = (obj?: { __typename?: any } | null): obj is TermTags => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isTermTags"')
+      return TermTags_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const TermTester_possibleTypes: string[] = ['TermTester']
+    export const isTermTester = (obj?: { __typename?: any } | null): obj is TermTester => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isTermTester"')
+      return TermTester_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const TermUnion_possibleTypes: string[] = ['TermTags','TermTester']
+    export const isTermUnion = (obj?: { __typename?: any } | null): obj is TermUnion => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isTermUnion"')
+      return TermUnion_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
     const Text_possibleTypes: string[] = ['Text']
     export const isText = (obj?: { __typename?: any } | null): obj is Text => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isText"')
@@ -2270,78 +2531,6 @@ export interface UserGenqlSelection{
     export const isTextSummary = (obj?: { __typename?: any } | null): obj is TextSummary => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isTextSummary"')
       return TextSummary_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const TypeBlockContentInterface_possibleTypes: string[] = ['BlockContentAnotherType','BlockContentBasicBlock']
-    export const isTypeBlockContentInterface = (obj?: { __typename?: any } | null): obj is TypeBlockContentInterface => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isTypeBlockContentInterface"')
-      return TypeBlockContentInterface_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const TypeBlockContentUnion_possibleTypes: string[] = ['BlockContentAnotherType','BlockContentBasicBlock']
-    export const isTypeBlockContentUnion = (obj?: { __typename?: any } | null): obj is TypeBlockContentUnion => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isTypeBlockContentUnion"')
-      return TypeBlockContentUnion_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const TypeMediaInterface_possibleTypes: string[] = ['MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo']
-    export const isTypeMediaInterface = (obj?: { __typename?: any } | null): obj is TypeMediaInterface => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isTypeMediaInterface"')
-      return TypeMediaInterface_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const TypeMediaUnion_possibleTypes: string[] = ['MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo']
-    export const isTypeMediaUnion = (obj?: { __typename?: any } | null): obj is TypeMediaUnion => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isTypeMediaUnion"')
-      return TypeMediaUnion_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const TypeNodeInterface_possibleTypes: string[] = ['NodePage']
-    export const isTypeNodeInterface = (obj?: { __typename?: any } | null): obj is TypeNodeInterface => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isTypeNodeInterface"')
-      return TypeNodeInterface_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const TypeParagraphInterface_possibleTypes: string[] = ['ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText']
-    export const isTypeParagraphInterface = (obj?: { __typename?: any } | null): obj is TypeParagraphInterface => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isTypeParagraphInterface"')
-      return TypeParagraphInterface_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const TypeParagraphUnion_possibleTypes: string[] = ['ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText']
-    export const isTypeParagraphUnion = (obj?: { __typename?: any } | null): obj is TypeParagraphUnion => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isTypeParagraphUnion"')
-      return TypeParagraphUnion_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const TypeTermInterface_possibleTypes: string[] = []
-    export const isTypeTermInterface = (obj?: { __typename?: any } | null): obj is TypeTermInterface => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isTypeTermInterface"')
-      return TypeTermInterface_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const TypeUserInterface_possibleTypes: string[] = ['User']
-    export const isTypeUserInterface = (obj?: { __typename?: any } | null): obj is TypeUserInterface => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isTypeUserInterface"')
-      return TypeUserInterface_possibleTypes.includes(obj.__typename)
     }
     
 
@@ -2361,17 +2550,40 @@ export interface UserGenqlSelection{
     }
     
 
+
+    const UserInterface_possibleTypes: string[] = ['User']
+    export const isUserInterface = (obj?: { __typename?: any } | null): obj is UserInterface => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isUserInterface"')
+      return UserInterface_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const UserUnion_possibleTypes: string[] = ['User']
+    export const isUserUnion = (obj?: { __typename?: any } | null): obj is UserUnion => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isUserUnion"')
+      return UserUnion_possibleTypes.includes(obj.__typename)
+    }
+    
+
+export const enumConnectionSortKeys = {
+   CREATED_AT: 'CREATED_AT' as const,
+   PROMOTED: 'PROMOTED' as const,
+   STICKY: 'STICKY' as const,
+   TITLE: 'TITLE' as const,
+   UPDATED_AT: 'UPDATED_AT' as const
+}
+
 export const enumImageStyleAvailable = {
-   UNDEFINED: 'UNDEFINED' as const
+   LARGE: 'LARGE' as const,
+   MEDIUM: 'MEDIUM' as const,
+   THUMBNAIL: 'THUMBNAIL' as const,
+   WIDE: 'WIDE' as const
 }
 
 export const enumMenuAvailable = {
    FOOTER: 'FOOTER' as const,
    MAIN: 'MAIN' as const
-}
-
-export const enumNodePageSortKeys = {
-   CREATED_AT: 'CREATED_AT' as const
 }
 
 export const enumUserStatus = {

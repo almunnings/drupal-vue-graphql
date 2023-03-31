@@ -3,7 +3,7 @@
 // Import transitionss
 @import "transitions/fade";
 
-p,ol,ul,table,figure,picture,blockquote {
+p,ol,ul,table,figure,picture,blockquote,.alert {
   &:is(:last-child) {
     margin-bottom: 0;
   }

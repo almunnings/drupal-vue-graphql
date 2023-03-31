@@ -1,8 +1,8 @@
 import { defineAsyncComponent } from 'vue'
 
-import type { TypeParagraphInterface } from '@/services/drupal'
+import type { ParagraphInterface } from '@/services/drupal'
 
-export const getLayoutComponent = (paragraph: TypeParagraphInterface) => {
+export const getLayoutComponent = (paragraph: ParagraphInterface) => {
   switch (paragraph.composition.layout?.id) {
     case 'layout_twocol':
       return defineAsyncComponent(
@@ -16,7 +16,7 @@ export const getLayoutComponent = (paragraph: TypeParagraphInterface) => {
   }
 }
 
-export const getParagraphComponent = (paragraph: TypeParagraphInterface) => {
+export const getParagraphComponent = (paragraph: ParagraphInterface) => {
   switch (paragraph.__typename) {
     case 'ParagraphText':
       return defineAsyncComponent(

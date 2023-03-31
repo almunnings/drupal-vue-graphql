@@ -3,8 +3,8 @@ import type {
   MenuItemGenqlSelection,
   RouteGenqlSelection,
   NodePageGenqlSelection,
-  TypeNodeInterfaceGenqlSelection,
-  TypeParagraphInterfaceGenqlSelection,
+  NodeInterfaceGenqlSelection,
+  ParagraphInterfaceGenqlSelection,
   LayoutParagraphsInterfaceGenqlSelection,
   LinkGenqlSelection
 } from './generated'
@@ -27,7 +27,7 @@ export const LinkFragment: LinkGenqlSelection = {
   }
 }
 
-export const TypeParagraphFragment: TypeParagraphInterfaceGenqlSelection = {
+export const ParagraphFragment: ParagraphInterfaceGenqlSelection = {
   __typename: true,
   id: true,
   on_ParagraphText: {
@@ -62,12 +62,12 @@ export const LayoutParagraphFragment: LayoutParagraphsInterfaceGenqlSelection =
 export const NodePageFragment: NodePageGenqlSelection = {
   __typename: true,
   content: {
-    on_TypeParagraphInterface: TypeParagraphFragment,
+    on_ParagraphInterface: ParagraphFragment,
     on_LayoutParagraphsInterface: LayoutParagraphFragment
   }
 }
 
-export const TypeNodeFragment: TypeNodeInterfaceGenqlSelection = {
+export const NodeFragment: NodeInterfaceGenqlSelection = {
   __typename: true,
   id: true,
   title: true,

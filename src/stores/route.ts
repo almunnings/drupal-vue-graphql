@@ -1,10 +1,6 @@
 import { reactive } from 'vue'
 import { defineStore } from 'pinia'
-import {
-  drupalClient,
-  RouteFragment,
-  TypeNodeFragment
-} from '@/services/drupal'
+import { drupalClient, RouteFragment, NodeFragment } from '@/services/drupal'
 import type { Route } from '@/services/drupal'
 
 export const useRouteStore = defineStore('route', () => {
@@ -32,7 +28,7 @@ export const useRouteStore = defineStore('route', () => {
           on_Route: RouteFragment,
           on_RouteInternal: {
             entity: {
-              on_TypeNodeInterface: TypeNodeFragment
+              on_NodeInterface: NodeFragment
             }
           }
         }

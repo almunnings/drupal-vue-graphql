@@ -27,14 +27,14 @@ interface Block {
 
 """Block field information."""
 type BlockContent implements Block & Node {
-  entity: TypeBlockContentUnion
+  entity: UnsupportedType
   id: ID!
   render: Html
   title: String
 }
 
 """Another example block type for testing of Unions in GraphQL."""
-type BlockContentAnotherType implements Node & TypeBlockContentInterface {
+type BlockContentAnotherType implements BlockContentInterface & Node {
   """Body"""
   body: TextSummary
 
@@ -55,7 +55,7 @@ type BlockContentAnotherType implements Node & TypeBlockContentInterface {
 }
 
 """A basic block with a title and content."""
-type BlockContentBasicBlock implements Node & TypeBlockContentInterface {
+type BlockContentBasicBlock implements BlockContentInterface & Node {
   """Body"""
   body: TextSummary
 
@@ -74,6 +74,26 @@ type BlockContentBasicBlock implements Node & TypeBlockContentInterface {
   """A brief description of your block."""
   title: String!
 }
+
+"""Entity type block_content."""
+interface BlockContentInterface {
+  """The time that the custom block was last edited."""
+  changed: DateTime
+
+  """The custom block UUID."""
+  id: ID
+
+  """The custom block language code."""
+  langcode: Language
+
+  """A boolean indicating whether this block is reusable."""
+  reusable: Boolean
+
+  """A brief description of your block."""
+  title: String!
+}
+
+union BlockContentUnion = BlockContentAnotherType | BlockContentBasicBlock
 
 """Block field information."""
 type BlockField {
@@ -102,6 +122,24 @@ interface Connection {
 
   """Information to aid in pagination."""
   pageInfo: PageInfo!
+}
+
+"""Choose how your sorts will occur and on which field."""
+enum ConnectionSortKeys {
+  """Sort by creation date"""
+  CREATED_AT
+
+  """Sort by promoted status."""
+  PROMOTED
+
+  """Sort by sticky status."""
+  STICKY
+
+  """Sort by entity title."""
+  TITLE
+
+  """Sort by updated date"""
+  UPDATED_AT
 }
 
 """A cursor for use in pagination."""
@@ -164,23 +202,34 @@ type Image {
 
 """Entity type image_style."""
 type ImageStyle {
+  id: ID!
   name: String
-  uuid: ID
 }
 
 """List of image styles available to use."""
 enum ImageStyleAvailable {
-  """No image styles have been enabled."""
-  UNDEFINED
+  """Large (636×636)"""
+  LARGE
+
+  """Medium (306×306)"""
+  MEDIUM
+
+  """Thumbnail (100×100)"""
+  THUMBNAIL
+
+  """Wide (1296)"""
+  WIDE
 }
 
 """ImageStyle derivative for an Image."""
 type ImageStyleDerivative {
-  height: Int
-  style: ImageStyle
-  url: String
-  width: Int
+  height: Int!
+  style: ImageStyle!
+  url: String!
+  width: Int!
 }
+
+union ImageStyleUnion = ImageStyle
 
 """A langauge definition provided by the CMS."""
 type Language {
@@ -249,7 +298,7 @@ type Link {
 }
 
 """A locally hosted audio file."""
-type MediaAudio implements Node & TypeMediaInterface {
+type MediaAudio implements MediaInterface & Node {
   """Audio file"""
   audio: File!
 
@@ -270,7 +319,7 @@ type MediaAudio implements Node & TypeMediaInterface {
 }
 
 """An uploaded file or document, such as a PDF."""
-type MediaDocument implements Node & TypeMediaInterface {
+type MediaDocument implements MediaInterface & Node {
   """The time the media item was last edited."""
   changed: DateTime!
 
@@ -291,7 +340,7 @@ type MediaDocument implements Node & TypeMediaInterface {
 }
 
 """Use local images for reusable media."""
-type MediaImage implements Node & TypeMediaInterface {
+type MediaImage implements MediaInterface & Node {
   """The time the media item was last edited."""
   changed: DateTime!
 
@@ -311,8 +360,26 @@ type MediaImage implements Node & TypeMediaInterface {
   status: Boolean!
 }
 
+"""Entity type media."""
+interface MediaInterface {
+  """The time the media item was last edited."""
+  changed: DateTime
+
+  """The time the media item was created."""
+  created: DateTime
+
+  """UUID"""
+  id: ID
+
+  """Name"""
+  name: String!
+
+  """Published"""
+  status: Boolean
+}
+
 """A remotely hosted video from YouTube or Vimeo."""
-type MediaRemoteVideo implements Node & TypeMediaInterface {
+type MediaRemoteVideo implements MediaInterface & Node {
   """The time the media item was last edited."""
   changed: DateTime!
 
@@ -332,8 +399,10 @@ type MediaRemoteVideo implements Node & TypeMediaInterface {
   status: Boolean!
 }
 
+union MediaUnion = MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo
+
 """A locally hosted video file."""
-type MediaVideo implements Node & TypeMediaInterface {
+type MediaVideo implements MediaInterface & Node {
   """The time the media item was last edited."""
   changed: DateTime!
 
@@ -376,6 +445,8 @@ type MenuItem {
   route: RouteUnion!
   title: String
 }
+
+union MenuUnion = Menu
 
 """
 Meta elements are tags used in HTML and XHTML documents to provide structured metadata about a Web page.
@@ -421,10 +492,46 @@ interface Node {
   id: ID!
 }
 
+"""Entity type node."""
+interface NodeInterface {
+  """The username of the content author."""
+  author: User
+
+  """The time that the node was last edited."""
+  changed: DateTime
+
+  """The time that the node was created."""
+  created: DateTime
+
+  """UUID"""
+  id: ID
+
+  """Language"""
+  langcode: Language
+
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]
+
+  """URL alias"""
+  path: String
+
+  """Promoted to front page"""
+  promote: Boolean
+
+  """Published"""
+  status: Boolean
+
+  """Sticky at top of lists"""
+  sticky: Boolean
+
+  """Title"""
+  title: String!
+}
+
 """
 Use <em>basic pages</em> for your static content, such as an 'About us' page.
 """
-type NodePage implements Node & TypeNodeInterface {
+type NodePage implements Node & NodeInterface {
   """The username of the content author."""
   author: User!
 
@@ -432,7 +539,7 @@ type NodePage implements Node & TypeNodeInterface {
   changed: DateTime!
 
   """Content"""
-  content: [TypeParagraphUnion!]
+  content: [ParagraphUnion!]
 
   """The time that the node was created."""
   created: DateTime!
@@ -458,6 +565,9 @@ type NodePage implements Node & TypeNodeInterface {
   """Sticky at top of lists"""
   sticky: Boolean!
 
+  """Tags"""
+  tags: [TermUnion!]
+
   """Title"""
   title: String!
 }
@@ -475,11 +585,7 @@ type NodePageEdge implements Edge {
   node: NodePage!
 }
 
-"""The set of valid sort keys for the NodePage query."""
-enum NodePageSortKeys {
-  """Sort by event creation date"""
-  CREATED_AT
-}
+union NodeUnion = NodePage
 
 """Information about the page in a connection."""
 type PageInfo {
@@ -499,12 +605,15 @@ type PageInfo {
 """
 Choose a block to display. Edit this fields settings to allow different blocks.
 """
-type ParagraphBlock implements LayoutParagraphsInterface & Node & TypeParagraphInterface {
+type ParagraphBlock implements LayoutParagraphsInterface & Node & ParagraphInterface {
   """Block"""
   block: BlockUnion
 
   """Layout metadata for this paragraph."""
   composition: LayoutParagraphs!
+
+  """The time that the Paragraph was created."""
+  created: DateTime!
 
   """Feature"""
   feature: String
@@ -514,9 +623,12 @@ type ParagraphBlock implements LayoutParagraphsInterface & Node & TypeParagraphI
 }
 
 """Add a title, text content with formatting and link."""
-type ParagraphCallToAction implements LayoutParagraphsInterface & Node & TypeParagraphInterface {
+type ParagraphCallToAction implements LayoutParagraphsInterface & Node & ParagraphInterface {
   """Layout metadata for this paragraph."""
   composition: LayoutParagraphs!
+
+  """The time that the Paragraph was created."""
+  created: DateTime!
 
   """UUID"""
   id: ID!
@@ -531,10 +643,22 @@ type ParagraphCallToAction implements LayoutParagraphsInterface & Node & TypePar
   title: String
 }
 
+"""Entity type paragraph."""
+interface ParagraphInterface {
+  """The time that the Paragraph was created."""
+  created: DateTime
+
+  """UUID"""
+  id: ID
+}
+
 """Add Audio, Documents, Images or Videos and Embed YouTube videos."""
-type ParagraphMedia implements LayoutParagraphsInterface & Node & TypeParagraphInterface {
+type ParagraphMedia implements LayoutParagraphsInterface & Node & ParagraphInterface {
   """Layout metadata for this paragraph."""
   composition: LayoutParagraphs!
+
+  """The time that the Paragraph was created."""
+  created: DateTime!
 
   """Description"""
   description: Text
@@ -543,19 +667,22 @@ type ParagraphMedia implements LayoutParagraphsInterface & Node & TypeParagraphI
   id: ID!
 
   """Media"""
-  media: TypeMediaUnion!
+  media: MediaUnion!
 
   """Title"""
   title: String
 }
 
 """Add a quote. Add citation and citation link"""
-type ParagraphQuote implements LayoutParagraphsInterface & Node & TypeParagraphInterface {
+type ParagraphQuote implements LayoutParagraphsInterface & Node & ParagraphInterface {
   """Give credit for the quote."""
   citation: String
 
   """Layout metadata for this paragraph."""
   composition: LayoutParagraphs!
+
+  """The time that the Paragraph was created."""
+  created: DateTime!
 
   """UUID"""
   id: ID!
@@ -570,18 +697,24 @@ type ParagraphQuote implements LayoutParagraphsInterface & Node & TypeParagraphI
 """
 Sections are layout containers with composition for embedding more components.
 """
-type ParagraphSection implements LayoutParagraphsInterface & Node & TypeParagraphInterface {
+type ParagraphSection implements LayoutParagraphsInterface & Node & ParagraphInterface {
   """Layout metadata for this paragraph."""
   composition: LayoutParagraphs!
+
+  """The time that the Paragraph was created."""
+  created: DateTime!
 
   """UUID"""
   id: ID!
 }
 
 """Create a table with your own columns and rows."""
-type ParagraphTable implements LayoutParagraphsInterface & Node & TypeParagraphInterface {
+type ParagraphTable implements LayoutParagraphsInterface & Node & ParagraphInterface {
   """Layout metadata for this paragraph."""
   composition: LayoutParagraphs!
+
+  """The time that the Paragraph was created."""
+  created: DateTime!
 
   """UUID"""
   id: ID!
@@ -594,9 +727,12 @@ type ParagraphTable implements LayoutParagraphsInterface & Node & TypeParagraphI
 }
 
 """Text based content with formatting."""
-type ParagraphText implements LayoutParagraphsInterface & Node & TypeParagraphInterface {
+type ParagraphText implements LayoutParagraphsInterface & Node & ParagraphInterface {
   """Layout metadata for this paragraph."""
   composition: LayoutParagraphs!
+
+  """The time that the Paragraph was created."""
+  created: DateTime!
 
   """UUID"""
   id: ID!
@@ -604,6 +740,8 @@ type ParagraphText implements LayoutParagraphsInterface & Node & TypeParagraphIn
   """Text"""
   text: Text!
 }
+
+union ParagraphUnion = ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText
 
 """A field whose value conforms to the standard E.164"""
 scalar PhoneNumber
@@ -652,7 +790,7 @@ type Query {
     reverse: Boolean = false
 
     """Sort the underlying list by the given key."""
-    sortKey: NodePageSortKeys = CREATED_AT
+    sortKey: ConnectionSortKeys = CREATED_AT
   ): NodePageConnection!
 
   """Load a Route by path."""
@@ -679,7 +817,7 @@ interface Route {
 }
 
 """A list of possible entites that can be returned by URL."""
-union RouteEntityUnion = NodePage
+union RouteEntityUnion = NodePage | TermTags | TermTester
 
 """Route outside of this website."""
 type RouteExternal implements Route {
@@ -735,6 +873,80 @@ type TableRow {
   weight: Int
 }
 
+"""Entity type taxonomy_term."""
+interface TermInterface {
+  """The time that the term was last edited."""
+  changed: DateTime
+
+  """Description"""
+  description: Text
+
+  """The term UUID."""
+  id: ID
+
+  """The term language code."""
+  langcode: Language
+
+  """Name"""
+  name: String!
+
+  """URL alias"""
+  path: String
+
+  """Published"""
+  status: Boolean
+}
+
+"""Tag content to group it together."""
+type TermTags implements Node & TermInterface {
+  """The time that the term was last edited."""
+  changed: DateTime!
+
+  """Description"""
+  description: Text!
+
+  """The term UUID."""
+  id: ID!
+
+  """The term language code."""
+  langcode: Language!
+
+  """Name"""
+  name: String!
+
+  """URL alias"""
+  path: String!
+
+  """Published"""
+  status: Boolean!
+}
+
+"""More testing tags."""
+type TermTester implements Node & TermInterface {
+  """The time that the term was last edited."""
+  changed: DateTime!
+
+  """Description"""
+  description: Text!
+
+  """The term UUID."""
+  id: ID!
+
+  """The term language code."""
+  langcode: Language!
+
+  """Name"""
+  name: String!
+
+  """URL alias"""
+  path: String!
+
+  """Published"""
+  status: Boolean!
+}
+
+union TermUnion = TermTags | TermTester
+
 """A processed text format defined by the CMS."""
 type Text {
   format: String
@@ -761,138 +973,6 @@ Type represents date and time as number of milliseconds from start of the UNIX e
 """
 scalar Timestamp
 
-"""Entity type block_content."""
-interface TypeBlockContentInterface {
-  """The time that the custom block was last edited."""
-  changed: DateTime
-
-  """The custom block UUID."""
-  id: ID
-
-  """The custom block language code."""
-  langcode: Language
-
-  """A boolean indicating whether this block is reusable."""
-  reusable: Boolean
-
-  """A brief description of your block."""
-  title: String!
-}
-
-union TypeBlockContentUnion = BlockContentAnotherType | BlockContentBasicBlock
-
-"""Entity type media."""
-interface TypeMediaInterface {
-  """The time the media item was last edited."""
-  changed: DateTime
-
-  """The time the media item was created."""
-  created: DateTime
-
-  """UUID"""
-  id: ID
-
-  """Name"""
-  name: String!
-
-  """Published"""
-  status: Boolean
-}
-
-union TypeMediaUnion = MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo
-
-"""Entity type node."""
-interface TypeNodeInterface {
-  """The username of the content author."""
-  author: User
-
-  """The time that the node was last edited."""
-  changed: DateTime
-
-  """The time that the node was created."""
-  created: DateTime
-
-  """UUID"""
-  id: ID
-
-  """Language"""
-  langcode: Language
-
-  """The computed meta tags for the entity."""
-  metatag: [MetaTagUnion!]
-
-  """URL alias"""
-  path: String
-
-  """Promoted to front page"""
-  promote: Boolean
-
-  """Published"""
-  status: Boolean
-
-  """Sticky at top of lists"""
-  sticky: Boolean
-
-  """Title"""
-  title: String!
-}
-
-"""Entity type paragraph."""
-interface TypeParagraphInterface {
-  """UUID"""
-  id: ID
-}
-
-union TypeParagraphUnion = ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText
-
-"""Entity type taxonomy_term."""
-interface TypeTermInterface {
-  """The time that the term was last edited."""
-  changed: DateTime
-
-  """Description"""
-  description: Text
-
-  """The term UUID."""
-  id: ID
-
-  """The term language code."""
-  langcode: Language
-
-  """Name"""
-  name: String!
-
-  """URL alias"""
-  path: String
-
-  """Published"""
-  status: Boolean
-}
-
-"""Entity type user."""
-interface TypeUserInterface {
-  """The time that the user was last edited."""
-  changed: DateTime
-
-  """The time that the user was created."""
-  created: DateTime
-
-  """The user UUID."""
-  id: ID
-
-  """The email of this user."""
-  mail: Email
-
-  """The name of this user."""
-  name: String!
-
-  """The roles the user has."""
-  roles: [UserRoles!]
-
-  """Whether the user is active or blocked."""
-  status: UserStatus
-}
-
 """
 Unsupported entity or field type in the schema.
 This entity may not have been enabled in the schema yet and is being referenced via entity reference.
@@ -903,7 +983,7 @@ type UnsupportedType {
 }
 
 """Entity type user."""
-type User implements Node & TypeUserInterface {
+type User implements Node & UserInterface {
   """The time that the user was last edited."""
   changed: DateTime!
 
@@ -926,6 +1006,30 @@ type User implements Node & TypeUserInterface {
   status: UserStatus!
 }
 
+"""Entity type user."""
+interface UserInterface {
+  """The time that the user was last edited."""
+  changed: DateTime
+
+  """The time that the user was created."""
+  created: DateTime
+
+  """The user UUID."""
+  id: ID
+
+  """The email of this user."""
+  mail: Email
+
+  """The name of this user."""
+  name: String!
+
+  """The roles the user has."""
+  roles: [UserRoles!]
+
+  """Whether the user is active or blocked."""
+  status: UserStatus
+}
+
 """User roles."""
 scalar UserRoles
 
@@ -939,6 +1043,8 @@ enum UserStatus {
   """
   BLOCKED
 }
+
+union UserUnion = User
 
 """A string that will have a value of format ±hh:mm"""
 scalar UtcOffset

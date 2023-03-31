@@ -5,12 +5,12 @@ import { useRouteStore } from '@/stores/route'
 import {
   isNodePage,
   isRouteInternal,
-  isTypeNodeInterface,
+  isNodeInterface,
   isParagraphSection,
   isLayoutParagraphsInterface
 } from '@/services/drupal'
 
-import type { TypeParagraphInterface } from '@/services/drupal'
+import type { ParagraphInterface } from '@/services/drupal'
 
 import ParagraphSection from '@/components/paragraphs/ParagraphSection.vue'
 
@@ -33,7 +33,7 @@ const sections = computed(
 )
 
 // Get the children of a section.
-const getParagraphChildren = (section: TypeParagraphInterface) =>
+const getParagraphChildren = (section: ParagraphInterface) =>
   content.value &&
   content.value
     .filter(isLayoutParagraphsInterface)
@@ -54,7 +54,7 @@ onBeforeRouteUpdate((to) => {
         Route: {{ route.internal ? 'Internal' : 'External' }}
       </li>
 
-      <template v-if="entity && isTypeNodeInterface(entity)">
+      <template v-if="entity && isNodeInterface(entity)">
         <li class="list-group-item">UUID: {{ entity.id }}</li>
         <li class="list-group-item">Title: {{ entity.title }}</li>
         <li class="list-group-item">Type: {{ entity.__typename }}</li>
