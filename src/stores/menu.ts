@@ -1,5 +1,5 @@
 import { reactive } from 'vue'
-import { defineStore } from 'pinia'
+import { defineStore, acceptHMRUpdate } from 'pinia'
 import { drupalClient, MenuFragment } from '@/services/drupal'
 import type { Menu, MenuAvailable } from '@/services/drupal'
 
@@ -48,3 +48,8 @@ export const useMenuStore = defineStore('menu', () => {
     fetchMenu
   }
 })
+
+// https://pinia.vuejs.org/cookbook/hot-module-replacement.html
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useMenuStore, import.meta.hot))
+}

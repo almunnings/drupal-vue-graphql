@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { defineStore } from 'pinia'
+import { defineStore, acceptHMRUpdate } from 'pinia'
 import { drupalClient } from '@/services/drupal'
 
 export const useInfoStore = defineStore('info', () => {
@@ -25,3 +25,8 @@ export const useInfoStore = defineStore('info', () => {
     fetchInfo
   }
 })
+
+// https://pinia.vuejs.org/cookbook/hot-module-replacement.html
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useInfoStore, import.meta.hot))
+}

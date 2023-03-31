@@ -1,5 +1,5 @@
 import { reactive } from 'vue'
-import { defineStore } from 'pinia'
+import { defineStore, acceptHMRUpdate } from 'pinia'
 import { drupalClient, RouteFragment, NodeFragment } from '@/services/drupal'
 import type { Route } from '@/services/drupal'
 
@@ -53,3 +53,8 @@ export const useRouteStore = defineStore('route', () => {
     fetchRoute
   }
 })
+
+// https://pinia.vuejs.org/cookbook/hot-module-replacement.html
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useRouteStore, import.meta.hot))
+}
