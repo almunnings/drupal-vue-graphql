@@ -1,29 +1,29 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const grid = [
+  'border',
+  'rounded',
+  'd-grid',
+  'p-3',
+  'gap-3',
+  'align-content-start'
+]
+</script>
 
 <template>
-  <section>
-    <header class="border rounded d-grid p-3 gap-3" v-if="$slots.top">
+  <section class="grid">
+    <header class="g-col-12" :class="grid" v-if="$slots.top">
       <slot name="top"></slot>
     </header>
 
-    <div class="row my-4" v-if="$slots.first || $slots.second">
-      <div class="col" v-if="$slots.first">
-        <div class="border rounded h-100">
-          <div class="d-grid p-3 gap-3">
-            <slot name="first"></slot>
-          </div>
-        </div>
-      </div>
-      <div class="col" v-if="$slots.second">
-        <div class="border rounded h-100">
-          <div class="d-grid p-3 gap-3">
-            <slot name="second"></slot>
-          </div>
-        </div>
-      </div>
+    <div class="g-col-6" :class="grid" v-if="$slots.first">
+      <slot name="first"></slot>
     </div>
 
-    <footer class="border rounded d-grid p-3 gap-3" v-if="$slots.bottom">
+    <div class="g-col-6" :class="grid" v-if="$slots.second">
+      <slot name="second"></slot>
+    </div>
+
+    <footer class="g-col-12" :class="grid" v-if="$slots.bottom">
       <slot name="bottom"></slot>
     </footer>
   </section>

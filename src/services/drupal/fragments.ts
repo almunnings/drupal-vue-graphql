@@ -41,6 +41,44 @@ export const ParagraphFragment: ParagraphInterfaceGenqlSelection = {
     },
     citation: true,
     link: LinkFragment
+  },
+  on_ParagraphMedia: {
+    title: true,
+    description: {
+      processed: true
+    },
+    media: {
+      __typename: true,
+      on_MediaImage: {
+        __typename: true,
+        image: {
+          url: true,
+          width: true,
+          height: true,
+          alt: true,
+          title: true,
+          mime: true,
+
+          variations: {
+            __args: {
+              styles: [
+                'WIDE',
+                'WIDE2X',
+                'LARGE',
+                'LARGE2X',
+                'MEDIUM',
+                'MEDIUM2X',
+                'THUMBNAIL'
+              ]
+            },
+            url: true,
+            width: true,
+            height: true,
+            name: true
+          }
+        }
+      }
+    }
   }
 }
 

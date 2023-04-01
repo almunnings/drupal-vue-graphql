@@ -26,6 +26,10 @@ export const getParagraphComponent = (paragraph: ParagraphInterface) => {
       return defineAsyncComponent(
         () => import('@/components/paragraphs/ParagraphQuote.vue')
       )
+    case 'ParagraphMedia':
+      return defineAsyncComponent(
+        () => import('@/components/paragraphs/ParagraphMedia.vue')
+      )
     default:
       return defineAsyncComponent(
         () => import('@/components/paragraphs/ParagraphUnknown.vue')

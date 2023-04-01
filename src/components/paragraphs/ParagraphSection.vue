@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { PropType } from 'vue'
-import { getParagraphComponent, getLayoutComponent } from '.'
+
+import {
+  getParagraphComponent,
+  getLayoutComponent
+} from '@/components/paragraphs'
 
 import type { ParagraphSection, ParagraphInterface } from '@/services/drupal'
 

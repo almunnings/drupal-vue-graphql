@@ -13,13 +13,13 @@ export default {
         43,
         70,
         80,
+        88,
         89,
         90,
-        91,
+        94,
         95,
-        96,
-        98,
-        99
+        97,
+        98
     ],
     "types": {
         "Address": {
@@ -89,7 +89,7 @@ export default {
         },
         "BlockContent": {
             "entity": [
-                92
+                7
             ],
             "id": [
                 21
@@ -106,7 +106,7 @@ export default {
         },
         "BlockContentAnotherType": {
             "body": [
-                88
+                87
             ],
             "changed": [
                 15
@@ -129,7 +129,7 @@ export default {
         },
         "BlockContentBasicBlock": {
             "body": [
-                88
+                87
             ],
             "changed": [
                 15
@@ -260,16 +260,16 @@ export default {
         "Cursor": {},
         "DateTime": {
             "offset": [
-                98
+                97
             ],
             "time": [
-                89
+                88
             ],
             "timestamp": [
-                91
+                90
             ],
             "timezone": [
-                90
+                89
             ],
             "__typename": [
                 80
@@ -320,19 +320,23 @@ export default {
             "height": [
                 27
             ],
-            "style": [
-                25,
-                {
-                    "name": [
-                        24
-                    ]
-                }
+            "mime": [
+                80
             ],
             "title": [
                 80
             ],
             "url": [
                 80
+            ],
+            "variations": [
+                25,
+                {
+                    "styles": [
+                        24,
+                        "[ImageStyleAvailable]"
+                    ]
+                }
             ],
             "width": [
                 27
@@ -357,8 +361,8 @@ export default {
             "height": [
                 27
             ],
-            "style": [
-                23
+            "name": [
+                80
             ],
             "url": [
                 80
@@ -866,11 +870,8 @@ export default {
             "on_TermTags": [
                 84
             ],
-            "on_TermTester": [
-                85
-            ],
             "on_User": [
-                93
+                92
             ],
             "__typename": [
                 80
@@ -878,7 +879,7 @@ export default {
         },
         "NodeInterface": {
             "author": [
-                93
+                92
             ],
             "changed": [
                 15
@@ -919,7 +920,7 @@ export default {
         },
         "NodePage": {
             "author": [
-                93
+                92
             ],
             "changed": [
                 15
@@ -952,7 +953,7 @@ export default {
                 11
             ],
             "tags": [
-                86
+                85
             ],
             "title": [
                 80
@@ -1051,7 +1052,7 @@ export default {
                 34
             ],
             "text": [
-                87
+                86
             ],
             "title": [
                 80
@@ -1100,7 +1101,7 @@ export default {
                 15
             ],
             "description": [
-                87
+                86
             ],
             "id": [
                 21
@@ -1132,7 +1133,7 @@ export default {
                 34
             ],
             "quote": [
-                87
+                86
             ],
             "__typename": [
                 80
@@ -1183,7 +1184,7 @@ export default {
                 21
             ],
             "text": [
-                87
+                86
             ],
             "__typename": [
                 80
@@ -1289,7 +1290,7 @@ export default {
                 }
             ],
             "viewer": [
-                93
+                92
             ],
             "__typename": [
                 80
@@ -1297,7 +1298,7 @@ export default {
         },
         "Response": {
             "errors": [
-                99
+                98
             ],
             "__typename": [
                 80
@@ -1329,9 +1330,6 @@ export default {
             ],
             "on_TermTags": [
                 84
-            ],
-            "on_TermTester": [
-                85
             ],
             "on_Node": [
                 54
@@ -1450,7 +1448,7 @@ export default {
                 15
             ],
             "description": [
-                87
+                86
             ],
             "id": [
                 21
@@ -1470,9 +1468,6 @@ export default {
             "on_TermTags": [
                 84
             ],
-            "on_TermTester": [
-                85
-            ],
             "__typename": [
                 80
             ]
@@ -1482,33 +1477,7 @@ export default {
                 15
             ],
             "description": [
-                87
-            ],
-            "id": [
-                21
-            ],
-            "langcode": [
-                28
-            ],
-            "name": [
-                80
-            ],
-            "path": [
-                80
-            ],
-            "status": [
-                11
-            ],
-            "__typename": [
-                80
-            ]
-        },
-        "TermTester": {
-            "changed": [
-                15
-            ],
-            "description": [
-                87
+                86
             ],
             "id": [
                 21
@@ -1532,9 +1501,6 @@ export default {
         "TermUnion": {
             "on_TermTags": [
                 84
-            ],
-            "on_TermTester": [
-                85
             ],
             "on_Node": [
                 54
@@ -1605,10 +1571,10 @@ export default {
                 80
             ],
             "roles": [
-                95
+                94
             ],
             "status": [
-                96
+                95
             ],
             "__typename": [
                 80
@@ -1631,13 +1597,13 @@ export default {
                 80
             ],
             "roles": [
-                95
+                94
             ],
             "status": [
-                96
+                95
             ],
             "on_User": [
-                93
+                92
             ],
             "__typename": [
                 80
@@ -1647,13 +1613,13 @@ export default {
         "UserStatus": {},
         "UserUnion": {
             "on_User": [
-                93
+                92
             ],
             "on_Node": [
                 54
             ],
             "on_UserInterface": [
-                94
+                93
             ],
             "__typename": [
                 80
