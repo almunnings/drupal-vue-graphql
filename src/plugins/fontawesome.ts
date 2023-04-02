@@ -12,18 +12,18 @@ import {
   faFileWord
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(
-  faFile,
-  faFileArchive,
-  faFileExcel,
-  faFilePdf,
-  faFilePowerpoint,
-  faFileText,
-  faFileWord
-)
-
 const fontawesomePlugin = {
   install(app) {
+    library.add(
+      faFile,
+      faFileArchive,
+      faFileExcel,
+      faFilePdf,
+      faFilePowerpoint,
+      faFileText,
+      faFileWord
+    )
+
     app.component('font-awesome-icon', FontAwesomeIcon)
   }
 }

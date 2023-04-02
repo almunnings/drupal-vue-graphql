@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import type { PropType } from 'vue'
 import type { MediaDocument } from '@/services/drupal'
-import { getFileIcon } from '@/components/media'
+import { getFileIcon, getFileExtension } from '@/components/media'
 import vWysiwygLinks from '@/directives/v-wysiwyg-links'
 import prettyBytes from 'pretty-bytes'
 
@@ -20,7 +20,7 @@ const props = defineProps({
 })
 
 const size = computed(() => prettyBytes(props.media.document.size))
-
+const extension = computed(() => getFileExtension(props.media.document))
 const icon = computed(() => getFileIcon(props.media.document))
 </script>
 
@@ -44,7 +44,7 @@ const icon = computed(() => getFileIcon(props.media.document))
           />
         </div>
         <div class="text-muted small ms-md-2 text-nowrap">
-          {{ size }}
+          {{ extension?.toUpperCase() }}, {{ size }}
         </div>
       </div>
     </div>

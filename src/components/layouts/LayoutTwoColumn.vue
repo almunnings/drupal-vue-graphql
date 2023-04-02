@@ -15,11 +15,11 @@ const grid = [
       <slot name="top"></slot>
     </header>
 
-    <div class="g-col-12 g-col-sm-6" :class="grid" v-if="$slots.first">
+    <div class="g-col-12 g-col-lg-6" :class="grid" v-if="$slots.first">
       <slot name="first"></slot>
     </div>
 
-    <div class="g-col-12 g-col-sm-6" :class="grid" v-if="$slots.second">
+    <div class="g-col-12 g-col-lg-6" :class="grid" v-if="$slots.second">
       <slot name="second"></slot>
     </div>
 

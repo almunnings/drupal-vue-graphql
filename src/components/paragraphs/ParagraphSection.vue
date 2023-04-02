@@ -2,10 +2,8 @@
 import { computed } from 'vue'
 import type { PropType } from 'vue'
 
-import {
-  getParagraphComponent,
-  getLayoutComponent
-} from '@/components/paragraphs'
+import { getParagraphComponent } from '@/components/paragraphs'
+import { getLayoutComponent } from '@/components/layouts'
 
 import type { ParagraphSection, ParagraphInterface } from '@/services/drupal'
 

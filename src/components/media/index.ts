@@ -30,12 +30,17 @@ export const getMediaComponent = (media: MediaInterface) => {
   }
 }
 
-// Get a file icon for font-awesome.
-export const getFileIcon = (file: File) => {
+// Get a file extension.
+export const getFileExtension = (file: File) => {
   const regex = /\.([a-zA-Z0-9]+)(?:[?#]|$)/
   const match = file.url.match(regex)
 
-  const fileExtension = match ? match[1].toLowerCase() : undefined
+  return match ? match[1].toLowerCase() : undefined
+}
+
+// Get a file icon for font-awesome.
+export const getFileIcon = (file: File) => {
+  const fileExtension = getFileExtension(file)
 
   switch (fileExtension) {
     case 'csv':
