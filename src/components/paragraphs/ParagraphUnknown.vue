@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import type { ParagraphText } from '@/services/drupal'
+import type { ParagraphInterface } from '@/services/drupal'
 defineProps({
   paragraph: {
-    type: Object as PropType<ParagraphText>,
+    type: Object as PropType<ParagraphInterface>,
     required: true
   }
 })

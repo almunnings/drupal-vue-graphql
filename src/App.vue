@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import { useRouteStore } from '@/stores/route'
 import { useInfoStore } from '@/stores/info'
 import { isRouteInternal } from '@/services/drupal'
+
 import MainMenu from '@/components/navigation/MainMenu.vue'
 
 const routeStore = useRouteStore()
@@ -31,7 +32,7 @@ const entity = computed(() =>
 
     <h2 class="h5 text-muted mb-4" :class="{ 'placeholder-glow': loading }">
       <span v-if="loading" class="placeholder col-2"></span>
-      <span v-else>{{ entity?.title || 'No entity title' }}</span>
+      <span v-else>{{ entity?.id || 'No entity title' }}</span>
     </h2>
 
     <!-- Example menu -->

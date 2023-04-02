@@ -13,28 +13,30 @@ defineProps({
 </script>
 
 <template>
-  <figure class="border border-secondary rounded p-3">
-    <blockquote class="blockquote">
-      <div
-        class="text-processed"
-        v-html="paragraph.quote.processed"
-        v-wysiwyg-links
-      />
-    </blockquote>
+  <div class="quote">
+    <figure class="border border-secondary rounded p-3">
+      <blockquote class="blockquote">
+        <div
+          class="text-processed"
+          v-html="paragraph.quote.processed"
+          v-wysiwyg-links
+        />
+      </blockquote>
 
-    <figcaption
-      class="blockquote-footer mb-0"
-      v-if="paragraph.citation || paragraph.link"
-    >
-      <cite class="me-1" v-if="paragraph.citation">
-        {{ paragraph.citation }}
-      </cite>
+      <figcaption
+        class="blockquote-footer mb-0"
+        v-if="paragraph.citation || paragraph.link"
+      >
+        <cite class="me-1" v-if="paragraph.citation">
+          {{ paragraph.citation }}
+        </cite>
 
-      <RouteLink
-        v-if="paragraph.link && paragraph.link.route"
-        :route="paragraph.link.route"
-        :title="paragraph.link.title"
-      />
-    </figcaption>
-  </figure>
+        <RouteLink
+          v-if="paragraph.link && paragraph.link.route"
+          :route="paragraph.link.route"
+          :title="paragraph.link.title"
+        />
+      </figcaption>
+    </figure>
+  </div>
 </template>

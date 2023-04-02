@@ -610,11 +610,11 @@ export default {
             "name": [
                 80
             ],
-            "oembed": [
-                80
-            ],
             "status": [
                 11
+            ],
+            "url": [
+                80
             ],
             "__typename": [
                 80

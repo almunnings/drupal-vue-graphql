@@ -2,11 +2,18 @@
 import { reactive, watch, ref } from 'vue'
 import type { PropType } from 'vue'
 import type { MediaImage, ImageStyleDerivative } from '@/services/drupal'
+import vWysiwygLinks from '@/directives/v-wysiwyg-links'
 
 const props = defineProps({
   media: {
     type: Object as PropType<MediaImage>,
     required: true
+  },
+  title: {
+    type: String
+  },
+  description: {
+    type: String
   }
 })
 
@@ -72,24 +79,35 @@ watch(
 </script>
 
 <template>
-  <picture>
-    <source
-      v-for="source in sources"
-      :key="source.name"
-      :media="source.media"
-      :srcset="source.srcset"
-      :width="source.width"
-      :height="source.height"
-      :type="media.image.mime"
-    />
+  <figure class="figure">
+    <h4 v-if="title">{{ title }}</h4>
 
-    <img
-      :src="variations.get('THUMBNAIL')?.url"
-      :alt="media.image.alt"
-      :type="media.image.mime"
-      :title="media.image.title || media.image.alt"
-      class="img-fluid d-block rounded"
-      loading="lazy"
+    <picture class="figure-img d-inline-block">
+      <source
+        v-for="source in sources"
+        :key="source.name"
+        :media="source.media"
+        :srcset="source.srcset"
+        :width="source.width"
+        :height="source.height"
+        :type="media.image.mime"
+      />
+
+      <img
+        :src="variations.get('THUMBNAIL')?.url"
+        :alt="media.image.alt"
+        :type="media.image.mime"
+        :title="media.image.title || media.image.alt"
+        class="img-fluid rounded"
+        loading="lazy"
+      />
+    </picture>
+
+    <figcaption
+      v-if="description"
+      v-html="description"
+      class="figure-caption"
+      v-wysiwyg-links
     />
-  </picture>
+  </figure>
 </template>

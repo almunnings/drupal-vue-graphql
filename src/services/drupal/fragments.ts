@@ -49,6 +49,23 @@ export const ParagraphFragment: ParagraphInterfaceGenqlSelection = {
     },
     media: {
       __typename: true,
+      on_MediaInterface: {
+        name: true
+      },
+      on_MediaAudio: {
+        audio: {
+          url: true,
+          mime: true,
+          size: true
+        }
+      },
+      on_MediaDocument: {
+        document: {
+          url: true,
+          mime: true,
+          size: true
+        }
+      },
       on_MediaImage: {
         __typename: true,
         image: {
@@ -76,6 +93,15 @@ export const ParagraphFragment: ParagraphInterfaceGenqlSelection = {
             height: true,
             name: true
           }
+        }
+      },
+      on_MediaRemoteVideo: {
+        url: true
+      },
+      on_MediaVideo: {
+        video: {
+          url: true,
+          mime: true
         }
       }
     }
