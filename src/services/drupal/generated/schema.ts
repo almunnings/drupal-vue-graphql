@@ -644,7 +644,7 @@ export type Route = (RouteExternal | RouteInternal | RouteRedirect) & { __isUnio
 
 
 /** A list of possible entites that can be returned by URL. */
-export type RouteEntityUnion = (NodePage | TermTags) & { __isUnion?: true }
+export type RouteEntityUnion = (NodePage) & { __isUnion?: true }
 
 
 /** Route outside of this website. */
@@ -1669,10 +1669,8 @@ export interface RouteGenqlSelection{
 /** A list of possible entites that can be returned by URL. */
 export interface RouteEntityUnionGenqlSelection{
     on_NodePage?:NodePageGenqlSelection,
-    on_TermTags?:TermTagsGenqlSelection,
     on_Node?: NodeGenqlSelection,
     on_NodeInterface?: NodeInterfaceGenqlSelection,
-    on_TermInterface?: TermInterfaceGenqlSelection,
     __typename?: boolean | number
 }
 
@@ -2378,7 +2376,7 @@ export interface UserUnionGenqlSelection{
     
 
 
-    const RouteEntityUnion_possibleTypes: string[] = ['NodePage','TermTags']
+    const RouteEntityUnion_possibleTypes: string[] = ['NodePage']
     export const isRouteEntityUnion = (obj?: { __typename?: any } | null): obj is RouteEntityUnion => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isRouteEntityUnion"')
       return RouteEntityUnion_possibleTypes.includes(obj.__typename)

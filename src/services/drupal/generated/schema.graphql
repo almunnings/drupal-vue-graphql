@@ -824,7 +824,7 @@ interface Route {
 }
 
 """A list of possible entites that can be returned by URL."""
-union RouteEntityUnion = NodePage | TermTags
+union RouteEntityUnion = NodePage
 
 """Route outside of this website."""
 type RouteExternal implements Route {

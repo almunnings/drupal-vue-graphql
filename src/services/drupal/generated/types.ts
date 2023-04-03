@@ -1328,17 +1328,11 @@ export default {
             "on_NodePage": [
                 56
             ],
-            "on_TermTags": [
-                84
-            ],
             "on_Node": [
                 54
             ],
             "on_NodeInterface": [
                 55
-            ],
-            "on_TermInterface": [
-                83
             ],
             "__typename": [
                 80
