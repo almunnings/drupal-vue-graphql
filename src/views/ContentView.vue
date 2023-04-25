@@ -14,7 +14,7 @@ import type { ParagraphInterface } from '@/services/drupal'
 
 import ParagraphSection from '@/components/paragraphs/ParagraphSection.vue'
 
-// Get the currrent route from the store.
+// Get the current route from the store.
 const route = computed(() => useRouteStore().routes.get(useRoute().path))
 
 // Get the entity off the current route if it's internal.
@@ -39,7 +39,7 @@ const getParagraphChildren = (section: ParagraphInterface) =>
     .filter(isLayoutParagraphsInterface)
     .filter((item) => item.composition.position?.parentId === section.id)
 
-// View isnt changing, but the data source is.
+// View isn't changing, but the data source is.
 // So we need to fetch the data again.
 onBeforeRouteUpdate((to) => {
   useRouteStore().fetchRoute(to.path)

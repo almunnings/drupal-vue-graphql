@@ -40,7 +40,7 @@ watch(
       variations.set(v.name, v)
     })
 
-    // Add srcsets for variation.
+    // Add src sets for variation.
     sources.value.push({
       name: 'wide',
       media: 'all and (min-width: 1400px)',
