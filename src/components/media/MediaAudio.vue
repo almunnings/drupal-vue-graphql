@@ -35,7 +35,7 @@ const size = computed(() => prettyBytes(props.media.audio.size))
     </div>
 
     <audio class="d-block lh-1 w-100" loading="lazy" preload="none" controls>
-      <source :src="media.audio.url" :type="media.audio.mime" />
+      <source :src="media.audio.url" :type="media.audio.mime || undefined" />
     </audio>
 
     <figcaption

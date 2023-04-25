@@ -27,7 +27,7 @@ defineProps({
 
     <div class="ratio ratio-16x9">
       <video class="w-100" loading="lazy" preload="auto" controls>
-        <source :src="media.video.url" :type="media.video.mime" />
+        <source :src="media.video.url" :type="media.video.mime || undefined" />
       </video>
     </div>
 

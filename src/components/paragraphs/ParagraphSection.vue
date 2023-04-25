@@ -13,7 +13,7 @@ const props = defineProps({
     required: true
   },
   children: {
-    type: Array as PropType<ParagraphInterface[]>,
+    type: Array as PropType<ParagraphInterface[] | null>,
     required: false
   }
 })

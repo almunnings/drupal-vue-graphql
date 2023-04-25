@@ -90,14 +90,14 @@ watch(
         :srcset="source.srcset"
         :width="source.width"
         :height="source.height"
-        :type="media.image.mime"
+        :type="media.image.mime || undefined"
       />
 
       <img
         :src="variations.get('THUMBNAIL')?.url"
-        :alt="media.image.alt"
-        :type="media.image.mime"
-        :title="media.image.title || media.image.alt"
+        :alt="media.image.alt || undefined"
+        :type="media.image.mime || undefined"
+        :title="media.image.title || media.image.alt || undefined"
         class="img-fluid rounded"
         loading="lazy"
       />

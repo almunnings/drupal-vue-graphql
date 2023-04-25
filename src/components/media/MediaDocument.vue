@@ -32,7 +32,11 @@ const icon = computed(() => getFileIcon(props.media.document))
       </div>
       <div class="align-self-center flex-grow-1 d-md-flex">
         <div class="flex-grow-1">
-          <a :href="media.document.url" download :type="media.document.mime">
+          <a
+            :href="media.document.url"
+            :type="media.document.mime || undefined"
+            download
+          >
             {{ title || media.name }}
           </a>
 
