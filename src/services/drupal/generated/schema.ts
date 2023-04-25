@@ -1,3 +1,4 @@
+// @ts-nocheck
 export type Scalars = {
     Attributes: any,
     Boolean: boolean,
@@ -20,20 +21,28 @@ export type Scalars = {
 
 /** Complex address data. */
 export interface Address {
-    additionalName?: Scalars['String']
-    addressLine1?: Scalars['String']
-    addressLine2?: Scalars['String']
-    administrativeArea?: Scalars['String']
-    countryCode?: Scalars['String']
-    dependentLocality?: Scalars['String']
-    familyName?: Scalars['String']
-    givenName?: Scalars['String']
-    langcode?: Scalars['String']
-    locality?: Scalars['String']
-    organization?: Scalars['String']
-    postalCode?: Scalars['String']
-    sortingCode?: Scalars['String']
+    additionalName?: (Scalars['String'] | null)
+    addressLine1?: (Scalars['String'] | null)
+    addressLine2?: (Scalars['String'] | null)
+    administrativeArea?: (Scalars['String'] | null)
+    country?: (AddressCountry | null)
+    dependentLocality?: (Scalars['String'] | null)
+    familyName?: (Scalars['String'] | null)
+    givenName?: (Scalars['String'] | null)
+    langcode?: (Scalars['String'] | null)
+    locality?: (Scalars['String'] | null)
+    organization?: (Scalars['String'] | null)
+    postalCode?: (Scalars['String'] | null)
+    sortingCode?: (Scalars['String'] | null)
     __typename: 'Address'
+}
+
+
+/** Address country. */
+export interface AddressCountry {
+    code?: (Scalars['String'] | null)
+    name?: (Scalars['String'] | null)
+    __typename: 'AddressCountry'
 }
 
 
@@ -43,10 +52,10 @@ export type Block = (BlockContent | BlockPlugin) & { __isUnion?: true }
 
 /** Block field information. */
 export interface BlockContent {
-    entity?: BlockContentUnion
+    entity?: (BlockContentUnion | null)
     id: Scalars['ID']
-    render?: Scalars['Html']
-    title?: Scalars['String']
+    render?: (Scalars['Html'] | null)
+    title?: (Scalars['String'] | null)
     __typename: 'BlockContent'
 }
 
@@ -54,7 +63,7 @@ export interface BlockContent {
 /** Another example block type for testing of Unions in GraphQL. */
 export interface BlockContentAnotherType {
     /** Body */
-    body?: TextSummary
+    body?: (TextSummary | null)
     /** The time that the custom block was last edited. */
     changed: DateTime
     /** The custom block UUID. */
@@ -72,7 +81,7 @@ export interface BlockContentAnotherType {
 /** A basic block with a title and content. */
 export interface BlockContentBasicBlock {
     /** Body */
-    body?: TextSummary
+    body?: (TextSummary | null)
     /** The time that the custom block was last edited. */
     changed: DateTime
     /** The custom block UUID. */
@@ -95,9 +104,9 @@ export type BlockContentUnion = (BlockContentAnotherType | BlockContentBasicBloc
 
 /** Block field information. */
 export interface BlockField {
-    block?: Block
-    configuration?: Scalars['Attributes']
-    plugin_id?: Scalars['ID']
+    block?: (Block | null)
+    configuration?: (Scalars['Attributes'] | null)
+    plugin_id?: (Scalars['ID'] | null)
     __typename: 'BlockField'
 }
 
@@ -105,8 +114,8 @@ export interface BlockField {
 /** Block field information. */
 export interface BlockPlugin {
     id: Scalars['ID']
-    render?: Scalars['Html']
-    title?: Scalars['String']
+    render?: (Scalars['Html'] | null)
+    title?: (Scalars['String'] | null)
     __typename: 'BlockPlugin'
 }
 
@@ -116,11 +125,41 @@ export type BlockUnion = (BlockContent | BlockPlugin) & { __isUnion?: true }
 
 
 /** A paginated set of results. */
-export type Connection = (NodePageConnection) & { __isUnion?: true }
+export interface Connection {
+    /** The edges of this connection. */
+    edges: Edge[]
+    /** The nodes of the edges of this connection. */
+    nodes: Node[]
+    /** Information to aid in pagination. */
+    pageInfo: ConnectionPageInfo
+    __typename: string
+}
+
+
+/** Information about the page in a connection. */
+export interface ConnectionPageInfo {
+    /** The cursor for the last element in this page. */
+    endCursor: Scalars['Cursor']
+    /** Whether there are more pages in this connection. */
+    hasNextPage: Scalars['Boolean']
+    /** Whether there are previous pages in this connection. */
+    hasPreviousPage: Scalars['Boolean']
+    /** The cursor for the first element in this page. */
+    startCursor: Scalars['Cursor']
+    __typename: 'ConnectionPageInfo'
+}
 
 
 /** Choose how your sorts will occur and on which field. */
 export type ConnectionSortKeys = 'CREATED_AT' | 'PROMOTED' | 'STICKY' | 'TITLE' | 'UPDATED_AT'
+
+
+/** A Date range has a start and an end. */
+export interface DateRange {
+    end?: (DateTime | null)
+    start?: (DateTime | null)
+    __typename: 'DateRange'
+}
 
 
 /** A DateTime object. */
@@ -139,14 +178,18 @@ export interface DateTime {
  * node. Specific edge implementations may provide more information about the
  * relationship they represent.
  */
-export type Edge = (NodePageEdge) & { __isUnion?: true }
+export interface Edge {
+    cursor: Scalars['Cursor']
+    node: Node
+    __typename: string
+}
 
 
 /** A file object to represent an managed file. */
 export interface File {
-    description?: Scalars['String']
-    mime?: Scalars['String']
-    name?: Scalars['String']
+    description?: (Scalars['String'] | null)
+    mime?: (Scalars['String'] | null)
+    name?: (Scalars['String'] | null)
     size: Scalars['Int']
     url: Scalars['String']
     __typename: 'File'
@@ -155,13 +198,13 @@ export interface File {
 
 /** A image object to represent an managed file. */
 export interface Image {
-    alt?: Scalars['String']
+    alt?: (Scalars['String'] | null)
     height: Scalars['Int']
-    mime?: Scalars['String']
-    title?: Scalars['String']
+    mime?: (Scalars['String'] | null)
+    title?: (Scalars['String'] | null)
     url: Scalars['String']
     /** Image variations control different sizes and formats for images. */
-    variations?: ImageStyleDerivative[]
+    variations?: (ImageStyleDerivative[] | null)
     width: Scalars['Int']
     __typename: 'Image'
 }
@@ -170,7 +213,7 @@ export interface Image {
 /** Entity type image_style. */
 export interface ImageStyle {
     id: Scalars['ID']
-    name?: Scalars['String']
+    name?: (Scalars['String'] | null)
     __typename: 'ImageStyle'
 }
 
@@ -191,11 +234,11 @@ export interface ImageStyleDerivative {
 export type ImageStyleUnion = (ImageStyle) & { __isUnion?: true }
 
 
-/** A langauge definition provided by the CMS. */
+/** A language definition provided by the CMS. */
 export interface Language {
-    direction?: Scalars['String']
-    id?: Scalars['ID']
-    name?: Scalars['String']
+    direction?: (Scalars['String'] | null)
+    id?: (Scalars['ID'] | null)
+    name?: (Scalars['String'] | null)
     __typename: 'Language'
 }
 
@@ -218,22 +261,22 @@ export interface Layout {
 
 /** If this component has been designed by a User extra information will be available here. */
 export interface LayoutParagraphs {
-    layout?: Layout
-    position?: LayoutParagraphsPosition
+    layout?: (Layout | null)
+    position?: (LayoutParagraphsPosition | null)
     __typename: 'LayoutParagraphs'
 }
 
 
 /** This content has been arranged by a User using a layout builder. */
-export type LayoutParagraphsInterface = (ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText) & { __isUnion?: true }
+export type LayoutParagraphsInterface = (ParagraphAccordion | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText) & { __isUnion?: true }
 
 
 /** This component positionally belongs to another component's layout. */
 export interface LayoutParagraphsPosition {
     /** Parent component this component belongs to. */
-    parentId?: Scalars['ID']
+    parentId?: (Scalars['ID'] | null)
     /** There this component is suggested to live within the parent component's regions. */
-    region?: Scalars['String']
+    region?: (Scalars['String'] | null)
     __typename: 'LayoutParagraphsPosition'
 }
 
@@ -241,16 +284,16 @@ export interface LayoutParagraphsPosition {
 /** This component positionally belongs to another component's layout. */
 export interface LayoutPosition {
     /** Parent component this component belongs to. */
-    parentId?: Scalars['ID']
+    parentId?: (Scalars['ID'] | null)
     /** There this component is suggested to live within the parent component's regions. */
-    region?: Scalars['String']
+    region?: (Scalars['String'] | null)
     __typename: 'LayoutPosition'
 }
 
 export interface Link {
-    route?: RouteUnion
-    title?: Scalars['String']
-    url?: Scalars['String']
+    route?: (RouteUnion | null)
+    title?: (Scalars['String'] | null)
+    url?: (Scalars['String'] | null)
     __typename: 'Link'
 }
 
@@ -353,8 +396,8 @@ export interface MediaVideo {
 
 /** Entity type menu. */
 export interface Menu {
-    items?: MenuItem[]
-    name?: Scalars['String']
+    items?: (MenuItem[] | null)
+    name?: (Scalars['String'] | null)
     __typename: 'Menu'
 }
 
@@ -365,12 +408,25 @@ export type MenuAvailable = 'FOOTER' | 'MAIN'
 
 /** A menu item defined in the CMS. */
 export interface MenuItem {
-    children?: MenuItem[]
-    description?: Scalars['String']
+    attributes: MenuItemAttributes
+    children?: (MenuItem[] | null)
+    description?: (Scalars['String'] | null)
     expanded: Scalars['Boolean']
     route: RouteUnion
-    title?: Scalars['String']
+    title?: (Scalars['String'] | null)
     __typename: 'MenuItem'
+}
+
+
+/** Menu item options set within the CMS. */
+export interface MenuItemAttributes {
+    /** Menu item attribute class. */
+    class?: (Scalars['String'] | null)
+    /** Menu item attribute id. */
+    id?: (Scalars['String'] | null)
+    /** Menu item attribute target. */
+    target?: (Scalars['String'] | null)
+    __typename: 'MenuItemAttributes'
 }
 
 export type MenuUnion = (Menu) & { __isUnion?: true }
@@ -386,8 +442,8 @@ export interface MetaTagLink {
 }
 
 export interface MetaTagLinkAttributes {
-    href?: Scalars['String']
-    rel?: Scalars['String']
+    href?: (Scalars['String'] | null)
+    rel?: (Scalars['String'] | null)
     __typename: 'MetaTagLinkAttributes'
 }
 
@@ -398,8 +454,8 @@ export interface MetaTagProperty {
 }
 
 export interface MetaTagPropertyAttributes {
-    content?: Scalars['String']
-    property?: Scalars['String']
+    content?: (Scalars['String'] | null)
+    property?: (Scalars['String'] | null)
     __typename: 'MetaTagPropertyAttributes'
 }
 
@@ -412,14 +468,22 @@ export interface MetaTagValue {
 }
 
 export interface MetaTagValueAttributes {
-    content?: Scalars['String']
-    name?: Scalars['String']
+    content?: (Scalars['String'] | null)
+    name?: (Scalars['String'] | null)
     __typename: 'MetaTagValueAttributes'
 }
 
 
-/** A concrete fetchable type that is addressable by an id. */
-export type Node = (BlockContent | BlockContentAnotherType | BlockContentBasicBlock | BlockPlugin | Layout | MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo | NodePage | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText | TermTags | User) & { __isUnion?: true }
+/** A GraphQL mutation is a request that changes data on the server. */
+export interface Mutation {
+    /** Dummy value to enable mutation extension. */
+    _?: (Scalars['Boolean'] | null)
+    __typename: 'Mutation'
+}
+
+
+/** A concrete fetchable type that is addressable by an id. Not to be confused with a Drupal node. */
+export type Node = (BlockContent | BlockContentAnotherType | BlockContentBasicBlock | BlockPlugin | Layout | MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo | NodePage | ParagraphAccordion | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText | TermTags | User) & { __isUnion?: true }
 
 
 /** Entity type node. */
@@ -433,7 +497,7 @@ export interface NodePage {
     /** The time that the node was last edited. */
     changed: DateTime
     /** Content */
-    content?: ParagraphUnion[]
+    content?: (ParagraphUnion[] | null)
     /** The time that the node was created. */
     created: DateTime
     /** UUID */
@@ -450,57 +514,40 @@ export interface NodePage {
     status: Scalars['Boolean']
     /** Sticky at top of lists */
     sticky: Scalars['Boolean']
-    /** Tags */
-    tags?: TermUnion[]
     /** Title */
     title: Scalars['String']
     __typename: 'NodePage'
 }
 
-
-/** A paginated set of results for NodePage. */
-export interface NodePageConnection {
-    edges: NodePageEdge[]
-    nodes: NodePage[]
-    pageInfo: PageInfo
-    __typename: 'NodePageConnection'
-}
-
-
-/** Edge for NodePage. */
-export interface NodePageEdge {
-    cursor: Scalars['Cursor']
-    node: NodePage
-    __typename: 'NodePageEdge'
-}
-
 export type NodeUnion = (NodePage) & { __isUnion?: true }
 
 
-/** Information about the page in a connection. */
-export interface PageInfo {
-    /** The cursor for the last element in this page. */
-    endCursor: Scalars['Cursor']
-    /** Whether there are more pages in this connection. */
-    hasNextPage: Scalars['Boolean']
-    /** Whether there are previous pages in this connection. */
-    hasPreviousPage: Scalars['Boolean']
-    /** The cursor for the first element in this page. */
-    startCursor: Scalars['Cursor']
-    __typename: 'PageInfo'
+/** Add an expanding and collapsing element. */
+export interface ParagraphAccordion {
+    /** Layout metadata for this paragraph. */
+    composition: LayoutParagraphs
+    /** The time that the Paragraph was created. */
+    created: DateTime
+    /** UUID */
+    id: Scalars['ID']
+    /** Content */
+    items: ParagraphUnion[]
+    /** Title */
+    title: Scalars['String']
+    __typename: 'ParagraphAccordion'
 }
 
 
 /** Choose a block to display. Edit this fields settings to allow different blocks. */
 export interface ParagraphBlock {
     /** Block */
-    block?: BlockUnion
+    block?: (BlockUnion | null)
     /** Layout metadata for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
     /** Feature */
-    feature?: Scalars['String']
+    feature?: (Scalars['String'] | null)
     /** UUID */
     id: Scalars['ID']
     __typename: 'ParagraphBlock'
@@ -516,17 +563,17 @@ export interface ParagraphCallToAction {
     /** UUID */
     id: Scalars['ID']
     /** Link */
-    link?: Link
+    link?: (Link | null)
     /** Text */
-    text?: Text
+    text?: (Text | null)
     /** Title */
-    title?: Scalars['String']
+    title?: (Scalars['String'] | null)
     __typename: 'ParagraphCallToAction'
 }
 
 
 /** Entity type paragraph. */
-export type ParagraphInterface = (ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText) & { __isUnion?: true }
+export type ParagraphInterface = (ParagraphAccordion | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText) & { __isUnion?: true }
 
 
 /** Add Audio, Documents, Images or Videos and Embed YouTube videos. */
@@ -536,13 +583,13 @@ export interface ParagraphMedia {
     /** The time that the Paragraph was created. */
     created: DateTime
     /** Description */
-    description?: Text
+    description?: (Text | null)
     /** UUID */
     id: Scalars['ID']
     /** Media */
     media: MediaUnion
     /** Title */
-    title?: Scalars['String']
+    title?: (Scalars['String'] | null)
     __typename: 'ParagraphMedia'
 }
 
@@ -550,7 +597,7 @@ export interface ParagraphMedia {
 /** Add a quote. Add citation and citation link */
 export interface ParagraphQuote {
     /** Give credit for the quote. */
-    citation?: Scalars['String']
+    citation?: (Scalars['String'] | null)
     /** Layout metadata for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
@@ -558,7 +605,7 @@ export interface ParagraphQuote {
     /** UUID */
     id: Scalars['ID']
     /** Enter an optional link for the citation. */
-    link?: Link
+    link?: (Link | null)
     /** Quote */
     quote: Text
     __typename: 'ParagraphQuote'
@@ -588,7 +635,7 @@ export interface ParagraphTable {
     /** Table */
     table: Table
     /** Add a title to your block */
-    title?: Scalars['String']
+    title?: (Scalars['String'] | null)
     __typename: 'ParagraphTable'
 }
 
@@ -606,35 +653,32 @@ export interface ParagraphText {
     __typename: 'ParagraphText'
 }
 
-export type ParagraphUnion = (ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText) & { __isUnion?: true }
+export type ParagraphUnion = (ParagraphAccordion | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText) & { __isUnion?: true }
 
 
 /**
- * The schema's entry-point for queries. This acts as the public, top-level API
- * from which all queries must start.
+ * The schema's entry-point for queries.
+ * 
+ * This acts as the public, top-level API from which all queries must start.
  */
 export interface Query {
     /** Load a Block plugin. */
-    block?: BlockUnion
+    block?: (BlockUnion | null)
     /** Schema generator version. */
     info: SchemaInformation
     /** Load a Route by path. */
-    menu?: Menu
-    /** Fetch data for a specific NodePage */
-    nodePage?: NodePage
-    /** List of all NodePage on the platform. Results are access controlled. */
-    nodePages: NodePageConnection
+    menu?: (Menu | null)
     /** Load a Route by path. */
-    route?: RouteUnion
+    route?: (RouteUnion | null)
     /** Get information about the currently authenticated user. NULL if not logged in. */
-    viewer?: User
+    viewer?: (User | null)
     __typename: 'Query'
 }
 
 
-/** The base GraphQL Response class */
+/** The base GraphQL Response class. */
 export interface Response {
-    errors?: (Scalars['Violation'] | undefined)[]
+    errors?: ((Scalars['Violation'] | null)[] | null)
     __typename: string
 }
 
@@ -643,7 +687,7 @@ export interface Response {
 export type Route = (RouteExternal | RouteInternal | RouteRedirect) & { __isUnion?: true }
 
 
-/** A list of possible entites that can be returned by URL. */
+/** A list of possible entities that can be returned by URL. */
 export type RouteEntityUnion = (NodePage) & { __isUnion?: true }
 
 
@@ -658,7 +702,7 @@ export interface RouteExternal {
 /** Route within this website. */
 export interface RouteInternal {
     /** Content assigned to this route. */
-    entity?: RouteEntityUnion
+    entity?: (RouteEntityUnion | null)
     internal: Scalars['Boolean']
     url: Scalars['String']
     __typename: 'RouteInternal'
@@ -686,23 +730,27 @@ export interface SchemaInformation {
     /** Schema description. */
     description: Scalars['String']
     /** Path to the homepage. */
-    home?: Scalars['String']
+    home?: (Scalars['String'] | null)
     /** Schema module version. */
     version: Scalars['String']
     __typename: 'SchemaInformation'
 }
 
+
+/** List of menus available to load. */
+export type SortDirection = 'ASC' | 'DESC'
+
 export interface Table {
-    caption?: Scalars['String']
+    caption?: (Scalars['String'] | null)
     /** A text format associated with the row data. */
-    format?: Scalars['String']
-    rows?: (TableRow | undefined)[]
+    format?: (Scalars['String'] | null)
+    rows?: ((TableRow | null)[] | null)
     __typename: 'Table'
 }
 
 export interface TableRow {
-    data?: (Scalars['String'] | undefined)[]
-    weight?: Scalars['Int']
+    data?: ((Scalars['String'] | null)[] | null)
+    weight?: (Scalars['Int'] | null)
     __typename: 'TableRow'
 }
 
@@ -711,7 +759,7 @@ export interface TableRow {
 export type TermInterface = (TermTags) & { __isUnion?: true }
 
 
-/** Tag content to group it together. */
+/** Tags */
 export interface TermTags {
     /** The time that the term was last edited. */
     changed: DateTime
@@ -735,19 +783,19 @@ export type TermUnion = (TermTags) & { __isUnion?: true }
 
 /** A processed text format defined by the CMS. */
 export interface Text {
-    format?: Scalars['String']
-    processed?: Scalars['Html']
-    value?: Scalars['String']
+    format?: (Scalars['String'] | null)
+    processed?: (Scalars['Html'] | null)
+    value?: (Scalars['String'] | null)
     __typename: 'Text'
 }
 
 
 /** A processed text format with summary defined by the CMS. */
 export interface TextSummary {
-    format?: Scalars['String']
-    processed?: Scalars['Html']
-    summary?: Scalars['Html']
-    value?: Scalars['String']
+    format?: (Scalars['String'] | null)
+    processed?: (Scalars['Html'] | null)
+    summary?: (Scalars['Html'] | null)
+    value?: (Scalars['String'] | null)
     __typename: 'TextSummary'
 }
 
@@ -758,7 +806,7 @@ export interface TextSummary {
  */
 export interface UnsupportedType {
     /** Unsupported type, always TRUE. */
-    unsupported?: Scalars['Boolean']
+    unsupported?: (Scalars['Boolean'] | null)
     __typename: 'UnsupportedType'
 }
 
@@ -772,13 +820,15 @@ export interface User {
     /** The user UUID. */
     id: Scalars['ID']
     /** The email of this user. */
-    mail: Scalars['Email']
+    mail?: (Scalars['Email'] | null)
     /** The name of this user. */
     name: Scalars['String']
     /** The roles the user has. */
-    roles: Scalars['UserRoles'][]
+    roles?: (Scalars['UserRoles'][] | null)
     /** Whether the user is active or blocked. */
     status: UserStatus
+    /** Your virtual face or picture. */
+    userPicture?: (Image | null)
     __typename: 'User'
 }
 
@@ -793,13 +843,47 @@ export type UserStatus = 'ACTIVE' | 'BLOCKED'
 export type UserUnion = (User) & { __isUnion?: true }
 
 
+/** Views represent collections of curated data from the site. */
+export interface View {
+    /** The description of the view. */
+    description?: (Scalars['String'] | null)
+    /** The machine name of the display. */
+    display: Scalars['String']
+    /** The ID of the view. */
+    id: Scalars['ID']
+    /** The human friendly label of the view. */
+    label?: (Scalars['String'] | null)
+    /** The language code of the view. */
+    langcode?: (Scalars['String'] | null)
+    /** Information about the page in the view. */
+    pageInfo: ViewPageInfo
+    /** The machine name of the view. */
+    view: Scalars['String']
+    __typename: string
+}
+
+
+/** Information about the page in a view. */
+export interface ViewPageInfo {
+    /** Any result offset being used. */
+    offset: Scalars['Int']
+    /** The current page being returned. */
+    page: Scalars['Int']
+    /** How many results per page. */
+    pageSize: Scalars['Int']
+    /** How many results total. */
+    total: Scalars['Int']
+    __typename: 'ViewPageInfo'
+}
+
+
 /** Complex address data. */
 export interface AddressGenqlSelection{
     additionalName?: boolean | number
     addressLine1?: boolean | number
     addressLine2?: boolean | number
     administrativeArea?: boolean | number
-    countryCode?: boolean | number
+    country?: AddressCountryGenqlSelection
     dependentLocality?: boolean | number
     familyName?: boolean | number
     givenName?: boolean | number
@@ -808,6 +892,15 @@ export interface AddressGenqlSelection{
     organization?: boolean | number
     postalCode?: boolean | number
     sortingCode?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Address country. */
+export interface AddressCountryGenqlSelection{
+    code?: boolean | number
+    name?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -938,8 +1031,31 @@ export interface ConnectionGenqlSelection{
     /** The nodes of the edges of this connection. */
     nodes?: NodeGenqlSelection
     /** Information to aid in pagination. */
-    pageInfo?: PageInfoGenqlSelection
-    on_NodePageConnection?: NodePageConnectionGenqlSelection
+    pageInfo?: ConnectionPageInfoGenqlSelection
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Information about the page in a connection. */
+export interface ConnectionPageInfoGenqlSelection{
+    /** The cursor for the last element in this page. */
+    endCursor?: boolean | number
+    /** Whether there are more pages in this connection. */
+    hasNextPage?: boolean | number
+    /** Whether there are previous pages in this connection. */
+    hasPreviousPage?: boolean | number
+    /** The cursor for the first element in this page. */
+    startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** A Date range has a start and an end. */
+export interface DateRangeGenqlSelection{
+    end?: DateTimeGenqlSelection
+    start?: DateTimeGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -965,7 +1081,6 @@ export interface DateTimeGenqlSelection{
 export interface EdgeGenqlSelection{
     cursor?: boolean | number
     node?: NodeGenqlSelection
-    on_NodePageEdge?: NodePageEdgeGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1023,7 +1138,7 @@ export interface ImageStyleUnionGenqlSelection{
 }
 
 
-/** A langauge definition provided by the CMS. */
+/** A language definition provided by the CMS. */
 export interface LanguageGenqlSelection{
     direction?: boolean | number
     id?: boolean | number
@@ -1062,6 +1177,7 @@ export interface LayoutParagraphsGenqlSelection{
 /** This content has been arranged by a User using a layout builder. */
 export interface LayoutParagraphsInterfaceGenqlSelection{
     composition?: LayoutParagraphsGenqlSelection
+    on_ParagraphAccordion?: ParagraphAccordionGenqlSelection
     on_ParagraphBlock?: ParagraphBlockGenqlSelection
     on_ParagraphCallToAction?: ParagraphCallToActionGenqlSelection
     on_ParagraphMedia?: ParagraphMediaGenqlSelection
@@ -1243,11 +1359,25 @@ export interface MenuGenqlSelection{
 
 /** A menu item defined in the CMS. */
 export interface MenuItemGenqlSelection{
+    attributes?: MenuItemAttributesGenqlSelection
     children?: MenuItemGenqlSelection
     description?: boolean | number
     expanded?: boolean | number
     route?: RouteUnionGenqlSelection
     title?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Menu item options set within the CMS. */
+export interface MenuItemAttributesGenqlSelection{
+    /** Menu item attribute class. */
+    class?: boolean | number
+    /** Menu item attribute id. */
+    id?: boolean | number
+    /** Menu item attribute target. */
+    target?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1319,7 +1449,16 @@ export interface MetaTagValueAttributesGenqlSelection{
 }
 
 
-/** A concrete fetchable type that is addressable by an id. */
+/** A GraphQL mutation is a request that changes data on the server. */
+export interface MutationGenqlSelection{
+    /** Dummy value to enable mutation extension. */
+    _?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** A concrete fetchable type that is addressable by an id. Not to be confused with a Drupal node. */
 export interface NodeGenqlSelection{
     id?: boolean | number
     on_BlockContent?: BlockContentGenqlSelection
@@ -1333,6 +1472,7 @@ export interface NodeGenqlSelection{
     on_MediaRemoteVideo?: MediaRemoteVideoGenqlSelection
     on_MediaVideo?: MediaVideoGenqlSelection
     on_NodePage?: NodePageGenqlSelection
+    on_ParagraphAccordion?: ParagraphAccordionGenqlSelection
     on_ParagraphBlock?: ParagraphBlockGenqlSelection
     on_ParagraphCallToAction?: ParagraphCallToActionGenqlSelection
     on_ParagraphMedia?: ParagraphMediaGenqlSelection
@@ -1401,29 +1541,8 @@ export interface NodePageGenqlSelection{
     status?: boolean | number
     /** Sticky at top of lists */
     sticky?: boolean | number
-    /** Tags */
-    tags?: TermUnionGenqlSelection
     /** Title */
     title?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** A paginated set of results for NodePage. */
-export interface NodePageConnectionGenqlSelection{
-    edges?: NodePageEdgeGenqlSelection
-    nodes?: NodePageGenqlSelection
-    pageInfo?: PageInfoGenqlSelection
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Edge for NodePage. */
-export interface NodePageEdgeGenqlSelection{
-    cursor?: boolean | number
-    node?: NodePageGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1436,16 +1555,18 @@ export interface NodeUnionGenqlSelection{
 }
 
 
-/** Information about the page in a connection. */
-export interface PageInfoGenqlSelection{
-    /** The cursor for the last element in this page. */
-    endCursor?: boolean | number
-    /** Whether there are more pages in this connection. */
-    hasNextPage?: boolean | number
-    /** Whether there are previous pages in this connection. */
-    hasPreviousPage?: boolean | number
-    /** The cursor for the first element in this page. */
-    startCursor?: boolean | number
+/** Add an expanding and collapsing element. */
+export interface ParagraphAccordionGenqlSelection{
+    /** Layout metadata for this paragraph. */
+    composition?: LayoutParagraphsGenqlSelection
+    /** The time that the Paragraph was created. */
+    created?: DateTimeGenqlSelection
+    /** UUID */
+    id?: boolean | number
+    /** Content */
+    items?: ParagraphUnionGenqlSelection
+    /** Title */
+    title?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1493,6 +1614,7 @@ export interface ParagraphInterfaceGenqlSelection{
     created?: DateTimeGenqlSelection
     /** UUID */
     id?: boolean | number
+    on_ParagraphAccordion?: ParagraphAccordionGenqlSelection
     on_ParagraphBlock?: ParagraphBlockGenqlSelection
     on_ParagraphCallToAction?: ParagraphCallToActionGenqlSelection
     on_ParagraphMedia?: ParagraphMediaGenqlSelection
@@ -1588,6 +1710,7 @@ export interface ParagraphTextGenqlSelection{
 }
 
 export interface ParagraphUnionGenqlSelection{
+    on_ParagraphAccordion?:ParagraphAccordionGenqlSelection,
     on_ParagraphBlock?:ParagraphBlockGenqlSelection,
     on_ParagraphCallToAction?:ParagraphCallToActionGenqlSelection,
     on_ParagraphMedia?:ParagraphMediaGenqlSelection,
@@ -1603,8 +1726,9 @@ export interface ParagraphUnionGenqlSelection{
 
 
 /**
- * The schema's entry-point for queries. This acts as the public, top-level API
- * from which all queries must start.
+ * The schema's entry-point for queries.
+ * 
+ * This acts as the public, top-level API from which all queries must start.
  */
 export interface QueryGenqlSelection{
     /** Load a Block plugin. */
@@ -1617,26 +1741,10 @@ export interface QueryGenqlSelection{
     menu?: (MenuGenqlSelection & { __args: {
     /** Internal menu name. Eg main */
     name: MenuAvailable} })
-    /** Fetch data for a specific NodePage */
-    nodePage?: (NodePageGenqlSelection & { __args: {
-    /** The id of the NodePage to load. */
-    id: Scalars['ID']} })
-    /** List of all NodePage on the platform. Results are access controlled. */
-    nodePages?: (NodePageConnectionGenqlSelection & { __args?: {
-    /** Returns the elements that come after the specified cursor. */
-    after?: (Scalars['Cursor'] | null), 
-    /** Returns the elements that come before the specified cursor. */
-    before?: (Scalars['Cursor'] | null), 
-    /** Returns up to the first n elements from the list. */
-    first?: (Scalars['Int'] | null), 
-    /** Returns up to the last n elements from the list. */
-    last?: (Scalars['Int'] | null), 
-    /** Reverse the order of the underlying list. */
-    reverse?: (Scalars['Boolean'] | null), 
-    /** Sort the underlying list by the given key. */
-    sortKey?: (ConnectionSortKeys | null)} })
     /** Load a Route by path. */
     route?: (RouteUnionGenqlSelection & { __args: {
+    /** Filter the route by language. Eg en, ja, fr. Defaults to site default language. */
+    langcode?: (Scalars['String'] | null), 
     /** Internal path to load. Eg /about */
     path: Scalars['String']} })
     /** Get information about the currently authenticated user. NULL if not logged in. */
@@ -1646,7 +1754,7 @@ export interface QueryGenqlSelection{
 }
 
 
-/** The base GraphQL Response class */
+/** The base GraphQL Response class. */
 export interface ResponseGenqlSelection{
     errors?: boolean | number
     __typename?: boolean | number
@@ -1666,7 +1774,7 @@ export interface RouteGenqlSelection{
 }
 
 
-/** A list of possible entites that can be returned by URL. */
+/** A list of possible entities that can be returned by URL. */
 export interface RouteEntityUnionGenqlSelection{
     on_NodePage?:NodePageGenqlSelection,
     on_Node?: NodeGenqlSelection,
@@ -1769,7 +1877,7 @@ export interface TermInterfaceGenqlSelection{
 }
 
 
-/** Tag content to group it together. */
+/** Tags */
 export interface TermTagsGenqlSelection{
     /** The time that the term was last edited. */
     changed?: DateTimeGenqlSelection
@@ -1846,6 +1954,8 @@ export interface UserGenqlSelection{
     roles?: boolean | number
     /** Whether the user is active or blocked. */
     status?: boolean | number
+    /** Your virtual face or picture. */
+    userPicture?: ImageGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1880,10 +1990,54 @@ export interface UserUnionGenqlSelection{
 }
 
 
+/** Views represent collections of curated data from the site. */
+export interface ViewGenqlSelection{
+    /** The description of the view. */
+    description?: boolean | number
+    /** The machine name of the display. */
+    display?: boolean | number
+    /** The ID of the view. */
+    id?: boolean | number
+    /** The human friendly label of the view. */
+    label?: boolean | number
+    /** The language code of the view. */
+    langcode?: boolean | number
+    /** Information about the page in the view. */
+    pageInfo?: ViewPageInfoGenqlSelection
+    /** The machine name of the view. */
+    view?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Information about the page in a view. */
+export interface ViewPageInfoGenqlSelection{
+    /** Any result offset being used. */
+    offset?: boolean | number
+    /** The current page being returned. */
+    page?: boolean | number
+    /** How many results per page. */
+    pageSize?: boolean | number
+    /** How many results total. */
+    total?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
     const Address_possibleTypes: string[] = ['Address']
     export const isAddress = (obj?: { __typename?: any } | null): obj is Address => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isAddress"')
       return Address_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const AddressCountry_possibleTypes: string[] = ['AddressCountry']
+    export const isAddressCountry = (obj?: { __typename?: any } | null): obj is AddressCountry => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isAddressCountry"')
+      return AddressCountry_possibleTypes.includes(obj.__typename)
     }
     
 
@@ -1960,10 +2114,26 @@ export interface UserUnionGenqlSelection{
     
 
 
-    const Connection_possibleTypes: string[] = ['NodePageConnection']
+    const Connection_possibleTypes: string[] = []
     export const isConnection = (obj?: { __typename?: any } | null): obj is Connection => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isConnection"')
       return Connection_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const ConnectionPageInfo_possibleTypes: string[] = ['ConnectionPageInfo']
+    export const isConnectionPageInfo = (obj?: { __typename?: any } | null): obj is ConnectionPageInfo => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isConnectionPageInfo"')
+      return ConnectionPageInfo_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const DateRange_possibleTypes: string[] = ['DateRange']
+    export const isDateRange = (obj?: { __typename?: any } | null): obj is DateRange => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isDateRange"')
+      return DateRange_possibleTypes.includes(obj.__typename)
     }
     
 
@@ -1976,7 +2146,7 @@ export interface UserUnionGenqlSelection{
     
 
 
-    const Edge_possibleTypes: string[] = ['NodePageEdge']
+    const Edge_possibleTypes: string[] = []
     export const isEdge = (obj?: { __typename?: any } | null): obj is Edge => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isEdge"')
       return Edge_possibleTypes.includes(obj.__typename)
@@ -2048,7 +2218,7 @@ export interface UserUnionGenqlSelection{
     
 
 
-    const LayoutParagraphsInterface_possibleTypes: string[] = ['ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText']
+    const LayoutParagraphsInterface_possibleTypes: string[] = ['ParagraphAccordion','ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText']
     export const isLayoutParagraphsInterface = (obj?: { __typename?: any } | null): obj is LayoutParagraphsInterface => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isLayoutParagraphsInterface"')
       return LayoutParagraphsInterface_possibleTypes.includes(obj.__typename)
@@ -2152,6 +2322,14 @@ export interface UserUnionGenqlSelection{
     
 
 
+    const MenuItemAttributes_possibleTypes: string[] = ['MenuItemAttributes']
+    export const isMenuItemAttributes = (obj?: { __typename?: any } | null): obj is MenuItemAttributes => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isMenuItemAttributes"')
+      return MenuItemAttributes_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
     const MenuUnion_possibleTypes: string[] = ['Menu']
     export const isMenuUnion = (obj?: { __typename?: any } | null): obj is MenuUnion => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isMenuUnion"')
@@ -2224,7 +2402,15 @@ export interface UserUnionGenqlSelection{
     
 
 
-    const Node_possibleTypes: string[] = ['BlockContent','BlockContentAnotherType','BlockContentBasicBlock','BlockPlugin','Layout','MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo','NodePage','ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText','TermTags','User']
+    const Mutation_possibleTypes: string[] = ['Mutation']
+    export const isMutation = (obj?: { __typename?: any } | null): obj is Mutation => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isMutation"')
+      return Mutation_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const Node_possibleTypes: string[] = ['BlockContent','BlockContentAnotherType','BlockContentBasicBlock','BlockPlugin','Layout','MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo','NodePage','ParagraphAccordion','ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText','TermTags','User']
     export const isNode = (obj?: { __typename?: any } | null): obj is Node => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isNode"')
       return Node_possibleTypes.includes(obj.__typename)
@@ -2248,22 +2434,6 @@ export interface UserUnionGenqlSelection{
     
 
 
-    const NodePageConnection_possibleTypes: string[] = ['NodePageConnection']
-    export const isNodePageConnection = (obj?: { __typename?: any } | null): obj is NodePageConnection => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isNodePageConnection"')
-      return NodePageConnection_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const NodePageEdge_possibleTypes: string[] = ['NodePageEdge']
-    export const isNodePageEdge = (obj?: { __typename?: any } | null): obj is NodePageEdge => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isNodePageEdge"')
-      return NodePageEdge_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
     const NodeUnion_possibleTypes: string[] = ['NodePage']
     export const isNodeUnion = (obj?: { __typename?: any } | null): obj is NodeUnion => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isNodeUnion"')
@@ -2272,10 +2442,10 @@ export interface UserUnionGenqlSelection{
     
 
 
-    const PageInfo_possibleTypes: string[] = ['PageInfo']
-    export const isPageInfo = (obj?: { __typename?: any } | null): obj is PageInfo => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isPageInfo"')
-      return PageInfo_possibleTypes.includes(obj.__typename)
+    const ParagraphAccordion_possibleTypes: string[] = ['ParagraphAccordion']
+    export const isParagraphAccordion = (obj?: { __typename?: any } | null): obj is ParagraphAccordion => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isParagraphAccordion"')
+      return ParagraphAccordion_possibleTypes.includes(obj.__typename)
     }
     
 
@@ -2296,7 +2466,7 @@ export interface UserUnionGenqlSelection{
     
 
 
-    const ParagraphInterface_possibleTypes: string[] = ['ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText']
+    const ParagraphInterface_possibleTypes: string[] = ['ParagraphAccordion','ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText']
     export const isParagraphInterface = (obj?: { __typename?: any } | null): obj is ParagraphInterface => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isParagraphInterface"')
       return ParagraphInterface_possibleTypes.includes(obj.__typename)
@@ -2344,7 +2514,7 @@ export interface UserUnionGenqlSelection{
     
 
 
-    const ParagraphUnion_possibleTypes: string[] = ['ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText']
+    const ParagraphUnion_possibleTypes: string[] = ['ParagraphAccordion','ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText']
     export const isParagraphUnion = (obj?: { __typename?: any } | null): obj is ParagraphUnion => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isParagraphUnion"')
       return ParagraphUnion_possibleTypes.includes(obj.__typename)
@@ -2511,6 +2681,22 @@ export interface UserUnionGenqlSelection{
     }
     
 
+
+    const View_possibleTypes: string[] = []
+    export const isView = (obj?: { __typename?: any } | null): obj is View => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isView"')
+      return View_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const ViewPageInfo_possibleTypes: string[] = ['ViewPageInfo']
+    export const isViewPageInfo = (obj?: { __typename?: any } | null): obj is ViewPageInfo => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isViewPageInfo"')
+      return ViewPageInfo_possibleTypes.includes(obj.__typename)
+    }
+    
+
 export const enumConnectionSortKeys = {
    CREATED_AT: 'CREATED_AT' as const,
    PROMOTED: 'PROMOTED' as const,
@@ -2532,6 +2718,11 @@ export const enumImageStyleAvailable = {
 export const enumMenuAvailable = {
    FOOTER: 'FOOTER' as const,
    MAIN: 'MAIN' as const
+}
+
+export const enumSortDirection = {
+   ASC: 'ASC' as const,
+   DESC: 'DESC' as const
 }
 
 export const enumUserStatus = {

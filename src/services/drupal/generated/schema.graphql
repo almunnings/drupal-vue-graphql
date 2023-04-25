@@ -4,7 +4,7 @@ type Address {
   addressLine1: String
   addressLine2: String
   administrativeArea: String
-  countryCode: String
+  country: AddressCountry
   dependentLocality: String
   familyName: String
   givenName: String
@@ -13,6 +13,12 @@ type Address {
   organization: String
   postalCode: String
   sortingCode: String
+}
+
+"""Address country."""
+type AddressCountry {
+  code: String
+  name: String
 }
 
 """Untyped attribute data. Eg configuration, settings."""
@@ -121,7 +127,22 @@ interface Connection {
   nodes: [Node!]!
 
   """Information to aid in pagination."""
-  pageInfo: PageInfo!
+  pageInfo: ConnectionPageInfo!
+}
+
+"""Information about the page in a connection."""
+type ConnectionPageInfo {
+  """The cursor for the last element in this page."""
+  endCursor: Cursor!
+
+  """Whether there are more pages in this connection."""
+  hasNextPage: Boolean!
+
+  """Whether there are previous pages in this connection."""
+  hasPreviousPage: Boolean!
+
+  """The cursor for the first element in this page."""
+  startCursor: Cursor!
 }
 
 """Choose how your sorts will occur and on which field."""
@@ -144,6 +165,12 @@ enum ConnectionSortKeys {
 
 """A cursor for use in pagination."""
 scalar Cursor
+
+"""A Date range has a start and an end."""
+type DateRange {
+  end: DateTime
+  start: DateTime
+}
 
 """A DateTime object."""
 type DateTime {
@@ -238,7 +265,7 @@ type ImageStyleDerivative {
 
 union ImageStyleUnion = ImageStyle
 
-"""A langauge definition provided by the CMS."""
+"""A language definition provided by the CMS."""
 type Language {
   direction: String
   id: ID
@@ -446,11 +473,24 @@ enum MenuAvailable {
 
 """A menu item defined in the CMS."""
 type MenuItem {
+  attributes: MenuItemAttributes!
   children: [MenuItem!]
   description: String
   expanded: Boolean!
   route: RouteUnion!
   title: String
+}
+
+"""Menu item options set within the CMS."""
+type MenuItemAttributes {
+  """Menu item attribute class."""
+  class: String
+
+  """Menu item attribute id."""
+  id: String
+
+  """Menu item attribute target."""
+  target: String
 }
 
 union MenuUnion = Menu
@@ -494,7 +534,15 @@ type MetaTagValueAttributes {
   name: String
 }
 
-"""A concrete fetchable type that is addressable by an id."""
+"""A GraphQL mutation is a request that changes data on the server."""
+type Mutation {
+  """Dummy value to enable mutation extension."""
+  _: Boolean
+}
+
+"""
+A concrete fetchable type that is addressable by an id. Not to be confused with a Drupal node.
+"""
 interface Node {
   id: ID!
 }
@@ -572,41 +620,28 @@ type NodePage implements Node & NodeInterface {
   """Sticky at top of lists"""
   sticky: Boolean!
 
-  """Tags"""
-  tags: [TermUnion!]
-
   """Title"""
   title: String!
 }
 
-"""A paginated set of results for NodePage."""
-type NodePageConnection implements Connection {
-  edges: [NodePageEdge!]!
-  nodes: [NodePage!]!
-  pageInfo: PageInfo!
-}
-
-"""Edge for NodePage."""
-type NodePageEdge implements Edge {
-  cursor: Cursor!
-  node: NodePage!
-}
-
 union NodeUnion = NodePage
 
-"""Information about the page in a connection."""
-type PageInfo {
-  """The cursor for the last element in this page."""
-  endCursor: Cursor!
+"""Add an expanding and collapsing element."""
+type ParagraphAccordion implements LayoutParagraphsInterface & Node & ParagraphInterface {
+  """Layout metadata for this paragraph."""
+  composition: LayoutParagraphs!
 
-  """Whether there are more pages in this connection."""
-  hasNextPage: Boolean!
+  """The time that the Paragraph was created."""
+  created: DateTime!
 
-  """Whether there are previous pages in this connection."""
-  hasPreviousPage: Boolean!
+  """UUID"""
+  id: ID!
 
-  """The cursor for the first element in this page."""
-  startCursor: Cursor!
+  """Content"""
+  items: [ParagraphUnion!]!
+
+  """Title"""
+  title: String!
 }
 
 """
@@ -748,14 +783,15 @@ type ParagraphText implements LayoutParagraphsInterface & Node & ParagraphInterf
   text: Text!
 }
 
-union ParagraphUnion = ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText
+union ParagraphUnion = ParagraphAccordion | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText
 
 """A field whose value conforms to the standard E.164"""
 scalar PhoneNumber
 
 """
-The schema's entry-point for queries. This acts as the public, top-level API
-from which all queries must start.
+The schema's entry-point for queries.
+
+This acts as the public, top-level API from which all queries must start.
 """
 type Query {
   """Load a Block plugin."""
@@ -773,35 +809,13 @@ type Query {
     name: MenuAvailable!
   ): Menu
 
-  """Fetch data for a specific NodePage"""
-  nodePage(
-    """The id of the NodePage to load."""
-    id: ID!
-  ): NodePage
-
-  """List of all NodePage on the platform. Results are access controlled."""
-  nodePages(
-    """Returns the elements that come after the specified cursor."""
-    after: Cursor
-
-    """Returns the elements that come before the specified cursor."""
-    before: Cursor
-
-    """Returns up to the first n elements from the list."""
-    first: Int
-
-    """Returns up to the last n elements from the list."""
-    last: Int
-
-    """Reverse the order of the underlying list."""
-    reverse: Boolean = false
-
-    """Sort the underlying list by the given key."""
-    sortKey: ConnectionSortKeys = CREATED_AT
-  ): NodePageConnection!
-
   """Load a Route by path."""
   route(
+    """
+    Filter the route by language. Eg en, ja, fr. Defaults to site default language.
+    """
+    langcode: String = "en"
+
     """Internal path to load. Eg /about"""
     path: String!
   ): RouteUnion
@@ -812,7 +826,7 @@ type Query {
   viewer: User
 }
 
-"""The base GraphQL Response class"""
+"""The base GraphQL Response class."""
 interface Response {
   errors: [Violation]
 }
@@ -823,7 +837,7 @@ interface Route {
   url: String!
 }
 
-"""A list of possible entites that can be returned by URL."""
+"""A list of possible entities that can be returned by URL."""
 union RouteEntityUnion = NodePage
 
 """Route outside of this website."""
@@ -867,6 +881,15 @@ type SchemaInformation {
   version: String!
 }
 
+"""List of menus available to load."""
+enum SortDirection {
+  """Ascending"""
+  ASC
+
+  """Descending"""
+  DESC
+}
+
 type Table {
   caption: String
 
@@ -904,7 +927,7 @@ interface TermInterface {
   status: Boolean
 }
 
-"""Tag content to group it together."""
+"""Tags"""
 type TermTags implements Node & TermInterface {
   """The time that the term was last edited."""
   changed: DateTime!
@@ -977,16 +1000,19 @@ type User implements Node & UserInterface {
   id: ID!
 
   """The email of this user."""
-  mail: Email!
+  mail: Email
 
   """The name of this user."""
   name: String!
 
   """The roles the user has."""
-  roles: [UserRoles!]!
+  roles: [UserRoles!]
 
   """Whether the user is active or blocked."""
   status: UserStatus!
+
+  """Your virtual face or picture."""
+  userPicture: Image
 }
 
 """Entity type user."""
@@ -1032,8 +1058,46 @@ union UserUnion = User
 """A string that will have a value of format ±hh:mm"""
 scalar UtcOffset
 
+"""Views represent collections of curated data from the site."""
+interface View {
+  """The description of the view."""
+  description: String
+
+  """The machine name of the display."""
+  display: String!
+
+  """The ID of the view."""
+  id: ID!
+
+  """The human friendly label of the view."""
+  label: String
+
+  """The language code of the view."""
+  langcode: String
+
+  """Information about the page in the view."""
+  pageInfo: ViewPageInfo!
+
+  """The machine name of the view."""
+  view: String!
+}
+
+"""Information about the page in a view."""
+type ViewPageInfo {
+  """Any result offset being used."""
+  offset: Int!
+
+  """The current page being returned."""
+  page: Int!
+
+  """How many results per page."""
+  pageSize: Int!
+
+  """How many results total."""
+  total: Int!
+}
+
 """
-A violation indicates an error in the GraphQL query or other incorrect
-circumstances such as missing permissions.
+A violation indicates an error in the GraphQL query or other incorrect circumstances such as missing permissions.
 """
 scalar Violation
