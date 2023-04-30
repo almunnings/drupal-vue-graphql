@@ -412,6 +412,8 @@ export interface MenuItem {
     children: MenuItem[]
     description?: (Scalars['String'] | null)
     expanded: Scalars['Boolean']
+    id: Scalars['ID']
+    /** The route this menu item links to. Entity loading within this route can be disabled per menu type. */
     route?: (RouteUnion | null)
     title: Scalars['String']
     __typename: 'MenuItem'
@@ -841,6 +843,56 @@ export type UserInterface = (User) & { __isUnion?: true }
 export type UserStatus = 'ACTIVE' | 'BLOCKED'
 
 export type UserUnion = (User) & { __isUnion?: true }
+
+
+/** Views represent collections of curated data from the site. */
+export interface View {
+    /** The description of the view. */
+    description?: (Scalars['String'] | null)
+    /** The machine name of the display. */
+    display: Scalars['String']
+    /** The ID of the view. */
+    id: Scalars['ID']
+    /** The human friendly label of the view. */
+    label?: (Scalars['String'] | null)
+    /** The language code of the view. */
+    langcode?: (Scalars['String'] | null)
+    /** Information about the page in the view. */
+    pageInfo: ViewPageInfo
+    /** The machine name of the view. */
+    view: Scalars['String']
+    __typename: string
+}
+
+
+/** Information about the page in a view. */
+export interface ViewPageInfo {
+    /** Any result offset being used. */
+    offset: Scalars['Int']
+    /** The current page being returned. */
+    page: Scalars['Int']
+    /** How many results per page. */
+    pageSize: Scalars['Int']
+    /** How many results total. */
+    total: Scalars['Int']
+    __typename: 'ViewPageInfo'
+}
+
+
+/** A reference to an embedded view */
+export interface ViewReference {
+    contextualFilter?: (Scalars['String'][] | null)
+    display: Scalars['String']
+    pageSize?: (Scalars['Int'] | null)
+    /** The name of the query used to fetch the data, if the view is a GraphQL display. */
+    query?: (Scalars['String'] | null)
+    view: Scalars['String']
+    __typename: 'ViewReference'
+}
+
+
+/** All available view result types. */
+export type ViewResultUnion = (UnsupportedType) & { __isUnion?: true }
 
 
 /** Complex address data. */
@@ -1333,6 +1385,8 @@ export interface MenuItemGenqlSelection{
     children?: MenuItemGenqlSelection
     description?: boolean | number
     expanded?: boolean | number
+    id?: boolean | number
+    /** The route this menu item links to. Entity loading within this route can be disabled per menu type. */
     route?: RouteUnionGenqlSelection
     title?: boolean | number
     __typename?: boolean | number
@@ -1956,6 +2010,62 @@ export interface UserUnionGenqlSelection{
     on_User?:UserGenqlSelection,
     on_Node?: NodeGenqlSelection,
     on_UserInterface?: UserInterfaceGenqlSelection,
+    __typename?: boolean | number
+}
+
+
+/** Views represent collections of curated data from the site. */
+export interface ViewGenqlSelection{
+    /** The description of the view. */
+    description?: boolean | number
+    /** The machine name of the display. */
+    display?: boolean | number
+    /** The ID of the view. */
+    id?: boolean | number
+    /** The human friendly label of the view. */
+    label?: boolean | number
+    /** The language code of the view. */
+    langcode?: boolean | number
+    /** Information about the page in the view. */
+    pageInfo?: ViewPageInfoGenqlSelection
+    /** The machine name of the view. */
+    view?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Information about the page in a view. */
+export interface ViewPageInfoGenqlSelection{
+    /** Any result offset being used. */
+    offset?: boolean | number
+    /** The current page being returned. */
+    page?: boolean | number
+    /** How many results per page. */
+    pageSize?: boolean | number
+    /** How many results total. */
+    total?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** A reference to an embedded view */
+export interface ViewReferenceGenqlSelection{
+    contextualFilter?: boolean | number
+    display?: boolean | number
+    pageSize?: boolean | number
+    /** The name of the query used to fetch the data, if the view is a GraphQL display. */
+    query?: boolean | number
+    view?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** All available view result types. */
+export interface ViewResultUnionGenqlSelection{
+    on_UnsupportedType?:UnsupportedTypeGenqlSelection,
     __typename?: boolean | number
 }
 
@@ -2612,6 +2722,38 @@ export interface UserUnionGenqlSelection{
     export const isUserUnion = (obj?: { __typename?: any } | null): obj is UserUnion => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isUserUnion"')
       return UserUnion_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const View_possibleTypes: string[] = []
+    export const isView = (obj?: { __typename?: any } | null): obj is View => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isView"')
+      return View_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const ViewPageInfo_possibleTypes: string[] = ['ViewPageInfo']
+    export const isViewPageInfo = (obj?: { __typename?: any } | null): obj is ViewPageInfo => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isViewPageInfo"')
+      return ViewPageInfo_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const ViewReference_possibleTypes: string[] = ['ViewReference']
+    export const isViewReference = (obj?: { __typename?: any } | null): obj is ViewReference => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isViewReference"')
+      return ViewReference_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const ViewResultUnion_possibleTypes: string[] = ['UnsupportedType']
+    export const isViewResultUnion = (obj?: { __typename?: any } | null): obj is ViewResultUnion => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isViewResultUnion"')
+      return ViewResultUnion_possibleTypes.includes(obj.__typename)
     }
     
 

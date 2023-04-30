@@ -483,6 +483,11 @@ type MenuItem {
   children: [MenuItem!]!
   description: String
   expanded: Boolean!
+  id: ID!
+
+  """
+  The route this menu item links to. Entity loading within this route can be disabled per menu type.
+  """
   route: RouteUnion
   title: String!
 }
@@ -1063,6 +1068,61 @@ union UserUnion = User
 
 """A string that will have a value of format ±hh:mm"""
 scalar UtcOffset
+
+"""Views represent collections of curated data from the site."""
+interface View {
+  """The description of the view."""
+  description: String
+
+  """The machine name of the display."""
+  display: String!
+
+  """The ID of the view."""
+  id: ID!
+
+  """The human friendly label of the view."""
+  label: String
+
+  """The language code of the view."""
+  langcode: String
+
+  """Information about the page in the view."""
+  pageInfo: ViewPageInfo!
+
+  """The machine name of the view."""
+  view: String!
+}
+
+"""Information about the page in a view."""
+type ViewPageInfo {
+  """Any result offset being used."""
+  offset: Int!
+
+  """The current page being returned."""
+  page: Int!
+
+  """How many results per page."""
+  pageSize: Int!
+
+  """How many results total."""
+  total: Int!
+}
+
+"""A reference to an embedded view"""
+type ViewReference {
+  contextualFilter: [String!]
+  display: String!
+  pageSize: Int
+
+  """
+  The name of the query used to fetch the data, if the view is a GraphQL display.
+  """
+  query: String
+  view: String!
+}
+
+"""All available view result types."""
+union ViewResultUnion = UnsupportedType
 
 """
 A violation indicates an error in the GraphQL query or other incorrect circumstances such as missing permissions.

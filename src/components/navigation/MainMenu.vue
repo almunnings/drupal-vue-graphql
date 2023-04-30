@@ -23,21 +23,14 @@ const menu = computed(() => menuStore.menus.get(props.name))
     <h5 class="card-header">{{ menu.name }}</h5>
     <div class="card-body">
       <div class="btn-group" role="group">
-        <template v-for="item in menu.items" :key="item.title">
+        <template v-for="item in menu.items" :key="item.id">
           <RouteLink
+            v-if="item.route"
             :route="item.route"
             :title="item.title"
             class="btn btn-outline-secondary"
           />
         </template>
-
-        <router-link to="/force/error" class="btn btn-outline-secondary">
-          Force error 1
-        </router-link>
-
-        <router-link to="/force/error2" class="btn btn-outline-secondary">
-          Force error 2
-        </router-link>
       </div>
     </div>
   </div>

@@ -20,7 +20,7 @@ export default {
         99,
         100,
         102,
-        103
+        107
     ],
     "types": {
         "Address": {
@@ -742,6 +742,9 @@ export default {
             "expanded": [
                 12
             ],
+            "id": [
+                24
+            ],
             "route": [
                 82
             ],
@@ -1326,7 +1329,7 @@ export default {
         },
         "Response": {
             "errors": [
-                103
+                107
             ],
             "__typename": [
                 85
@@ -1652,6 +1655,77 @@ export default {
             ]
         },
         "UtcOffset": {},
+        "View": {
+            "description": [
+                85
+            ],
+            "display": [
+                85
+            ],
+            "id": [
+                24
+            ],
+            "label": [
+                85
+            ],
+            "langcode": [
+                85
+            ],
+            "pageInfo": [
+                104
+            ],
+            "view": [
+                85
+            ],
+            "__typename": [
+                85
+            ]
+        },
+        "ViewPageInfo": {
+            "offset": [
+                30
+            ],
+            "page": [
+                30
+            ],
+            "pageSize": [
+                30
+            ],
+            "total": [
+                30
+            ],
+            "__typename": [
+                85
+            ]
+        },
+        "ViewReference": {
+            "contextualFilter": [
+                85
+            ],
+            "display": [
+                85
+            ],
+            "pageSize": [
+                30
+            ],
+            "query": [
+                85
+            ],
+            "view": [
+                85
+            ],
+            "__typename": [
+                85
+            ]
+        },
+        "ViewResultUnion": {
+            "on_UnsupportedType": [
+                96
+            ],
+            "__typename": [
+                85
+            ]
+        },
         "Violation": {}
     }
 }
