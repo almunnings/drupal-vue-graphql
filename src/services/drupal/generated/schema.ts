@@ -396,8 +396,8 @@ export interface MediaVideo {
 
 /** Entity type menu. */
 export interface Menu {
-    items?: (MenuItem[] | null)
-    name?: (Scalars['String'] | null)
+    items: MenuItem[]
+    name: Scalars['String']
     __typename: 'Menu'
 }
 
@@ -409,11 +409,11 @@ export type MenuAvailable = 'FOOTER' | 'MAIN'
 /** A menu item defined in the CMS. */
 export interface MenuItem {
     attributes: MenuItemAttributes
-    children?: (MenuItem[] | null)
+    children: MenuItem[]
     description?: (Scalars['String'] | null)
     expanded: Scalars['Boolean']
-    route: RouteUnion
-    title?: (Scalars['String'] | null)
+    route?: (RouteUnion | null)
+    title: Scalars['String']
     __typename: 'MenuItem'
 }
 
@@ -843,40 +843,6 @@ export type UserStatus = 'ACTIVE' | 'BLOCKED'
 export type UserUnion = (User) & { __isUnion?: true }
 
 
-/** Views represent collections of curated data from the site. */
-export interface View {
-    /** The description of the view. */
-    description?: (Scalars['String'] | null)
-    /** The machine name of the display. */
-    display: Scalars['String']
-    /** The ID of the view. */
-    id: Scalars['ID']
-    /** The human friendly label of the view. */
-    label?: (Scalars['String'] | null)
-    /** The language code of the view. */
-    langcode?: (Scalars['String'] | null)
-    /** Information about the page in the view. */
-    pageInfo: ViewPageInfo
-    /** The machine name of the view. */
-    view: Scalars['String']
-    __typename: string
-}
-
-
-/** Information about the page in a view. */
-export interface ViewPageInfo {
-    /** Any result offset being used. */
-    offset: Scalars['Int']
-    /** The current page being returned. */
-    page: Scalars['Int']
-    /** How many results per page. */
-    pageSize: Scalars['Int']
-    /** How many results total. */
-    total: Scalars['Int']
-    __typename: 'ViewPageInfo'
-}
-
-
 /** Complex address data. */
 export interface AddressGenqlSelection{
     additionalName?: boolean | number
@@ -1136,6 +1102,10 @@ export interface ImageStyleUnionGenqlSelection{
     on_ImageStyle?:ImageStyleGenqlSelection,
     __typename?: boolean | number
 }
+
+
+/** Generic untyped input for key-value pairs. */
+export interface KeyValueInput {key: Scalars['String'],value?: (Scalars['String'] | null)}
 
 
 /** A language definition provided by the CMS. */
@@ -1990,42 +1960,6 @@ export interface UserUnionGenqlSelection{
 }
 
 
-/** Views represent collections of curated data from the site. */
-export interface ViewGenqlSelection{
-    /** The description of the view. */
-    description?: boolean | number
-    /** The machine name of the display. */
-    display?: boolean | number
-    /** The ID of the view. */
-    id?: boolean | number
-    /** The human friendly label of the view. */
-    label?: boolean | number
-    /** The language code of the view. */
-    langcode?: boolean | number
-    /** Information about the page in the view. */
-    pageInfo?: ViewPageInfoGenqlSelection
-    /** The machine name of the view. */
-    view?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Information about the page in a view. */
-export interface ViewPageInfoGenqlSelection{
-    /** Any result offset being used. */
-    offset?: boolean | number
-    /** The current page being returned. */
-    page?: boolean | number
-    /** How many results per page. */
-    pageSize?: boolean | number
-    /** How many results total. */
-    total?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
     const Address_possibleTypes: string[] = ['Address']
     export const isAddress = (obj?: { __typename?: any } | null): obj is Address => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isAddress"')
@@ -2678,22 +2612,6 @@ export interface ViewPageInfoGenqlSelection{
     export const isUserUnion = (obj?: { __typename?: any } | null): obj is UserUnion => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isUserUnion"')
       return UserUnion_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const View_possibleTypes: string[] = []
-    export const isView = (obj?: { __typename?: any } | null): obj is View => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isView"')
-      return View_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const ViewPageInfo_possibleTypes: string[] = ['ViewPageInfo']
-    export const isViewPageInfo = (obj?: { __typename?: any } | null): obj is ViewPageInfo => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isViewPageInfo"')
-      return ViewPageInfo_possibleTypes.includes(obj.__typename)
     }
     
 

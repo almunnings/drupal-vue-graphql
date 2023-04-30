@@ -265,6 +265,12 @@ type ImageStyleDerivative {
 
 union ImageStyleUnion = ImageStyle
 
+"""Generic untyped input for key-value pairs."""
+input KeyValueInput {
+  key: String!
+  value: String
+}
+
 """A language definition provided by the CMS."""
 type Language {
   direction: String
@@ -458,8 +464,8 @@ type MediaVideo implements MediaInterface & Node {
 
 """Entity type menu."""
 type Menu {
-  items: [MenuItem!]
-  name: String
+  items: [MenuItem!]!
+  name: String!
 }
 
 """List of menus available to load."""
@@ -474,11 +480,11 @@ enum MenuAvailable {
 """A menu item defined in the CMS."""
 type MenuItem {
   attributes: MenuItemAttributes!
-  children: [MenuItem!]
+  children: [MenuItem!]!
   description: String
   expanded: Boolean!
-  route: RouteUnion!
-  title: String
+  route: RouteUnion
+  title: String!
 }
 
 """Menu item options set within the CMS."""
@@ -1057,45 +1063,6 @@ union UserUnion = User
 
 """A string that will have a value of format ±hh:mm"""
 scalar UtcOffset
-
-"""Views represent collections of curated data from the site."""
-interface View {
-  """The description of the view."""
-  description: String
-
-  """The machine name of the display."""
-  display: String!
-
-  """The ID of the view."""
-  id: ID!
-
-  """The human friendly label of the view."""
-  label: String
-
-  """The language code of the view."""
-  langcode: String
-
-  """Information about the page in the view."""
-  pageInfo: ViewPageInfo!
-
-  """The machine name of the view."""
-  view: String!
-}
-
-"""Information about the page in a view."""
-type ViewPageInfo {
-  """Any result offset being used."""
-  offset: Int!
-
-  """The current page being returned."""
-  page: Int!
-
-  """How many results per page."""
-  pageSize: Int!
-
-  """How many results total."""
-  total: Int!
-}
 
 """
 A violation indicates an error in the GraphQL query or other incorrect circumstances such as missing permissions.

@@ -28,7 +28,7 @@ const icon = computed(() => getFileIcon(props.media.document))
   <div class="d-block border p-3 rounded">
     <div class="d-flex">
       <div class="align-self-start m-2">
-        <font-awesome-icon :icon="icon" class="me-2" size="xl" />
+        <font-awesome-icon :icon="icon" class="me-2 text-light" size="xl" />
       </div>
       <div class="align-self-center flex-grow-1 d-md-flex">
         <div class="flex-grow-1">

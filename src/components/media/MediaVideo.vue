@@ -21,12 +21,12 @@ defineProps({
   <figure
     class="figure d-block border border-dark p-3 rounded bg-black bg-opacity-25 col-lg-9 mx-auto"
   >
-    <h4 v-if="title">
+    <h3 v-if="title" class="h5">
       {{ title }}
-    </h4>
+    </h3>
 
     <div class="ratio ratio-16x9">
-      <video class="w-100" loading="lazy" preload="auto" controls>
+      <video class="w-100 rounded" loading="lazy" preload="auto" controls>
         <source :src="media.video.url" :type="media.video.mime || undefined" />
       </video>
     </div>

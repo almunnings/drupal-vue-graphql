@@ -80,7 +80,7 @@ watch(
 
 <template>
   <figure class="figure">
-    <h4 v-if="title">{{ title }}</h4>
+    <h3 v-if="title" class="h5">{{ title }}</h3>
 
     <picture class="figure-img d-inline-block">
       <source

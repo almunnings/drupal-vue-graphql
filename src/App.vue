@@ -25,9 +25,8 @@ const entity = computed(() =>
 
 <template>
   <div class="container py-5">
-    <!-- Example title -->
     <h1 class="mb-1">
-      Sample vue app with ts, pinia, vue 3, genql, vite to Drupal GraphQL
+      Vue 3 with TS, Pinia, GenQL &amp; Vite to Drupal GraphQL
     </h1>
 
     <h2 class="h5 text-muted mb-4" :class="{ 'placeholder-glow': loading }">

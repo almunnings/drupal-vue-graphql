@@ -24,9 +24,9 @@ const size = computed(() => prettyBytes(props.media.audio.size))
 <template>
   <figure class="figure d-block border p-3 rounded">
     <div class="d-md-flex justify-content-between align-items-center mb-2">
-      <h4 v-if="title" class="mb-0">
+      <h3 v-if="title" class="mb-0 h5">
         {{ title }}
-      </h4>
+      </h3>
       <div class="ms-md-2">
         <a :href="media.audio.url" download class="small text-nowrap">
           Download {{ size }}
