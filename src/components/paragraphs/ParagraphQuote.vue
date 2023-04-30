@@ -32,8 +32,9 @@ defineProps({
         </cite>
 
         <RouteLink
-          v-if="paragraph.link && paragraph.link.route"
-          :route="paragraph.link.route"
+          v-if="paragraph.link && paragraph.link.url"
+          :url="paragraph.link.url"
+          :internal="paragraph.link.internal"
           :title="paragraph.link.title"
         />
       </figcaption>

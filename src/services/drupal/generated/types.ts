@@ -528,6 +528,9 @@ export default {
             ]
         },
         "Link": {
+            "internal": [
+                12
+            ],
             "route": [
                 82
             ],
@@ -745,10 +748,16 @@ export default {
             "id": [
                 24
             ],
+            "internal": [
+                12
+            ],
             "route": [
                 82
             ],
             "title": [
+                85
+            ],
+            "url": [
                 85
             ],
             "__typename": [

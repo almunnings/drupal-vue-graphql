@@ -291,6 +291,7 @@ export interface LayoutPosition {
 }
 
 export interface Link {
+    internal: Scalars['Boolean']
     route?: (RouteUnion | null)
     title?: (Scalars['String'] | null)
     url?: (Scalars['String'] | null)
@@ -408,14 +409,20 @@ export type MenuAvailable = 'FOOTER' | 'MAIN'
 
 /** A menu item defined in the CMS. */
 export interface MenuItem {
+    /** Attributes of this menu item. */
     attributes: MenuItemAttributes
+    /** Child menu items of this menu item. */
     children: MenuItem[]
     description?: (Scalars['String'] | null)
+    /** Whether this menu item is intended to be expanded. */
     expanded: Scalars['Boolean']
     id: Scalars['ID']
+    /** Whether this menu item links to an internal route. */
+    internal: Scalars['Boolean']
     /** The route this menu item links to. Entity loading within this route can be disabled per menu type. */
     route?: (RouteUnion | null)
     title: Scalars['String']
+    url?: (Scalars['String'] | null)
     __typename: 'MenuItem'
 }
 
@@ -1234,6 +1241,7 @@ export interface LayoutPositionGenqlSelection{
 }
 
 export interface LinkGenqlSelection{
+    internal?: boolean | number
     route?: RouteUnionGenqlSelection
     title?: boolean | number
     url?: boolean | number
@@ -1381,14 +1389,20 @@ export interface MenuGenqlSelection{
 
 /** A menu item defined in the CMS. */
 export interface MenuItemGenqlSelection{
+    /** Attributes of this menu item. */
     attributes?: MenuItemAttributesGenqlSelection
+    /** Child menu items of this menu item. */
     children?: MenuItemGenqlSelection
     description?: boolean | number
+    /** Whether this menu item is intended to be expanded. */
     expanded?: boolean | number
     id?: boolean | number
+    /** Whether this menu item links to an internal route. */
+    internal?: boolean | number
     /** The route this menu item links to. Entity loading within this route can be disabled per menu type. */
     route?: RouteUnionGenqlSelection
     title?: boolean | number
+    url?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }

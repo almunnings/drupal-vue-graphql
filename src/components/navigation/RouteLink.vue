@@ -2,11 +2,14 @@
 import { computed } from 'vue'
 import { useInfoStore } from '@/stores/info'
 import type { PropType } from 'vue'
-import type { RouteUnion } from '@/services/drupal'
 
 const props = defineProps({
-  route: {
-    type: Object as PropType<RouteUnion>,
+  url: {
+    type: String,
+    required: true
+  },
+  internal: {
+    type: Boolean,
     required: true
   },
   title: {
@@ -17,7 +20,7 @@ const props = defineProps({
 
 // strip http, https, www from url
 const title_url = computed(() =>
-  props.route.url
+  props.url
     // Remove protocol://
     .replace(/(^\w+:|^)\/\//, '')
     // Remove www.
@@ -28,12 +31,12 @@ const title_url = computed(() =>
 
 // Convert homepage links into /
 const url = computed(() =>
-  props.route.url === useInfoStore().home ? '/' : props.route.url
+  props.url === useInfoStore().home ? '/' : props.url
 )
 </script>
 
 <template>
-  <router-link v-if="route.internal" :to="url" active-class="active">
+  <router-link v-if="internal" :to="url" active-class="active">
     {{ title || title_url || 'Untitled' }}
   </router-link>
   <a v-else :href="url"> {{ title || title_url || 'Untitled' }}</a>

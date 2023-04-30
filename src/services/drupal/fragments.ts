@@ -22,9 +22,7 @@ export const RouteFragment: RouteGenqlSelection = {
 export const LinkFragment: LinkGenqlSelection = {
   url: true,
   title: true,
-  route: {
-    on_Route: RouteFragment
-  }
+  internal: true
 }
 
 export const ParagraphFragment: ParagraphInterfaceGenqlSelection = {
@@ -143,8 +141,12 @@ export const MenuItemFragment: MenuItemGenqlSelection = {
   title: true,
   description: true,
   expanded: true,
-  route: {
-    on_Route: RouteFragment
+  url: true,
+  internal: true,
+  attributes: {
+    id: true,
+    target: true,
+    class: true
   }
 }
 

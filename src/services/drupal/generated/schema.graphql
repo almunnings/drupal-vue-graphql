@@ -332,6 +332,7 @@ type LayoutPosition {
 }
 
 type Link {
+  internal: Boolean!
   route: RouteUnion
   title: String
   url: String
@@ -479,17 +480,26 @@ enum MenuAvailable {
 
 """A menu item defined in the CMS."""
 type MenuItem {
+  """Attributes of this menu item."""
   attributes: MenuItemAttributes!
+
+  """Child menu items of this menu item."""
   children: [MenuItem!]!
   description: String
+
+  """Whether this menu item is intended to be expanded."""
   expanded: Boolean!
   id: ID!
+
+  """Whether this menu item links to an internal route."""
+  internal: Boolean!
 
   """
   The route this menu item links to. Entity loading within this route can be disabled per menu type.
   """
   route: RouteUnion
   title: String!
+  url: String
 }
 
 """Menu item options set within the CMS."""

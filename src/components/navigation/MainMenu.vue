@@ -25,10 +25,14 @@ const menu = computed(() => menuStore.menus.get(props.name))
       <div class="btn-group" role="group">
         <template v-for="item in menu.items" :key="item.id">
           <RouteLink
-            v-if="item.route"
-            :route="item.route"
+            v-if="item.url"
+            :url="item.url"
+            :internal="item.internal"
             :title="item.title"
             class="btn btn-outline-secondary"
+            :class="item.attributes.class"
+            :target="item.attributes.target"
+            :id="item.attributes.id"
           />
         </template>
       </div>
