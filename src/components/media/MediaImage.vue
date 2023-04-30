@@ -82,26 +82,34 @@ watch(
   <figure class="figure">
     <h3 v-if="title" class="h5">{{ title }}</h3>
 
-    <picture class="figure-img d-inline-block">
-      <source
-        v-for="source in sources"
-        :key="source.name"
-        :media="source.media"
-        :srcset="source.srcset"
-        :width="source.width"
-        :height="source.height"
-        :type="media.image.mime || undefined"
-      />
+    <a
+      :href="media.image.url"
+      title="Open image in new tab"
+      target="_blank"
+      rel="noopener"
+      class="figure-img d-inline-block"
+    >
+      <picture class="figure-img d-inline-block">
+        <source
+          v-for="source in sources"
+          :key="source.name"
+          :media="source.media"
+          :srcset="source.srcset"
+          :width="source.width"
+          :height="source.height"
+          :type="media.image.mime || undefined"
+        />
 
-      <img
-        :src="variations.get('THUMBNAIL')?.url"
-        :alt="media.image.alt || undefined"
-        :type="media.image.mime || undefined"
-        :title="media.image.title || media.image.alt || undefined"
-        class="img-fluid rounded"
-        loading="lazy"
-      />
-    </picture>
+        <img
+          :src="variations.get('THUMBNAIL')?.url"
+          :alt="media.image.alt || undefined"
+          :type="media.image.mime || undefined"
+          :title="media.image.title || media.image.alt || undefined"
+          class="img-fluid rounded"
+          loading="lazy"
+        />
+      </picture>
+    </a>
 
     <figcaption
       v-if="description"
@@ -111,3 +119,15 @@ watch(
     />
   </figure>
 </template>
+
+<style lang="scss" scoped>
+a.figure-img {
+  @include transition;
+  opacity: 1;
+
+  &:hover,
+  &:focus {
+    opacity: 0.85;
+  }
+}
+</style>
