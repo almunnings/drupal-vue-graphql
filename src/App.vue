@@ -45,10 +45,10 @@ const entity = computed(() =>
         </transition>
       </router-view>
     </main>
-  </div>
 
-  <!-- Example notifications -->
-  <div v-if="error" class="alert alert-warning" role="alert">
-    {{ error }}
+    <!-- Example notifications -->
+    <div v-if="error" class="alert alert-warning" role="alert">
+      {{ error }}
+    </div>
   </div>
 </template>
