@@ -149,9 +149,3 @@ export const MenuItemFragment: MenuItemGenqlSelection = {
     class: true
   }
 }
-
-export const MenuFragment: MenuGenqlSelection = {
-  __typename: true,
-  name: true,
-  items: MenuItemFragment
-}

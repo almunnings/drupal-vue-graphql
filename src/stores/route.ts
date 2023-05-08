@@ -27,6 +27,9 @@ export const useRouteStore = defineStore('route', () => {
           __args: { path },
           on_Route: RouteFragment,
           on_RouteInternal: {
+            breadcrumbs: {
+              __scalar: true
+            },
             entity: {
               on_NodeInterface: NodeFragment
             }

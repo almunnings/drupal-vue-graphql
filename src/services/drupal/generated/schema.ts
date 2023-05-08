@@ -292,7 +292,6 @@ export interface LayoutPosition {
 
 export interface Link {
     internal: Scalars['Boolean']
-    route?: (RouteUnion | null)
     title?: (Scalars['String'] | null)
     url?: (Scalars['String'] | null)
     __typename: 'Link'
@@ -419,7 +418,7 @@ export interface MenuItem {
     id: Scalars['ID']
     /** Whether this menu item links to an internal route. */
     internal: Scalars['Boolean']
-    /** The route this menu item links to. Entity loading within this route can be disabled per menu type. */
+    /** The route this menu item uses. Route loading can be disabled per menu type. */
     route?: (RouteUnion | null)
     title: Scalars['String']
     url?: (Scalars['String'] | null)
@@ -702,7 +701,9 @@ export type RouteEntityUnion = (NodePage) & { __isUnion?: true }
 
 /** Route outside of this website. */
 export interface RouteExternal {
+    /** Whether this route is internal or external. */
     internal: Scalars['Boolean']
+    /** URL of this route. */
     url: Scalars['String']
     __typename: 'RouteExternal'
 }
@@ -710,9 +711,13 @@ export interface RouteExternal {
 
 /** Route within this website. */
 export interface RouteInternal {
+    /** Breadcrumb links for this route. */
+    breadcrumbs?: (Link[] | null)
     /** Content assigned to this route. */
     entity?: (RouteEntityUnion | null)
+    /** Whether this route is internal or external. */
     internal: Scalars['Boolean']
+    /** URL of this route. */
     url: Scalars['String']
     __typename: 'RouteInternal'
 }
@@ -720,11 +725,13 @@ export interface RouteInternal {
 
 /** Redirect to another URL with status. */
 export interface RouteRedirect {
+    /** Whether this route is internal or external. */
     internal: Scalars['Boolean']
     /** Utility prop. Always true for redirects. */
     redirect: Scalars['Boolean']
     /** Suggested status for redirect. Eg 301. */
     status: Scalars['Int']
+    /** URL of this route. */
     url: Scalars['String']
     __typename: 'RouteRedirect'
 }
@@ -836,8 +843,6 @@ export interface User {
     roles?: (Scalars['UserRoles'][] | null)
     /** Whether the user is active or blocked. */
     status: UserStatus
-    /** Your virtual face or picture. */
-    userPicture?: (Image | null)
     __typename: 'User'
 }
 
@@ -1242,7 +1247,6 @@ export interface LayoutPositionGenqlSelection{
 
 export interface LinkGenqlSelection{
     internal?: boolean | number
-    route?: RouteUnionGenqlSelection
     title?: boolean | number
     url?: boolean | number
     __typename?: boolean | number
@@ -1399,7 +1403,7 @@ export interface MenuItemGenqlSelection{
     id?: boolean | number
     /** Whether this menu item links to an internal route. */
     internal?: boolean | number
-    /** The route this menu item links to. Entity loading within this route can be disabled per menu type. */
+    /** The route this menu item uses. Route loading can be disabled per menu type. */
     route?: RouteUnionGenqlSelection
     title?: boolean | number
     url?: boolean | number
@@ -1802,7 +1806,9 @@ export interface ResponseGenqlSelection{
 
 /** Routes represent incoming requests that resolve to content. */
 export interface RouteGenqlSelection{
+    /** Whether this route is internal or external. */
     internal?: boolean | number
+    /** URL of this route. */
     url?: boolean | number
     on_RouteExternal?: RouteExternalGenqlSelection
     on_RouteInternal?: RouteInternalGenqlSelection
@@ -1823,7 +1829,9 @@ export interface RouteEntityUnionGenqlSelection{
 
 /** Route outside of this website. */
 export interface RouteExternalGenqlSelection{
+    /** Whether this route is internal or external. */
     internal?: boolean | number
+    /** URL of this route. */
     url?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1832,9 +1840,13 @@ export interface RouteExternalGenqlSelection{
 
 /** Route within this website. */
 export interface RouteInternalGenqlSelection{
+    /** Breadcrumb links for this route. */
+    breadcrumbs?: LinkGenqlSelection
     /** Content assigned to this route. */
     entity?: RouteEntityUnionGenqlSelection
+    /** Whether this route is internal or external. */
     internal?: boolean | number
+    /** URL of this route. */
     url?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1843,11 +1855,13 @@ export interface RouteInternalGenqlSelection{
 
 /** Redirect to another URL with status. */
 export interface RouteRedirectGenqlSelection{
+    /** Whether this route is internal or external. */
     internal?: boolean | number
     /** Utility prop. Always true for redirects. */
     redirect?: boolean | number
     /** Suggested status for redirect. Eg 301. */
     status?: boolean | number
+    /** URL of this route. */
     url?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1992,8 +2006,6 @@ export interface UserGenqlSelection{
     roles?: boolean | number
     /** Whether the user is active or blocked. */
     status?: boolean | number
-    /** Your virtual face or picture. */
-    userPicture?: ImageGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }

@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 import { defineStore, acceptHMRUpdate } from 'pinia'
-import { drupalClient, MenuFragment } from '@/services/drupal'
+import { drupalClient, MenuItemFragment } from '@/services/drupal'
 import type { Menu, MenuAvailable } from '@/services/drupal'
 
 export const useMenuStore = defineStore('menu', () => {
@@ -25,7 +25,11 @@ export const useMenuStore = defineStore('menu', () => {
       const { menu } = await drupalClient.query({
         menu: {
           __args: { name },
-          ...MenuFragment
+          name: true,
+          items: {
+            ...MenuItemFragment,
+            children: MenuItemFragment
+          }
         }
       })
 

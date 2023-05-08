@@ -30,22 +30,12 @@ const entity = computed(() =>
     </h1>
 
     <h2 class="h5 text-muted mb-4" :class="{ 'placeholder-glow': loading }">
-      <span v-if="loading" class="placeholder col-2"></span>
+      <span v-if="loading" class="placeholder col-4"></span>
       <span v-else>{{ entity?.id || 'No entity title' }}</span>
     </h2>
 
     <!-- Example menu -->
-    <main-menu class="my-3" name="MAIN" />
-
-    <!-- Example notifications -->
-    <div v-if="error" class="alert alert-warning" role="alert">
-      {{ error }}
-    </div>
-
-    <div v-if="loading" class="alert alert-info" role="alert">
-      Loading route
-      <em>{{ $route.path }}</em>
-    </div>
+    <MainMenu class="my-3" name="MAIN" />
 
     <!-- Example content -->
     <main class="position-relative mt-3">
@@ -55,5 +45,10 @@ const entity = computed(() =>
         </transition>
       </router-view>
     </main>
+  </div>
+
+  <!-- Example notifications -->
+  <div v-if="error" class="alert alert-warning" role="alert">
+    {{ error }}
   </div>
 </template>

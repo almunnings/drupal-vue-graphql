@@ -531,9 +531,6 @@ export default {
             "internal": [
                 12
             ],
-            "route": [
-                82
-            ],
             "title": [
                 85
             ],
@@ -1390,6 +1387,9 @@ export default {
             ]
         },
         "RouteInternal": {
+            "breadcrumbs": [
+                38
+            ],
             "entity": [
                 78
             ],
@@ -1610,9 +1610,6 @@ export default {
             ],
             "status": [
                 100
-            ],
-            "userPicture": [
-                25
             ],
             "__typename": [
                 85

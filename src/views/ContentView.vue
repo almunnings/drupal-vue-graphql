@@ -12,6 +12,7 @@ import {
 
 import type { ParagraphInterface } from '@/services/drupal'
 
+import BreadcrumbMenu from '@/components/navigation/BreadcrumbMenu.vue'
 import ParagraphSection from '@/components/paragraphs/ParagraphSection.vue'
 
 // Get the current route from the store.
@@ -20,6 +21,12 @@ const route = computed(() => useRouteStore().routes.get(useRoute().path))
 // Get the entity off the current route if it's internal.
 const entity = computed(() =>
   route.value && isRouteInternal(route.value) ? route.value.entity : undefined
+)
+
+const breadcrumbs = computed(() =>
+  route.value && isRouteInternal(route.value) && route.value.breadcrumbs
+    ? route.value.breadcrumbs
+    : []
 )
 
 // Get the content field from the node content if its a node page.
@@ -47,20 +54,17 @@ onBeforeRouteUpdate((to) => {
 </script>
 
 <template>
-  <div>
-    <ul class="list-group" v-if="route">
-      <li class="list-group-item">URL: {{ route.url }}</li>
-      <li class="list-group-item">
-        Route: {{ route.internal ? 'Internal' : 'External' }}
-      </li>
+  <div v-if="entity && isNodeInterface(entity)">
+    <h2>{{ entity.title }}</h2>
 
-      <template v-if="entity && isNodeInterface(entity)">
-        <li class="list-group-item">UUID: {{ entity.id }}</li>
-        <li class="list-group-item">Title: {{ entity.title }}</li>
-        <li class="list-group-item">Type: {{ entity.__typename }}</li>
-      </template>
-    </ul>
+    <!-- Breadcrumbs -->
+    <BreadcrumbMenu
+      v-if="breadcrumbs.length"
+      :links="breadcrumbs"
+      :current="entity?.title"
+    />
 
+    <!-- Section content -->
     <ParagraphSection
       v-for="section in sections"
       :key="section.id"

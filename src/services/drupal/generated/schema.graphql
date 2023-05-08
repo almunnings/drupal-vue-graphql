@@ -333,7 +333,6 @@ type LayoutPosition {
 
 type Link {
   internal: Boolean!
-  route: RouteUnion
   title: String
   url: String
 }
@@ -495,7 +494,7 @@ type MenuItem {
   internal: Boolean!
 
   """
-  The route this menu item links to. Entity loading within this route can be disabled per menu type.
+  The route this menu item uses. Route loading can be disabled per menu type.
   """
   route: RouteUnion
   title: String!
@@ -854,7 +853,10 @@ interface Response {
 
 """Routes represent incoming requests that resolve to content."""
 interface Route {
+  """Whether this route is internal or external."""
   internal: Boolean!
+
+  """URL of this route."""
   url: String!
 }
 
@@ -863,20 +865,31 @@ union RouteEntityUnion = NodePage
 
 """Route outside of this website."""
 type RouteExternal implements Route {
+  """Whether this route is internal or external."""
   internal: Boolean!
+
+  """URL of this route."""
   url: String!
 }
 
 """Route within this website."""
 type RouteInternal implements Route {
+  """Breadcrumb links for this route."""
+  breadcrumbs: [Link!]
+
   """Content assigned to this route."""
   entity: RouteEntityUnion
+
+  """Whether this route is internal or external."""
   internal: Boolean!
+
+  """URL of this route."""
   url: String!
 }
 
 """Redirect to another URL with status."""
 type RouteRedirect implements Route {
+  """Whether this route is internal or external."""
   internal: Boolean!
 
   """Utility prop. Always true for redirects."""
@@ -884,6 +897,8 @@ type RouteRedirect implements Route {
 
   """Suggested status for redirect. Eg 301."""
   status: Int!
+
+  """URL of this route."""
   url: String!
 }
 
@@ -1031,9 +1046,6 @@ type User implements Node & UserInterface {
 
   """Whether the user is active or blocked."""
   status: UserStatus!
-
-  """Your virtual face or picture."""
-  userPicture: Image
 }
 
 """Entity type user."""
