@@ -1785,7 +1785,7 @@ export interface QueryGenqlSelection{
     name: MenuAvailable} })
     /** Load a Route by path. */
     route?: (RouteUnionGenqlSelection & { __args: {
-    /** Filter the route by language. Eg en, ja, fr. Defaults to site default language. */
+    /** Optionally filter the route by language. Eg en, ja, fr. Defaults to site default language. */
     langcode?: (Scalars['String'] | null), 
     /** Internal path to load. Eg /about */
     path: Scalars['String']} })

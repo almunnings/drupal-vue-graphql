@@ -17,7 +17,6 @@ const dropdown = ref<HTMLElement | null>(null)
 onMounted(() => {
   if (dropdown.value) {
     new Dropdown(dropdown.value)
-    console.log('dropdown', dropdown.value)
   }
 })
 </script>

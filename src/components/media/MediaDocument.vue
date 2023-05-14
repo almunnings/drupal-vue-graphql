@@ -25,19 +25,23 @@ const icon = computed(() => getFileIcon(props.media.document))
 </script>
 
 <template>
-  <div class="d-block border p-3 rounded">
+  <figure class="d-block border p-3 rounded">
     <div class="d-flex">
       <div class="align-self-start m-2">
         <font-awesome-icon :icon="icon" class="me-2 text-light" size="xl" />
       </div>
       <div class="align-self-center flex-grow-1 d-md-flex">
         <div class="flex-grow-1">
+          <h3 v-if="title" class="mb-0 h5">
+            {{ title }}
+          </h3>
+
           <a
             :href="media.document.url"
             :type="media.document.mime || undefined"
             download
           >
-            {{ title || media.name }}
+            {{ media.document.description || media.document.name }}
           </a>
 
           <div
@@ -52,5 +56,5 @@ const icon = computed(() => getFileIcon(props.media.document))
         </div>
       </div>
     </div>
-  </div>
+  </figure>
 </template>

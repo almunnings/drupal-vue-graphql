@@ -832,7 +832,7 @@ type Query {
   """Load a Route by path."""
   route(
     """
-    Filter the route by language. Eg en, ja, fr. Defaults to site default language.
+    Optionally filter the route by language. Eg en, ja, fr. Defaults to site default language.
     """
     langcode: String = "en"
 

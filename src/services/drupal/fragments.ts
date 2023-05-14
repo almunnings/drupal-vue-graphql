@@ -60,8 +60,10 @@ export const ParagraphFragment: ParagraphInterfaceGenqlSelection = {
       on_MediaDocument: {
         document: {
           url: true,
+          name: true,
           mime: true,
-          size: true
+          size: true,
+          description: true
         }
       },
       on_MediaImage: {
