@@ -4,7 +4,7 @@ Combine all the things together to get a great development experience.
 
 This project is setup to work with [Drupal Boilerplate](https://github.com/almunnings/drupal-boilerplate).
 
-> 100% WIP. Don't touch with a 10ft pole.
+This project is intended to be a starting point, a hint, an idea. Not a solution.
 
 ## Development
 

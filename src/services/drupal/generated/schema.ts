@@ -64,11 +64,11 @@ export interface BlockContent {
 export interface BlockContentAnotherType {
     /** Body */
     body?: (TextSummary | null)
-    /** The time that the custom block was last edited. */
+    /** The time that the content block was last edited. */
     changed: DateTime
-    /** The custom block UUID. */
+    /** The content block UUID. */
     id: Scalars['ID']
-    /** The custom block language code. */
+    /** The content block language code. */
     langcode: Language
     /** A boolean indicating whether this block is reusable. */
     reusable: Scalars['Boolean']
@@ -82,11 +82,11 @@ export interface BlockContentAnotherType {
 export interface BlockContentBasicBlock {
     /** Body */
     body?: (TextSummary | null)
-    /** The time that the custom block was last edited. */
+    /** The time that the content block was last edited. */
     changed: DateTime
-    /** The custom block UUID. */
+    /** The content block UUID. */
     id: Scalars['ID']
-    /** The custom block language code. */
+    /** The content block language code. */
     langcode: Language
     /** A boolean indicating whether this block is reusable. */
     reusable: Scalars['Boolean']
@@ -100,15 +100,6 @@ export interface BlockContentBasicBlock {
 export type BlockContentInterface = (BlockContentAnotherType | BlockContentBasicBlock) & { __isUnion?: true }
 
 export type BlockContentUnion = (BlockContentAnotherType | BlockContentBasicBlock) & { __isUnion?: true }
-
-
-/** Block field information. */
-export interface BlockField {
-    block?: (Block | null)
-    configuration?: (Scalars['Attributes'] | null)
-    plugin_id?: (Scalars['ID'] | null)
-    __typename: 'BlockField'
-}
 
 
 /** Block field information. */
@@ -532,6 +523,8 @@ export type NodeUnion = (NodePage) & { __isUnion?: true }
 
 /** Add an expanding and collapsing element. */
 export interface ParagraphAccordion {
+    /** Title */
+    accordionTitle: Scalars['String']
     /** Layout metadata for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
@@ -540,8 +533,6 @@ export interface ParagraphAccordion {
     id: Scalars['ID']
     /** Content */
     items: ParagraphUnion[]
-    /** Title */
-    title: Scalars['String']
     __typename: 'ParagraphAccordion'
 }
 
@@ -554,8 +545,6 @@ export interface ParagraphBlock {
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
-    /** Feature */
-    feature?: (Scalars['String'] | null)
     /** UUID */
     id: Scalars['ID']
     __typename: 'ParagraphBlock'
@@ -963,11 +952,11 @@ export interface BlockContentGenqlSelection{
 export interface BlockContentAnotherTypeGenqlSelection{
     /** Body */
     body?: TextSummaryGenqlSelection
-    /** The time that the custom block was last edited. */
+    /** The time that the content block was last edited. */
     changed?: DateTimeGenqlSelection
-    /** The custom block UUID. */
+    /** The content block UUID. */
     id?: boolean | number
-    /** The custom block language code. */
+    /** The content block language code. */
     langcode?: LanguageGenqlSelection
     /** A boolean indicating whether this block is reusable. */
     reusable?: boolean | number
@@ -982,11 +971,11 @@ export interface BlockContentAnotherTypeGenqlSelection{
 export interface BlockContentBasicBlockGenqlSelection{
     /** Body */
     body?: TextSummaryGenqlSelection
-    /** The time that the custom block was last edited. */
+    /** The time that the content block was last edited. */
     changed?: DateTimeGenqlSelection
-    /** The custom block UUID. */
+    /** The content block UUID. */
     id?: boolean | number
-    /** The custom block language code. */
+    /** The content block language code. */
     langcode?: LanguageGenqlSelection
     /** A boolean indicating whether this block is reusable. */
     reusable?: boolean | number
@@ -999,11 +988,11 @@ export interface BlockContentBasicBlockGenqlSelection{
 
 /** Entity type block_content. */
 export interface BlockContentInterfaceGenqlSelection{
-    /** The time that the custom block was last edited. */
+    /** The time that the content block was last edited. */
     changed?: DateTimeGenqlSelection
-    /** The custom block UUID. */
+    /** The content block UUID. */
     id?: boolean | number
-    /** The custom block language code. */
+    /** The content block language code. */
     langcode?: LanguageGenqlSelection
     /** A boolean indicating whether this block is reusable. */
     reusable?: boolean | number
@@ -1021,16 +1010,6 @@ export interface BlockContentUnionGenqlSelection{
     on_BlockContentInterface?: BlockContentInterfaceGenqlSelection,
     on_Node?: NodeGenqlSelection,
     __typename?: boolean | number
-}
-
-
-/** Block field information. */
-export interface BlockFieldGenqlSelection{
-    block?: BlockGenqlSelection
-    configuration?: boolean | number
-    plugin_id?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
 }
 
 
@@ -1599,6 +1578,8 @@ export interface NodeUnionGenqlSelection{
 
 /** Add an expanding and collapsing element. */
 export interface ParagraphAccordionGenqlSelection{
+    /** Title */
+    accordionTitle?: boolean | number
     /** Layout metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
@@ -1607,8 +1588,6 @@ export interface ParagraphAccordionGenqlSelection{
     id?: boolean | number
     /** Content */
     items?: ParagraphUnionGenqlSelection
-    /** Title */
-    title?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1622,8 +1601,6 @@ export interface ParagraphBlockGenqlSelection{
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
-    /** Feature */
-    feature?: boolean | number
     /** UUID */
     id?: boolean | number
     __typename?: boolean | number
@@ -2156,14 +2133,6 @@ export interface ViewResultUnionGenqlSelection{
     export const isBlockContentUnion = (obj?: { __typename?: any } | null): obj is BlockContentUnion => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isBlockContentUnion"')
       return BlockContentUnion_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const BlockField_possibleTypes: string[] = ['BlockField']
-    export const isBlockField = (obj?: { __typename?: any } | null): obj is BlockField => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isBlockField"')
-      return BlockField_possibleTypes.includes(obj.__typename)
     }
     
 

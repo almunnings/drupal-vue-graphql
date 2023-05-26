@@ -44,13 +44,13 @@ type BlockContentAnotherType implements BlockContentInterface & Node {
   """Body"""
   body: TextSummary
 
-  """The time that the custom block was last edited."""
+  """The time that the content block was last edited."""
   changed: DateTime!
 
-  """The custom block UUID."""
+  """The content block UUID."""
   id: ID!
 
-  """The custom block language code."""
+  """The content block language code."""
   langcode: Language!
 
   """A boolean indicating whether this block is reusable."""
@@ -65,13 +65,13 @@ type BlockContentBasicBlock implements BlockContentInterface & Node {
   """Body"""
   body: TextSummary
 
-  """The time that the custom block was last edited."""
+  """The time that the content block was last edited."""
   changed: DateTime!
 
-  """The custom block UUID."""
+  """The content block UUID."""
   id: ID!
 
-  """The custom block language code."""
+  """The content block language code."""
   langcode: Language!
 
   """A boolean indicating whether this block is reusable."""
@@ -83,13 +83,13 @@ type BlockContentBasicBlock implements BlockContentInterface & Node {
 
 """Entity type block_content."""
 interface BlockContentInterface {
-  """The time that the custom block was last edited."""
+  """The time that the content block was last edited."""
   changed: DateTime
 
-  """The custom block UUID."""
+  """The content block UUID."""
   id: ID
 
-  """The custom block language code."""
+  """The content block language code."""
   langcode: Language
 
   """A boolean indicating whether this block is reusable."""
@@ -100,13 +100,6 @@ interface BlockContentInterface {
 }
 
 union BlockContentUnion = BlockContentAnotherType | BlockContentBasicBlock
-
-"""Block field information."""
-type BlockField {
-  block: Block
-  configuration: Attributes
-  plugin_id: ID
-}
 
 """Block field information."""
 type BlockPlugin implements Block & Node {
@@ -648,6 +641,9 @@ union NodeUnion = NodePage
 
 """Add an expanding and collapsing element."""
 type ParagraphAccordion implements LayoutParagraphsInterface & Node & ParagraphInterface {
+  """Title"""
+  accordionTitle: String!
+
   """Layout metadata for this paragraph."""
   composition: LayoutParagraphs!
 
@@ -659,9 +655,6 @@ type ParagraphAccordion implements LayoutParagraphsInterface & Node & ParagraphI
 
   """Content"""
   items: [ParagraphUnion!]!
-
-  """Title"""
-  title: String!
 }
 
 """
@@ -676,9 +669,6 @@ type ParagraphBlock implements LayoutParagraphsInterface & Node & ParagraphInter
 
   """The time that the Paragraph was created."""
   created: DateTime!
-
-  """Feature"""
-  feature: String
 
   """UUID"""
   id: ID!

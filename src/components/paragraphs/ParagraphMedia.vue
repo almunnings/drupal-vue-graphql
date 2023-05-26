@@ -3,7 +3,7 @@ import type { PropType } from 'vue'
 import type { ParagraphMedia } from '@/services/drupal'
 import { getMediaComponent } from '@/components/media'
 
-const props = defineProps({
+defineProps({
   paragraph: {
     type: Object as PropType<ParagraphMedia>,
     required: true
@@ -14,7 +14,7 @@ const props = defineProps({
 <template>
   <div class="media">
     <component
-      :is="getMediaComponent(props.paragraph.media)"
+      :is="getMediaComponent(paragraph.media)"
       :media="paragraph.media"
       :title="paragraph.title"
       :description="paragraph.description?.processed"
