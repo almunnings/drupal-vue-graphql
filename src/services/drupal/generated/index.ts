@@ -33,7 +33,7 @@ export interface Client {
 
 export const createClient = function (options?: ClientOptions): Client {
   return createClientOriginal({
-    url: 'https://drupal-boilerplate.lndo.site/graphql',
+    url: 'http://drupal-boilerplate.lndo.site/graphql',
 
     ...options,
     queryRoot: typeMap.Query!,

@@ -126,7 +126,7 @@ interface Connection {
 """Information about the page in a connection."""
 type ConnectionPageInfo {
   """The cursor for the last element in this page."""
-  endCursor: Cursor!
+  endCursor: Cursor
 
   """Whether there are more pages in this connection."""
   hasNextPage: Boolean!
@@ -135,7 +135,7 @@ type ConnectionPageInfo {
   hasPreviousPage: Boolean!
 
   """The cursor for the first element in this page."""
-  startCursor: Cursor!
+  startCursor: Cursor
 }
 
 """Choose how your sorts will occur and on which field."""

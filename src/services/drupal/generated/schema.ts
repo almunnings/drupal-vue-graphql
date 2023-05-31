@@ -1,4 +1,8 @@
 // @ts-nocheck
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+
 export type Scalars = {
     Attributes: any,
     Boolean: boolean,
@@ -130,13 +134,13 @@ export interface Connection {
 /** Information about the page in a connection. */
 export interface ConnectionPageInfo {
     /** The cursor for the last element in this page. */
-    endCursor: Scalars['Cursor']
+    endCursor?: (Scalars['Cursor'] | null)
     /** Whether there are more pages in this connection. */
     hasNextPage: Scalars['Boolean']
     /** Whether there are previous pages in this connection. */
     hasPreviousPage: Scalars['Boolean']
     /** The cursor for the first element in this page. */
-    startCursor: Scalars['Cursor']
+    startCursor?: (Scalars['Cursor'] | null)
     __typename: 'ConnectionPageInfo'
 }
 
