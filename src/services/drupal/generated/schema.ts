@@ -780,6 +780,8 @@ export interface TermTags {
     langcode: Language
     /** Name */
     name: Scalars['String']
+    /** The parents of this term. */
+    parent?: (TermUnion | null)
     /** URL alias */
     path: Scalars['String']
     /** Published */
@@ -1766,7 +1768,7 @@ export interface QueryGenqlSelection{
     name: MenuAvailable} })
     /** Load a Route by path. */
     route?: (RouteUnionGenqlSelection & { __args: {
-    /** Optionally filter the route by language. Eg en, ja, fr. Defaults to site default language. */
+    /** Optionally filter the route by language. Eg en, ja, fr. */
     langcode?: (Scalars['String'] | null), 
     /** Internal path to load. Eg /about */
     path: Scalars['String']} })
@@ -1900,6 +1902,8 @@ export interface TermInterfaceGenqlSelection{
     langcode?: LanguageGenqlSelection
     /** Name */
     name?: boolean | number
+    /** The parents of this term. */
+    parent?: TermUnionGenqlSelection
     /** URL alias */
     path?: boolean | number
     /** Published */
@@ -1922,6 +1926,8 @@ export interface TermTagsGenqlSelection{
     langcode?: LanguageGenqlSelection
     /** Name */
     name?: boolean | number
+    /** The parents of this term. */
+    parent?: TermUnionGenqlSelection
     /** URL alias */
     path?: boolean | number
     /** Published */

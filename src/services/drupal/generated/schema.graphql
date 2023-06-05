@@ -821,10 +821,8 @@ type Query {
 
   """Load a Route by path."""
   route(
-    """
-    Optionally filter the route by language. Eg en, ja, fr. Defaults to site default language.
-    """
-    langcode: String = "en"
+    """Optionally filter the route by language. Eg en, ja, fr."""
+    langcode: String
 
     """Internal path to load. Eg /about"""
     path: String!
@@ -946,6 +944,9 @@ interface TermInterface {
   """Name"""
   name: String!
 
+  """The parents of this term."""
+  parent: TermUnion
+
   """URL alias"""
   path: String
 
@@ -969,6 +970,9 @@ type TermTags implements Node & TermInterface {
 
   """Name"""
   name: String!
+
+  """The parents of this term."""
+  parent: TermUnion
 
   """URL alias"""
   path: String!
