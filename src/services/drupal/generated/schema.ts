@@ -740,7 +740,7 @@ export interface SchemaInformation {
     description: Scalars['String']
     /** Path to the homepage. */
     home?: (Scalars['String'] | null)
-    /** Schema module version. */
+    /** Schema version. */
     version: Scalars['String']
     __typename: 'SchemaInformation'
 }
@@ -1867,7 +1867,7 @@ export interface SchemaInformationGenqlSelection{
     description?: boolean | number
     /** Path to the homepage. */
     home?: boolean | number
-    /** Schema module version. */
+    /** Schema version. */
     version?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number

@@ -901,7 +901,7 @@ type SchemaInformation {
   """Path to the homepage."""
   home: String
 
-  """Schema module version."""
+  """Schema version."""
   version: String!
 }
 
