@@ -135,7 +135,7 @@ export const ParagraphAccordionFragment: ParagraphAccordionGenqlSelection = {
 export const ParagraphBlockFragment: ParagraphBlockGenqlSelection = {
   block: {
     __typename: true,
-    on_Block: {
+    on_BlockInterface: {
       id: true,
       title: true
     },
