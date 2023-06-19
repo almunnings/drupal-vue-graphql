@@ -78,29 +78,9 @@ export default {
             ]
         },
         "Attributes": {},
-        "Block": {
-            "id": [
-                24
-            ],
-            "render": [
-                23
-            ],
-            "title": [
-                84
-            ],
-            "on_BlockContent": [
-                4
-            ],
-            "on_BlockPlugin": [
-                9
-            ],
-            "__typename": [
-                84
-            ]
-        },
         "BlockContent": {
             "entity": [
-                8
+                7
             ],
             "id": [
                 24
@@ -178,10 +158,10 @@ export default {
                 84
             ],
             "on_BlockContentAnotherType": [
-                5
+                4
             ],
             "on_BlockContentBasicBlock": [
-                6
+                5
             ],
             "__typename": [
                 84
@@ -189,13 +169,33 @@ export default {
         },
         "BlockContentUnion": {
             "on_BlockContentAnotherType": [
-                5
+                4
             ],
             "on_BlockContentBasicBlock": [
-                6
+                5
             ],
             "on_BlockContentInterface": [
-                7
+                6
+            ],
+            "__typename": [
+                84
+            ]
+        },
+        "BlockInterface": {
+            "id": [
+                24
+            ],
+            "render": [
+                23
+            ],
+            "title": [
+                84
+            ],
+            "on_BlockContent": [
+                3
+            ],
+            "on_BlockPlugin": [
+                9
             ],
             "__typename": [
                 84
@@ -217,13 +217,13 @@ export default {
         },
         "BlockUnion": {
             "on_BlockContent": [
-                4
+                3
             ],
             "on_BlockPlugin": [
                 9
             ],
-            "on_Block": [
-                3
+            "on_BlockInterface": [
+                8
             ],
             "__typename": [
                 84
@@ -1229,9 +1229,9 @@ export default {
             "block": [
                 10,
                 {
-                    "block_plugin_id": [
-                        84,
-                        "String!"
+                    "id": [
+                        24,
+                        "ID!"
                     ]
                 }
             ],

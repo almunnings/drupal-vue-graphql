@@ -49,11 +49,7 @@ export interface AddressCountry {
 }
 
 
-/** Block field information. */
-export type Block = (BlockContent | BlockPlugin) & { __isUnion?: true }
-
-
-/** Block field information. */
+/** Block content is a modular piece of content that can be displayed in various regions of a website's layout. */
 export interface BlockContent {
     entity: (BlockContentUnion | null)
     id: Scalars['ID']
@@ -105,7 +101,11 @@ export type BlockContentInterface = (BlockContentAnotherType | BlockContentBasic
 export type BlockContentUnion = (BlockContentAnotherType | BlockContentBasicBlock) & { __isUnion?: true }
 
 
-/** Block field information. */
+/** Blocks are a modular piece of content that can be displayed in various regions of a website's layout. */
+export type BlockInterface = (BlockContent | BlockPlugin) & { __isUnion?: true }
+
+
+/** Block plugin is a modular piece of content that can be displayed in various regions of a website's layout. */
 export interface BlockPlugin {
     id: Scalars['ID']
     render: (Scalars['Html'] | null)
@@ -927,19 +927,7 @@ export interface AddressCountryGenqlSelection{
 }
 
 
-/** Block field information. */
-export interface BlockGenqlSelection{
-    id?: boolean | number
-    render?: boolean | number
-    title?: boolean | number
-    on_BlockContent?: BlockContentGenqlSelection
-    on_BlockPlugin?: BlockPluginGenqlSelection
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Block field information. */
+/** Block content is a modular piece of content that can be displayed in various regions of a website's layout. */
 export interface BlockContentGenqlSelection{
     entity?: BlockContentUnionGenqlSelection
     id?: boolean | number
@@ -1014,7 +1002,19 @@ export interface BlockContentUnionGenqlSelection{
 }
 
 
-/** Block field information. */
+/** Blocks are a modular piece of content that can be displayed in various regions of a website's layout. */
+export interface BlockInterfaceGenqlSelection{
+    id?: boolean | number
+    render?: boolean | number
+    title?: boolean | number
+    on_BlockContent?: BlockContentGenqlSelection
+    on_BlockPlugin?: BlockPluginGenqlSelection
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Block plugin is a modular piece of content that can be displayed in various regions of a website's layout. */
 export interface BlockPluginGenqlSelection{
     id?: boolean | number
     render?: boolean | number
@@ -1028,7 +1028,7 @@ export interface BlockPluginGenqlSelection{
 export interface BlockUnionGenqlSelection{
     on_BlockContent?:BlockContentGenqlSelection,
     on_BlockPlugin?:BlockPluginGenqlSelection,
-    on_Block?: BlockGenqlSelection,
+    on_BlockInterface?: BlockInterfaceGenqlSelection,
     __typename?: boolean | number
 }
 
@@ -1746,7 +1746,7 @@ export interface QueryGenqlSelection{
     /** Load a Block plugin. */
     block?: (BlockUnionGenqlSelection & { __args: {
     /** Block plugin ID. Eg page_title_block, block_content:uuid */
-    block_plugin_id: Scalars['String']} })
+    id: Scalars['ID']} })
     /** Schema information. */
     info?: SchemaInformationGenqlSelection
     /** Load a Route by path. */
@@ -2075,14 +2075,6 @@ export interface ViewResultUnionGenqlSelection{
     
 
 
-    const Block_possibleTypes: string[] = ['BlockContent','BlockPlugin']
-    export const isBlock = (obj?: { __typename?: any } | null): obj is Block => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isBlock"')
-      return Block_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
     const BlockContent_possibleTypes: string[] = ['BlockContent']
     export const isBlockContent = (obj?: { __typename?: any } | null): obj is BlockContent => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isBlockContent"')
@@ -2119,6 +2111,14 @@ export interface ViewResultUnionGenqlSelection{
     export const isBlockContentUnion = (obj?: { __typename?: any } | null): obj is BlockContentUnion => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isBlockContentUnion"')
       return BlockContentUnion_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const BlockInterface_possibleTypes: string[] = ['BlockContent','BlockPlugin']
+    export const isBlockInterface = (obj?: { __typename?: any } | null): obj is BlockInterface => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isBlockInterface"')
+      return BlockInterface_possibleTypes.includes(obj.__typename)
     }
     
 

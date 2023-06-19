@@ -24,15 +24,10 @@ type AddressCountry {
 """Untyped attribute data. Eg configuration, settings."""
 scalar Attributes
 
-"""Block field information."""
-interface Block {
-  id: ID!
-  render: Html
-  title: String
-}
-
-"""Block field information."""
-type BlockContent implements Block {
+"""
+Block content is a modular piece of content that can be displayed in various regions of a website's layout.
+"""
+type BlockContent implements BlockInterface {
   entity: BlockContentUnion
   id: ID!
   render: Html
@@ -101,8 +96,19 @@ interface BlockContentInterface {
 
 union BlockContentUnion = BlockContentAnotherType | BlockContentBasicBlock
 
-"""Block field information."""
-type BlockPlugin implements Block {
+"""
+Blocks are a modular piece of content that can be displayed in various regions of a website's layout.
+"""
+interface BlockInterface {
+  id: ID!
+  render: Html
+  title: String
+}
+
+"""
+Block plugin is a modular piece of content that can be displayed in various regions of a website's layout.
+"""
+type BlockPlugin implements BlockInterface {
   id: ID!
   render: Html
   title: String
@@ -812,7 +818,7 @@ type Query {
   """Load a Block plugin."""
   block(
     """Block plugin ID. Eg page_title_block, block_content:uuid"""
-    block_plugin_id: String!
+    id: ID!
   ): BlockUnion
 
   """Schema information."""
