@@ -19,33 +19,32 @@ export type Scalars = {
     Timestamp: any,
     UserRoles: any,
     UtcOffset: any,
-    Violation: any,
 }
 
 
 /** Complex address data. */
 export interface Address {
-    additionalName?: (Scalars['String'] | null)
-    addressLine1?: (Scalars['String'] | null)
-    addressLine2?: (Scalars['String'] | null)
-    administrativeArea?: (Scalars['String'] | null)
-    country?: (AddressCountry | null)
-    dependentLocality?: (Scalars['String'] | null)
-    familyName?: (Scalars['String'] | null)
-    givenName?: (Scalars['String'] | null)
-    langcode?: (Scalars['String'] | null)
-    locality?: (Scalars['String'] | null)
-    organization?: (Scalars['String'] | null)
-    postalCode?: (Scalars['String'] | null)
-    sortingCode?: (Scalars['String'] | null)
+    additionalName: (Scalars['String'] | null)
+    addressLine1: (Scalars['String'] | null)
+    addressLine2: (Scalars['String'] | null)
+    administrativeArea: (Scalars['String'] | null)
+    country: (AddressCountry | null)
+    dependentLocality: (Scalars['String'] | null)
+    familyName: (Scalars['String'] | null)
+    givenName: (Scalars['String'] | null)
+    langcode: (Scalars['String'] | null)
+    locality: (Scalars['String'] | null)
+    organization: (Scalars['String'] | null)
+    postalCode: (Scalars['String'] | null)
+    sortingCode: (Scalars['String'] | null)
     __typename: 'Address'
 }
 
 
 /** Address country. */
 export interface AddressCountry {
-    code?: (Scalars['String'] | null)
-    name?: (Scalars['String'] | null)
+    code: (Scalars['String'] | null)
+    name: (Scalars['String'] | null)
     __typename: 'AddressCountry'
 }
 
@@ -56,10 +55,10 @@ export type Block = (BlockContent | BlockPlugin) & { __isUnion?: true }
 
 /** Block field information. */
 export interface BlockContent {
-    entity?: (BlockContentUnion | null)
+    entity: (BlockContentUnion | null)
     id: Scalars['ID']
-    render?: (Scalars['Html'] | null)
-    title?: (Scalars['String'] | null)
+    render: (Scalars['Html'] | null)
+    title: (Scalars['String'] | null)
     __typename: 'BlockContent'
 }
 
@@ -67,10 +66,10 @@ export interface BlockContent {
 /** Another example block type for testing of Unions in GraphQL. */
 export interface BlockContentAnotherType {
     /** Body */
-    body?: (TextSummary | null)
+    body: (TextSummary | null)
     /** The time that the content block was last edited. */
     changed: DateTime
-    /** The content block UUID. */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** The content block language code. */
     langcode: Language
@@ -85,10 +84,10 @@ export interface BlockContentAnotherType {
 /** A basic block with a title and content. */
 export interface BlockContentBasicBlock {
     /** Body */
-    body?: (TextSummary | null)
+    body: (TextSummary | null)
     /** The time that the content block was last edited. */
     changed: DateTime
-    /** The content block UUID. */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** The content block language code. */
     langcode: Language
@@ -109,8 +108,8 @@ export type BlockContentUnion = (BlockContentAnotherType | BlockContentBasicBloc
 /** Block field information. */
 export interface BlockPlugin {
     id: Scalars['ID']
-    render?: (Scalars['Html'] | null)
-    title?: (Scalars['String'] | null)
+    render: (Scalars['Html'] | null)
+    title: (Scalars['String'] | null)
     __typename: 'BlockPlugin'
 }
 
@@ -124,7 +123,7 @@ export interface Connection {
     /** The edges of this connection. */
     edges: Edge[]
     /** The nodes of the edges of this connection. */
-    nodes: Node[]
+    nodes: EdgeNode[]
     /** Information to aid in pagination. */
     pageInfo: ConnectionPageInfo
     __typename: string
@@ -134,13 +133,13 @@ export interface Connection {
 /** Information about the page in a connection. */
 export interface ConnectionPageInfo {
     /** The cursor for the last element in this page. */
-    endCursor?: (Scalars['Cursor'] | null)
+    endCursor: (Scalars['Cursor'] | null)
     /** Whether there are more pages in this connection. */
     hasNextPage: Scalars['Boolean']
     /** Whether there are previous pages in this connection. */
     hasPreviousPage: Scalars['Boolean']
     /** The cursor for the first element in this page. */
-    startCursor?: (Scalars['Cursor'] | null)
+    startCursor: (Scalars['Cursor'] | null)
     __typename: 'ConnectionPageInfo'
 }
 
@@ -151,8 +150,8 @@ export type ConnectionSortKeys = 'CREATED_AT' | 'PROMOTED' | 'STICKY' | 'TITLE' 
 
 /** A Date range has a start and an end. */
 export interface DateRange {
-    end?: (DateTime | null)
-    start?: (DateTime | null)
+    end: (DateTime | null)
+    start: (DateTime | null)
     __typename: 'DateRange'
 }
 
@@ -175,16 +174,23 @@ export interface DateTime {
  */
 export interface Edge {
     cursor: Scalars['Cursor']
-    node: Node
+    node: EdgeNode
+    __typename: string
+}
+
+
+/** This entity is accessible over an Edge connection. */
+export interface EdgeNode {
+    id: Scalars['ID']
     __typename: string
 }
 
 
 /** A file object to represent an managed file. */
 export interface File {
-    description?: (Scalars['String'] | null)
-    mime?: (Scalars['String'] | null)
-    name?: (Scalars['String'] | null)
+    description: (Scalars['String'] | null)
+    mime: (Scalars['String'] | null)
+    name: (Scalars['String'] | null)
     size: Scalars['Int']
     url: Scalars['String']
     __typename: 'File'
@@ -193,13 +199,13 @@ export interface File {
 
 /** A image object to represent an managed file. */
 export interface Image {
-    alt?: (Scalars['String'] | null)
+    alt: (Scalars['String'] | null)
     height: Scalars['Int']
-    mime?: (Scalars['String'] | null)
-    title?: (Scalars['String'] | null)
+    mime: (Scalars['String'] | null)
+    title: (Scalars['String'] | null)
     url: Scalars['String']
     /** Image variations control different sizes and formats for images. */
-    variations?: (ImageStyleDerivative[] | null)
+    variations: (ImageStyleDerivative[] | null)
     width: Scalars['Int']
     __typename: 'Image'
 }
@@ -207,8 +213,9 @@ export interface Image {
 
 /** Entity type image_style. */
 export interface ImageStyle {
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
-    name?: (Scalars['String'] | null)
+    name: Scalars['String']
     __typename: 'ImageStyle'
 }
 
@@ -226,14 +233,18 @@ export interface ImageStyleDerivative {
     __typename: 'ImageStyleDerivative'
 }
 
+
+/** Entity type image_style. */
+export type ImageStyleInterface = (ImageStyle) & { __isUnion?: true }
+
 export type ImageStyleUnion = (ImageStyle) & { __isUnion?: true }
 
 
 /** A language definition provided by the CMS. */
 export interface Language {
-    direction?: (Scalars['String'] | null)
-    id?: (Scalars['ID'] | null)
-    name?: (Scalars['String'] | null)
+    direction: (Scalars['String'] | null)
+    id: (Scalars['ID'] | null)
+    name: (Scalars['String'] | null)
     __typename: 'Language'
 }
 
@@ -256,8 +267,8 @@ export interface Layout {
 
 /** If this component has been designed by a User extra information will be available here. */
 export interface LayoutParagraphs {
-    layout?: (Layout | null)
-    position?: (LayoutParagraphsPosition | null)
+    layout: (Layout | null)
+    position: (LayoutParagraphsPosition | null)
     __typename: 'LayoutParagraphs'
 }
 
@@ -268,27 +279,17 @@ export type LayoutParagraphsInterface = (ParagraphAccordion | ParagraphBlock | P
 
 /** This component positionally belongs to another component's layout. */
 export interface LayoutParagraphsPosition {
-    /** Parent component this component belongs to. */
-    parentId?: (Scalars['ID'] | null)
+    /** The UUID of the component this component belongs to. */
+    parentId: (Scalars['ID'] | null)
     /** There this component is suggested to live within the parent component's regions. */
-    region?: (Scalars['String'] | null)
+    region: (Scalars['String'] | null)
     __typename: 'LayoutParagraphsPosition'
-}
-
-
-/** This component positionally belongs to another component's layout. */
-export interface LayoutPosition {
-    /** Parent component this component belongs to. */
-    parentId?: (Scalars['ID'] | null)
-    /** There this component is suggested to live within the parent component's regions. */
-    region?: (Scalars['String'] | null)
-    __typename: 'LayoutPosition'
 }
 
 export interface Link {
     internal: Scalars['Boolean']
-    title?: (Scalars['String'] | null)
-    url?: (Scalars['String'] | null)
+    title: (Scalars['String'] | null)
+    url: (Scalars['String'] | null)
     __typename: 'Link'
 }
 
@@ -301,7 +302,7 @@ export interface MediaAudio {
     changed: DateTime
     /** The time the media item was created. */
     created: DateTime
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** Name */
     name: Scalars['String']
@@ -319,7 +320,7 @@ export interface MediaDocument {
     created: DateTime
     /** Document */
     document: File
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** Name */
     name: Scalars['String']
@@ -335,7 +336,7 @@ export interface MediaImage {
     changed: DateTime
     /** The time the media item was created. */
     created: DateTime
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** Image */
     image: Image
@@ -357,7 +358,7 @@ export interface MediaRemoteVideo {
     changed: DateTime
     /** The time the media item was created. */
     created: DateTime
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** Name */
     name: Scalars['String']
@@ -377,7 +378,7 @@ export interface MediaVideo {
     changed: DateTime
     /** The time the media item was created. */
     created: DateTime
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** Name */
     name: Scalars['String']
@@ -391,6 +392,8 @@ export interface MediaVideo {
 
 /** Entity type menu. */
 export interface Menu {
+    /** The Universally Unique IDentifier (UUID). */
+    id: Scalars['ID']
     items: MenuItem[]
     name: Scalars['String']
     __typename: 'Menu'
@@ -401,22 +404,26 @@ export interface Menu {
 export type MenuAvailable = 'FOOTER' | 'MAIN'
 
 
+/** Entity type menu. */
+export type MenuInterface = (Menu) & { __isUnion?: true }
+
+
 /** A menu item defined in the CMS. */
 export interface MenuItem {
     /** Attributes of this menu item. */
     attributes: MenuItemAttributes
     /** Child menu items of this menu item. */
     children: MenuItem[]
-    description?: (Scalars['String'] | null)
+    description: (Scalars['String'] | null)
     /** Whether this menu item is intended to be expanded. */
     expanded: Scalars['Boolean']
     id: Scalars['ID']
     /** Whether this menu item links to an internal route. */
     internal: Scalars['Boolean']
     /** The route this menu item uses. Route loading can be disabled per menu type. */
-    route?: (RouteUnion | null)
+    route: (RouteUnion | null)
     title: Scalars['String']
-    url?: (Scalars['String'] | null)
+    url: (Scalars['String'] | null)
     __typename: 'MenuItem'
 }
 
@@ -424,11 +431,11 @@ export interface MenuItem {
 /** Menu item options set within the CMS. */
 export interface MenuItemAttributes {
     /** Menu item attribute class. */
-    class?: (Scalars['String'] | null)
+    class: (Scalars['String'] | null)
     /** Menu item attribute id. */
-    id?: (Scalars['String'] | null)
+    id: (Scalars['String'] | null)
     /** Menu item attribute target. */
-    target?: (Scalars['String'] | null)
+    target: (Scalars['String'] | null)
     __typename: 'MenuItemAttributes'
 }
 
@@ -445,8 +452,8 @@ export interface MetaTagLink {
 }
 
 export interface MetaTagLinkAttributes {
-    href?: (Scalars['String'] | null)
-    rel?: (Scalars['String'] | null)
+    href: (Scalars['String'] | null)
+    rel: (Scalars['String'] | null)
     __typename: 'MetaTagLinkAttributes'
 }
 
@@ -457,8 +464,8 @@ export interface MetaTagProperty {
 }
 
 export interface MetaTagPropertyAttributes {
-    content?: (Scalars['String'] | null)
-    property?: (Scalars['String'] | null)
+    content: (Scalars['String'] | null)
+    property: (Scalars['String'] | null)
     __typename: 'MetaTagPropertyAttributes'
 }
 
@@ -471,22 +478,18 @@ export interface MetaTagValue {
 }
 
 export interface MetaTagValueAttributes {
-    content?: (Scalars['String'] | null)
-    name?: (Scalars['String'] | null)
+    content: (Scalars['String'] | null)
+    name: (Scalars['String'] | null)
     __typename: 'MetaTagValueAttributes'
 }
 
 
 /** A GraphQL mutation is a request that changes data on the server. */
 export interface Mutation {
-    /** Dummy value to enable mutation extension. */
-    _?: (Scalars['Boolean'] | null)
+    /** Placeholder field to enable schema mutation extension. */
+    _: Scalars['Boolean']
     __typename: 'Mutation'
 }
-
-
-/** A concrete fetchable type that is addressable by an id. Not to be confused with a Drupal node. */
-export type Node = (BlockContent | BlockContentAnotherType | BlockContentBasicBlock | BlockPlugin | Layout | MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo | NodePage | ParagraphAccordion | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText | TermTags | User) & { __isUnion?: true }
 
 
 /** Entity type node. */
@@ -500,10 +503,10 @@ export interface NodePage {
     /** The time that the node was last edited. */
     changed: DateTime
     /** Content */
-    content?: (ParagraphUnion[] | null)
+    content: (ParagraphUnion[] | null)
     /** The time that the node was created. */
     created: DateTime
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** Language */
     langcode: Language
@@ -533,7 +536,7 @@ export interface ParagraphAccordion {
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** Content */
     items: ParagraphUnion[]
@@ -544,12 +547,12 @@ export interface ParagraphAccordion {
 /** Choose a block to display. Edit this fields settings to allow different blocks. */
 export interface ParagraphBlock {
     /** Block */
-    block?: (BlockUnion | null)
+    block: (BlockUnion | null)
     /** Layout metadata for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     __typename: 'ParagraphBlock'
 }
@@ -561,14 +564,14 @@ export interface ParagraphCallToAction {
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** Link */
-    link?: (Link | null)
+    link: (Link | null)
     /** Text */
-    text?: (Text | null)
+    text: (Text | null)
     /** Title */
-    title?: (Scalars['String'] | null)
+    title: (Scalars['String'] | null)
     __typename: 'ParagraphCallToAction'
 }
 
@@ -584,13 +587,13 @@ export interface ParagraphMedia {
     /** The time that the Paragraph was created. */
     created: DateTime
     /** Description */
-    description?: (Text | null)
-    /** UUID */
+    description: (Text | null)
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** Media */
     media: MediaUnion
     /** Title */
-    title?: (Scalars['String'] | null)
+    title: (Scalars['String'] | null)
     __typename: 'ParagraphMedia'
 }
 
@@ -598,15 +601,15 @@ export interface ParagraphMedia {
 /** Add a quote. Add citation and citation link */
 export interface ParagraphQuote {
     /** Give credit for the quote. */
-    citation?: (Scalars['String'] | null)
+    citation: (Scalars['String'] | null)
     /** Layout metadata for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** Enter an optional link for the citation. */
-    link?: (Link | null)
+    link: (Link | null)
     /** Quote */
     quote: Text
     __typename: 'ParagraphQuote'
@@ -619,7 +622,7 @@ export interface ParagraphSection {
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     __typename: 'ParagraphSection'
 }
@@ -631,12 +634,12 @@ export interface ParagraphTable {
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** Table */
     table: Table
     /** Add a title to your block */
-    title?: (Scalars['String'] | null)
+    title: (Scalars['String'] | null)
     __typename: 'ParagraphTable'
 }
 
@@ -647,7 +650,7 @@ export interface ParagraphText {
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** Text */
     text: Text
@@ -664,23 +667,16 @@ export type ParagraphUnion = (ParagraphAccordion | ParagraphBlock | ParagraphCal
  */
 export interface Query {
     /** Load a Block plugin. */
-    block?: (BlockUnion | null)
-    /** Schema generator version. */
+    block: (BlockUnion | null)
+    /** Schema information. */
     info: SchemaInformation
     /** Load a Route by path. */
-    menu?: (Menu | null)
+    menu: (Menu | null)
     /** Load a Route by path. */
-    route?: (RouteUnion | null)
+    route: (RouteUnion | null)
     /** Get information about the currently authenticated user. NULL if not logged in. */
-    viewer?: (User | null)
+    viewer: (User | null)
     __typename: 'Query'
-}
-
-
-/** The base GraphQL Response class. */
-export interface Response {
-    errors?: ((Scalars['Violation'] | null)[] | null)
-    __typename: string
 }
 
 
@@ -705,9 +701,9 @@ export interface RouteExternal {
 /** Route within this website. */
 export interface RouteInternal {
     /** Breadcrumb links for this route. */
-    breadcrumbs?: (Link[] | null)
+    breadcrumbs: (Link[] | null)
     /** Content assigned to this route. */
-    entity?: (RouteEntityUnion | null)
+    entity: (RouteEntityUnion | null)
     /** Whether this route is internal or external. */
     internal: Scalars['Boolean']
     /** URL of this route. */
@@ -734,14 +730,14 @@ export interface RouteRedirect {
 export type RouteUnion = (RouteExternal | RouteInternal | RouteRedirect) & { __isUnion?: true }
 
 
-/** Schema generator version. */
+/** Schema information provided by the system. */
 export interface SchemaInformation {
-    /** Schema description. */
-    description: Scalars['String']
-    /** Path to the homepage. */
-    home?: (Scalars['String'] | null)
-    /** Schema version. */
-    version: Scalars['String']
+    /** The schema description. */
+    description: (Scalars['String'] | null)
+    /** The internal path to the front page. */
+    home: (Scalars['String'] | null)
+    /** The schema version. */
+    version: (Scalars['String'] | null)
     __typename: 'SchemaInformation'
 }
 
@@ -750,16 +746,16 @@ export interface SchemaInformation {
 export type SortDirection = 'ASC' | 'DESC'
 
 export interface Table {
-    caption?: (Scalars['String'] | null)
+    caption: (Scalars['String'] | null)
     /** A text format associated with the row data. */
-    format?: (Scalars['String'] | null)
-    rows?: ((TableRow | null)[] | null)
+    format: (Scalars['String'] | null)
+    rows: ((TableRow | null)[] | null)
     __typename: 'Table'
 }
 
 export interface TableRow {
-    data?: ((Scalars['String'] | null)[] | null)
-    weight?: (Scalars['Int'] | null)
+    data: ((Scalars['String'] | null)[] | null)
+    weight: (Scalars['Int'] | null)
     __typename: 'TableRow'
 }
 
@@ -774,14 +770,14 @@ export interface TermTags {
     changed: DateTime
     /** Description */
     description: Text
-    /** The term UUID. */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** The term language code. */
     langcode: Language
     /** Name */
     name: Scalars['String']
     /** The parents of this term. */
-    parent?: (TermUnion | null)
+    parent: (TermUnion | null)
     /** URL alias */
     path: Scalars['String']
     /** Published */
@@ -794,19 +790,19 @@ export type TermUnion = (TermTags) & { __isUnion?: true }
 
 /** A processed text format defined by the CMS. */
 export interface Text {
-    format?: (Scalars['String'] | null)
-    processed?: (Scalars['Html'] | null)
-    value?: (Scalars['String'] | null)
+    format: (Scalars['String'] | null)
+    processed: (Scalars['Html'] | null)
+    value: (Scalars['String'] | null)
     __typename: 'Text'
 }
 
 
 /** A processed text format with summary defined by the CMS. */
 export interface TextSummary {
-    format?: (Scalars['String'] | null)
-    processed?: (Scalars['Html'] | null)
-    summary?: (Scalars['Html'] | null)
-    value?: (Scalars['String'] | null)
+    format: (Scalars['String'] | null)
+    processed: (Scalars['Html'] | null)
+    summary: (Scalars['Html'] | null)
+    value: (Scalars['String'] | null)
     __typename: 'TextSummary'
 }
 
@@ -817,7 +813,7 @@ export interface TextSummary {
  */
 export interface UnsupportedType {
     /** Unsupported type, always TRUE. */
-    unsupported?: (Scalars['Boolean'] | null)
+    unsupported: (Scalars['Boolean'] | null)
     __typename: 'UnsupportedType'
 }
 
@@ -828,14 +824,14 @@ export interface User {
     changed: DateTime
     /** The time that the user was created. */
     created: DateTime
-    /** The user UUID. */
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** The email of this user. */
-    mail?: (Scalars['Email'] | null)
+    mail: (Scalars['Email'] | null)
     /** The name of this user. */
     name: Scalars['String']
     /** The roles the user has. */
-    roles?: (Scalars['UserRoles'][] | null)
+    roles: (Scalars['UserRoles'][] | null)
     /** Whether the user is active or blocked. */
     status: UserStatus
     __typename: 'User'
@@ -855,15 +851,15 @@ export type UserUnion = (User) & { __isUnion?: true }
 /** Views represent collections of curated data from the site. */
 export interface View {
     /** The description of the view. */
-    description?: (Scalars['String'] | null)
+    description: (Scalars['String'] | null)
     /** The machine name of the display. */
     display: Scalars['String']
     /** The ID of the view. */
     id: Scalars['ID']
     /** The human friendly label of the view. */
-    label?: (Scalars['String'] | null)
+    label: (Scalars['String'] | null)
     /** The language code of the view. */
-    langcode?: (Scalars['String'] | null)
+    langcode: (Scalars['String'] | null)
     /** Information about the page in the view. */
     pageInfo: ViewPageInfo
     /** The machine name of the view. */
@@ -888,11 +884,11 @@ export interface ViewPageInfo {
 
 /** A reference to an embedded view */
 export interface ViewReference {
-    contextualFilter?: (Scalars['String'][] | null)
+    contextualFilter: (Scalars['String'][] | null)
     display: Scalars['String']
-    pageSize?: (Scalars['Int'] | null)
+    pageSize: (Scalars['Int'] | null)
     /** The name of the query used to fetch the data, if the view is a GraphQL display. */
-    query?: (Scalars['String'] | null)
+    query: (Scalars['String'] | null)
     view: Scalars['String']
     __typename: 'ViewReference'
 }
@@ -960,7 +956,7 @@ export interface BlockContentAnotherTypeGenqlSelection{
     body?: TextSummaryGenqlSelection
     /** The time that the content block was last edited. */
     changed?: DateTimeGenqlSelection
-    /** The content block UUID. */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** The content block language code. */
     langcode?: LanguageGenqlSelection
@@ -979,7 +975,7 @@ export interface BlockContentBasicBlockGenqlSelection{
     body?: TextSummaryGenqlSelection
     /** The time that the content block was last edited. */
     changed?: DateTimeGenqlSelection
-    /** The content block UUID. */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** The content block language code. */
     langcode?: LanguageGenqlSelection
@@ -996,7 +992,7 @@ export interface BlockContentBasicBlockGenqlSelection{
 export interface BlockContentInterfaceGenqlSelection{
     /** The time that the content block was last edited. */
     changed?: DateTimeGenqlSelection
-    /** The content block UUID. */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** The content block language code. */
     langcode?: LanguageGenqlSelection
@@ -1014,7 +1010,6 @@ export interface BlockContentUnionGenqlSelection{
     on_BlockContentAnotherType?:BlockContentAnotherTypeGenqlSelection,
     on_BlockContentBasicBlock?:BlockContentBasicBlockGenqlSelection,
     on_BlockContentInterface?: BlockContentInterfaceGenqlSelection,
-    on_Node?: NodeGenqlSelection,
     __typename?: boolean | number
 }
 
@@ -1034,7 +1029,6 @@ export interface BlockUnionGenqlSelection{
     on_BlockContent?:BlockContentGenqlSelection,
     on_BlockPlugin?:BlockPluginGenqlSelection,
     on_Block?: BlockGenqlSelection,
-    on_Node?: NodeGenqlSelection,
     __typename?: boolean | number
 }
 
@@ -1044,7 +1038,7 @@ export interface ConnectionGenqlSelection{
     /** The edges of this connection. */
     edges?: EdgeGenqlSelection
     /** The nodes of the edges of this connection. */
-    nodes?: NodeGenqlSelection
+    nodes?: EdgeNodeGenqlSelection
     /** Information to aid in pagination. */
     pageInfo?: ConnectionPageInfoGenqlSelection
     __typename?: boolean | number
@@ -1095,7 +1089,15 @@ export interface DateTimeGenqlSelection{
  */
 export interface EdgeGenqlSelection{
     cursor?: boolean | number
-    node?: NodeGenqlSelection
+    node?: EdgeNodeGenqlSelection
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** This entity is accessible over an Edge connection. */
+export interface EdgeNodeGenqlSelection{
+    id?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1130,6 +1132,7 @@ export interface ImageGenqlSelection{
 
 /** Entity type image_style. */
 export interface ImageStyleGenqlSelection{
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     name?: boolean | number
     __typename?: boolean | number
@@ -1147,14 +1150,26 @@ export interface ImageStyleDerivativeGenqlSelection{
     __scalar?: boolean | number
 }
 
+
+/** Entity type image_style. */
+export interface ImageStyleInterfaceGenqlSelection{
+    /** The Universally Unique IDentifier (UUID). */
+    id?: boolean | number
+    name?: boolean | number
+    on_ImageStyle?: ImageStyleGenqlSelection
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
 export interface ImageStyleUnionGenqlSelection{
     on_ImageStyle?:ImageStyleGenqlSelection,
+    on_ImageStyleInterface?: ImageStyleInterfaceGenqlSelection,
     __typename?: boolean | number
 }
 
 
 /** Generic untyped input for key-value pairs. */
-export interface KeyValueInput {key: Scalars['String'],value?: (Scalars['String'] | null)}
+export interface KeyValueInput {key?: Scalars['String'],value?: (Scalars['String'] | null)}
 
 
 /** A language definition provided by the CMS. */
@@ -1211,18 +1226,7 @@ export interface LayoutParagraphsInterfaceGenqlSelection{
 
 /** This component positionally belongs to another component's layout. */
 export interface LayoutParagraphsPositionGenqlSelection{
-    /** Parent component this component belongs to. */
-    parentId?: boolean | number
-    /** There this component is suggested to live within the parent component's regions. */
-    region?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** This component positionally belongs to another component's layout. */
-export interface LayoutPositionGenqlSelection{
-    /** Parent component this component belongs to. */
+    /** The UUID of the component this component belongs to. */
     parentId?: boolean | number
     /** There this component is suggested to live within the parent component's regions. */
     region?: boolean | number
@@ -1247,7 +1251,7 @@ export interface MediaAudioGenqlSelection{
     changed?: DateTimeGenqlSelection
     /** The time the media item was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Name */
     name?: boolean | number
@@ -1266,7 +1270,7 @@ export interface MediaDocumentGenqlSelection{
     created?: DateTimeGenqlSelection
     /** Document */
     document?: FileGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Name */
     name?: boolean | number
@@ -1283,7 +1287,7 @@ export interface MediaImageGenqlSelection{
     changed?: DateTimeGenqlSelection
     /** The time the media item was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Image */
     image?: ImageGenqlSelection
@@ -1302,7 +1306,7 @@ export interface MediaInterfaceGenqlSelection{
     changed?: DateTimeGenqlSelection
     /** The time the media item was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Name */
     name?: boolean | number
@@ -1324,7 +1328,7 @@ export interface MediaRemoteVideoGenqlSelection{
     changed?: DateTimeGenqlSelection
     /** The time the media item was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Name */
     name?: boolean | number
@@ -1343,7 +1347,6 @@ export interface MediaUnionGenqlSelection{
     on_MediaRemoteVideo?:MediaRemoteVideoGenqlSelection,
     on_MediaVideo?:MediaVideoGenqlSelection,
     on_MediaInterface?: MediaInterfaceGenqlSelection,
-    on_Node?: NodeGenqlSelection,
     __typename?: boolean | number
 }
 
@@ -1354,7 +1357,7 @@ export interface MediaVideoGenqlSelection{
     changed?: DateTimeGenqlSelection
     /** The time the media item was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Name */
     name?: boolean | number
@@ -1369,8 +1372,22 @@ export interface MediaVideoGenqlSelection{
 
 /** Entity type menu. */
 export interface MenuGenqlSelection{
+    /** The Universally Unique IDentifier (UUID). */
+    id?: boolean | number
     items?: MenuItemGenqlSelection
     name?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Entity type menu. */
+export interface MenuInterfaceGenqlSelection{
+    /** The Universally Unique IDentifier (UUID). */
+    id?: boolean | number
+    items?: MenuItemGenqlSelection
+    name?: boolean | number
+    on_Menu?: MenuGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1411,6 +1428,7 @@ export interface MenuItemAttributesGenqlSelection{
 
 export interface MenuUnionGenqlSelection{
     on_Menu?:MenuGenqlSelection,
+    on_MenuInterface?: MenuInterfaceGenqlSelection,
     __typename?: boolean | number
 }
 
@@ -1478,37 +1496,8 @@ export interface MetaTagValueAttributesGenqlSelection{
 
 /** A GraphQL mutation is a request that changes data on the server. */
 export interface MutationGenqlSelection{
-    /** Dummy value to enable mutation extension. */
+    /** Placeholder field to enable schema mutation extension. */
     _?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** A concrete fetchable type that is addressable by an id. Not to be confused with a Drupal node. */
-export interface NodeGenqlSelection{
-    id?: boolean | number
-    on_BlockContent?: BlockContentGenqlSelection
-    on_BlockContentAnotherType?: BlockContentAnotherTypeGenqlSelection
-    on_BlockContentBasicBlock?: BlockContentBasicBlockGenqlSelection
-    on_BlockPlugin?: BlockPluginGenqlSelection
-    on_Layout?: LayoutGenqlSelection
-    on_MediaAudio?: MediaAudioGenqlSelection
-    on_MediaDocument?: MediaDocumentGenqlSelection
-    on_MediaImage?: MediaImageGenqlSelection
-    on_MediaRemoteVideo?: MediaRemoteVideoGenqlSelection
-    on_MediaVideo?: MediaVideoGenqlSelection
-    on_NodePage?: NodePageGenqlSelection
-    on_ParagraphAccordion?: ParagraphAccordionGenqlSelection
-    on_ParagraphBlock?: ParagraphBlockGenqlSelection
-    on_ParagraphCallToAction?: ParagraphCallToActionGenqlSelection
-    on_ParagraphMedia?: ParagraphMediaGenqlSelection
-    on_ParagraphQuote?: ParagraphQuoteGenqlSelection
-    on_ParagraphSection?: ParagraphSectionGenqlSelection
-    on_ParagraphTable?: ParagraphTableGenqlSelection
-    on_ParagraphText?: ParagraphTextGenqlSelection
-    on_TermTags?: TermTagsGenqlSelection
-    on_User?: UserGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1522,7 +1511,7 @@ export interface NodeInterfaceGenqlSelection{
     changed?: DateTimeGenqlSelection
     /** The time that the node was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Language */
     langcode?: LanguageGenqlSelection
@@ -1554,7 +1543,7 @@ export interface NodePageGenqlSelection{
     content?: ParagraphUnionGenqlSelection
     /** The time that the node was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Language */
     langcode?: LanguageGenqlSelection
@@ -1576,7 +1565,6 @@ export interface NodePageGenqlSelection{
 
 export interface NodeUnionGenqlSelection{
     on_NodePage?:NodePageGenqlSelection,
-    on_Node?: NodeGenqlSelection,
     on_NodeInterface?: NodeInterfaceGenqlSelection,
     __typename?: boolean | number
 }
@@ -1590,7 +1578,7 @@ export interface ParagraphAccordionGenqlSelection{
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Content */
     items?: ParagraphUnionGenqlSelection
@@ -1607,7 +1595,7 @@ export interface ParagraphBlockGenqlSelection{
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1620,7 +1608,7 @@ export interface ParagraphCallToActionGenqlSelection{
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Link */
     link?: LinkGenqlSelection
@@ -1637,7 +1625,7 @@ export interface ParagraphCallToActionGenqlSelection{
 export interface ParagraphInterfaceGenqlSelection{
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     on_ParagraphAccordion?: ParagraphAccordionGenqlSelection
     on_ParagraphBlock?: ParagraphBlockGenqlSelection
@@ -1660,7 +1648,7 @@ export interface ParagraphMediaGenqlSelection{
     created?: DateTimeGenqlSelection
     /** Description */
     description?: TextGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Media */
     media?: MediaUnionGenqlSelection
@@ -1679,7 +1667,7 @@ export interface ParagraphQuoteGenqlSelection{
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Enter an optional link for the citation. */
     link?: LinkGenqlSelection
@@ -1696,7 +1684,7 @@ export interface ParagraphSectionGenqlSelection{
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1709,7 +1697,7 @@ export interface ParagraphTableGenqlSelection{
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Table */
     table?: TableGenqlSelection
@@ -1726,7 +1714,7 @@ export interface ParagraphTextGenqlSelection{
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
-    /** UUID */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Text */
     text?: TextGenqlSelection
@@ -1744,7 +1732,6 @@ export interface ParagraphUnionGenqlSelection{
     on_ParagraphTable?:ParagraphTableGenqlSelection,
     on_ParagraphText?:ParagraphTextGenqlSelection,
     on_LayoutParagraphsInterface?: LayoutParagraphsInterfaceGenqlSelection,
-    on_Node?: NodeGenqlSelection,
     on_ParagraphInterface?: ParagraphInterfaceGenqlSelection,
     __typename?: boolean | number
 }
@@ -1758,9 +1745,9 @@ export interface ParagraphUnionGenqlSelection{
 export interface QueryGenqlSelection{
     /** Load a Block plugin. */
     block?: (BlockUnionGenqlSelection & { __args: {
-    /** Block plugin name. Eg page_title_block, block_content:uuid */
+    /** Block plugin ID. Eg page_title_block, block_content:uuid */
     block_plugin_id: Scalars['String']} })
-    /** Schema generator version. */
+    /** Schema information. */
     info?: SchemaInformationGenqlSelection
     /** Load a Route by path. */
     menu?: (MenuGenqlSelection & { __args: {
@@ -1774,14 +1761,6 @@ export interface QueryGenqlSelection{
     path: Scalars['String']} })
     /** Get information about the currently authenticated user. NULL if not logged in. */
     viewer?: UserGenqlSelection
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** The base GraphQL Response class. */
-export interface ResponseGenqlSelection{
-    errors?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1804,7 +1783,6 @@ export interface RouteGenqlSelection{
 /** A list of possible entities that can be returned by URL. */
 export interface RouteEntityUnionGenqlSelection{
     on_NodePage?:NodePageGenqlSelection,
-    on_Node?: NodeGenqlSelection,
     on_NodeInterface?: NodeInterfaceGenqlSelection,
     __typename?: boolean | number
 }
@@ -1861,13 +1839,13 @@ export interface RouteUnionGenqlSelection{
 }
 
 
-/** Schema generator version. */
+/** Schema information provided by the system. */
 export interface SchemaInformationGenqlSelection{
-    /** Schema description. */
+    /** The schema description. */
     description?: boolean | number
-    /** Path to the homepage. */
+    /** The internal path to the front page. */
     home?: boolean | number
-    /** Schema version. */
+    /** The schema version. */
     version?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1896,7 +1874,7 @@ export interface TermInterfaceGenqlSelection{
     changed?: DateTimeGenqlSelection
     /** Description */
     description?: TextGenqlSelection
-    /** The term UUID. */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** The term language code. */
     langcode?: LanguageGenqlSelection
@@ -1920,7 +1898,7 @@ export interface TermTagsGenqlSelection{
     changed?: DateTimeGenqlSelection
     /** Description */
     description?: TextGenqlSelection
-    /** The term UUID. */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** The term language code. */
     langcode?: LanguageGenqlSelection
@@ -1938,7 +1916,6 @@ export interface TermTagsGenqlSelection{
 
 export interface TermUnionGenqlSelection{
     on_TermTags?:TermTagsGenqlSelection,
-    on_Node?: NodeGenqlSelection,
     on_TermInterface?: TermInterfaceGenqlSelection,
     __typename?: boolean | number
 }
@@ -1983,7 +1960,7 @@ export interface UserGenqlSelection{
     changed?: DateTimeGenqlSelection
     /** The time that the user was created. */
     created?: DateTimeGenqlSelection
-    /** The user UUID. */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** The email of this user. */
     mail?: boolean | number
@@ -2004,7 +1981,7 @@ export interface UserInterfaceGenqlSelection{
     changed?: DateTimeGenqlSelection
     /** The time that the user was created. */
     created?: DateTimeGenqlSelection
-    /** The user UUID. */
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** The email of this user. */
     mail?: boolean | number
@@ -2021,7 +1998,6 @@ export interface UserInterfaceGenqlSelection{
 
 export interface UserUnionGenqlSelection{
     on_User?:UserGenqlSelection,
-    on_Node?: NodeGenqlSelection,
     on_UserInterface?: UserInterfaceGenqlSelection,
     __typename?: boolean | number
 }
@@ -2203,6 +2179,14 @@ export interface ViewResultUnionGenqlSelection{
     
 
 
+    const EdgeNode_possibleTypes: string[] = []
+    export const isEdgeNode = (obj?: { __typename?: any } | null): obj is EdgeNode => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isEdgeNode"')
+      return EdgeNode_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
     const File_possibleTypes: string[] = ['File']
     export const isFile = (obj?: { __typename?: any } | null): obj is File => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isFile"')
@@ -2231,6 +2215,14 @@ export interface ViewResultUnionGenqlSelection{
     export const isImageStyleDerivative = (obj?: { __typename?: any } | null): obj is ImageStyleDerivative => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isImageStyleDerivative"')
       return ImageStyleDerivative_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const ImageStyleInterface_possibleTypes: string[] = ['ImageStyle']
+    export const isImageStyleInterface = (obj?: { __typename?: any } | null): obj is ImageStyleInterface => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isImageStyleInterface"')
+      return ImageStyleInterface_possibleTypes.includes(obj.__typename)
     }
     
 
@@ -2279,14 +2271,6 @@ export interface ViewResultUnionGenqlSelection{
     export const isLayoutParagraphsPosition = (obj?: { __typename?: any } | null): obj is LayoutParagraphsPosition => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isLayoutParagraphsPosition"')
       return LayoutParagraphsPosition_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const LayoutPosition_possibleTypes: string[] = ['LayoutPosition']
-    export const isLayoutPosition = (obj?: { __typename?: any } | null): obj is LayoutPosition => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isLayoutPosition"')
-      return LayoutPosition_possibleTypes.includes(obj.__typename)
     }
     
 
@@ -2359,6 +2343,14 @@ export interface ViewResultUnionGenqlSelection{
     export const isMenu = (obj?: { __typename?: any } | null): obj is Menu => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isMenu"')
       return Menu_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const MenuInterface_possibleTypes: string[] = ['Menu']
+    export const isMenuInterface = (obj?: { __typename?: any } | null): obj is MenuInterface => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isMenuInterface"')
+      return MenuInterface_possibleTypes.includes(obj.__typename)
     }
     
 
@@ -2455,14 +2447,6 @@ export interface ViewResultUnionGenqlSelection{
     export const isMutation = (obj?: { __typename?: any } | null): obj is Mutation => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isMutation"')
       return Mutation_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const Node_possibleTypes: string[] = ['BlockContent','BlockContentAnotherType','BlockContentBasicBlock','BlockPlugin','Layout','MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo','NodePage','ParagraphAccordion','ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText','TermTags','User']
-    export const isNode = (obj?: { __typename?: any } | null): obj is Node => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isNode"')
-      return Node_possibleTypes.includes(obj.__typename)
     }
     
 
@@ -2575,14 +2559,6 @@ export interface ViewResultUnionGenqlSelection{
     export const isQuery = (obj?: { __typename?: any } | null): obj is Query => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isQuery"')
       return Query_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const Response_possibleTypes: string[] = []
-    export const isResponse = (obj?: { __typename?: any } | null): obj is Response => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isResponse"')
-      return Response_possibleTypes.includes(obj.__typename)
     }
     
 

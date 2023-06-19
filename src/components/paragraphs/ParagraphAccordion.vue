@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Collapse } from 'bootstrap'
-import { computed, ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import type { ParagraphAccordion } from '@/services/drupal'
 import { getParagraphComponent } from '.'
