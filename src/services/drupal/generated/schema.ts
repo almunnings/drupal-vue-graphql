@@ -43,7 +43,9 @@ export interface Address {
 
 /** Address country. */
 export interface AddressCountry {
+    /** The code of the country. */
     code: (Scalars['String'] | null)
+    /** The name of the country. */
     name: (Scalars['String'] | null)
     __typename: 'AddressCountry'
 }
@@ -51,9 +53,13 @@ export interface AddressCountry {
 
 /** Block content is a modular piece of content that can be displayed in various regions of a website's layout. */
 export interface BlockContent {
-    entity: (BlockContentUnion | null)
+    /** The Content Block entity to be displayed within the block. */
+    entity: BlockContentUnion
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
+    /** The rendered output of the block. */
     render: (Scalars['Html'] | null)
+    /** The title of the block if provided. */
     title: (Scalars['String'] | null)
     __typename: 'BlockContent'
 }
@@ -98,6 +104,8 @@ export interface BlockContentBasicBlock {
 /** Entity type block_content. */
 export type BlockContentInterface = (BlockContentAnotherType | BlockContentBasicBlock) & { __isUnion?: true }
 
+
+/** Entity type block_content. */
 export type BlockContentUnion = (BlockContentAnotherType | BlockContentBasicBlock) & { __isUnion?: true }
 
 
@@ -105,10 +113,13 @@ export type BlockContentUnion = (BlockContentAnotherType | BlockContentBasicBloc
 export type BlockInterface = (BlockContent | BlockPlugin) & { __isUnion?: true }
 
 
-/** Block plugin is a modular piece of content that can be displayed in various regions of a website's layout. */
+/** A generic block plugin is a modular piece of content that can be displayed in various regions of a website's layout. */
 export interface BlockPlugin {
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
+    /** The rendered output of the block. */
     render: (Scalars['Html'] | null)
+    /** The title of the block if provided. */
     title: (Scalars['String'] | null)
     __typename: 'BlockPlugin'
 }
@@ -150,7 +161,9 @@ export type ConnectionSortKeys = 'CREATED_AT' | 'PROMOTED' | 'STICKY' | 'TITLE' 
 
 /** A Date range has a start and an end. */
 export interface DateRange {
+    /** The end of the date range. */
     end: (DateTime | null)
+    /** The start of the date range. */
     start: (DateTime | null)
     __typename: 'DateRange'
 }
@@ -158,9 +171,13 @@ export interface DateRange {
 
 /** A DateTime object. */
 export interface DateTime {
+    /** A string that will have a value of format ±hh:mm */
     offset: Scalars['UtcOffset']
+    /** RFC 3339 compliant time string. */
     time: Scalars['Time']
+    /** Type represents date and time as number of milliseconds from start of the UNIX epoch. */
     timestamp: Scalars['Timestamp']
+    /** A field whose value exists in the standard IANA Time Zone Database. */
     timezone: Scalars['TimeZone']
     __typename: 'DateTime'
 }
@@ -199,13 +216,19 @@ export interface File {
 
 /** A image object to represent an managed file. */
 export interface Image {
+    /** The alt text of the image. */
     alt: (Scalars['String'] | null)
+    /** The height of the image. */
     height: Scalars['Int']
+    /** The mime type of the image. */
     mime: (Scalars['String'] | null)
+    /** The title text of the image. */
     title: (Scalars['String'] | null)
+    /** The URL of the image. */
     url: Scalars['String']
     /** Image variations control different sizes and formats for images. */
     variations: (ImageStyleDerivative[] | null)
+    /** The width of the image. */
     width: Scalars['Int']
     __typename: 'Image'
 }
@@ -237,13 +260,18 @@ export interface ImageStyleDerivative {
 /** Entity type image_style. */
 export type ImageStyleInterface = (ImageStyle) & { __isUnion?: true }
 
+
+/** Entity type image_style. */
 export type ImageStyleUnion = (ImageStyle) & { __isUnion?: true }
 
 
 /** A language definition provided by the CMS. */
 export interface Language {
+    /** The language direction. */
     direction: (Scalars['String'] | null)
+    /** The language code. */
     id: (Scalars['ID'] | null)
+    /** The language name. */
     name: (Scalars['String'] | null)
     __typename: 'Language'
 }
@@ -273,7 +301,7 @@ export interface LayoutParagraphs {
 }
 
 
-/** This content has been arranged by a User using a layout builder. */
+/** This content has been arranged by a User using Layout Paragraphs. */
 export type LayoutParagraphsInterface = (ParagraphAccordion | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText) & { __isUnion?: true }
 
 
@@ -286,9 +314,14 @@ export interface LayoutParagraphsPosition {
     __typename: 'LayoutParagraphsPosition'
 }
 
+
+/** A link. */
 export interface Link {
+    /** Whether the link is internal to this website. */
     internal: Scalars['Boolean']
+    /** The title of the link. */
     title: (Scalars['String'] | null)
+    /** The URL of the link. */
     url: (Scalars['String'] | null)
     __typename: 'Link'
 }
@@ -304,8 +337,14 @@ export interface MediaAudio {
     created: DateTime
     /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
+    /** Language */
+    langcode: Language
+    /** The computed meta tags for the entity. */
+    metatag: MetaTagUnion[]
     /** Name */
     name: Scalars['String']
+    /** URL alias */
+    path: Scalars['String']
     /** Published */
     status: Scalars['Boolean']
     __typename: 'MediaAudio'
@@ -322,8 +361,14 @@ export interface MediaDocument {
     document: File
     /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
+    /** Language */
+    langcode: Language
+    /** The computed meta tags for the entity. */
+    metatag: MetaTagUnion[]
     /** Name */
     name: Scalars['String']
+    /** URL alias */
+    path: Scalars['String']
     /** Published */
     status: Scalars['Boolean']
     __typename: 'MediaDocument'
@@ -340,8 +385,14 @@ export interface MediaImage {
     id: Scalars['ID']
     /** Image */
     image: Image
+    /** Language */
+    langcode: Language
+    /** The computed meta tags for the entity. */
+    metatag: MetaTagUnion[]
     /** Name */
     name: Scalars['String']
+    /** URL alias */
+    path: Scalars['String']
     /** Published */
     status: Scalars['Boolean']
     __typename: 'MediaImage'
@@ -360,8 +411,14 @@ export interface MediaRemoteVideo {
     created: DateTime
     /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
+    /** Language */
+    langcode: Language
+    /** The computed meta tags for the entity. */
+    metatag: MetaTagUnion[]
     /** Name */
     name: Scalars['String']
+    /** URL alias */
+    path: Scalars['String']
     /** Published */
     status: Scalars['Boolean']
     /** Video URL */
@@ -369,6 +426,8 @@ export interface MediaRemoteVideo {
     __typename: 'MediaRemoteVideo'
 }
 
+
+/** Entity type media. */
 export type MediaUnion = (MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo) & { __isUnion?: true }
 
 
@@ -380,8 +439,14 @@ export interface MediaVideo {
     created: DateTime
     /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
+    /** Language */
+    langcode: Language
+    /** The computed meta tags for the entity. */
+    metatag: MetaTagUnion[]
     /** Name */
     name: Scalars['String']
+    /** URL alias */
+    path: Scalars['String']
     /** Published */
     status: Scalars['Boolean']
     /** Video file */
@@ -394,7 +459,9 @@ export interface MediaVideo {
 export interface Menu {
     /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
+    /** The menu items. */
     items: MenuItem[]
+    /** The menu name. */
     name: Scalars['String']
     __typename: 'Menu'
 }
@@ -414,15 +481,19 @@ export interface MenuItem {
     attributes: MenuItemAttributes
     /** Child menu items of this menu item. */
     children: MenuItem[]
+    /** The description of the menu item. */
     description: (Scalars['String'] | null)
     /** Whether this menu item is intended to be expanded. */
     expanded: Scalars['Boolean']
+    /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
     /** Whether this menu item links to an internal route. */
     internal: Scalars['Boolean']
     /** The route this menu item uses. Route loading can be disabled per menu type. */
     route: (RouteUnion | null)
+    /** The title of the menu item. */
     title: Scalars['String']
+    /** The URL of the menu item. */
     url: (Scalars['String'] | null)
     __typename: 'MenuItem'
 }
@@ -439,46 +510,78 @@ export interface MenuItemAttributes {
     __typename: 'MenuItemAttributes'
 }
 
+
+/** Entity type menu. */
 export type MenuUnion = (Menu) & { __isUnion?: true }
 
 
-/** Meta elements are tags used in HTML and XHTML documents to provide structured metadata about a Web page. */
+/** A meta tag element. */
 export type MetaTag = (MetaTagLink | MetaTagProperty | MetaTagValue) & { __isUnion?: true }
 
+
+/** This entity has meta tags enabled. */
+export type MetaTagInterface = (MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo | NodePage | TermTags | User) & { __isUnion?: true }
+
+
+/** A meta link element. */
 export interface MetaTagLink {
+    /** The meta tag element attributes. */
     attributes: MetaTagLinkAttributes
+    /** The HTML tag for this meta element. */
     tag: Scalars['String']
     __typename: 'MetaTagLink'
 }
 
+
+/** A meta link element's attributes. */
 export interface MetaTagLinkAttributes {
+    /** The href attribute of the link. */
     href: (Scalars['String'] | null)
+    /** The rel attribute of the link. */
     rel: (Scalars['String'] | null)
     __typename: 'MetaTagLinkAttributes'
 }
 
+
+/** A meta property element. */
 export interface MetaTagProperty {
+    /** The meta tag element attributes. */
     attributes: MetaTagPropertyAttributes
+    /** The HTML tag for this meta element. */
     tag: Scalars['String']
     __typename: 'MetaTagProperty'
 }
 
+
+/** A meta property element's attributes. */
 export interface MetaTagPropertyAttributes {
+    /** The content attribute of the meta tag. */
     content: (Scalars['String'] | null)
+    /** The property attribute of the meta tag. */
     property: (Scalars['String'] | null)
     __typename: 'MetaTagPropertyAttributes'
 }
 
+
+/** A meta tag element. */
 export type MetaTagUnion = (MetaTagLink | MetaTagProperty | MetaTagValue) & { __isUnion?: true }
 
+
+/** A meta content element. */
 export interface MetaTagValue {
+    /** The meta tag element attributes. */
     attributes: MetaTagValueAttributes
+    /** The HTML tag for this meta element. */
     tag: Scalars['String']
     __typename: 'MetaTagValue'
 }
 
+
+/** A meta content element's attributes. */
 export interface MetaTagValueAttributes {
+    /** The content attribute of the meta tag. */
     content: (Scalars['String'] | null)
+    /** The name attribute of the meta tag. */
     name: (Scalars['String'] | null)
     __typename: 'MetaTagValueAttributes'
 }
@@ -525,6 +628,8 @@ export interface NodePage {
     __typename: 'NodePage'
 }
 
+
+/** Entity type node. */
 export type NodeUnion = (NodePage) & { __isUnion?: true }
 
 
@@ -532,7 +637,7 @@ export type NodeUnion = (NodePage) & { __isUnion?: true }
 export interface ParagraphAccordion {
     /** Title */
     accordionTitle: Scalars['String']
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
@@ -540,6 +645,8 @@ export interface ParagraphAccordion {
     id: Scalars['ID']
     /** Content */
     items: ParagraphUnion[]
+    /** The paragraphs entity language code. */
+    langcode: Language
     __typename: 'ParagraphAccordion'
 }
 
@@ -548,24 +655,28 @@ export interface ParagraphAccordion {
 export interface ParagraphBlock {
     /** Block */
     block: (BlockUnion | null)
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
     /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
+    /** The paragraphs entity language code. */
+    langcode: Language
     __typename: 'ParagraphBlock'
 }
 
 
 /** Add a title, text content with formatting and link. */
 export interface ParagraphCallToAction {
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
     /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
+    /** The paragraphs entity language code. */
+    langcode: Language
     /** Link */
     link: (Link | null)
     /** Text */
@@ -582,7 +693,7 @@ export type ParagraphInterface = (ParagraphAccordion | ParagraphBlock | Paragrap
 
 /** Add Audio, Documents, Images or Videos and Embed YouTube videos. */
 export interface ParagraphMedia {
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
@@ -590,6 +701,8 @@ export interface ParagraphMedia {
     description: (Text | null)
     /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
+    /** The paragraphs entity language code. */
+    langcode: Language
     /** Media */
     media: MediaUnion
     /** Title */
@@ -602,12 +715,14 @@ export interface ParagraphMedia {
 export interface ParagraphQuote {
     /** Give credit for the quote. */
     citation: (Scalars['String'] | null)
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
     /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
+    /** The paragraphs entity language code. */
+    langcode: Language
     /** Enter an optional link for the citation. */
     link: (Link | null)
     /** Quote */
@@ -618,24 +733,28 @@ export interface ParagraphQuote {
 
 /** Sections are layout containers with composition for embedding more components. */
 export interface ParagraphSection {
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
     /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
+    /** The paragraphs entity language code. */
+    langcode: Language
     __typename: 'ParagraphSection'
 }
 
 
 /** Create a table with your own columns and rows. */
 export interface ParagraphTable {
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
     /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
+    /** The paragraphs entity language code. */
+    langcode: Language
     /** Table */
     table: Table
     /** Add a title to your block */
@@ -646,17 +765,21 @@ export interface ParagraphTable {
 
 /** Text based content with formatting. */
 export interface ParagraphText {
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
     /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
+    /** The paragraphs entity language code. */
+    langcode: Language
     /** Text */
     text: Text
     __typename: 'ParagraphText'
 }
 
+
+/** Entity type paragraph. */
 export type ParagraphUnion = (ParagraphAccordion | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText) & { __isUnion?: true }
 
 
@@ -742,19 +865,27 @@ export interface SchemaInformation {
 }
 
 
-/** List of menus available to load. */
+/** Sort direction. */
 export type SortDirection = 'ASC' | 'DESC'
 
+
+/** A table field. */
 export interface Table {
+    /** The caption of the table. */
     caption: (Scalars['String'] | null)
     /** A text format associated with the row data. */
     format: (Scalars['String'] | null)
+    /** The rows of the table. */
     rows: ((TableRow | null)[] | null)
     __typename: 'Table'
 }
 
+
+/** A row of a table field. */
 export interface TableRow {
+    /** The data of the row. */
     data: ((Scalars['String'] | null)[] | null)
+    /** The weight of the row. */
     weight: (Scalars['Int'] | null)
     __typename: 'TableRow'
 }
@@ -774,6 +905,8 @@ export interface TermTags {
     id: Scalars['ID']
     /** The term language code. */
     langcode: Language
+    /** The computed meta tags for the entity. */
+    metatag: MetaTagUnion[]
     /** Name */
     name: Scalars['String']
     /** The parents of this term. */
@@ -785,13 +918,18 @@ export interface TermTags {
     __typename: 'TermTags'
 }
 
+
+/** Entity type taxonomy_term. */
 export type TermUnion = (TermTags) & { __isUnion?: true }
 
 
 /** A processed text format defined by the CMS. */
 export interface Text {
+    /** The text format used to process the text value. */
     format: (Scalars['String'] | null)
+    /** The processed text value. */
     processed: (Scalars['Html'] | null)
+    /** The raw text value. */
     value: (Scalars['String'] | null)
     __typename: 'Text'
 }
@@ -799,9 +937,13 @@ export interface Text {
 
 /** A processed text format with summary defined by the CMS. */
 export interface TextSummary {
+    /** The text format used to process the text value. */
     format: (Scalars['String'] | null)
+    /** The processed text value. */
     processed: (Scalars['Html'] | null)
+    /** The processed text summary. */
     summary: (Scalars['Html'] | null)
+    /** The raw text value. */
     value: (Scalars['String'] | null)
     __typename: 'TextSummary'
 }
@@ -828,6 +970,8 @@ export interface User {
     id: Scalars['ID']
     /** The email of this user. */
     mail: (Scalars['Email'] | null)
+    /** The computed meta tags for the entity. */
+    metatag: MetaTagUnion[]
     /** The name of this user. */
     name: Scalars['String']
     /** The roles the user has. */
@@ -845,6 +989,8 @@ export type UserInterface = (User) & { __isUnion?: true }
 /** Whether the user is active or blocked. */
 export type UserStatus = 'ACTIVE' | 'BLOCKED'
 
+
+/** Entity type user. */
 export type UserUnion = (User) & { __isUnion?: true }
 
 
@@ -920,7 +1066,9 @@ export interface AddressGenqlSelection{
 
 /** Address country. */
 export interface AddressCountryGenqlSelection{
+    /** The code of the country. */
     code?: boolean | number
+    /** The name of the country. */
     name?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -929,9 +1077,13 @@ export interface AddressCountryGenqlSelection{
 
 /** Block content is a modular piece of content that can be displayed in various regions of a website's layout. */
 export interface BlockContentGenqlSelection{
+    /** The Content Block entity to be displayed within the block. */
     entity?: BlockContentUnionGenqlSelection
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** The rendered output of the block. */
     render?: boolean | number
+    /** The title of the block if provided. */
     title?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -994,6 +1146,8 @@ export interface BlockContentInterfaceGenqlSelection{
     __scalar?: boolean | number
 }
 
+
+/** Entity type block_content. */
 export interface BlockContentUnionGenqlSelection{
     on_BlockContentAnotherType?:BlockContentAnotherTypeGenqlSelection,
     on_BlockContentBasicBlock?:BlockContentBasicBlockGenqlSelection,
@@ -1004,8 +1158,11 @@ export interface BlockContentUnionGenqlSelection{
 
 /** Blocks are a modular piece of content that can be displayed in various regions of a website's layout. */
 export interface BlockInterfaceGenqlSelection{
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** The rendered output of the block. */
     render?: boolean | number
+    /** The title of the block if provided. */
     title?: boolean | number
     on_BlockContent?: BlockContentGenqlSelection
     on_BlockPlugin?: BlockPluginGenqlSelection
@@ -1014,10 +1171,13 @@ export interface BlockInterfaceGenqlSelection{
 }
 
 
-/** Block plugin is a modular piece of content that can be displayed in various regions of a website's layout. */
+/** A generic block plugin is a modular piece of content that can be displayed in various regions of a website's layout. */
 export interface BlockPluginGenqlSelection{
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** The rendered output of the block. */
     render?: boolean | number
+    /** The title of the block if provided. */
     title?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1063,7 +1223,9 @@ export interface ConnectionPageInfoGenqlSelection{
 
 /** A Date range has a start and an end. */
 export interface DateRangeGenqlSelection{
+    /** The end of the date range. */
     end?: DateTimeGenqlSelection
+    /** The start of the date range. */
     start?: DateTimeGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1072,9 +1234,13 @@ export interface DateRangeGenqlSelection{
 
 /** A DateTime object. */
 export interface DateTimeGenqlSelection{
+    /** A string that will have a value of format ±hh:mm */
     offset?: boolean | number
+    /** RFC 3339 compliant time string. */
     time?: boolean | number
+    /** Type represents date and time as number of milliseconds from start of the UNIX epoch. */
     timestamp?: boolean | number
+    /** A field whose value exists in the standard IANA Time Zone Database. */
     timezone?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1117,13 +1283,19 @@ export interface FileGenqlSelection{
 
 /** A image object to represent an managed file. */
 export interface ImageGenqlSelection{
+    /** The alt text of the image. */
     alt?: boolean | number
+    /** The height of the image. */
     height?: boolean | number
+    /** The mime type of the image. */
     mime?: boolean | number
+    /** The title text of the image. */
     title?: boolean | number
+    /** The URL of the image. */
     url?: boolean | number
     /** Image variations control different sizes and formats for images. */
     variations?: (ImageStyleDerivativeGenqlSelection & { __args?: {styles?: ((ImageStyleAvailable | null)[] | null)} })
+    /** The width of the image. */
     width?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1161,6 +1333,8 @@ export interface ImageStyleInterfaceGenqlSelection{
     __scalar?: boolean | number
 }
 
+
+/** Entity type image_style. */
 export interface ImageStyleUnionGenqlSelection{
     on_ImageStyle?:ImageStyleGenqlSelection,
     on_ImageStyleInterface?: ImageStyleInterfaceGenqlSelection,
@@ -1174,8 +1348,11 @@ export interface KeyValueInput {key?: Scalars['String'],value?: (Scalars['String
 
 /** A language definition provided by the CMS. */
 export interface LanguageGenqlSelection{
+    /** The language direction. */
     direction?: boolean | number
+    /** The language code. */
     id?: boolean | number
+    /** The language name. */
     name?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1208,7 +1385,7 @@ export interface LayoutParagraphsGenqlSelection{
 }
 
 
-/** This content has been arranged by a User using a layout builder. */
+/** This content has been arranged by a User using Layout Paragraphs. */
 export interface LayoutParagraphsInterfaceGenqlSelection{
     composition?: LayoutParagraphsGenqlSelection
     on_ParagraphAccordion?: ParagraphAccordionGenqlSelection
@@ -1234,9 +1411,14 @@ export interface LayoutParagraphsPositionGenqlSelection{
     __scalar?: boolean | number
 }
 
+
+/** A link. */
 export interface LinkGenqlSelection{
+    /** Whether the link is internal to this website. */
     internal?: boolean | number
+    /** The title of the link. */
     title?: boolean | number
+    /** The URL of the link. */
     url?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1253,8 +1435,14 @@ export interface MediaAudioGenqlSelection{
     created?: DateTimeGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** Language */
+    langcode?: LanguageGenqlSelection
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
     /** Name */
     name?: boolean | number
+    /** URL alias */
+    path?: boolean | number
     /** Published */
     status?: boolean | number
     __typename?: boolean | number
@@ -1272,8 +1460,14 @@ export interface MediaDocumentGenqlSelection{
     document?: FileGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** Language */
+    langcode?: LanguageGenqlSelection
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
     /** Name */
     name?: boolean | number
+    /** URL alias */
+    path?: boolean | number
     /** Published */
     status?: boolean | number
     __typename?: boolean | number
@@ -1291,8 +1485,14 @@ export interface MediaImageGenqlSelection{
     id?: boolean | number
     /** Image */
     image?: ImageGenqlSelection
+    /** Language */
+    langcode?: LanguageGenqlSelection
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
     /** Name */
     name?: boolean | number
+    /** URL alias */
+    path?: boolean | number
     /** Published */
     status?: boolean | number
     __typename?: boolean | number
@@ -1308,8 +1508,14 @@ export interface MediaInterfaceGenqlSelection{
     created?: DateTimeGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** Language */
+    langcode?: LanguageGenqlSelection
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
     /** Name */
     name?: boolean | number
+    /** URL alias */
+    path?: boolean | number
     /** Published */
     status?: boolean | number
     on_MediaAudio?: MediaAudioGenqlSelection
@@ -1330,8 +1536,14 @@ export interface MediaRemoteVideoGenqlSelection{
     created?: DateTimeGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** Language */
+    langcode?: LanguageGenqlSelection
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
     /** Name */
     name?: boolean | number
+    /** URL alias */
+    path?: boolean | number
     /** Published */
     status?: boolean | number
     /** Video URL */
@@ -1340,6 +1552,8 @@ export interface MediaRemoteVideoGenqlSelection{
     __scalar?: boolean | number
 }
 
+
+/** Entity type media. */
 export interface MediaUnionGenqlSelection{
     on_MediaAudio?:MediaAudioGenqlSelection,
     on_MediaDocument?:MediaDocumentGenqlSelection,
@@ -1347,6 +1561,7 @@ export interface MediaUnionGenqlSelection{
     on_MediaRemoteVideo?:MediaRemoteVideoGenqlSelection,
     on_MediaVideo?:MediaVideoGenqlSelection,
     on_MediaInterface?: MediaInterfaceGenqlSelection,
+    on_MetaTagInterface?: MetaTagInterfaceGenqlSelection,
     __typename?: boolean | number
 }
 
@@ -1359,8 +1574,14 @@ export interface MediaVideoGenqlSelection{
     created?: DateTimeGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** Language */
+    langcode?: LanguageGenqlSelection
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
     /** Name */
     name?: boolean | number
+    /** URL alias */
+    path?: boolean | number
     /** Published */
     status?: boolean | number
     /** Video file */
@@ -1374,7 +1595,9 @@ export interface MediaVideoGenqlSelection{
 export interface MenuGenqlSelection{
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** The menu items. */
     items?: MenuItemGenqlSelection
+    /** The menu name. */
     name?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1385,7 +1608,9 @@ export interface MenuGenqlSelection{
 export interface MenuInterfaceGenqlSelection{
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** The menu items. */
     items?: MenuItemGenqlSelection
+    /** The menu name. */
     name?: boolean | number
     on_Menu?: MenuGenqlSelection
     __typename?: boolean | number
@@ -1399,15 +1624,19 @@ export interface MenuItemGenqlSelection{
     attributes?: MenuItemAttributesGenqlSelection
     /** Child menu items of this menu item. */
     children?: MenuItemGenqlSelection
+    /** The description of the menu item. */
     description?: boolean | number
     /** Whether this menu item is intended to be expanded. */
     expanded?: boolean | number
+    /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
     /** Whether this menu item links to an internal route. */
     internal?: boolean | number
     /** The route this menu item uses. Route loading can be disabled per menu type. */
     route?: RouteUnionGenqlSelection
+    /** The title of the menu item. */
     title?: boolean | number
+    /** The URL of the menu item. */
     url?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1426,6 +1655,8 @@ export interface MenuItemAttributesGenqlSelection{
     __scalar?: boolean | number
 }
 
+
+/** Entity type menu. */
 export interface MenuUnionGenqlSelection{
     on_Menu?:MenuGenqlSelection,
     on_MenuInterface?: MenuInterfaceGenqlSelection,
@@ -1433,8 +1664,9 @@ export interface MenuUnionGenqlSelection{
 }
 
 
-/** Meta elements are tags used in HTML and XHTML documents to provide structured metadata about a Web page. */
+/** A meta tag element. */
 export interface MetaTagGenqlSelection{
+    /** The HTML tag for this meta element. */
     tag?: boolean | number
     on_MetaTagLink?: MetaTagLinkGenqlSelection
     on_MetaTagProperty?: MetaTagPropertyGenqlSelection
@@ -1443,34 +1675,69 @@ export interface MetaTagGenqlSelection{
     __scalar?: boolean | number
 }
 
+
+/** This entity has meta tags enabled. */
+export interface MetaTagInterfaceGenqlSelection{
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
+    on_MediaAudio?: MediaAudioGenqlSelection
+    on_MediaDocument?: MediaDocumentGenqlSelection
+    on_MediaImage?: MediaImageGenqlSelection
+    on_MediaRemoteVideo?: MediaRemoteVideoGenqlSelection
+    on_MediaVideo?: MediaVideoGenqlSelection
+    on_NodePage?: NodePageGenqlSelection
+    on_TermTags?: TermTagsGenqlSelection
+    on_User?: UserGenqlSelection
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** A meta link element. */
 export interface MetaTagLinkGenqlSelection{
+    /** The meta tag element attributes. */
     attributes?: MetaTagLinkAttributesGenqlSelection
+    /** The HTML tag for this meta element. */
     tag?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
+
+/** A meta link element's attributes. */
 export interface MetaTagLinkAttributesGenqlSelection{
+    /** The href attribute of the link. */
     href?: boolean | number
+    /** The rel attribute of the link. */
     rel?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
+
+/** A meta property element. */
 export interface MetaTagPropertyGenqlSelection{
+    /** The meta tag element attributes. */
     attributes?: MetaTagPropertyAttributesGenqlSelection
+    /** The HTML tag for this meta element. */
     tag?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
+
+/** A meta property element's attributes. */
 export interface MetaTagPropertyAttributesGenqlSelection{
+    /** The content attribute of the meta tag. */
     content?: boolean | number
+    /** The property attribute of the meta tag. */
     property?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
+
+/** A meta tag element. */
 export interface MetaTagUnionGenqlSelection{
     on_MetaTagLink?:MetaTagLinkGenqlSelection,
     on_MetaTagProperty?:MetaTagPropertyGenqlSelection,
@@ -1479,15 +1746,23 @@ export interface MetaTagUnionGenqlSelection{
     __typename?: boolean | number
 }
 
+
+/** A meta content element. */
 export interface MetaTagValueGenqlSelection{
+    /** The meta tag element attributes. */
     attributes?: MetaTagValueAttributesGenqlSelection
+    /** The HTML tag for this meta element. */
     tag?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
+
+/** A meta content element's attributes. */
 export interface MetaTagValueAttributesGenqlSelection{
+    /** The content attribute of the meta tag. */
     content?: boolean | number
+    /** The name attribute of the meta tag. */
     name?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1563,8 +1838,11 @@ export interface NodePageGenqlSelection{
     __scalar?: boolean | number
 }
 
+
+/** Entity type node. */
 export interface NodeUnionGenqlSelection{
     on_NodePage?:NodePageGenqlSelection,
+    on_MetaTagInterface?: MetaTagInterfaceGenqlSelection,
     on_NodeInterface?: NodeInterfaceGenqlSelection,
     __typename?: boolean | number
 }
@@ -1574,7 +1852,7 @@ export interface NodeUnionGenqlSelection{
 export interface ParagraphAccordionGenqlSelection{
     /** Title */
     accordionTitle?: boolean | number
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
@@ -1582,6 +1860,8 @@ export interface ParagraphAccordionGenqlSelection{
     id?: boolean | number
     /** Content */
     items?: ParagraphUnionGenqlSelection
+    /** The paragraphs entity language code. */
+    langcode?: LanguageGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1591,12 +1871,14 @@ export interface ParagraphAccordionGenqlSelection{
 export interface ParagraphBlockGenqlSelection{
     /** Block */
     block?: BlockUnionGenqlSelection
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** The paragraphs entity language code. */
+    langcode?: LanguageGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1604,12 +1886,14 @@ export interface ParagraphBlockGenqlSelection{
 
 /** Add a title, text content with formatting and link. */
 export interface ParagraphCallToActionGenqlSelection{
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** The paragraphs entity language code. */
+    langcode?: LanguageGenqlSelection
     /** Link */
     link?: LinkGenqlSelection
     /** Text */
@@ -1627,6 +1911,8 @@ export interface ParagraphInterfaceGenqlSelection{
     created?: DateTimeGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** The paragraphs entity language code. */
+    langcode?: LanguageGenqlSelection
     on_ParagraphAccordion?: ParagraphAccordionGenqlSelection
     on_ParagraphBlock?: ParagraphBlockGenqlSelection
     on_ParagraphCallToAction?: ParagraphCallToActionGenqlSelection
@@ -1642,7 +1928,7 @@ export interface ParagraphInterfaceGenqlSelection{
 
 /** Add Audio, Documents, Images or Videos and Embed YouTube videos. */
 export interface ParagraphMediaGenqlSelection{
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
@@ -1650,6 +1936,8 @@ export interface ParagraphMediaGenqlSelection{
     description?: TextGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** The paragraphs entity language code. */
+    langcode?: LanguageGenqlSelection
     /** Media */
     media?: MediaUnionGenqlSelection
     /** Title */
@@ -1663,12 +1951,14 @@ export interface ParagraphMediaGenqlSelection{
 export interface ParagraphQuoteGenqlSelection{
     /** Give credit for the quote. */
     citation?: boolean | number
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** The paragraphs entity language code. */
+    langcode?: LanguageGenqlSelection
     /** Enter an optional link for the citation. */
     link?: LinkGenqlSelection
     /** Quote */
@@ -1680,12 +1970,14 @@ export interface ParagraphQuoteGenqlSelection{
 
 /** Sections are layout containers with composition for embedding more components. */
 export interface ParagraphSectionGenqlSelection{
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** The paragraphs entity language code. */
+    langcode?: LanguageGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1693,12 +1985,14 @@ export interface ParagraphSectionGenqlSelection{
 
 /** Create a table with your own columns and rows. */
 export interface ParagraphTableGenqlSelection{
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** The paragraphs entity language code. */
+    langcode?: LanguageGenqlSelection
     /** Table */
     table?: TableGenqlSelection
     /** Add a title to your block */
@@ -1710,18 +2004,22 @@ export interface ParagraphTableGenqlSelection{
 
 /** Text based content with formatting. */
 export interface ParagraphTextGenqlSelection{
-    /** Layout metadata for this paragraph. */
+    /** Layout Paragraphs metadata for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
+    /** The paragraphs entity language code. */
+    langcode?: LanguageGenqlSelection
     /** Text */
     text?: TextGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
+
+/** Entity type paragraph. */
 export interface ParagraphUnionGenqlSelection{
     on_ParagraphAccordion?:ParagraphAccordionGenqlSelection,
     on_ParagraphBlock?:ParagraphBlockGenqlSelection,
@@ -1783,6 +2081,7 @@ export interface RouteGenqlSelection{
 /** A list of possible entities that can be returned by URL. */
 export interface RouteEntityUnionGenqlSelection{
     on_NodePage?:NodePageGenqlSelection,
+    on_MetaTagInterface?: MetaTagInterfaceGenqlSelection,
     on_NodeInterface?: NodeInterfaceGenqlSelection,
     __typename?: boolean | number
 }
@@ -1851,17 +2150,25 @@ export interface SchemaInformationGenqlSelection{
     __scalar?: boolean | number
 }
 
+
+/** A table field. */
 export interface TableGenqlSelection{
+    /** The caption of the table. */
     caption?: boolean | number
     /** A text format associated with the row data. */
     format?: boolean | number
+    /** The rows of the table. */
     rows?: TableRowGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
+
+/** A row of a table field. */
 export interface TableRowGenqlSelection{
+    /** The data of the row. */
     data?: boolean | number
+    /** The weight of the row. */
     weight?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1878,6 +2185,8 @@ export interface TermInterfaceGenqlSelection{
     id?: boolean | number
     /** The term language code. */
     langcode?: LanguageGenqlSelection
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
     /** Name */
     name?: boolean | number
     /** The parents of this term. */
@@ -1902,6 +2211,8 @@ export interface TermTagsGenqlSelection{
     id?: boolean | number
     /** The term language code. */
     langcode?: LanguageGenqlSelection
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
     /** Name */
     name?: boolean | number
     /** The parents of this term. */
@@ -1914,8 +2225,11 @@ export interface TermTagsGenqlSelection{
     __scalar?: boolean | number
 }
 
+
+/** Entity type taxonomy_term. */
 export interface TermUnionGenqlSelection{
     on_TermTags?:TermTagsGenqlSelection,
+    on_MetaTagInterface?: MetaTagInterfaceGenqlSelection,
     on_TermInterface?: TermInterfaceGenqlSelection,
     __typename?: boolean | number
 }
@@ -1923,8 +2237,11 @@ export interface TermUnionGenqlSelection{
 
 /** A processed text format defined by the CMS. */
 export interface TextGenqlSelection{
+    /** The text format used to process the text value. */
     format?: boolean | number
+    /** The processed text value. */
     processed?: boolean | number
+    /** The raw text value. */
     value?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1933,9 +2250,13 @@ export interface TextGenqlSelection{
 
 /** A processed text format with summary defined by the CMS. */
 export interface TextSummaryGenqlSelection{
+    /** The text format used to process the text value. */
     format?: boolean | number
+    /** The processed text value. */
     processed?: boolean | number
+    /** The processed text summary. */
     summary?: boolean | number
+    /** The raw text value. */
     value?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1964,6 +2285,8 @@ export interface UserGenqlSelection{
     id?: boolean | number
     /** The email of this user. */
     mail?: boolean | number
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
     /** The name of this user. */
     name?: boolean | number
     /** The roles the user has. */
@@ -1985,6 +2308,8 @@ export interface UserInterfaceGenqlSelection{
     id?: boolean | number
     /** The email of this user. */
     mail?: boolean | number
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
     /** The name of this user. */
     name?: boolean | number
     /** The roles the user has. */
@@ -1996,8 +2321,11 @@ export interface UserInterfaceGenqlSelection{
     __scalar?: boolean | number
 }
 
+
+/** Entity type user. */
 export interface UserUnionGenqlSelection{
     on_User?:UserGenqlSelection,
+    on_MetaTagInterface?: MetaTagInterfaceGenqlSelection,
     on_UserInterface?: UserInterfaceGenqlSelection,
     __typename?: boolean | number
 }
@@ -2383,6 +2711,14 @@ export interface ViewResultUnionGenqlSelection{
     export const isMetaTag = (obj?: { __typename?: any } | null): obj is MetaTag => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isMetaTag"')
       return MetaTag_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const MetaTagInterface_possibleTypes: string[] = ['MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo','NodePage','TermTags','User']
+    export const isMetaTagInterface = (obj?: { __typename?: any } | null): obj is MetaTagInterface => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isMetaTagInterface"')
+      return MetaTagInterface_possibleTypes.includes(obj.__typename)
     }
     
 

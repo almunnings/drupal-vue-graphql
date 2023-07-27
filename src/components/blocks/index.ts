@@ -1,7 +1,10 @@
 import { defineAsyncComponent } from 'vue'
-import { type Block, type BlockContentInterface } from '@/services/drupal'
+import {
+  type BlockInterface,
+  type BlockContentInterface
+} from '@/services/drupal'
 
-export const getBlockComponent = (block: Block) => {
+export const getBlockComponent = (block: BlockInterface) => {
   switch (block.__typename) {
     case 'BlockContent':
       return defineAsyncComponent(

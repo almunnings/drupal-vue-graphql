@@ -1,5 +1,5 @@
 import { defineAsyncComponent } from 'vue'
-import { File, MediaInterface } from '@/services/drupal'
+import type { File, MediaInterface } from '@/services/drupal'
 
 export const getMediaComponent = (media: MediaInterface) => {
   switch (media.__typename) {

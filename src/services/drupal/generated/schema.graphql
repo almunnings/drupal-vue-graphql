@@ -17,20 +17,30 @@ type Address {
 
 """Address country."""
 type AddressCountry {
+  """The code of the country."""
   code: String
+
+  """The name of the country."""
   name: String
 }
 
-"""Untyped attribute data. Eg configuration, settings."""
+"""Untyped attribute data. Eg configuration, settings, attributes."""
 scalar Attributes
 
 """
 Block content is a modular piece of content that can be displayed in various regions of a website's layout.
 """
 type BlockContent implements BlockInterface {
-  entity: BlockContentUnion
+  """The Content Block entity to be displayed within the block."""
+  entity: BlockContentUnion!
+
+  """The Universally Unique IDentifier (UUID)."""
   id: ID!
+
+  """The rendered output of the block."""
   render: Html
+
+  """The title of the block if provided."""
   title: String
 }
 
@@ -94,23 +104,34 @@ interface BlockContentInterface {
   title: String!
 }
 
+"""Entity type block_content."""
 union BlockContentUnion = BlockContentAnotherType | BlockContentBasicBlock
 
 """
 Blocks are a modular piece of content that can be displayed in various regions of a website's layout.
 """
 interface BlockInterface {
+  """The Universally Unique IDentifier (UUID)."""
   id: ID!
+
+  """The rendered output of the block."""
   render: Html
+
+  """The title of the block if provided."""
   title: String
 }
 
 """
-Block plugin is a modular piece of content that can be displayed in various regions of a website's layout.
+A generic block plugin is a modular piece of content that can be displayed in various regions of a website's layout.
 """
 type BlockPlugin implements BlockInterface {
+  """The Universally Unique IDentifier (UUID)."""
   id: ID!
+
+  """The rendered output of the block."""
   render: Html
+
+  """The title of the block if provided."""
   title: String
 }
 
@@ -167,15 +188,27 @@ scalar Cursor
 
 """A Date range has a start and an end."""
 type DateRange {
+  """The end of the date range."""
   end: DateTime
+
+  """The start of the date range."""
   start: DateTime
 }
 
 """A DateTime object."""
 type DateTime {
+  """A string that will have a value of format ±hh:mm"""
   offset: UtcOffset!
+
+  """RFC 3339 compliant time string."""
   time: Time!
+
+  """
+  Type represents date and time as number of milliseconds from start of the UNIX epoch.
+  """
   timestamp: Timestamp!
+
+  """A field whose value exists in the standard IANA Time Zone Database."""
   timezone: TimeZone!
 }
 
@@ -218,14 +251,25 @@ scalar Html
 
 """A image object to represent an managed file."""
 type Image {
+  """The alt text of the image."""
   alt: String
+
+  """The height of the image."""
   height: Int!
+
+  """The mime type of the image."""
   mime: String
+
+  """The title text of the image."""
   title: String
+
+  """The URL of the image."""
   url: String!
 
   """Image variations control different sizes and formats for images."""
   variations(styles: [ImageStyleAvailable]): [ImageStyleDerivative!]
+
+  """The width of the image."""
   width: Int!
 }
 
@@ -275,6 +319,7 @@ interface ImageStyleInterface {
   name: String!
 }
 
+"""Entity type image_style."""
 union ImageStyleUnion = ImageStyle
 
 """Generic untyped input for key-value pairs."""
@@ -285,8 +330,13 @@ input KeyValueInput {
 
 """A language definition provided by the CMS."""
 type Language {
+  """The language direction."""
   direction: String
+
+  """The language code."""
   id: ID
+
+  """The language name."""
   name: String
 }
 
@@ -316,7 +366,7 @@ type LayoutParagraphs {
   position: LayoutParagraphsPosition
 }
 
-"""This content has been arranged by a User using a layout builder."""
+"""This content has been arranged by a User using Layout Paragraphs."""
 interface LayoutParagraphsInterface {
   composition: LayoutParagraphs!
 }
@@ -332,14 +382,20 @@ type LayoutParagraphsPosition {
   region: String
 }
 
+"""A link."""
 type Link {
+  """Whether the link is internal to this website."""
   internal: Boolean!
+
+  """The title of the link."""
   title: String
+
+  """The URL of the link."""
   url: String
 }
 
 """A locally hosted audio file."""
-type MediaAudio implements MediaInterface {
+type MediaAudio implements MediaInterface & MetaTagInterface {
   """Audio file"""
   audio: File!
 
@@ -352,15 +408,24 @@ type MediaAudio implements MediaInterface {
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
 
+  """Language"""
+  langcode: Language!
+
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]!
+
   """Name"""
   name: String!
+
+  """URL alias"""
+  path: String!
 
   """Published"""
   status: Boolean!
 }
 
 """An uploaded file or document, such as a PDF."""
-type MediaDocument implements MediaInterface {
+type MediaDocument implements MediaInterface & MetaTagInterface {
   """The time the media item was last edited."""
   changed: DateTime!
 
@@ -373,15 +438,24 @@ type MediaDocument implements MediaInterface {
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
 
+  """Language"""
+  langcode: Language!
+
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]!
+
   """Name"""
   name: String!
+
+  """URL alias"""
+  path: String!
 
   """Published"""
   status: Boolean!
 }
 
 """Use local images for reusable media."""
-type MediaImage implements MediaInterface {
+type MediaImage implements MediaInterface & MetaTagInterface {
   """The time the media item was last edited."""
   changed: DateTime!
 
@@ -394,8 +468,17 @@ type MediaImage implements MediaInterface {
   """Image"""
   image: Image!
 
+  """Language"""
+  langcode: Language!
+
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]!
+
   """Name"""
   name: String!
+
+  """URL alias"""
+  path: String!
 
   """Published"""
   status: Boolean!
@@ -412,15 +495,24 @@ interface MediaInterface {
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
 
+  """Language"""
+  langcode: Language!
+
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]!
+
   """Name"""
   name: String!
+
+  """URL alias"""
+  path: String!
 
   """Published"""
   status: Boolean!
 }
 
 """A remotely hosted video from YouTube or Vimeo."""
-type MediaRemoteVideo implements MediaInterface {
+type MediaRemoteVideo implements MediaInterface & MetaTagInterface {
   """The time the media item was last edited."""
   changed: DateTime!
 
@@ -430,8 +522,17 @@ type MediaRemoteVideo implements MediaInterface {
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
 
+  """Language"""
+  langcode: Language!
+
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]!
+
   """Name"""
   name: String!
+
+  """URL alias"""
+  path: String!
 
   """Published"""
   status: Boolean!
@@ -440,10 +541,11 @@ type MediaRemoteVideo implements MediaInterface {
   url: String!
 }
 
+"""Entity type media."""
 union MediaUnion = MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo
 
 """A locally hosted video file."""
-type MediaVideo implements MediaInterface {
+type MediaVideo implements MediaInterface & MetaTagInterface {
   """The time the media item was last edited."""
   changed: DateTime!
 
@@ -453,8 +555,17 @@ type MediaVideo implements MediaInterface {
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
 
+  """Language"""
+  langcode: Language!
+
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]!
+
   """Name"""
   name: String!
+
+  """URL alias"""
+  path: String!
 
   """Published"""
   status: Boolean!
@@ -467,7 +578,11 @@ type MediaVideo implements MediaInterface {
 type Menu implements MenuInterface {
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
+
+  """The menu items."""
   items: [MenuItem!]!
+
+  """The menu name."""
   name: String!
 }
 
@@ -484,7 +599,11 @@ enum MenuAvailable {
 interface MenuInterface {
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
+
+  """The menu items."""
   items: [MenuItem!]!
+
+  """The menu name."""
   name: String!
 }
 
@@ -495,10 +614,14 @@ type MenuItem {
 
   """Child menu items of this menu item."""
   children: [MenuItem!]!
+
+  """The description of the menu item."""
   description: String
 
   """Whether this menu item is intended to be expanded."""
   expanded: Boolean!
+
+  """The Universally Unique IDentifier (UUID)."""
   id: ID!
 
   """Whether this menu item links to an internal route."""
@@ -508,7 +631,11 @@ type MenuItem {
   The route this menu item uses. Route loading can be disabled per menu type.
   """
   route: RouteUnion
+
+  """The title of the menu item."""
   title: String!
+
+  """The URL of the menu item."""
   url: String
 }
 
@@ -524,44 +651,75 @@ type MenuItemAttributes {
   target: String
 }
 
+"""Entity type menu."""
 union MenuUnion = Menu
 
-"""
-Meta elements are tags used in HTML and XHTML documents to provide structured metadata about a Web page.
-"""
+"""A meta tag element."""
 interface MetaTag {
+  """The HTML tag for this meta element."""
   tag: String!
 }
 
+"""This entity has meta tags enabled."""
+interface MetaTagInterface {
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]!
+}
+
+"""A meta link element."""
 type MetaTagLink implements MetaTag {
+  """The meta tag element attributes."""
   attributes: MetaTagLinkAttributes!
+
+  """The HTML tag for this meta element."""
   tag: String!
 }
 
+"""A meta link element's attributes."""
 type MetaTagLinkAttributes {
+  """The href attribute of the link."""
   href: String
+
+  """The rel attribute of the link."""
   rel: String
 }
 
+"""A meta property element."""
 type MetaTagProperty implements MetaTag {
+  """The meta tag element attributes."""
   attributes: MetaTagPropertyAttributes!
+
+  """The HTML tag for this meta element."""
   tag: String!
 }
 
+"""A meta property element's attributes."""
 type MetaTagPropertyAttributes {
+  """The content attribute of the meta tag."""
   content: String
+
+  """The property attribute of the meta tag."""
   property: String
 }
 
+"""A meta tag element."""
 union MetaTagUnion = MetaTagLink | MetaTagProperty | MetaTagValue
 
+"""A meta content element."""
 type MetaTagValue implements MetaTag {
+  """The meta tag element attributes."""
   attributes: MetaTagValueAttributes!
+
+  """The HTML tag for this meta element."""
   tag: String!
 }
 
+"""A meta content element's attributes."""
 type MetaTagValueAttributes {
+  """The content attribute of the meta tag."""
   content: String
+
+  """The name attribute of the meta tag."""
   name: String
 }
 
@@ -610,7 +768,7 @@ interface NodeInterface {
 """
 Use <em>basic pages</em> for your static content, such as an 'About us' page.
 """
-type NodePage implements NodeInterface {
+type NodePage implements MetaTagInterface & NodeInterface {
   """The username of the content author."""
   author: User!
 
@@ -648,6 +806,7 @@ type NodePage implements NodeInterface {
   title: String!
 }
 
+"""Entity type node."""
 union NodeUnion = NodePage
 
 """Add an expanding and collapsing element."""
@@ -655,7 +814,7 @@ type ParagraphAccordion implements LayoutParagraphsInterface & ParagraphInterfac
   """Title"""
   accordionTitle: String!
 
-  """Layout metadata for this paragraph."""
+  """Layout Paragraphs metadata for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -666,6 +825,9 @@ type ParagraphAccordion implements LayoutParagraphsInterface & ParagraphInterfac
 
   """Content"""
   items: [ParagraphUnion!]!
+
+  """The paragraphs entity language code."""
+  langcode: Language!
 }
 
 """
@@ -675,7 +837,7 @@ type ParagraphBlock implements LayoutParagraphsInterface & ParagraphInterface {
   """Block"""
   block: BlockUnion
 
-  """Layout metadata for this paragraph."""
+  """Layout Paragraphs metadata for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -683,11 +845,14 @@ type ParagraphBlock implements LayoutParagraphsInterface & ParagraphInterface {
 
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
+
+  """The paragraphs entity language code."""
+  langcode: Language!
 }
 
 """Add a title, text content with formatting and link."""
 type ParagraphCallToAction implements LayoutParagraphsInterface & ParagraphInterface {
-  """Layout metadata for this paragraph."""
+  """Layout Paragraphs metadata for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -695,6 +860,9 @@ type ParagraphCallToAction implements LayoutParagraphsInterface & ParagraphInter
 
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
+
+  """The paragraphs entity language code."""
+  langcode: Language!
 
   """Link"""
   link: Link
@@ -713,11 +881,14 @@ interface ParagraphInterface {
 
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
+
+  """The paragraphs entity language code."""
+  langcode: Language!
 }
 
 """Add Audio, Documents, Images or Videos and Embed YouTube videos."""
 type ParagraphMedia implements LayoutParagraphsInterface & ParagraphInterface {
-  """Layout metadata for this paragraph."""
+  """Layout Paragraphs metadata for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -728,6 +899,9 @@ type ParagraphMedia implements LayoutParagraphsInterface & ParagraphInterface {
 
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
+
+  """The paragraphs entity language code."""
+  langcode: Language!
 
   """Media"""
   media: MediaUnion!
@@ -741,7 +915,7 @@ type ParagraphQuote implements LayoutParagraphsInterface & ParagraphInterface {
   """Give credit for the quote."""
   citation: String
 
-  """Layout metadata for this paragraph."""
+  """Layout Paragraphs metadata for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -749,6 +923,9 @@ type ParagraphQuote implements LayoutParagraphsInterface & ParagraphInterface {
 
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
+
+  """The paragraphs entity language code."""
+  langcode: Language!
 
   """Enter an optional link for the citation."""
   link: Link
@@ -761,7 +938,7 @@ type ParagraphQuote implements LayoutParagraphsInterface & ParagraphInterface {
 Sections are layout containers with composition for embedding more components.
 """
 type ParagraphSection implements LayoutParagraphsInterface & ParagraphInterface {
-  """Layout metadata for this paragraph."""
+  """Layout Paragraphs metadata for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -769,11 +946,14 @@ type ParagraphSection implements LayoutParagraphsInterface & ParagraphInterface 
 
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
+
+  """The paragraphs entity language code."""
+  langcode: Language!
 }
 
 """Create a table with your own columns and rows."""
 type ParagraphTable implements LayoutParagraphsInterface & ParagraphInterface {
-  """Layout metadata for this paragraph."""
+  """Layout Paragraphs metadata for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -781,6 +961,9 @@ type ParagraphTable implements LayoutParagraphsInterface & ParagraphInterface {
 
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
+
+  """The paragraphs entity language code."""
+  langcode: Language!
 
   """Table"""
   table: Table!
@@ -791,7 +974,7 @@ type ParagraphTable implements LayoutParagraphsInterface & ParagraphInterface {
 
 """Text based content with formatting."""
 type ParagraphText implements LayoutParagraphsInterface & ParagraphInterface {
-  """Layout metadata for this paragraph."""
+  """Layout Paragraphs metadata for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -800,10 +983,14 @@ type ParagraphText implements LayoutParagraphsInterface & ParagraphInterface {
   """The Universally Unique IDentifier (UUID)."""
   id: ID!
 
+  """The paragraphs entity language code."""
+  langcode: Language!
+
   """Text"""
   text: Text!
 }
 
+"""Entity type paragraph."""
 union ParagraphUnion = ParagraphAccordion | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText
 
 """A field whose value conforms to the standard E.164"""
@@ -911,7 +1098,7 @@ type SchemaInformation {
   version: String
 }
 
-"""List of menus available to load."""
+"""Sort direction."""
 enum SortDirection {
   """Ascending"""
   ASC
@@ -920,16 +1107,24 @@ enum SortDirection {
   DESC
 }
 
+"""A table field."""
 type Table {
+  """The caption of the table."""
   caption: String
 
   """A text format associated with the row data."""
   format: String
+
+  """The rows of the table."""
   rows: [TableRow]
 }
 
+"""A row of a table field."""
 type TableRow {
+  """The data of the row."""
   data: [String]
+
+  """The weight of the row."""
   weight: Int
 }
 
@@ -947,6 +1142,9 @@ interface TermInterface {
   """The term language code."""
   langcode: Language!
 
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]!
+
   """Name"""
   name: String!
 
@@ -961,7 +1159,7 @@ interface TermInterface {
 }
 
 """Tags"""
-type TermTags implements TermInterface {
+type TermTags implements MetaTagInterface & TermInterface {
   """The time that the term was last edited."""
   changed: DateTime!
 
@@ -973,6 +1171,9 @@ type TermTags implements TermInterface {
 
   """The term language code."""
   langcode: Language!
+
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]!
 
   """Name"""
   name: String!
@@ -987,20 +1188,33 @@ type TermTags implements TermInterface {
   status: Boolean!
 }
 
+"""Entity type taxonomy_term."""
 union TermUnion = TermTags
 
 """A processed text format defined by the CMS."""
 type Text {
+  """The text format used to process the text value."""
   format: String
+
+  """The processed text value."""
   processed: Html
+
+  """The raw text value."""
   value: String
 }
 
 """A processed text format with summary defined by the CMS."""
 type TextSummary {
+  """The text format used to process the text value."""
   format: String
+
+  """The processed text value."""
   processed: Html
+
+  """The processed text summary."""
   summary: Html
+
+  """The raw text value."""
   value: String
 }
 
@@ -1025,7 +1239,7 @@ type UnsupportedType {
 }
 
 """Entity type user."""
-type User implements UserInterface {
+type User implements MetaTagInterface & UserInterface {
   """The time that the user was last edited."""
   changed: DateTime!
 
@@ -1037,6 +1251,9 @@ type User implements UserInterface {
 
   """The email of this user."""
   mail: Email
+
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]!
 
   """The name of this user."""
   name: String!
@@ -1062,6 +1279,9 @@ interface UserInterface {
   """The email of this user."""
   mail: Email
 
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]!
+
   """The name of this user."""
   name: String!
 
@@ -1086,6 +1306,7 @@ enum UserStatus {
   BLOCKED
 }
 
+"""Entity type user."""
 union UserUnion = User
 
 """A string that will have a value of format ±hh:mm"""

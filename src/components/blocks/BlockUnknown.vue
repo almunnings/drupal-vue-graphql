@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import type { Block } from '@/services/drupal'
+import type { BlockInterface } from '@/services/drupal'
 defineProps({
   block: {
-    type: Object as PropType<Block>,
+    type: Object as PropType<BlockInterface>,
     required: true
   }
 })
