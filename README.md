@@ -4,7 +4,9 @@ Combine all the things together to get a great development experience.
 
 This project is setup to work with [Drupal Boilerplate](https://github.com/almunnings/drupal-boilerplate).
 
-This project is intended to be a starting point, a hint, an idea. Not a solution.
+Running example: http://gqlc.almunnings.com/
+
+> This project is intended to be a starting point, a hint, an idea. Not a solution.
 
 ## Development
 
