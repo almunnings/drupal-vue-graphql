@@ -43,7 +43,7 @@ watch(
     // Add src sets for variation.
     sources.value.push({
       name: 'wide',
-      media: 'all and (min-width: 1400px)',
+      media: 'all and (min-width: 992px)',
       width: variations.get('WIDE')?.width || 0,
       height: variations.get('WIDE')?.height || 0,
       srcset: [
@@ -54,7 +54,7 @@ watch(
 
     sources.value.push({
       name: 'large',
-      media: 'all and (min-width: 768px)',
+      media: 'all and (min-width: 420px)',
       width: variations.get('LARGE')?.width || 0,
       height: variations.get('LARGE')?.height || 0,
       srcset: [
@@ -65,7 +65,7 @@ watch(
 
     sources.value.push({
       name: 'medium',
-      media: 'all and (min-width: 480px)',
+      media: 'all and (max-width: 420px)',
       width: variations.get('MEDIUM')?.width || 0,
       height: variations.get('MEDIUM')?.height || 0,
       srcset: [
@@ -87,7 +87,7 @@ watch(
       title="Open image in new tab"
       target="_blank"
       rel="noopener"
-      class="figure-img d-inline-block"
+      class="figure-img d-inline-block m-0"
     >
       <picture class="figure-img d-inline-block">
         <source

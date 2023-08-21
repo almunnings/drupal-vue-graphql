@@ -1343,7 +1343,7 @@ export interface ImageStyleUnionGenqlSelection{
 
 
 /** Generic untyped input for key-value pairs. */
-export interface KeyValueInput {key?: Scalars['String'],value?: (Scalars['String'] | null)}
+export interface KeyValueInput {key: Scalars['String'],value?: (Scalars['String'] | null)}
 
 
 /** A language definition provided by the CMS. */
