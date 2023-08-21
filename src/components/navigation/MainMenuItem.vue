@@ -36,14 +36,16 @@ const props = defineProps({
     />
 
     <ul class="dropdown-menu" v-if="item.children.length">
-      <RouteLink
-        v-if="item.url"
-        :url="item.url"
-        :internal="item.internal"
-        :title="item.title"
-        class="dropdown-item"
-        :target="item.attributes.target"
-      />
+      <li>
+        <RouteLink
+          v-if="item.url"
+          :url="item.url"
+          :internal="item.internal"
+          :title="item.title"
+          class="dropdown-item"
+          :target="item.attributes.target"
+        />
+      </li>
 
       <li class="dropdown-divider"></li>
 

@@ -38,7 +38,6 @@ const loading = computed(() => menuStore.loading.get(props.name))
       <button
         class="navbar-toggler"
         type="button"
-        ref="collapse"
         data-bs-toggle="collapse"
         data-bs-target="#mainNav"
         aria-controls="mainNav"
@@ -48,7 +47,7 @@ const loading = computed(() => menuStore.loading.get(props.name))
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="mainNav">
+      <div class="collapse navbar-collapse" id="mainNav" ref="collapse">
         <ul class="navbar-nav me-auto" v-if="menu">
           <MainMenuItem
             :item="item"
