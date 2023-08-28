@@ -205,10 +205,15 @@ export interface EdgeNode {
 
 /** A file object to represent an managed file. */
 export interface File {
+    /** The description of the file. */
     description: (Scalars['String'] | null)
+    /** The mime type of the file. */
     mime: (Scalars['String'] | null)
+    /** The name of the file. */
     name: (Scalars['String'] | null)
+    /** The size of the file in bytes. */
     size: Scalars['Int']
+    /** The URL of the file. */
     url: Scalars['String']
     __typename: 'File'
 }
@@ -222,6 +227,8 @@ export interface Image {
     height: Scalars['Int']
     /** The mime type of the image. */
     mime: (Scalars['String'] | null)
+    /** The size of the image in bytes. */
+    size: Scalars['Int']
     /** The title text of the image. */
     title: (Scalars['String'] | null)
     /** The URL of the image. */
@@ -1271,10 +1278,15 @@ export interface EdgeNodeGenqlSelection{
 
 /** A file object to represent an managed file. */
 export interface FileGenqlSelection{
+    /** The description of the file. */
     description?: boolean | number
+    /** The mime type of the file. */
     mime?: boolean | number
+    /** The name of the file. */
     name?: boolean | number
+    /** The size of the file in bytes. */
     size?: boolean | number
+    /** The URL of the file. */
     url?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1289,6 +1301,8 @@ export interface ImageGenqlSelection{
     height?: boolean | number
     /** The mime type of the image. */
     mime?: boolean | number
+    /** The size of the image in bytes. */
+    size?: boolean | number
     /** The title text of the image. */
     title?: boolean | number
     /** The URL of the image. */

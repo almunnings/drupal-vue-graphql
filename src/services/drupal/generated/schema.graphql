@@ -233,10 +233,19 @@ scalar Email
 
 """A file object to represent an managed file."""
 type File {
+  """The description of the file."""
   description: String
+
+  """The mime type of the file."""
   mime: String
+
+  """The name of the file."""
   name: String
+
+  """The size of the file in bytes."""
   size: Int!
+
+  """The URL of the file."""
   url: String!
 }
 
@@ -259,6 +268,9 @@ type Image {
 
   """The mime type of the image."""
   mime: String
+
+  """The size of the image in bytes."""
+  size: Int!
 
   """The title text of the image."""
   title: String

@@ -344,6 +344,9 @@ export default {
             "mime": [
                 85
             ],
+            "size": [
+                31
+            ],
             "title": [
                 85
             ],
