@@ -608,8 +608,8 @@ export type NodeInterface = (NodePage) & { __isUnion?: true }
 
 /** Use <em>basic pages</em> for your static content, such as an 'About us' page. */
 export interface NodePage {
-    /** The username of the content author. */
-    author: User
+    /** The author of this content. */
+    author: (User | null)
     /** The time that the node was last edited. */
     changed: DateTime
     /** Content */
@@ -922,6 +922,8 @@ export interface TermTags {
     path: Scalars['String']
     /** Published */
     status: Scalars['Boolean']
+    /** The weight of this term in relation to other terms. */
+    weight: Scalars['Int']
     __typename: 'TermTags'
 }
 
@@ -1794,7 +1796,7 @@ export interface MutationGenqlSelection{
 
 /** Entity type node. */
 export interface NodeInterfaceGenqlSelection{
-    /** The username of the content author. */
+    /** The author of this content. */
     author?: UserGenqlSelection
     /** The time that the node was last edited. */
     changed?: DateTimeGenqlSelection
@@ -1824,7 +1826,7 @@ export interface NodeInterfaceGenqlSelection{
 
 /** Use <em>basic pages</em> for your static content, such as an 'About us' page. */
 export interface NodePageGenqlSelection{
-    /** The username of the content author. */
+    /** The author of this content. */
     author?: UserGenqlSelection
     /** The time that the node was last edited. */
     changed?: DateTimeGenqlSelection
@@ -2209,6 +2211,8 @@ export interface TermInterfaceGenqlSelection{
     path?: boolean | number
     /** Published */
     status?: boolean | number
+    /** The weight of this term in relation to other terms. */
+    weight?: boolean | number
     on_TermTags?: TermTagsGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -2235,6 +2239,8 @@ export interface TermTagsGenqlSelection{
     path?: boolean | number
     /** Published */
     status?: boolean | number
+    /** The weight of this term in relation to other terms. */
+    weight?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }

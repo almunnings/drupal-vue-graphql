@@ -743,8 +743,8 @@ type Mutation {
 
 """Entity type node."""
 interface NodeInterface {
-  """The username of the content author."""
-  author: User!
+  """The author of this content."""
+  author: User
 
   """The time that the node was last edited."""
   changed: DateTime!
@@ -781,8 +781,8 @@ interface NodeInterface {
 Use <em>basic pages</em> for your static content, such as an 'About us' page.
 """
 type NodePage implements MetaTagInterface & NodeInterface {
-  """The username of the content author."""
-  author: User!
+  """The author of this content."""
+  author: User
 
   """The time that the node was last edited."""
   changed: DateTime!
@@ -1168,6 +1168,9 @@ interface TermInterface {
 
   """Published"""
   status: Boolean!
+
+  """The weight of this term in relation to other terms."""
+  weight: Int!
 }
 
 """Tags"""
@@ -1198,6 +1201,9 @@ type TermTags implements MetaTagInterface & TermInterface {
 
   """Published"""
   status: Boolean!
+
+  """The weight of this term in relation to other terms."""
+  weight: Int!
 }
 
 """Entity type taxonomy_term."""

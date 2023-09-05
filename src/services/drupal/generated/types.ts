@@ -1553,6 +1553,9 @@ export default {
             "status": [
                 11
             ],
+            "weight": [
+                31
+            ],
             "on_TermTags": [
                 89
             ],
@@ -1587,6 +1590,9 @@ export default {
             ],
             "status": [
                 11
+            ],
+            "weight": [
+                31
             ],
             "__typename": [
                 85
