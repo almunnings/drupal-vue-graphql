@@ -24,9 +24,6 @@ type AddressCountry {
   name: String
 }
 
-"""Untyped attribute data. Eg configuration, settings, attributes."""
-scalar Attributes
-
 """
 Block content is a modular piece of content that can be displayed in various regions of a website's layout.
 """
@@ -1174,7 +1171,7 @@ interface TermInterface {
 }
 
 """Tags"""
-type TermTags implements MetaTagInterface & TermInterface {
+type TermTag implements MetaTagInterface & TermInterface {
   """The time that the term was last edited."""
   changed: DateTime!
 
@@ -1207,7 +1204,7 @@ type TermTags implements MetaTagInterface & TermInterface {
 }
 
 """Entity type taxonomy_term."""
-union TermUnion = TermTags
+union TermUnion = TermTag
 
 """A processed text format defined by the CMS."""
 type Text {
@@ -1255,6 +1252,9 @@ type UnsupportedType {
   """Unsupported type, always TRUE."""
   unsupported: Boolean
 }
+
+"""Untyped structured data. Eg JSON, configuration, settings, attributes."""
+scalar UntypedStructuredData
 
 """Entity type user."""
 type User implements MetaTagInterface & UserInterface {

@@ -4,7 +4,6 @@
 /* eslint-disable */
 
 export type Scalars = {
-    Attributes: any,
     Boolean: boolean,
     Cursor: any,
     Email: any,
@@ -17,6 +16,7 @@ export type Scalars = {
     Time: any,
     TimeZone: any,
     Timestamp: any,
+    UntypedStructuredData: any,
     UserRoles: any,
     UtcOffset: any,
 }
@@ -527,7 +527,7 @@ export type MetaTag = (MetaTagLink | MetaTagProperty | MetaTagValue) & { __isUni
 
 
 /** This entity has meta tags enabled. */
-export type MetaTagInterface = (MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo | NodePage | TermTags | User) & { __isUnion?: true }
+export type MetaTagInterface = (MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo | NodePage | TermTag | User) & { __isUnion?: true }
 
 
 /** A meta link element. */
@@ -899,11 +899,11 @@ export interface TableRow {
 
 
 /** Entity type taxonomy_term. */
-export type TermInterface = (TermTags) & { __isUnion?: true }
+export type TermInterface = (TermTag) & { __isUnion?: true }
 
 
 /** Tags */
-export interface TermTags {
+export interface TermTag {
     /** The time that the term was last edited. */
     changed: DateTime
     /** Description */
@@ -924,12 +924,12 @@ export interface TermTags {
     status: Scalars['Boolean']
     /** The weight of this term in relation to other terms. */
     weight: Scalars['Int']
-    __typename: 'TermTags'
+    __typename: 'TermTag'
 }
 
 
 /** Entity type taxonomy_term. */
-export type TermUnion = (TermTags) & { __isUnion?: true }
+export type TermUnion = (TermTag) & { __isUnion?: true }
 
 
 /** A processed text format defined by the CMS. */
@@ -1702,7 +1702,7 @@ export interface MetaTagInterfaceGenqlSelection{
     on_MediaRemoteVideo?: MediaRemoteVideoGenqlSelection
     on_MediaVideo?: MediaVideoGenqlSelection
     on_NodePage?: NodePageGenqlSelection
-    on_TermTags?: TermTagsGenqlSelection
+    on_TermTag?: TermTagGenqlSelection
     on_User?: UserGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -2213,14 +2213,14 @@ export interface TermInterfaceGenqlSelection{
     status?: boolean | number
     /** The weight of this term in relation to other terms. */
     weight?: boolean | number
-    on_TermTags?: TermTagsGenqlSelection
+    on_TermTag?: TermTagGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
 
 /** Tags */
-export interface TermTagsGenqlSelection{
+export interface TermTagGenqlSelection{
     /** The time that the term was last edited. */
     changed?: DateTimeGenqlSelection
     /** Description */
@@ -2248,7 +2248,7 @@ export interface TermTagsGenqlSelection{
 
 /** Entity type taxonomy_term. */
 export interface TermUnionGenqlSelection{
-    on_TermTags?:TermTagsGenqlSelection,
+    on_TermTag?:TermTagGenqlSelection,
     on_MetaTagInterface?: MetaTagInterfaceGenqlSelection,
     on_TermInterface?: TermInterfaceGenqlSelection,
     __typename?: boolean | number
@@ -2735,7 +2735,7 @@ export interface ViewResultUnionGenqlSelection{
     
 
 
-    const MetaTagInterface_possibleTypes: string[] = ['MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo','NodePage','TermTags','User']
+    const MetaTagInterface_possibleTypes: string[] = ['MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo','NodePage','TermTag','User']
     export const isMetaTagInterface = (obj?: { __typename?: any } | null): obj is MetaTagInterface => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isMetaTagInterface"')
       return MetaTagInterface_possibleTypes.includes(obj.__typename)
@@ -2991,7 +2991,7 @@ export interface ViewResultUnionGenqlSelection{
     
 
 
-    const TermInterface_possibleTypes: string[] = ['TermTags']
+    const TermInterface_possibleTypes: string[] = ['TermTag']
     export const isTermInterface = (obj?: { __typename?: any } | null): obj is TermInterface => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isTermInterface"')
       return TermInterface_possibleTypes.includes(obj.__typename)
@@ -2999,15 +2999,15 @@ export interface ViewResultUnionGenqlSelection{
     
 
 
-    const TermTags_possibleTypes: string[] = ['TermTags']
-    export const isTermTags = (obj?: { __typename?: any } | null): obj is TermTags => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isTermTags"')
-      return TermTags_possibleTypes.includes(obj.__typename)
+    const TermTag_possibleTypes: string[] = ['TermTag']
+    export const isTermTag = (obj?: { __typename?: any } | null): obj is TermTag => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isTermTag"')
+      return TermTag_possibleTypes.includes(obj.__typename)
     }
     
 
 
-    const TermUnion_possibleTypes: string[] = ['TermTags']
+    const TermUnion_possibleTypes: string[] = ['TermTag']
     export const isTermUnion = (obj?: { __typename?: any } | null): obj is TermUnion => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isTermUnion"')
       return TermUnion_possibleTypes.includes(obj.__typename)
