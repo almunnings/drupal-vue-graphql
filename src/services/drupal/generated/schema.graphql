@@ -135,54 +135,6 @@ type BlockPlugin implements BlockInterface {
 """Block types that can exist in the system."""
 union BlockUnion = BlockContent | BlockPlugin
 
-"""A paginated set of results."""
-interface Connection {
-  """The edges of this connection."""
-  edges: [Edge!]!
-
-  """The nodes of the edges of this connection."""
-  nodes: [EdgeNode!]!
-
-  """Information to aid in pagination."""
-  pageInfo: ConnectionPageInfo!
-}
-
-"""Information about the page in a connection."""
-type ConnectionPageInfo {
-  """The cursor for the last element in this page."""
-  endCursor: Cursor
-
-  """Whether there are more pages in this connection."""
-  hasNextPage: Boolean!
-
-  """Whether there are previous pages in this connection."""
-  hasPreviousPage: Boolean!
-
-  """The cursor for the first element in this page."""
-  startCursor: Cursor
-}
-
-"""Choose how your sorts will occur and on which field."""
-enum ConnectionSortKeys {
-  """Sort by creation date"""
-  CREATED_AT
-
-  """Sort by promoted status."""
-  PROMOTED
-
-  """Sort by sticky status."""
-  STICKY
-
-  """Sort by entity title."""
-  TITLE
-
-  """Sort by updated date"""
-  UPDATED_AT
-}
-
-"""A cursor for use in pagination."""
-scalar Cursor
-
 """A Date range has a start and an end."""
 type DateRange {
   """The end of the date range."""
@@ -207,22 +159,6 @@ type DateTime {
 
   """A field whose value exists in the standard IANA Time Zone Database."""
   timezone: TimeZone!
-}
-
-"""
-An edge in a connection.
-Provides the cursor to fetch data based on the position of the associated
-node. Specific edge implementations may provide more information about the
-relationship they represent.
-"""
-interface Edge {
-  cursor: Cursor!
-  node: EdgeNode!
-}
-
-"""This entity is accessible over an Edge connection."""
-interface EdgeNode {
-  id: ID!
 }
 
 """An email address."""
@@ -740,9 +676,6 @@ type Mutation {
 
 """Entity type node."""
 interface NodeInterface {
-  """The author of this content."""
-  author: User
-
   """The time that the node was last edited."""
   changed: DateTime!
 
@@ -778,9 +711,6 @@ interface NodeInterface {
 Use <em>basic pages</em> for your static content, such as an 'About us' page.
 """
 type NodePage implements MetaTagInterface & NodeInterface {
-  """The author of this content."""
-  author: User
-
   """The time that the node was last edited."""
   changed: DateTime!
 
@@ -1022,23 +952,27 @@ type Query {
 
   """Load a Route by path."""
   menu(
-    """Internal menu name. Eg main"""
+    """
+    Optionally set the response language. Eg en, ja, fr. Setting this langcode
+    will change the current language of the entire response.
+    """
+    langcode: String
+
+    """Internal menu name. Eg MAIN"""
     name: MenuAvailable!
   ): Menu
 
   """Load a Route by path."""
   route(
-    """Optionally filter the route by language. Eg en, ja, fr."""
+    """
+    Optionally set the response language. Eg en, ja, fr. Setting this langcode
+    will change the current language of the entire response.
+    """
     langcode: String
 
     """Internal path to load. Eg /about"""
     path: String!
   ): RouteUnion
-
-  """
-  Get information about the currently authenticated user. NULL if not logged in.
-  """
-  viewer: User
 }
 
 """Routes represent incoming requests that resolve to content."""
@@ -1255,77 +1189,6 @@ type UnsupportedType {
 
 """Untyped structured data. Eg JSON, configuration, settings, attributes."""
 scalar UntypedStructuredData
-
-"""Entity type user."""
-type User implements MetaTagInterface & UserInterface {
-  """The time that the user was last edited."""
-  changed: DateTime!
-
-  """The time that the user was created."""
-  created: DateTime!
-
-  """The Universally Unique IDentifier (UUID)."""
-  id: ID!
-
-  """The email of this user."""
-  mail: Email
-
-  """The computed meta tags for the entity."""
-  metatag: [MetaTagUnion!]!
-
-  """The name of this user."""
-  name: String!
-
-  """The roles the user has."""
-  roles: [UserRoles!]
-
-  """Whether the user is active or blocked."""
-  status: UserStatus!
-}
-
-"""Entity type user."""
-interface UserInterface {
-  """The time that the user was last edited."""
-  changed: DateTime!
-
-  """The time that the user was created."""
-  created: DateTime!
-
-  """The Universally Unique IDentifier (UUID)."""
-  id: ID!
-
-  """The email of this user."""
-  mail: Email
-
-  """The computed meta tags for the entity."""
-  metatag: [MetaTagUnion!]!
-
-  """The name of this user."""
-  name: String!
-
-  """The roles the user has."""
-  roles: [UserRoles!]
-
-  """Whether the user is active or blocked."""
-  status: UserStatus!
-}
-
-"""User roles."""
-scalar UserRoles
-
-"""Whether the user is active or blocked."""
-enum UserStatus {
-  """An active user is able to login on the platform and view content"""
-  ACTIVE
-
-  """
-  A blocked user is unable to access the platform, although their content will still be visible until it's deleted.
-  """
-  BLOCKED
-}
-
-"""Entity type user."""
-union UserUnion = User
 
 """A string that will have a value of format ±hh:mm"""
 scalar UtcOffset

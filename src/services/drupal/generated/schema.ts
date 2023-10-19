@@ -5,7 +5,6 @@
 
 export type Scalars = {
     Boolean: boolean,
-    Cursor: any,
     Email: any,
     Float: number,
     Html: any,
@@ -17,7 +16,6 @@ export type Scalars = {
     TimeZone: any,
     Timestamp: any,
     UntypedStructuredData: any,
-    UserRoles: any,
     UtcOffset: any,
 }
 
@@ -129,36 +127,6 @@ export interface BlockPlugin {
 export type BlockUnion = (BlockContent | BlockPlugin) & { __isUnion?: true }
 
 
-/** A paginated set of results. */
-export interface Connection {
-    /** The edges of this connection. */
-    edges: Edge[]
-    /** The nodes of the edges of this connection. */
-    nodes: EdgeNode[]
-    /** Information to aid in pagination. */
-    pageInfo: ConnectionPageInfo
-    __typename: string
-}
-
-
-/** Information about the page in a connection. */
-export interface ConnectionPageInfo {
-    /** The cursor for the last element in this page. */
-    endCursor: (Scalars['Cursor'] | null)
-    /** Whether there are more pages in this connection. */
-    hasNextPage: Scalars['Boolean']
-    /** Whether there are previous pages in this connection. */
-    hasPreviousPage: Scalars['Boolean']
-    /** The cursor for the first element in this page. */
-    startCursor: (Scalars['Cursor'] | null)
-    __typename: 'ConnectionPageInfo'
-}
-
-
-/** Choose how your sorts will occur and on which field. */
-export type ConnectionSortKeys = 'CREATED_AT' | 'PROMOTED' | 'STICKY' | 'TITLE' | 'UPDATED_AT'
-
-
 /** A Date range has a start and an end. */
 export interface DateRange {
     /** The end of the date range. */
@@ -180,26 +148,6 @@ export interface DateTime {
     /** A field whose value exists in the standard IANA Time Zone Database. */
     timezone: Scalars['TimeZone']
     __typename: 'DateTime'
-}
-
-
-/**
- * An edge in a connection.
- * Provides the cursor to fetch data based on the position of the associated
- * node. Specific edge implementations may provide more information about the
- * relationship they represent.
- */
-export interface Edge {
-    cursor: Scalars['Cursor']
-    node: EdgeNode
-    __typename: string
-}
-
-
-/** This entity is accessible over an Edge connection. */
-export interface EdgeNode {
-    id: Scalars['ID']
-    __typename: string
 }
 
 
@@ -527,7 +475,7 @@ export type MetaTag = (MetaTagLink | MetaTagProperty | MetaTagValue) & { __isUni
 
 
 /** This entity has meta tags enabled. */
-export type MetaTagInterface = (MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo | NodePage | TermTag | User) & { __isUnion?: true }
+export type MetaTagInterface = (MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo | NodePage | TermTag) & { __isUnion?: true }
 
 
 /** A meta link element. */
@@ -608,8 +556,6 @@ export type NodeInterface = (NodePage) & { __isUnion?: true }
 
 /** Use <em>basic pages</em> for your static content, such as an 'About us' page. */
 export interface NodePage {
-    /** The author of this content. */
-    author: (User | null)
     /** The time that the node was last edited. */
     changed: DateTime
     /** Content */
@@ -804,8 +750,6 @@ export interface Query {
     menu: (Menu | null)
     /** Load a Route by path. */
     route: (RouteUnion | null)
-    /** Get information about the currently authenticated user. NULL if not logged in. */
-    viewer: (User | null)
     __typename: 'Query'
 }
 
@@ -967,40 +911,6 @@ export interface UnsupportedType {
     unsupported: (Scalars['Boolean'] | null)
     __typename: 'UnsupportedType'
 }
-
-
-/** Entity type user. */
-export interface User {
-    /** The time that the user was last edited. */
-    changed: DateTime
-    /** The time that the user was created. */
-    created: DateTime
-    /** The Universally Unique IDentifier (UUID). */
-    id: Scalars['ID']
-    /** The email of this user. */
-    mail: (Scalars['Email'] | null)
-    /** The computed meta tags for the entity. */
-    metatag: MetaTagUnion[]
-    /** The name of this user. */
-    name: Scalars['String']
-    /** The roles the user has. */
-    roles: (Scalars['UserRoles'][] | null)
-    /** Whether the user is active or blocked. */
-    status: UserStatus
-    __typename: 'User'
-}
-
-
-/** Entity type user. */
-export type UserInterface = (User) & { __isUnion?: true }
-
-
-/** Whether the user is active or blocked. */
-export type UserStatus = 'ACTIVE' | 'BLOCKED'
-
-
-/** Entity type user. */
-export type UserUnion = (User) & { __isUnion?: true }
 
 
 /** Views represent collections of curated data from the site. */
@@ -1202,34 +1112,6 @@ export interface BlockUnionGenqlSelection{
 }
 
 
-/** A paginated set of results. */
-export interface ConnectionGenqlSelection{
-    /** The edges of this connection. */
-    edges?: EdgeGenqlSelection
-    /** The nodes of the edges of this connection. */
-    nodes?: EdgeNodeGenqlSelection
-    /** Information to aid in pagination. */
-    pageInfo?: ConnectionPageInfoGenqlSelection
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Information about the page in a connection. */
-export interface ConnectionPageInfoGenqlSelection{
-    /** The cursor for the last element in this page. */
-    endCursor?: boolean | number
-    /** Whether there are more pages in this connection. */
-    hasNextPage?: boolean | number
-    /** Whether there are previous pages in this connection. */
-    hasPreviousPage?: boolean | number
-    /** The cursor for the first element in this page. */
-    startCursor?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
 /** A Date range has a start and an end. */
 export interface DateRangeGenqlSelection{
     /** The end of the date range. */
@@ -1251,28 +1133,6 @@ export interface DateTimeGenqlSelection{
     timestamp?: boolean | number
     /** A field whose value exists in the standard IANA Time Zone Database. */
     timezone?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/**
- * An edge in a connection.
- * Provides the cursor to fetch data based on the position of the associated
- * node. Specific edge implementations may provide more information about the
- * relationship they represent.
- */
-export interface EdgeGenqlSelection{
-    cursor?: boolean | number
-    node?: EdgeNodeGenqlSelection
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** This entity is accessible over an Edge connection. */
-export interface EdgeNodeGenqlSelection{
-    id?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1703,7 +1563,6 @@ export interface MetaTagInterfaceGenqlSelection{
     on_MediaVideo?: MediaVideoGenqlSelection
     on_NodePage?: NodePageGenqlSelection
     on_TermTag?: TermTagGenqlSelection
-    on_User?: UserGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1796,8 +1655,6 @@ export interface MutationGenqlSelection{
 
 /** Entity type node. */
 export interface NodeInterfaceGenqlSelection{
-    /** The author of this content. */
-    author?: UserGenqlSelection
     /** The time that the node was last edited. */
     changed?: DateTimeGenqlSelection
     /** The time that the node was created. */
@@ -1826,8 +1683,6 @@ export interface NodeInterfaceGenqlSelection{
 
 /** Use <em>basic pages</em> for your static content, such as an 'About us' page. */
 export interface NodePageGenqlSelection{
-    /** The author of this content. */
-    author?: UserGenqlSelection
     /** The time that the node was last edited. */
     changed?: DateTimeGenqlSelection
     /** Content */
@@ -2065,16 +1920,22 @@ export interface QueryGenqlSelection{
     info?: SchemaInformationGenqlSelection
     /** Load a Route by path. */
     menu?: (MenuGenqlSelection & { __args: {
-    /** Internal menu name. Eg main */
+    /**
+     * Optionally set the response language. Eg en, ja, fr. Setting this langcode
+     * will change the current language of the entire response.
+     */
+    langcode?: (Scalars['String'] | null), 
+    /** Internal menu name. Eg MAIN */
     name: MenuAvailable} })
     /** Load a Route by path. */
     route?: (RouteUnionGenqlSelection & { __args: {
-    /** Optionally filter the route by language. Eg en, ja, fr. */
+    /**
+     * Optionally set the response language. Eg en, ja, fr. Setting this langcode
+     * will change the current language of the entire response.
+     */
     langcode?: (Scalars['String'] | null), 
     /** Internal path to load. Eg /about */
     path: Scalars['String']} })
-    /** Get information about the currently authenticated user. NULL if not logged in. */
-    viewer?: UserGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -2295,62 +2156,6 @@ export interface UnsupportedTypeGenqlSelection{
 }
 
 
-/** Entity type user. */
-export interface UserGenqlSelection{
-    /** The time that the user was last edited. */
-    changed?: DateTimeGenqlSelection
-    /** The time that the user was created. */
-    created?: DateTimeGenqlSelection
-    /** The Universally Unique IDentifier (UUID). */
-    id?: boolean | number
-    /** The email of this user. */
-    mail?: boolean | number
-    /** The computed meta tags for the entity. */
-    metatag?: MetaTagUnionGenqlSelection
-    /** The name of this user. */
-    name?: boolean | number
-    /** The roles the user has. */
-    roles?: boolean | number
-    /** Whether the user is active or blocked. */
-    status?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Entity type user. */
-export interface UserInterfaceGenqlSelection{
-    /** The time that the user was last edited. */
-    changed?: DateTimeGenqlSelection
-    /** The time that the user was created. */
-    created?: DateTimeGenqlSelection
-    /** The Universally Unique IDentifier (UUID). */
-    id?: boolean | number
-    /** The email of this user. */
-    mail?: boolean | number
-    /** The computed meta tags for the entity. */
-    metatag?: MetaTagUnionGenqlSelection
-    /** The name of this user. */
-    name?: boolean | number
-    /** The roles the user has. */
-    roles?: boolean | number
-    /** Whether the user is active or blocked. */
-    status?: boolean | number
-    on_User?: UserGenqlSelection
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Entity type user. */
-export interface UserUnionGenqlSelection{
-    on_User?:UserGenqlSelection,
-    on_MetaTagInterface?: MetaTagInterfaceGenqlSelection,
-    on_UserInterface?: UserInterfaceGenqlSelection,
-    __typename?: boolean | number
-}
-
-
 /** Views represent collections of curated data from the site. */
 export interface ViewGenqlSelection{
     /** The description of the view. */
@@ -2487,22 +2292,6 @@ export interface ViewResultUnionGenqlSelection{
     
 
 
-    const Connection_possibleTypes: string[] = []
-    export const isConnection = (obj?: { __typename?: any } | null): obj is Connection => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isConnection"')
-      return Connection_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const ConnectionPageInfo_possibleTypes: string[] = ['ConnectionPageInfo']
-    export const isConnectionPageInfo = (obj?: { __typename?: any } | null): obj is ConnectionPageInfo => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isConnectionPageInfo"')
-      return ConnectionPageInfo_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
     const DateRange_possibleTypes: string[] = ['DateRange']
     export const isDateRange = (obj?: { __typename?: any } | null): obj is DateRange => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isDateRange"')
@@ -2515,22 +2304,6 @@ export interface ViewResultUnionGenqlSelection{
     export const isDateTime = (obj?: { __typename?: any } | null): obj is DateTime => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isDateTime"')
       return DateTime_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const Edge_possibleTypes: string[] = []
-    export const isEdge = (obj?: { __typename?: any } | null): obj is Edge => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isEdge"')
-      return Edge_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const EdgeNode_possibleTypes: string[] = []
-    export const isEdgeNode = (obj?: { __typename?: any } | null): obj is EdgeNode => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isEdgeNode"')
-      return EdgeNode_possibleTypes.includes(obj.__typename)
     }
     
 
@@ -2735,7 +2508,7 @@ export interface ViewResultUnionGenqlSelection{
     
 
 
-    const MetaTagInterface_possibleTypes: string[] = ['MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo','NodePage','TermTag','User']
+    const MetaTagInterface_possibleTypes: string[] = ['MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo','NodePage','TermTag']
     export const isMetaTagInterface = (obj?: { __typename?: any } | null): obj is MetaTagInterface => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isMetaTagInterface"')
       return MetaTagInterface_possibleTypes.includes(obj.__typename)
@@ -3039,30 +2812,6 @@ export interface ViewResultUnionGenqlSelection{
     
 
 
-    const User_possibleTypes: string[] = ['User']
-    export const isUser = (obj?: { __typename?: any } | null): obj is User => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isUser"')
-      return User_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const UserInterface_possibleTypes: string[] = ['User']
-    export const isUserInterface = (obj?: { __typename?: any } | null): obj is UserInterface => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isUserInterface"')
-      return UserInterface_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
-    const UserUnion_possibleTypes: string[] = ['User']
-    export const isUserUnion = (obj?: { __typename?: any } | null): obj is UserUnion => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isUserUnion"')
-      return UserUnion_possibleTypes.includes(obj.__typename)
-    }
-    
-
-
     const View_possibleTypes: string[] = []
     export const isView = (obj?: { __typename?: any } | null): obj is View => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isView"')
@@ -3094,14 +2843,6 @@ export interface ViewResultUnionGenqlSelection{
     }
     
 
-export const enumConnectionSortKeys = {
-   CREATED_AT: 'CREATED_AT' as const,
-   PROMOTED: 'PROMOTED' as const,
-   STICKY: 'STICKY' as const,
-   TITLE: 'TITLE' as const,
-   UPDATED_AT: 'UPDATED_AT' as const
-}
-
 export const enumImageStyleAvailable = {
    LARGE: 'LARGE' as const,
    LARGE2X: 'LARGE2X' as const,
@@ -3120,9 +2861,4 @@ export const enumMenuAvailable = {
 export const enumSortDirection = {
    ASC: 'ASC' as const,
    DESC: 'DESC' as const
-}
-
-export const enumUserStatus = {
-   ACTIVE: 'ACTIVE' as const,
-   BLOCKED: 'BLOCKED' as const
 }

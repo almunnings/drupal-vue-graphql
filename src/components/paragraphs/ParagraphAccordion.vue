@@ -31,13 +31,13 @@ onMounted(() => {
           aria-expanded="false"
           :aria-controls="paragraph.id"
           data-bs-toggle="collapse"
-          :data-bs-target="`#${paragraph.id}`"
+          :data-bs-target="`#accordion-${paragraph.id}`"
         >
           {{ props.paragraph.accordionTitle }}
         </button>
       </h2>
       <div
-        :id="paragraph.id"
+        :id="`accordion-${paragraph.id}`"
         ref="collapse"
         class="accordion-collapse collapse"
       >

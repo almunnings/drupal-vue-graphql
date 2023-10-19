@@ -2,79 +2,75 @@ export default {
     "scalars": [
         10,
         13,
-        14,
-        19,
-        21,
-        22,
-        23,
-        26,
-        30,
-        46,
-        74,
-        83,
-        84,
-        92,
-        93,
-        94,
-        96,
-        99,
-        100,
-        102
+        15,
+        16,
+        17,
+        20,
+        24,
+        40,
+        68,
+        77,
+        78,
+        86,
+        87,
+        88,
+        90,
+        91
     ],
     "types": {
         "Address": {
             "additionalName": [
-                84
+                78
             ],
             "addressLine1": [
-                84
+                78
             ],
             "addressLine2": [
-                84
+                78
             ],
             "administrativeArea": [
-                84
+                78
             ],
             "country": [
                 1
             ],
             "dependentLocality": [
-                84
+                78
             ],
             "familyName": [
-                84
+                78
             ],
             "givenName": [
-                84
+                78
             ],
             "langcode": [
-                84
+                78
             ],
             "locality": [
-                84
+                78
             ],
             "organization": [
-                84
+                78
             ],
             "postalCode": [
-                84
+                78
             ],
             "sortingCode": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "AddressCountry": {
             "code": [
-                84
+                78
             ],
             "name": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "BlockContent": {
@@ -82,79 +78,79 @@ export default {
                 6
             ],
             "id": [
-                23
+                17
             ],
             "render": [
-                22
+                16
             ],
             "title": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "BlockContentAnotherType": {
             "body": [
-                91
+                85
             ],
             "changed": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "reusable": [
                 10
             ],
             "title": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "BlockContentBasicBlock": {
             "body": [
-                91
+                85
             ],
             "changed": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "reusable": [
                 10
             ],
             "title": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "BlockContentInterface": {
             "changed": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "reusable": [
                 10
             ],
             "title": [
-                84
+                78
             ],
             "on_BlockContentAnotherType": [
                 3
@@ -163,7 +159,7 @@ export default {
                 4
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "BlockContentUnion": {
@@ -177,18 +173,18 @@ export default {
                 5
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "BlockInterface": {
             "id": [
-                23
+                17
             ],
             "render": [
-                22
+                16
             ],
             "title": [
-                84
+                78
             ],
             "on_BlockContent": [
                 2
@@ -197,21 +193,21 @@ export default {
                 8
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "BlockPlugin": {
             "id": [
-                23
+                17
             ],
             "render": [
-                22
+                16
             ],
             "title": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "BlockUnion": {
@@ -225,109 +221,57 @@ export default {
                 7
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "Boolean": {},
-        "Connection": {
-            "edges": [
-                17
+        "DateRange": {
+            "end": [
+                12
             ],
-            "nodes": [
-                18
-            ],
-            "pageInfo": [
+            "start": [
                 12
             ],
             "__typename": [
-                84
-            ]
-        },
-        "ConnectionPageInfo": {
-            "endCursor": [
-                14
-            ],
-            "hasNextPage": [
-                10
-            ],
-            "hasPreviousPage": [
-                10
-            ],
-            "startCursor": [
-                14
-            ],
-            "__typename": [
-                84
-            ]
-        },
-        "ConnectionSortKeys": {},
-        "Cursor": {},
-        "DateRange": {
-            "end": [
-                16
-            ],
-            "start": [
-                16
-            ],
-            "__typename": [
-                84
+                78
             ]
         },
         "DateTime": {
             "offset": [
-                102
+                91
             ],
             "time": [
-                92
+                86
             ],
             "timestamp": [
-                94
+                88
             ],
             "timezone": [
-                93
+                87
             ],
             "__typename": [
-                84
-            ]
-        },
-        "Edge": {
-            "cursor": [
-                14
-            ],
-            "node": [
-                18
-            ],
-            "__typename": [
-                84
-            ]
-        },
-        "EdgeNode": {
-            "id": [
-                23
-            ],
-            "__typename": [
-                84
+                78
             ]
         },
         "Email": {},
         "File": {
             "description": [
-                84
+                78
             ],
             "mime": [
-                84
+                78
             ],
             "name": [
-                84
+                78
             ],
             "size": [
-                30
+                24
             ],
             "url": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "Float": {},
@@ -335,191 +279,191 @@ export default {
         "ID": {},
         "Image": {
             "alt": [
-                84
+                78
             ],
             "height": [
-                30
+                24
             ],
             "mime": [
-                84
+                78
             ],
             "size": [
-                30
+                24
             ],
             "title": [
-                84
+                78
             ],
             "url": [
-                84
+                78
             ],
             "variations": [
-                27,
+                21,
                 {
                     "styles": [
-                        26,
+                        20,
                         "[ImageStyleAvailable]"
                     ]
                 }
             ],
             "width": [
-                30
+                24
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ImageStyle": {
             "id": [
-                23
+                17
             ],
             "name": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ImageStyleAvailable": {},
         "ImageStyleDerivative": {
             "height": [
-                30
+                24
             ],
             "name": [
-                84
+                78
             ],
             "url": [
-                84
+                78
             ],
             "width": [
-                30
+                24
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ImageStyleInterface": {
             "id": [
-                23
+                17
             ],
             "name": [
-                84
+                78
             ],
             "on_ImageStyle": [
-                25
+                19
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ImageStyleUnion": {
             "on_ImageStyle": [
-                25
+                19
             ],
             "on_ImageStyleInterface": [
-                28
+                22
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "Int": {},
         "KeyValueInput": {
             "key": [
-                84
+                78
             ],
             "value": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "Language": {
             "direction": [
-                84
+                78
             ],
             "id": [
-                23
+                17
             ],
             "name": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "Layout": {
             "category": [
-                84
+                78
             ],
             "defaultRegion": [
-                84
+                78
             ],
             "id": [
-                23
+                17
             ],
             "label": [
-                84
+                78
             ],
             "regions": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "LayoutParagraphs": {
             "layout": [
-                33
+                27
             ],
             "position": [
-                36
+                30
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "LayoutParagraphsInterface": {
             "composition": [
-                34
+                28
             ],
             "on_ParagraphAccordion": [
-                64
+                58
             ],
             "on_ParagraphBlock": [
-                65
+                59
             ],
             "on_ParagraphCallToAction": [
-                66
+                60
             ],
             "on_ParagraphMedia": [
-                68
+                62
             ],
             "on_ParagraphQuote": [
-                69
+                63
             ],
             "on_ParagraphSection": [
-                70
+                64
             ],
             "on_ParagraphTable": [
-                71
+                65
             ],
             "on_ParagraphText": [
-                72
+                66
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "LayoutParagraphsPosition": {
             "parentId": [
-                23
+                17
             ],
             "region": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "Link": {
@@ -527,464 +471,461 @@ export default {
                 10
             ],
             "title": [
-                84
+                78
             ],
             "url": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MediaAudio": {
             "audio": [
-                20
+                14
             ],
             "changed": [
-                16
+                12
             ],
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "metatag": [
-                57
+                51
             ],
             "name": [
-                84
+                78
             ],
             "path": [
-                84
+                78
             ],
             "status": [
                 10
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MediaDocument": {
             "changed": [
-                16
+                12
             ],
             "created": [
-                16
+                12
             ],
             "document": [
-                20
+                14
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "metatag": [
-                57
+                51
             ],
             "name": [
-                84
+                78
             ],
             "path": [
-                84
+                78
             ],
             "status": [
                 10
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MediaImage": {
             "changed": [
-                16
+                12
             ],
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "image": [
-                24
+                18
             ],
             "langcode": [
-                32
+                26
             ],
             "metatag": [
-                57
+                51
             ],
             "name": [
-                84
+                78
             ],
             "path": [
-                84
+                78
             ],
             "status": [
                 10
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MediaInterface": {
             "changed": [
-                16
+                12
             ],
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "metatag": [
-                57
+                51
             ],
             "name": [
-                84
+                78
             ],
             "path": [
-                84
+                78
             ],
             "status": [
                 10
             ],
             "on_MediaAudio": [
-                38
+                32
             ],
             "on_MediaDocument": [
-                39
+                33
             ],
             "on_MediaImage": [
-                40
+                34
             ],
             "on_MediaRemoteVideo": [
-                42
+                36
             ],
             "on_MediaVideo": [
-                44
+                38
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MediaRemoteVideo": {
             "changed": [
-                16
+                12
             ],
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "metatag": [
-                57
+                51
             ],
             "name": [
-                84
+                78
             ],
             "path": [
-                84
+                78
             ],
             "status": [
                 10
             ],
             "url": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MediaUnion": {
             "on_MediaAudio": [
-                38
+                32
             ],
             "on_MediaDocument": [
-                39
+                33
             ],
             "on_MediaImage": [
-                40
+                34
             ],
             "on_MediaRemoteVideo": [
-                42
+                36
             ],
             "on_MediaVideo": [
-                44
+                38
             ],
             "on_MediaInterface": [
-                41
+                35
             ],
             "on_MetaTagInterface": [
-                52
+                46
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MediaVideo": {
             "changed": [
-                16
+                12
             ],
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "metatag": [
-                57
+                51
             ],
             "name": [
-                84
+                78
             ],
             "path": [
-                84
+                78
             ],
             "status": [
                 10
             ],
             "video": [
-                20
+                14
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "Menu": {
             "id": [
-                23
+                17
             ],
             "items": [
-                48
+                42
             ],
             "name": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MenuAvailable": {},
         "MenuInterface": {
             "id": [
-                23
+                17
             ],
             "items": [
-                48
+                42
             ],
             "name": [
-                84
+                78
             ],
             "on_Menu": [
-                45
+                39
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MenuItem": {
             "attributes": [
-                49
+                43
             ],
             "children": [
-                48
+                42
             ],
             "description": [
-                84
+                78
             ],
             "expanded": [
                 10
             ],
             "id": [
-                23
+                17
             ],
             "internal": [
                 10
             ],
             "route": [
-                81
+                75
             ],
             "title": [
-                84
+                78
             ],
             "url": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MenuItemAttributes": {
             "class": [
-                84
+                78
             ],
             "id": [
-                84
+                78
             ],
             "target": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MenuUnion": {
             "on_Menu": [
-                45
+                39
             ],
             "on_MenuInterface": [
-                47
+                41
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MetaTag": {
             "tag": [
-                84
+                78
             ],
             "on_MetaTagLink": [
-                53
+                47
             ],
             "on_MetaTagProperty": [
-                55
+                49
             ],
             "on_MetaTagValue": [
-                58
+                52
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MetaTagInterface": {
             "metatag": [
-                57
+                51
             ],
             "on_MediaAudio": [
-                38
+                32
             ],
             "on_MediaDocument": [
-                39
+                33
             ],
             "on_MediaImage": [
-                40
+                34
             ],
             "on_MediaRemoteVideo": [
-                42
+                36
             ],
             "on_MediaVideo": [
-                44
+                38
             ],
             "on_NodePage": [
-                62
+                56
             ],
             "on_TermTag": [
-                88
-            ],
-            "on_User": [
-                97
+                82
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MetaTagLink": {
             "attributes": [
-                54
+                48
             ],
             "tag": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MetaTagLinkAttributes": {
             "href": [
-                84
+                78
             ],
             "rel": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MetaTagProperty": {
             "attributes": [
-                56
+                50
             ],
             "tag": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MetaTagPropertyAttributes": {
             "content": [
-                84
+                78
             ],
             "property": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MetaTagUnion": {
             "on_MetaTagLink": [
-                53
+                47
             ],
             "on_MetaTagProperty": [
-                55
+                49
             ],
             "on_MetaTagValue": [
-                58
+                52
             ],
             "on_MetaTag": [
-                51
+                45
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MetaTagValue": {
             "attributes": [
-                59
+                53
             ],
             "tag": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "MetaTagValueAttributes": {
             "content": [
-                84
+                78
             ],
             "name": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "Mutation": {
@@ -992,30 +933,27 @@ export default {
                 10
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "NodeInterface": {
-            "author": [
-                97
-            ],
             "changed": [
-                16
+                12
             ],
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "metatag": [
-                57
+                51
             ],
             "path": [
-                84
+                78
             ],
             "promote": [
                 10
@@ -1027,39 +965,36 @@ export default {
                 10
             ],
             "title": [
-                84
+                78
             ],
             "on_NodePage": [
-                62
+                56
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "NodePage": {
-            "author": [
-                97
-            ],
             "changed": [
-                16
+                12
             ],
             "content": [
-                73
+                67
             ],
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "metatag": [
-                57
+                51
             ],
             "path": [
-                84
+                78
             ],
             "promote": [
                 10
@@ -1071,47 +1006,47 @@ export default {
                 10
             ],
             "title": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "NodeUnion": {
             "on_NodePage": [
-                62
+                56
             ],
             "on_MetaTagInterface": [
-                52
+                46
             ],
             "on_NodeInterface": [
-                61
+                55
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ParagraphAccordion": {
             "accordionTitle": [
-                84
+                78
             ],
             "composition": [
-                34
+                28
             ],
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "items": [
-                73
+                67
             ],
             "langcode": [
-                32
+                26
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ParagraphBlock": {
@@ -1119,230 +1054,230 @@ export default {
                 9
             ],
             "composition": [
-                34
+                28
             ],
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ParagraphCallToAction": {
             "composition": [
-                34
+                28
             ],
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "link": [
-                37
+                31
             ],
             "text": [
-                90
+                84
             ],
             "title": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ParagraphInterface": {
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "on_ParagraphAccordion": [
-                64
+                58
             ],
             "on_ParagraphBlock": [
-                65
+                59
             ],
             "on_ParagraphCallToAction": [
-                66
+                60
             ],
             "on_ParagraphMedia": [
-                68
+                62
             ],
             "on_ParagraphQuote": [
-                69
+                63
             ],
             "on_ParagraphSection": [
-                70
+                64
             ],
             "on_ParagraphTable": [
-                71
+                65
             ],
             "on_ParagraphText": [
-                72
+                66
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ParagraphMedia": {
             "composition": [
-                34
+                28
             ],
             "created": [
-                16
+                12
             ],
             "description": [
-                90
+                84
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "media": [
-                43
+                37
             ],
             "title": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ParagraphQuote": {
             "citation": [
-                84
+                78
             ],
             "composition": [
-                34
+                28
             ],
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "link": [
-                37
+                31
             ],
             "quote": [
-                90
+                84
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ParagraphSection": {
             "composition": [
-                34
+                28
             ],
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ParagraphTable": {
             "composition": [
-                34
+                28
             ],
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "table": [
-                85
+                79
             ],
             "title": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ParagraphText": {
             "composition": [
-                34
+                28
             ],
             "created": [
-                16
+                12
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "text": [
-                90
+                84
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ParagraphUnion": {
             "on_ParagraphAccordion": [
-                64
+                58
             ],
             "on_ParagraphBlock": [
-                65
+                59
             ],
             "on_ParagraphCallToAction": [
-                66
+                60
             ],
             "on_ParagraphMedia": [
-                68
+                62
             ],
             "on_ParagraphQuote": [
-                69
+                63
             ],
             "on_ParagraphSection": [
-                70
+                64
             ],
             "on_ParagraphTable": [
-                71
+                65
             ],
             "on_ParagraphText": [
-                72
+                66
             ],
             "on_LayoutParagraphsInterface": [
-                35
+                29
             ],
             "on_ParagraphInterface": [
-                67
+                61
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "PhoneNumber": {},
@@ -1351,40 +1286,40 @@ export default {
                 9,
                 {
                     "id": [
-                        23,
+                        17,
                         "ID!"
                     ]
                 }
             ],
             "info": [
-                82
+                76
             ],
             "menu": [
-                45,
+                39,
                 {
+                    "langcode": [
+                        78
+                    ],
                     "name": [
-                        46,
+                        40,
                         "MenuAvailable!"
                     ]
                 }
             ],
             "route": [
-                81,
+                75,
                 {
                     "langcode": [
-                        84
+                        78
                     ],
                     "path": [
-                        84,
+                        78,
                         "String!"
                     ]
                 }
             ],
-            "viewer": [
-                97
-            ],
             "__typename": [
-                84
+                78
             ]
         },
         "Route": {
@@ -1392,33 +1327,33 @@ export default {
                 10
             ],
             "url": [
-                84
-            ],
-            "on_RouteExternal": [
                 78
             ],
+            "on_RouteExternal": [
+                72
+            ],
             "on_RouteInternal": [
-                79
+                73
             ],
             "on_RouteRedirect": [
-                80
+                74
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "RouteEntityUnion": {
             "on_NodePage": [
-                62
+                56
             ],
             "on_MetaTagInterface": [
-                52
+                46
             ],
             "on_NodeInterface": [
-                61
+                55
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "RouteExternal": {
@@ -1426,27 +1361,27 @@ export default {
                 10
             ],
             "url": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "RouteInternal": {
             "breadcrumbs": [
-                37
+                31
             ],
             "entity": [
-                77
+                71
             ],
             "internal": [
                 10
             ],
             "url": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "RouteRedirect": {
@@ -1457,189 +1392,189 @@ export default {
                 10
             ],
             "status": [
-                30
+                24
             ],
             "url": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "RouteUnion": {
             "on_RouteExternal": [
-                78
+                72
             ],
             "on_RouteInternal": [
-                79
+                73
             ],
             "on_RouteRedirect": [
-                80
+                74
             ],
             "on_Route": [
-                76
+                70
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "SchemaInformation": {
             "description": [
-                84
+                78
             ],
             "home": [
-                84
+                78
             ],
             "version": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "SortDirection": {},
         "String": {},
         "Table": {
             "caption": [
-                84
+                78
             ],
             "format": [
-                84
+                78
             ],
             "rows": [
-                86
+                80
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "TableRow": {
             "data": [
-                84
+                78
             ],
             "weight": [
-                30
+                24
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "TermInterface": {
             "changed": [
-                16
+                12
             ],
             "description": [
-                90
+                84
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "metatag": [
-                57
+                51
             ],
             "name": [
-                84
+                78
             ],
             "parent": [
-                89
+                83
             ],
             "path": [
-                84
+                78
             ],
             "status": [
                 10
             ],
             "weight": [
-                30
+                24
             ],
             "on_TermTag": [
-                88
+                82
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "TermTag": {
             "changed": [
-                16
+                12
             ],
             "description": [
-                90
+                84
             ],
             "id": [
-                23
+                17
             ],
             "langcode": [
-                32
+                26
             ],
             "metatag": [
-                57
+                51
             ],
             "name": [
-                84
+                78
             ],
             "parent": [
-                89
+                83
             ],
             "path": [
-                84
+                78
             ],
             "status": [
                 10
             ],
             "weight": [
-                30
+                24
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "TermUnion": {
             "on_TermTag": [
-                88
+                82
             ],
             "on_MetaTagInterface": [
-                52
+                46
             ],
             "on_TermInterface": [
-                87
+                81
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "Text": {
             "format": [
-                84
+                78
             ],
             "processed": [
-                22
+                16
             ],
             "value": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "TextSummary": {
             "format": [
-                84
+                78
             ],
             "processed": [
-                22
+                16
             ],
             "summary": [
-                22
+                16
             ],
             "value": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "Time": {},
@@ -1650,157 +1585,80 @@ export default {
                 10
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "UntypedStructuredData": {},
-        "User": {
-            "changed": [
-                16
-            ],
-            "created": [
-                16
-            ],
-            "id": [
-                23
-            ],
-            "mail": [
-                19
-            ],
-            "metatag": [
-                57
-            ],
-            "name": [
-                84
-            ],
-            "roles": [
-                99
-            ],
-            "status": [
-                100
-            ],
-            "__typename": [
-                84
-            ]
-        },
-        "UserInterface": {
-            "changed": [
-                16
-            ],
-            "created": [
-                16
-            ],
-            "id": [
-                23
-            ],
-            "mail": [
-                19
-            ],
-            "metatag": [
-                57
-            ],
-            "name": [
-                84
-            ],
-            "roles": [
-                99
-            ],
-            "status": [
-                100
-            ],
-            "on_User": [
-                97
-            ],
-            "__typename": [
-                84
-            ]
-        },
-        "UserRoles": {},
-        "UserStatus": {},
-        "UserUnion": {
-            "on_User": [
-                97
-            ],
-            "on_MetaTagInterface": [
-                52
-            ],
-            "on_UserInterface": [
-                98
-            ],
-            "__typename": [
-                84
-            ]
-        },
         "UtcOffset": {},
         "View": {
             "description": [
-                84
+                78
             ],
             "display": [
-                84
+                78
             ],
             "id": [
-                23
+                17
             ],
             "label": [
-                84
+                78
             ],
             "langcode": [
-                84
+                78
             ],
             "pageInfo": [
-                104
+                93
             ],
             "view": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ViewPageInfo": {
             "offset": [
-                30
+                24
             ],
             "page": [
-                30
+                24
             ],
             "pageSize": [
-                30
+                24
             ],
             "total": [
-                30
+                24
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ViewReference": {
             "contextualFilter": [
-                84
+                78
             ],
             "display": [
-                84
+                78
             ],
             "pageSize": [
-                30
+                24
             ],
             "query": [
-                84
+                78
             ],
             "view": [
-                84
+                78
             ],
             "__typename": [
-                84
+                78
             ]
         },
         "ViewResultUnion": {
             "on_UnsupportedType": [
-                95
+                89
             ],
             "__typename": [
-                84
+                78
             ]
         }
     }

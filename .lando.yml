@@ -8,9 +8,10 @@ services:
     type: node:18
     scanner: false
     ports:
-      - 3009:3009
+      - 3010:3010
+    globals:
+      '@genql/cli': latest
     build:
-      - npm i -g @genql/cli
       - npm ci
 
 tooling:
@@ -20,7 +21,7 @@ tooling:
 
   dev:
     service: node
-    cmd: npm run dev
+    cmd: npm run dev -- --port 3010 --host
 
   build:
     service: node
@@ -29,5 +30,7 @@ tooling:
   genql:
     service: node
     cmd: genql --sort --esm --endpoint "$VITE_DRUPAL_BASE_URL/$VITE_GRAPHQL_PATH" --output ./src/services/drupal/generated
+    shell: bash
     env:
       NODE_TLS_REJECT_UNAUTHORIZED: 0
+
