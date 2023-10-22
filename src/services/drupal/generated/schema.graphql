@@ -307,22 +307,28 @@ type Layout {
 If this component has been designed by a User extra information will be available here.
 """
 type LayoutParagraphs {
+  """The layout definition for this component."""
   layout: Layout
+
+  """
+  Detail on where this component is suggested to be placed within the parent component.
+  """
   position: LayoutParagraphsPosition
 }
 
-"""This content has been arranged by a User using Layout Paragraphs."""
+"""This content has been arranged using Layout Paragraphs."""
 interface LayoutParagraphsInterface {
+  """The layout information for this paragraph."""
   composition: LayoutParagraphs!
 }
 
 """This component positionally belongs to another component's layout."""
 type LayoutParagraphsPosition {
-  """The UUID of the component this component belongs to."""
+  """The UUID of the parent component this component belongs to."""
   parentId: ID
 
   """
-  There this component is suggested to live within the parent component's regions.
+  Where this component is suggested to be places within the parent component's regions.
   """
   region: String
 }
@@ -749,11 +755,11 @@ type NodePage implements MetaTagInterface & NodeInterface {
 union NodeUnion = NodePage
 
 """Add an expanding and collapsing element."""
-type ParagraphAccordion implements LayoutParagraphsInterface & ParagraphInterface {
+type ParagraphAccordion implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
   """Title"""
   accordionTitle: String!
 
-  """Layout Paragraphs metadata for this paragraph."""
+  """The layout information for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -772,11 +778,11 @@ type ParagraphAccordion implements LayoutParagraphsInterface & ParagraphInterfac
 """
 Choose a block to display. Edit this fields settings to allow different blocks.
 """
-type ParagraphBlock implements LayoutParagraphsInterface & ParagraphInterface {
+type ParagraphBlock implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
   """Block"""
   block: BlockUnion
 
-  """Layout Paragraphs metadata for this paragraph."""
+  """The layout information for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -790,8 +796,8 @@ type ParagraphBlock implements LayoutParagraphsInterface & ParagraphInterface {
 }
 
 """Add a title, text content with formatting and link."""
-type ParagraphCallToAction implements LayoutParagraphsInterface & ParagraphInterface {
-  """Layout Paragraphs metadata for this paragraph."""
+type ParagraphCallToAction implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
+  """The layout information for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -826,8 +832,8 @@ interface ParagraphInterface {
 }
 
 """Add Audio, Documents, Images or Videos and Embed YouTube videos."""
-type ParagraphMedia implements LayoutParagraphsInterface & ParagraphInterface {
-  """Layout Paragraphs metadata for this paragraph."""
+type ParagraphMedia implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
+  """The layout information for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -850,11 +856,11 @@ type ParagraphMedia implements LayoutParagraphsInterface & ParagraphInterface {
 }
 
 """Add a quote. Add citation and citation link"""
-type ParagraphQuote implements LayoutParagraphsInterface & ParagraphInterface {
+type ParagraphQuote implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
   """Give credit for the quote."""
   citation: String
 
-  """Layout Paragraphs metadata for this paragraph."""
+  """The layout information for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -876,8 +882,8 @@ type ParagraphQuote implements LayoutParagraphsInterface & ParagraphInterface {
 """
 Sections are layout containers with composition for embedding more components.
 """
-type ParagraphSection implements LayoutParagraphsInterface & ParagraphInterface {
-  """Layout Paragraphs metadata for this paragraph."""
+type ParagraphSection implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
+  """The layout information for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -891,8 +897,8 @@ type ParagraphSection implements LayoutParagraphsInterface & ParagraphInterface 
 }
 
 """Create a table with your own columns and rows."""
-type ParagraphTable implements LayoutParagraphsInterface & ParagraphInterface {
-  """Layout Paragraphs metadata for this paragraph."""
+type ParagraphTable implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
+  """The layout information for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -912,8 +918,8 @@ type ParagraphTable implements LayoutParagraphsInterface & ParagraphInterface {
 }
 
 """Text based content with formatting."""
-type ParagraphText implements LayoutParagraphsInterface & ParagraphInterface {
-  """Layout Paragraphs metadata for this paragraph."""
+type ParagraphText implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
+  """The layout information for this paragraph."""
   composition: LayoutParagraphs!
 
   """The time that the Paragraph was created."""
@@ -950,7 +956,7 @@ type Query {
   """Schema information."""
   info: SchemaInformation!
 
-  """Load a Route by path."""
+  """Load a Menu by name."""
   menu(
     """
     Optionally set the response language. Eg en, ja, fr. Setting this langcode

@@ -838,6 +838,30 @@ export default {
             "on_NodePage": [
                 56
             ],
+            "on_ParagraphAccordion": [
+                58
+            ],
+            "on_ParagraphBlock": [
+                59
+            ],
+            "on_ParagraphCallToAction": [
+                60
+            ],
+            "on_ParagraphMedia": [
+                62
+            ],
+            "on_ParagraphQuote": [
+                63
+            ],
+            "on_ParagraphSection": [
+                64
+            ],
+            "on_ParagraphTable": [
+                65
+            ],
+            "on_ParagraphText": [
+                66
+            ],
             "on_TermTag": [
                 82
             ],
@@ -1272,6 +1296,9 @@ export default {
             ],
             "on_LayoutParagraphsInterface": [
                 29
+            ],
+            "on_MetaTagInterface": [
+                46
             ],
             "on_ParagraphInterface": [
                 61

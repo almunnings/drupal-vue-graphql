@@ -250,21 +250,23 @@ export interface Layout {
 
 /** If this component has been designed by a User extra information will be available here. */
 export interface LayoutParagraphs {
+    /** The layout definition for this component. */
     layout: (Layout | null)
+    /** Detail on where this component is suggested to be placed within the parent component. */
     position: (LayoutParagraphsPosition | null)
     __typename: 'LayoutParagraphs'
 }
 
 
-/** This content has been arranged by a User using Layout Paragraphs. */
+/** This content has been arranged using Layout Paragraphs. */
 export type LayoutParagraphsInterface = (ParagraphAccordion | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText) & { __isUnion?: true }
 
 
 /** This component positionally belongs to another component's layout. */
 export interface LayoutParagraphsPosition {
-    /** The UUID of the component this component belongs to. */
+    /** The UUID of the parent component this component belongs to. */
     parentId: (Scalars['ID'] | null)
-    /** There this component is suggested to live within the parent component's regions. */
+    /** Where this component is suggested to be places within the parent component's regions. */
     region: (Scalars['String'] | null)
     __typename: 'LayoutParagraphsPosition'
 }
@@ -475,7 +477,7 @@ export type MetaTag = (MetaTagLink | MetaTagProperty | MetaTagValue) & { __isUni
 
 
 /** This entity has meta tags enabled. */
-export type MetaTagInterface = (MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo | NodePage | TermTag) & { __isUnion?: true }
+export type MetaTagInterface = (MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo | NodePage | ParagraphAccordion | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText | TermTag) & { __isUnion?: true }
 
 
 /** A meta link element. */
@@ -590,7 +592,7 @@ export type NodeUnion = (NodePage) & { __isUnion?: true }
 export interface ParagraphAccordion {
     /** Title */
     accordionTitle: Scalars['String']
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
@@ -608,7 +610,7 @@ export interface ParagraphAccordion {
 export interface ParagraphBlock {
     /** Block */
     block: (BlockUnion | null)
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
@@ -622,7 +624,7 @@ export interface ParagraphBlock {
 
 /** Add a title, text content with formatting and link. */
 export interface ParagraphCallToAction {
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
@@ -646,7 +648,7 @@ export type ParagraphInterface = (ParagraphAccordion | ParagraphBlock | Paragrap
 
 /** Add Audio, Documents, Images or Videos and Embed YouTube videos. */
 export interface ParagraphMedia {
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
@@ -668,7 +670,7 @@ export interface ParagraphMedia {
 export interface ParagraphQuote {
     /** Give credit for the quote. */
     citation: (Scalars['String'] | null)
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
@@ -686,7 +688,7 @@ export interface ParagraphQuote {
 
 /** Sections are layout containers with composition for embedding more components. */
 export interface ParagraphSection {
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
@@ -700,7 +702,7 @@ export interface ParagraphSection {
 
 /** Create a table with your own columns and rows. */
 export interface ParagraphTable {
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
@@ -718,7 +720,7 @@ export interface ParagraphTable {
 
 /** Text based content with formatting. */
 export interface ParagraphText {
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition: LayoutParagraphs
     /** The time that the Paragraph was created. */
     created: DateTime
@@ -746,7 +748,7 @@ export interface Query {
     block: (BlockUnion | null)
     /** Schema information. */
     info: SchemaInformation
-    /** Load a Route by path. */
+    /** Load a Menu by name. */
     menu: (Menu | null)
     /** Load a Route by path. */
     route: (RouteUnion | null)
@@ -1254,15 +1256,18 @@ export interface LayoutGenqlSelection{
 
 /** If this component has been designed by a User extra information will be available here. */
 export interface LayoutParagraphsGenqlSelection{
+    /** The layout definition for this component. */
     layout?: LayoutGenqlSelection
+    /** Detail on where this component is suggested to be placed within the parent component. */
     position?: LayoutParagraphsPositionGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
 
-/** This content has been arranged by a User using Layout Paragraphs. */
+/** This content has been arranged using Layout Paragraphs. */
 export interface LayoutParagraphsInterfaceGenqlSelection{
+    /** The layout information for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     on_ParagraphAccordion?: ParagraphAccordionGenqlSelection
     on_ParagraphBlock?: ParagraphBlockGenqlSelection
@@ -1279,9 +1284,9 @@ export interface LayoutParagraphsInterfaceGenqlSelection{
 
 /** This component positionally belongs to another component's layout. */
 export interface LayoutParagraphsPositionGenqlSelection{
-    /** The UUID of the component this component belongs to. */
+    /** The UUID of the parent component this component belongs to. */
     parentId?: boolean | number
-    /** There this component is suggested to live within the parent component's regions. */
+    /** Where this component is suggested to be places within the parent component's regions. */
     region?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1562,6 +1567,14 @@ export interface MetaTagInterfaceGenqlSelection{
     on_MediaRemoteVideo?: MediaRemoteVideoGenqlSelection
     on_MediaVideo?: MediaVideoGenqlSelection
     on_NodePage?: NodePageGenqlSelection
+    on_ParagraphAccordion?: ParagraphAccordionGenqlSelection
+    on_ParagraphBlock?: ParagraphBlockGenqlSelection
+    on_ParagraphCallToAction?: ParagraphCallToActionGenqlSelection
+    on_ParagraphMedia?: ParagraphMediaGenqlSelection
+    on_ParagraphQuote?: ParagraphQuoteGenqlSelection
+    on_ParagraphSection?: ParagraphSectionGenqlSelection
+    on_ParagraphTable?: ParagraphTableGenqlSelection
+    on_ParagraphText?: ParagraphTextGenqlSelection
     on_TermTag?: TermTagGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1723,7 +1736,7 @@ export interface NodeUnionGenqlSelection{
 export interface ParagraphAccordionGenqlSelection{
     /** Title */
     accordionTitle?: boolean | number
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
@@ -1742,7 +1755,7 @@ export interface ParagraphAccordionGenqlSelection{
 export interface ParagraphBlockGenqlSelection{
     /** Block */
     block?: BlockUnionGenqlSelection
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
@@ -1757,7 +1770,7 @@ export interface ParagraphBlockGenqlSelection{
 
 /** Add a title, text content with formatting and link. */
 export interface ParagraphCallToActionGenqlSelection{
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
@@ -1799,7 +1812,7 @@ export interface ParagraphInterfaceGenqlSelection{
 
 /** Add Audio, Documents, Images or Videos and Embed YouTube videos. */
 export interface ParagraphMediaGenqlSelection{
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
@@ -1822,7 +1835,7 @@ export interface ParagraphMediaGenqlSelection{
 export interface ParagraphQuoteGenqlSelection{
     /** Give credit for the quote. */
     citation?: boolean | number
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
@@ -1841,7 +1854,7 @@ export interface ParagraphQuoteGenqlSelection{
 
 /** Sections are layout containers with composition for embedding more components. */
 export interface ParagraphSectionGenqlSelection{
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
@@ -1856,7 +1869,7 @@ export interface ParagraphSectionGenqlSelection{
 
 /** Create a table with your own columns and rows. */
 export interface ParagraphTableGenqlSelection{
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
@@ -1875,7 +1888,7 @@ export interface ParagraphTableGenqlSelection{
 
 /** Text based content with formatting. */
 export interface ParagraphTextGenqlSelection{
-    /** Layout Paragraphs metadata for this paragraph. */
+    /** The layout information for this paragraph. */
     composition?: LayoutParagraphsGenqlSelection
     /** The time that the Paragraph was created. */
     created?: DateTimeGenqlSelection
@@ -1901,6 +1914,7 @@ export interface ParagraphUnionGenqlSelection{
     on_ParagraphTable?:ParagraphTableGenqlSelection,
     on_ParagraphText?:ParagraphTextGenqlSelection,
     on_LayoutParagraphsInterface?: LayoutParagraphsInterfaceGenqlSelection,
+    on_MetaTagInterface?: MetaTagInterfaceGenqlSelection,
     on_ParagraphInterface?: ParagraphInterfaceGenqlSelection,
     __typename?: boolean | number
 }
@@ -1918,7 +1932,7 @@ export interface QueryGenqlSelection{
     id: Scalars['ID']} })
     /** Schema information. */
     info?: SchemaInformationGenqlSelection
-    /** Load a Route by path. */
+    /** Load a Menu by name. */
     menu?: (MenuGenqlSelection & { __args: {
     /**
      * Optionally set the response language. Eg en, ja, fr. Setting this langcode
@@ -2508,7 +2522,7 @@ export interface ViewResultUnionGenqlSelection{
     
 
 
-    const MetaTagInterface_possibleTypes: string[] = ['MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo','NodePage','TermTag']
+    const MetaTagInterface_possibleTypes: string[] = ['MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo','NodePage','ParagraphAccordion','ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText','TermTag']
     export const isMetaTagInterface = (obj?: { __typename?: any } | null): obj is MetaTagInterface => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isMetaTagInterface"')
       return MetaTagInterface_possibleTypes.includes(obj.__typename)
