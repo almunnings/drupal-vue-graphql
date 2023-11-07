@@ -103,6 +103,9 @@ export default {
             "langcode": [
                 26
             ],
+            "metatag": [
+                51
+            ],
             "reusable": [
                 10
             ],
@@ -126,6 +129,9 @@ export default {
             "langcode": [
                 26
             ],
+            "metatag": [
+                51
+            ],
             "reusable": [
                 10
             ],
@@ -145,6 +151,9 @@ export default {
             ],
             "langcode": [
                 26
+            ],
+            "metatag": [
+                51
             ],
             "reusable": [
                 10
@@ -171,6 +180,9 @@ export default {
             ],
             "on_BlockContentInterface": [
                 5
+            ],
+            "on_MetaTagInterface": [
+                46
             ],
             "__typename": [
                 78
@@ -820,6 +832,12 @@ export default {
             "metatag": [
                 51
             ],
+            "on_BlockContentAnotherType": [
+                3
+            ],
+            "on_BlockContentBasicBlock": [
+                4
+            ],
             "on_MediaAudio": [
                 32
             ],
@@ -837,30 +855,6 @@ export default {
             ],
             "on_NodePage": [
                 56
-            ],
-            "on_ParagraphAccordion": [
-                58
-            ],
-            "on_ParagraphBlock": [
-                59
-            ],
-            "on_ParagraphCallToAction": [
-                60
-            ],
-            "on_ParagraphMedia": [
-                62
-            ],
-            "on_ParagraphQuote": [
-                63
-            ],
-            "on_ParagraphSection": [
-                64
-            ],
-            "on_ParagraphTable": [
-                65
-            ],
-            "on_ParagraphText": [
-                66
             ],
             "on_TermTag": [
                 82
@@ -1296,9 +1290,6 @@ export default {
             ],
             "on_LayoutParagraphsInterface": [
                 29
-            ],
-            "on_MetaTagInterface": [
-                46
             ],
             "on_ParagraphInterface": [
                 61

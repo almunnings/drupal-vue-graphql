@@ -73,6 +73,8 @@ export interface BlockContentAnotherType {
     id: Scalars['ID']
     /** The content block language code. */
     langcode: Language
+    /** The computed meta tags for the entity. */
+    metatag: MetaTagUnion[]
     /** A boolean indicating whether this block is reusable. */
     reusable: Scalars['Boolean']
     /** A brief description of your block. */
@@ -91,6 +93,8 @@ export interface BlockContentBasicBlock {
     id: Scalars['ID']
     /** The content block language code. */
     langcode: Language
+    /** The computed meta tags for the entity. */
+    metatag: MetaTagUnion[]
     /** A boolean indicating whether this block is reusable. */
     reusable: Scalars['Boolean']
     /** A brief description of your block. */
@@ -477,7 +481,7 @@ export type MetaTag = (MetaTagLink | MetaTagProperty | MetaTagValue) & { __isUni
 
 
 /** This entity has meta tags enabled. */
-export type MetaTagInterface = (MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo | NodePage | ParagraphAccordion | ParagraphBlock | ParagraphCallToAction | ParagraphMedia | ParagraphQuote | ParagraphSection | ParagraphTable | ParagraphText | TermTag) & { __isUnion?: true }
+export type MetaTagInterface = (BlockContentAnotherType | BlockContentBasicBlock | MediaAudio | MediaDocument | MediaImage | MediaRemoteVideo | MediaVideo | NodePage | TermTag) & { __isUnion?: true }
 
 
 /** A meta link element. */
@@ -1021,6 +1025,8 @@ export interface BlockContentAnotherTypeGenqlSelection{
     id?: boolean | number
     /** The content block language code. */
     langcode?: LanguageGenqlSelection
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
     /** A boolean indicating whether this block is reusable. */
     reusable?: boolean | number
     /** A brief description of your block. */
@@ -1040,6 +1046,8 @@ export interface BlockContentBasicBlockGenqlSelection{
     id?: boolean | number
     /** The content block language code. */
     langcode?: LanguageGenqlSelection
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
     /** A boolean indicating whether this block is reusable. */
     reusable?: boolean | number
     /** A brief description of your block. */
@@ -1057,6 +1065,8 @@ export interface BlockContentInterfaceGenqlSelection{
     id?: boolean | number
     /** The content block language code. */
     langcode?: LanguageGenqlSelection
+    /** The computed meta tags for the entity. */
+    metatag?: MetaTagUnionGenqlSelection
     /** A boolean indicating whether this block is reusable. */
     reusable?: boolean | number
     /** A brief description of your block. */
@@ -1073,6 +1083,7 @@ export interface BlockContentUnionGenqlSelection{
     on_BlockContentAnotherType?:BlockContentAnotherTypeGenqlSelection,
     on_BlockContentBasicBlock?:BlockContentBasicBlockGenqlSelection,
     on_BlockContentInterface?: BlockContentInterfaceGenqlSelection,
+    on_MetaTagInterface?: MetaTagInterfaceGenqlSelection,
     __typename?: boolean | number
 }
 
@@ -1561,20 +1572,14 @@ export interface MetaTagGenqlSelection{
 export interface MetaTagInterfaceGenqlSelection{
     /** The computed meta tags for the entity. */
     metatag?: MetaTagUnionGenqlSelection
+    on_BlockContentAnotherType?: BlockContentAnotherTypeGenqlSelection
+    on_BlockContentBasicBlock?: BlockContentBasicBlockGenqlSelection
     on_MediaAudio?: MediaAudioGenqlSelection
     on_MediaDocument?: MediaDocumentGenqlSelection
     on_MediaImage?: MediaImageGenqlSelection
     on_MediaRemoteVideo?: MediaRemoteVideoGenqlSelection
     on_MediaVideo?: MediaVideoGenqlSelection
     on_NodePage?: NodePageGenqlSelection
-    on_ParagraphAccordion?: ParagraphAccordionGenqlSelection
-    on_ParagraphBlock?: ParagraphBlockGenqlSelection
-    on_ParagraphCallToAction?: ParagraphCallToActionGenqlSelection
-    on_ParagraphMedia?: ParagraphMediaGenqlSelection
-    on_ParagraphQuote?: ParagraphQuoteGenqlSelection
-    on_ParagraphSection?: ParagraphSectionGenqlSelection
-    on_ParagraphTable?: ParagraphTableGenqlSelection
-    on_ParagraphText?: ParagraphTextGenqlSelection
     on_TermTag?: TermTagGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1914,7 +1919,6 @@ export interface ParagraphUnionGenqlSelection{
     on_ParagraphTable?:ParagraphTableGenqlSelection,
     on_ParagraphText?:ParagraphTextGenqlSelection,
     on_LayoutParagraphsInterface?: LayoutParagraphsInterfaceGenqlSelection,
-    on_MetaTagInterface?: MetaTagInterfaceGenqlSelection,
     on_ParagraphInterface?: ParagraphInterfaceGenqlSelection,
     __typename?: boolean | number
 }
@@ -2522,7 +2526,7 @@ export interface ViewResultUnionGenqlSelection{
     
 
 
-    const MetaTagInterface_possibleTypes: string[] = ['MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo','NodePage','ParagraphAccordion','ParagraphBlock','ParagraphCallToAction','ParagraphMedia','ParagraphQuote','ParagraphSection','ParagraphTable','ParagraphText','TermTag']
+    const MetaTagInterface_possibleTypes: string[] = ['BlockContentAnotherType','BlockContentBasicBlock','MediaAudio','MediaDocument','MediaImage','MediaRemoteVideo','MediaVideo','NodePage','TermTag']
     export const isMetaTagInterface = (obj?: { __typename?: any } | null): obj is MetaTagInterface => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isMetaTagInterface"')
       return MetaTagInterface_possibleTypes.includes(obj.__typename)

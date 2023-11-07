@@ -42,7 +42,7 @@ type BlockContent implements BlockInterface {
 }
 
 """Another example block type for testing of Unions in GraphQL."""
-type BlockContentAnotherType implements BlockContentInterface {
+type BlockContentAnotherType implements BlockContentInterface & MetaTagInterface {
   """Body"""
   body: TextSummary
 
@@ -54,6 +54,9 @@ type BlockContentAnotherType implements BlockContentInterface {
 
   """The content block language code."""
   langcode: Language!
+
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]!
 
   """A boolean indicating whether this block is reusable."""
   reusable: Boolean!
@@ -63,7 +66,7 @@ type BlockContentAnotherType implements BlockContentInterface {
 }
 
 """A basic block with a title and content."""
-type BlockContentBasicBlock implements BlockContentInterface {
+type BlockContentBasicBlock implements BlockContentInterface & MetaTagInterface {
   """Body"""
   body: TextSummary
 
@@ -75,6 +78,9 @@ type BlockContentBasicBlock implements BlockContentInterface {
 
   """The content block language code."""
   langcode: Language!
+
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]!
 
   """A boolean indicating whether this block is reusable."""
   reusable: Boolean!
@@ -93,6 +99,9 @@ interface BlockContentInterface {
 
   """The content block language code."""
   langcode: Language!
+
+  """The computed meta tags for the entity."""
+  metatag: [MetaTagUnion!]!
 
   """A boolean indicating whether this block is reusable."""
   reusable: Boolean!
@@ -755,7 +764,7 @@ type NodePage implements MetaTagInterface & NodeInterface {
 union NodeUnion = NodePage
 
 """Add an expanding and collapsing element."""
-type ParagraphAccordion implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
+type ParagraphAccordion implements LayoutParagraphsInterface & ParagraphInterface {
   """Title"""
   accordionTitle: String!
 
@@ -778,7 +787,7 @@ type ParagraphAccordion implements LayoutParagraphsInterface & MetaTagInterface 
 """
 Choose a block to display. Edit this fields settings to allow different blocks.
 """
-type ParagraphBlock implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
+type ParagraphBlock implements LayoutParagraphsInterface & ParagraphInterface {
   """Block"""
   block: BlockUnion
 
@@ -796,7 +805,7 @@ type ParagraphBlock implements LayoutParagraphsInterface & MetaTagInterface & Pa
 }
 
 """Add a title, text content with formatting and link."""
-type ParagraphCallToAction implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
+type ParagraphCallToAction implements LayoutParagraphsInterface & ParagraphInterface {
   """The layout information for this paragraph."""
   composition: LayoutParagraphs!
 
@@ -832,7 +841,7 @@ interface ParagraphInterface {
 }
 
 """Add Audio, Documents, Images or Videos and Embed YouTube videos."""
-type ParagraphMedia implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
+type ParagraphMedia implements LayoutParagraphsInterface & ParagraphInterface {
   """The layout information for this paragraph."""
   composition: LayoutParagraphs!
 
@@ -856,7 +865,7 @@ type ParagraphMedia implements LayoutParagraphsInterface & MetaTagInterface & Pa
 }
 
 """Add a quote. Add citation and citation link"""
-type ParagraphQuote implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
+type ParagraphQuote implements LayoutParagraphsInterface & ParagraphInterface {
   """Give credit for the quote."""
   citation: String
 
@@ -882,7 +891,7 @@ type ParagraphQuote implements LayoutParagraphsInterface & MetaTagInterface & Pa
 """
 Sections are layout containers with composition for embedding more components.
 """
-type ParagraphSection implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
+type ParagraphSection implements LayoutParagraphsInterface & ParagraphInterface {
   """The layout information for this paragraph."""
   composition: LayoutParagraphs!
 
@@ -897,7 +906,7 @@ type ParagraphSection implements LayoutParagraphsInterface & MetaTagInterface & 
 }
 
 """Create a table with your own columns and rows."""
-type ParagraphTable implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
+type ParagraphTable implements LayoutParagraphsInterface & ParagraphInterface {
   """The layout information for this paragraph."""
   composition: LayoutParagraphs!
 
@@ -918,7 +927,7 @@ type ParagraphTable implements LayoutParagraphsInterface & MetaTagInterface & Pa
 }
 
 """Text based content with formatting."""
-type ParagraphText implements LayoutParagraphsInterface & MetaTagInterface & ParagraphInterface {
+type ParagraphText implements LayoutParagraphsInterface & ParagraphInterface {
   """The layout information for this paragraph."""
   composition: LayoutParagraphs!
 
