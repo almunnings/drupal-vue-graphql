@@ -878,7 +878,19 @@ export default {
             "href": [
                 78
             ],
+            "hreflang": [
+                78
+            ],
+            "media": [
+                78
+            ],
             "rel": [
+                78
+            ],
+            "sizes": [
+                78
+            ],
+            "type": [
                 78
             ],
             "__typename": [

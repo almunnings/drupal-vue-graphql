@@ -637,11 +637,25 @@ type MetaTagLink implements MetaTag {
 
 """A meta link element's attributes."""
 type MetaTagLinkAttributes {
-  """The href attribute of the link."""
+  """Specifies the location of the linked document."""
   href: String
 
-  """The rel attribute of the link."""
+  """Specifies the location of the linked document."""
+  hreflang: String
+
+  """Specifies on what device the linked document will be displayed."""
+  media: String
+
+  """
+  Specifies the relationship between the current document and the linked document.
+  """
   rel: String
+
+  """Specifies the size of the linked resource. Only for rel="icon"."""
+  sizes: String
+
+  """Specifies the media type of the linked document."""
+  type: String
 }
 
 """A meta property element."""
@@ -694,7 +708,7 @@ interface NodeInterface {
   """The time that the node was last edited."""
   changed: DateTime!
 
-  """The time that the node was created."""
+  """The date and time that the content was created."""
   created: DateTime!
 
   """The Universally Unique IDentifier (UUID)."""
@@ -732,7 +746,7 @@ type NodePage implements MetaTagInterface & NodeInterface {
   """Content"""
   content: [ParagraphUnion!]
 
-  """The time that the node was created."""
+  """The date and time that the content was created."""
   created: DateTime!
 
   """The Universally Unique IDentifier (UUID)."""

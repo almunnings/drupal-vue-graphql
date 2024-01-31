@@ -496,10 +496,18 @@ export interface MetaTagLink {
 
 /** A meta link element's attributes. */
 export interface MetaTagLinkAttributes {
-    /** The href attribute of the link. */
+    /** Specifies the location of the linked document. */
     href: (Scalars['String'] | null)
-    /** The rel attribute of the link. */
+    /** Specifies the location of the linked document. */
+    hreflang: (Scalars['String'] | null)
+    /** Specifies on what device the linked document will be displayed. */
+    media: (Scalars['String'] | null)
+    /** Specifies the relationship between the current document and the linked document. */
     rel: (Scalars['String'] | null)
+    /** Specifies the size of the linked resource. Only for rel="icon". */
+    sizes: (Scalars['String'] | null)
+    /** Specifies the media type of the linked document. */
+    type: (Scalars['String'] | null)
     __typename: 'MetaTagLinkAttributes'
 }
 
@@ -566,7 +574,7 @@ export interface NodePage {
     changed: DateTime
     /** Content */
     content: (ParagraphUnion[] | null)
-    /** The time that the node was created. */
+    /** The date and time that the content was created. */
     created: DateTime
     /** The Universally Unique IDentifier (UUID). */
     id: Scalars['ID']
@@ -1599,10 +1607,18 @@ export interface MetaTagLinkGenqlSelection{
 
 /** A meta link element's attributes. */
 export interface MetaTagLinkAttributesGenqlSelection{
-    /** The href attribute of the link. */
+    /** Specifies the location of the linked document. */
     href?: boolean | number
-    /** The rel attribute of the link. */
+    /** Specifies the location of the linked document. */
+    hreflang?: boolean | number
+    /** Specifies on what device the linked document will be displayed. */
+    media?: boolean | number
+    /** Specifies the relationship between the current document and the linked document. */
     rel?: boolean | number
+    /** Specifies the size of the linked resource. Only for rel="icon". */
+    sizes?: boolean | number
+    /** Specifies the media type of the linked document. */
+    type?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1675,7 +1691,7 @@ export interface MutationGenqlSelection{
 export interface NodeInterfaceGenqlSelection{
     /** The time that the node was last edited. */
     changed?: DateTimeGenqlSelection
-    /** The time that the node was created. */
+    /** The date and time that the content was created. */
     created?: DateTimeGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
@@ -1705,7 +1721,7 @@ export interface NodePageGenqlSelection{
     changed?: DateTimeGenqlSelection
     /** Content */
     content?: ParagraphUnionGenqlSelection
-    /** The time that the node was created. */
+    /** The date and time that the content was created. */
     created?: DateTimeGenqlSelection
     /** The Universally Unique IDentifier (UUID). */
     id?: boolean | number
