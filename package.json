@@ -11,7 +11,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "genql": "dotenvx run -- genql --sort --esm --endpoint $VITE_DRUPAL_BASE_URL/$VITE_GRAPHQL_PATH --output ./src/services/drupal/generated"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
@@ -27,6 +28,8 @@
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@dotenvx/dotenvx": "^0.14.1",
+    "@genql/cli": "^6.3.1",
     "@rushstack/eslint-patch": "^1.7.2",
     "@types/bootstrap": "^5.2.10",
     "@types/node": "^18.19.11",
