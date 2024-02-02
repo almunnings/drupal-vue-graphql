@@ -1,8 +1,12 @@
 # Headless Drupal Vue 3, GenQL GraphQL, Pinia, Vite, Typescript
 
-Running example: http://gqlc.almunnings.com/
-
 > This project is intended to be a starting point, a hint, an idea. Not a solution.
+
+Live demo: http://gqlc.almunnings.com/
+
+## GraphQL Compose
+
+This example uses the Drupal [GraphQL Compose](https://www.drupal.org/project/graphql_compose) module to generate the GraphQL schema and types.
 
 ## Development
 
