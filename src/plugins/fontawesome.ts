@@ -1,3 +1,4 @@
+import type { App } from 'vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -12,7 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 const fontawesomePlugin = {
-  install(app) {
+  install(app: App) {
     library.add(
       faFile,
       faFileArchive,

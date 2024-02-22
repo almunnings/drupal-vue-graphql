@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useRouteStore } from '@/stores/route'
-import ContentView from '@/views/ContentView'
+import ContentView from '@/views/ContentView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

@@ -7,6 +7,8 @@ import type {
   LayoutParagraphsInterfaceGenqlSelection,
   LinkGenqlSelection,
   ParagraphTextGenqlSelection,
+  ParagraphTableGenqlSelection,
+  ParagraphQuoteGenqlSelection,
   ParagraphMediaGenqlSelection,
   ParagraphAccordionGenqlSelection,
   ParagraphBlockGenqlSelection
