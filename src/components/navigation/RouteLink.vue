@@ -30,9 +30,7 @@ const title_url = computed(() =>
 )
 
 // Convert homepage links into /
-const url = computed(() =>
-  props.url === useInfoStore().home ? '/' : props.url
-)
+const url = computed(() => (props.url === useInfoStore().home ? '/' : props.url))
 </script>
 
 <template>

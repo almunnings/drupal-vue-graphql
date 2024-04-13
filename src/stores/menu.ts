@@ -1,10 +1,10 @@
 import { reactive } from 'vue'
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { drupalClient, MenuItemFragment } from '@/services/drupal'
-import type { Menu, MenuAvailable } from '@/services/drupal'
+import type { MenuInterface, MenuAvailable } from '@/services/drupal'
 
 export const useMenuStore = defineStore('menu', () => {
-  const menus = reactive(new Map<string, Menu>())
+  const menus = reactive(new Map<string, MenuInterface>())
   const errors = reactive(new Map<string, Error>())
   const loading = reactive(new Map<string, boolean>())
 
@@ -25,7 +25,7 @@ export const useMenuStore = defineStore('menu', () => {
       const { menu } = await drupalClient.query({
         menu: {
           __args: { name },
-          name: true,
+          __scalar: true,
           items: {
             ...MenuItemFragment,
             children: MenuItemFragment
@@ -38,8 +38,8 @@ export const useMenuStore = defineStore('menu', () => {
       }
 
       return menus.set(name, menu)
-    } catch (e: Error) {
-      return errors.set(name, e)
+    } catch (e: unknown) {
+      return errors.set(name, e instanceof Error ? e : new Error(String(e)))
     } finally {
       loading.set(name, false)
     }

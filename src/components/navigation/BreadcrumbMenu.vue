@@ -20,12 +20,7 @@ defineProps({
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item" v-for="(link, delta) in links" :key="delta">
-        <RouteLink
-          v-if="link.url"
-          :url="link.url"
-          :internal="link.internal"
-          :title="link.title"
-        />
+        <RouteLink v-if="link.url" :url="link.url" :internal="link.internal" :title="link.title" />
       </li>
       <li v-if="current" class="breadcrumb-item active" aria-current="page">
         {{ current }}

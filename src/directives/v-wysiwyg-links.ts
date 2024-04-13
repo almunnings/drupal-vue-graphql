@@ -18,10 +18,7 @@ const vWysiwygLinks = {
 
       const href = target?.getAttribute('href')
 
-      if (
-        href?.startsWith('/') &&
-        target?.matches("[data-entity-substitution='canonical']")
-      ) {
+      if (href?.startsWith('/') && target?.matches("[data-entity-substitution='canonical']")) {
         event.preventDefault()
         router.push({ path: href })
       }

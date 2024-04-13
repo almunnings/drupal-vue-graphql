@@ -30,9 +30,7 @@ const content = computed(() =>
 )
 
 // Get the section types from the content.
-const sections = computed(
-  () => content.value && content.value.filter(isParagraphSection)
-)
+const sections = computed(() => content.value && content.value.filter(isParagraphSection))
 
 // Get the children of a section.
 const getParagraphChildren = (section: ParagraphInterface) =>

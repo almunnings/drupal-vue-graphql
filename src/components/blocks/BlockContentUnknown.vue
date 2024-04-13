@@ -12,7 +12,7 @@ defineProps({
 
 <template>
   <div class="alert alert-warning" role="alert">
-    Block content type <mark>{{ blockContent.__typename }}</mark> is not
-    implemented in the block content resolver.
+    Block content type <mark>{{ blockContent.__typename }}</mark> is not implemented in the block
+    content resolver.
   </div>
 </template>

@@ -82,15 +82,7 @@ export const ParagraphMediaFragment: ParagraphMediaGenqlSelection = {
 
         variations: {
           __args: {
-            styles: [
-              'WIDE',
-              'WIDE2X',
-              'LARGE',
-              'LARGE2X',
-              'MEDIUM',
-              'MEDIUM2X',
-              'THUMBNAIL'
-            ]
+            styles: ['WIDE', 'WIDE2X', 'LARGE', 'LARGE2X', 'MEDIUM', 'MEDIUM2X', 'THUMBNAIL']
           },
           url: true,
           width: true,
@@ -172,20 +164,19 @@ export const ParagraphFragment: ParagraphInterfaceGenqlSelection = {
   on_ParagraphAccordion: ParagraphAccordionFragment
 }
 
-export const LayoutParagraphFragment: LayoutParagraphsInterfaceGenqlSelection =
-  {
-    __typename: true,
-    composition: {
-      layout: {
-        id: true,
-        regions: true
-      },
-      position: {
-        parentId: true,
-        region: true
-      }
+export const LayoutParagraphFragment: LayoutParagraphsInterfaceGenqlSelection = {
+  __typename: true,
+  composition: {
+    layout: {
+      id: true,
+      regions: true
+    },
+    position: {
+      parentId: true,
+      region: true
     }
   }
+}
 
 export const NodePageFragment: NodePageGenqlSelection = {
   __typename: true,
@@ -204,14 +195,8 @@ export const NodeFragment: NodeInterfaceGenqlSelection = {
 
 export const MenuItemFragment: MenuItemGenqlSelection = {
   __typename: true,
-  title: true,
-  description: true,
-  expanded: true,
-  url: true,
-  internal: true,
+  __scalar: true,
   attributes: {
-    id: true,
-    target: true,
-    class: true
+    __scalar: true
   }
 }

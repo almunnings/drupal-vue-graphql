@@ -48,17 +48,10 @@ useInfoStore().fetchInfo()
     </h3>
 
     <!-- Breadcrumbs -->
-    <BreadcrumbMenu
-      v-if="breadcrumbs.length"
-      :links="breadcrumbs"
-      :current="entity?.title"
-    />
+    <BreadcrumbMenu v-if="breadcrumbs.length" :links="breadcrumbs" :current="entity?.title" />
 
     <!-- Example content -->
-    <main
-      class="position-relative mt-3"
-      :class="{ 'placeholder-glow': loading }"
-    >
+    <main class="position-relative mt-3" :class="{ 'placeholder-glow': loading }">
       <router-view v-slot="{ Component, route }">
         <transition name="fade">
           <component :is="Component" :key="route.path" />

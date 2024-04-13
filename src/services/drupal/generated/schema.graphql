@@ -587,6 +587,9 @@ type MenuItem {
   """Whether this menu item links to an internal route."""
   internal: Boolean!
 
+  """The language of the menu item."""
+  langcode: Language!
+
   """
   The route this menu item uses. Route loading can be disabled per menu type.
   """
@@ -676,8 +679,32 @@ type MetaTagPropertyAttributes {
   property: String
 }
 
+"""A meta script element."""
+type MetaTagScript implements MetaTag {
+  """The meta tag element attributes."""
+  attributes: MetaTagScriptAttributes!
+
+  """The content of the script tag."""
+  content: String
+
+  """The HTML tag for this meta element."""
+  tag: String!
+}
+
+"""A meta script element's attributes."""
+type MetaTagScriptAttributes {
+  """The integrity attribute of the script tag."""
+  integrity: String
+
+  """The src attribute of the script tag."""
+  src: String
+
+  """The type attribute of the script tag."""
+  type: String
+}
+
 """A meta tag element."""
-union MetaTagUnion = MetaTagLink | MetaTagProperty | MetaTagValue
+union MetaTagUnion = MetaTagLink | MetaTagProperty | MetaTagScript | MetaTagValue
 
 """A meta content element."""
 type MetaTagValue implements MetaTag {
@@ -796,6 +823,9 @@ type ParagraphAccordion implements LayoutParagraphsInterface & ParagraphInterfac
 
   """The paragraphs entity language code."""
   langcode: Language!
+
+  """Published"""
+  status: Boolean!
 }
 
 """
@@ -816,6 +846,9 @@ type ParagraphBlock implements LayoutParagraphsInterface & ParagraphInterface {
 
   """The paragraphs entity language code."""
   langcode: Language!
+
+  """Published"""
+  status: Boolean!
 }
 
 """Add a title, text content with formatting and link."""
@@ -835,6 +868,9 @@ type ParagraphCallToAction implements LayoutParagraphsInterface & ParagraphInter
   """Link"""
   link: Link
 
+  """Published"""
+  status: Boolean!
+
   """Text"""
   text: Text
 
@@ -852,6 +888,9 @@ interface ParagraphInterface {
 
   """The paragraphs entity language code."""
   langcode: Language!
+
+  """Published"""
+  status: Boolean!
 }
 
 """Add Audio, Documents, Images or Videos and Embed YouTube videos."""
@@ -873,6 +912,9 @@ type ParagraphMedia implements LayoutParagraphsInterface & ParagraphInterface {
 
   """Media"""
   media: MediaUnion!
+
+  """Published"""
+  status: Boolean!
 
   """Title"""
   title: String
@@ -900,6 +942,9 @@ type ParagraphQuote implements LayoutParagraphsInterface & ParagraphInterface {
 
   """Quote"""
   quote: Text!
+
+  """Published"""
+  status: Boolean!
 }
 
 """
@@ -917,6 +962,9 @@ type ParagraphSection implements LayoutParagraphsInterface & ParagraphInterface 
 
   """The paragraphs entity language code."""
   langcode: Language!
+
+  """Published"""
+  status: Boolean!
 }
 
 """Create a table with your own columns and rows."""
@@ -932,6 +980,9 @@ type ParagraphTable implements LayoutParagraphsInterface & ParagraphInterface {
 
   """The paragraphs entity language code."""
   langcode: Language!
+
+  """Published"""
+  status: Boolean!
 
   """Table"""
   table: Table!
@@ -953,6 +1004,9 @@ type ParagraphText implements LayoutParagraphsInterface & ParagraphInterface {
 
   """The paragraphs entity language code."""
   langcode: Language!
+
+  """Published"""
+  status: Boolean!
 
   """Text"""
   text: Text!
@@ -981,24 +1035,12 @@ type Query {
 
   """Load a Menu by name."""
   menu(
-    """
-    Optionally set the response language. Eg en, ja, fr. Setting this langcode
-    will change the current language of the entire response.
-    """
-    langcode: String
-
     """Internal menu name. Eg MAIN"""
     name: MenuAvailable!
   ): Menu
 
   """Load a Route by path."""
   route(
-    """
-    Optionally set the response language. Eg en, ja, fr. Setting this langcode
-    will change the current language of the entire response.
-    """
-    langcode: String
-
     """Internal path to load. Eg /about"""
     path: String!
   ): RouteUnion
@@ -1222,7 +1264,7 @@ scalar UntypedStructuredData
 """A string that will have a value of format ±hh:mm"""
 scalar UtcOffset
 
-"""Views represent collections of curated data from the site."""
+"""Views represent collections of curated data from the CMS."""
 interface View {
   """The description of the view."""
   description: String
@@ -1276,3 +1318,5 @@ type ViewReference {
 
 """All available view result types."""
 union ViewResultUnion = UnsupportedType
+
+scalar _

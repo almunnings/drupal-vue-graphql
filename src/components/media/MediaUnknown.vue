@@ -11,7 +11,6 @@ defineProps({
 
 <template>
   <div class="alert alert-warning" role="alert">
-    Media type <mark>{{ media.__typename }}</mark> is not implemented in the
-    media resolver.
+    Media type <mark>{{ media.__typename }}</mark> is not implemented in the media resolver.
   </div>
 </template>

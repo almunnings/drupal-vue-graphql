@@ -28,9 +28,7 @@ const size = computed(() => prettyBytes(props.media.audio.size))
         {{ title }}
       </h3>
       <div class="ms-md-2">
-        <a :href="media.audio.url" download class="small text-nowrap">
-          Download {{ size }}
-        </a>
+        <a :href="media.audio.url" download class="small text-nowrap"> Download {{ size }} </a>
       </div>
     </div>
 

@@ -42,8 +42,8 @@ export const useRouteStore = defineStore('route', () => {
       }
 
       return routes.set(path, route)
-    } catch (e: Error) {
-      return errors.set(path, e)
+    } catch (e: unknown) {
+      return errors.set(path, e instanceof Error ? e : new Error(String(e)))
     } finally {
       loading.set(path, false)
     }

@@ -17,10 +17,6 @@ defineProps({
 <template>
   <div class="block">
     <h3 class="h5" v-if="title">{{ title }}</h3>
-    <div
-      class="text-processed"
-      v-html="blockContent.body?.processed"
-      v-wysiwyg-links
-    />
+    <div class="text-processed" v-html="blockContent.body?.processed" v-wysiwyg-links />
   </div>
 </template>

@@ -17,6 +17,7 @@ export type Scalars = {
     Timestamp: any,
     UntypedStructuredData: any,
     UtcOffset: any,
+    _: any,
 }
 
 
@@ -450,6 +451,8 @@ export interface MenuItem {
     id: Scalars['ID']
     /** Whether this menu item links to an internal route. */
     internal: Scalars['Boolean']
+    /** The language of the menu item. */
+    langcode: Language
     /** The route this menu item uses. Route loading can be disabled per menu type. */
     route: (RouteUnion | null)
     /** The title of the menu item. */
@@ -477,7 +480,7 @@ export type MenuUnion = (Menu) & { __isUnion?: true }
 
 
 /** A meta tag element. */
-export type MetaTag = (MetaTagLink | MetaTagProperty | MetaTagValue) & { __isUnion?: true }
+export type MetaTag = (MetaTagLink | MetaTagProperty | MetaTagScript | MetaTagValue) & { __isUnion?: true }
 
 
 /** This entity has meta tags enabled. */
@@ -532,8 +535,32 @@ export interface MetaTagPropertyAttributes {
 }
 
 
+/** A meta script element. */
+export interface MetaTagScript {
+    /** The meta tag element attributes. */
+    attributes: MetaTagScriptAttributes
+    /** The content of the script tag. */
+    content: (Scalars['String'] | null)
+    /** The HTML tag for this meta element. */
+    tag: Scalars['String']
+    __typename: 'MetaTagScript'
+}
+
+
+/** A meta script element's attributes. */
+export interface MetaTagScriptAttributes {
+    /** The integrity attribute of the script tag. */
+    integrity: (Scalars['String'] | null)
+    /** The src attribute of the script tag. */
+    src: (Scalars['String'] | null)
+    /** The type attribute of the script tag. */
+    type: (Scalars['String'] | null)
+    __typename: 'MetaTagScriptAttributes'
+}
+
+
 /** A meta tag element. */
-export type MetaTagUnion = (MetaTagLink | MetaTagProperty | MetaTagValue) & { __isUnion?: true }
+export type MetaTagUnion = (MetaTagLink | MetaTagProperty | MetaTagScript | MetaTagValue) & { __isUnion?: true }
 
 
 /** A meta content element. */
@@ -614,6 +641,8 @@ export interface ParagraphAccordion {
     items: ParagraphUnion[]
     /** The paragraphs entity language code. */
     langcode: Language
+    /** Published */
+    status: Scalars['Boolean']
     __typename: 'ParagraphAccordion'
 }
 
@@ -630,6 +659,8 @@ export interface ParagraphBlock {
     id: Scalars['ID']
     /** The paragraphs entity language code. */
     langcode: Language
+    /** Published */
+    status: Scalars['Boolean']
     __typename: 'ParagraphBlock'
 }
 
@@ -646,6 +677,8 @@ export interface ParagraphCallToAction {
     langcode: Language
     /** Link */
     link: (Link | null)
+    /** Published */
+    status: Scalars['Boolean']
     /** Text */
     text: (Text | null)
     /** Title */
@@ -672,6 +705,8 @@ export interface ParagraphMedia {
     langcode: Language
     /** Media */
     media: MediaUnion
+    /** Published */
+    status: Scalars['Boolean']
     /** Title */
     title: (Scalars['String'] | null)
     __typename: 'ParagraphMedia'
@@ -694,6 +729,8 @@ export interface ParagraphQuote {
     link: (Link | null)
     /** Quote */
     quote: Text
+    /** Published */
+    status: Scalars['Boolean']
     __typename: 'ParagraphQuote'
 }
 
@@ -708,6 +745,8 @@ export interface ParagraphSection {
     id: Scalars['ID']
     /** The paragraphs entity language code. */
     langcode: Language
+    /** Published */
+    status: Scalars['Boolean']
     __typename: 'ParagraphSection'
 }
 
@@ -722,6 +761,8 @@ export interface ParagraphTable {
     id: Scalars['ID']
     /** The paragraphs entity language code. */
     langcode: Language
+    /** Published */
+    status: Scalars['Boolean']
     /** Table */
     table: Table
     /** Add a title to your block */
@@ -740,6 +781,8 @@ export interface ParagraphText {
     id: Scalars['ID']
     /** The paragraphs entity language code. */
     langcode: Language
+    /** Published */
+    status: Scalars['Boolean']
     /** Text */
     text: Text
     __typename: 'ParagraphText'
@@ -927,7 +970,7 @@ export interface UnsupportedType {
 }
 
 
-/** Views represent collections of curated data from the site. */
+/** Views represent collections of curated data from the CMS. */
 export interface View {
     /** The description of the view. */
     description: (Scalars['String'] | null)
@@ -1532,6 +1575,8 @@ export interface MenuItemGenqlSelection{
     id?: boolean | number
     /** Whether this menu item links to an internal route. */
     internal?: boolean | number
+    /** The language of the menu item. */
+    langcode?: LanguageGenqlSelection
     /** The route this menu item uses. Route loading can be disabled per menu type. */
     route?: RouteUnionGenqlSelection
     /** The title of the menu item. */
@@ -1570,6 +1615,7 @@ export interface MetaTagGenqlSelection{
     tag?: boolean | number
     on_MetaTagLink?: MetaTagLinkGenqlSelection
     on_MetaTagProperty?: MetaTagPropertyGenqlSelection
+    on_MetaTagScript?: MetaTagScriptGenqlSelection
     on_MetaTagValue?: MetaTagValueGenqlSelection
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1646,10 +1692,37 @@ export interface MetaTagPropertyAttributesGenqlSelection{
 }
 
 
+/** A meta script element. */
+export interface MetaTagScriptGenqlSelection{
+    /** The meta tag element attributes. */
+    attributes?: MetaTagScriptAttributesGenqlSelection
+    /** The content of the script tag. */
+    content?: boolean | number
+    /** The HTML tag for this meta element. */
+    tag?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** A meta script element's attributes. */
+export interface MetaTagScriptAttributesGenqlSelection{
+    /** The integrity attribute of the script tag. */
+    integrity?: boolean | number
+    /** The src attribute of the script tag. */
+    src?: boolean | number
+    /** The type attribute of the script tag. */
+    type?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
 /** A meta tag element. */
 export interface MetaTagUnionGenqlSelection{
     on_MetaTagLink?:MetaTagLinkGenqlSelection,
     on_MetaTagProperty?:MetaTagPropertyGenqlSelection,
+    on_MetaTagScript?:MetaTagScriptGenqlSelection,
     on_MetaTagValue?:MetaTagValueGenqlSelection,
     on_MetaTag?: MetaTagGenqlSelection,
     __typename?: boolean | number
@@ -1767,6 +1840,8 @@ export interface ParagraphAccordionGenqlSelection{
     items?: ParagraphUnionGenqlSelection
     /** The paragraphs entity language code. */
     langcode?: LanguageGenqlSelection
+    /** Published */
+    status?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1784,6 +1859,8 @@ export interface ParagraphBlockGenqlSelection{
     id?: boolean | number
     /** The paragraphs entity language code. */
     langcode?: LanguageGenqlSelection
+    /** Published */
+    status?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1801,6 +1878,8 @@ export interface ParagraphCallToActionGenqlSelection{
     langcode?: LanguageGenqlSelection
     /** Link */
     link?: LinkGenqlSelection
+    /** Published */
+    status?: boolean | number
     /** Text */
     text?: TextGenqlSelection
     /** Title */
@@ -1818,6 +1897,8 @@ export interface ParagraphInterfaceGenqlSelection{
     id?: boolean | number
     /** The paragraphs entity language code. */
     langcode?: LanguageGenqlSelection
+    /** Published */
+    status?: boolean | number
     on_ParagraphAccordion?: ParagraphAccordionGenqlSelection
     on_ParagraphBlock?: ParagraphBlockGenqlSelection
     on_ParagraphCallToAction?: ParagraphCallToActionGenqlSelection
@@ -1845,6 +1926,8 @@ export interface ParagraphMediaGenqlSelection{
     langcode?: LanguageGenqlSelection
     /** Media */
     media?: MediaUnionGenqlSelection
+    /** Published */
+    status?: boolean | number
     /** Title */
     title?: boolean | number
     __typename?: boolean | number
@@ -1868,6 +1951,8 @@ export interface ParagraphQuoteGenqlSelection{
     link?: LinkGenqlSelection
     /** Quote */
     quote?: TextGenqlSelection
+    /** Published */
+    status?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1883,6 +1968,8 @@ export interface ParagraphSectionGenqlSelection{
     id?: boolean | number
     /** The paragraphs entity language code. */
     langcode?: LanguageGenqlSelection
+    /** Published */
+    status?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1898,6 +1985,8 @@ export interface ParagraphTableGenqlSelection{
     id?: boolean | number
     /** The paragraphs entity language code. */
     langcode?: LanguageGenqlSelection
+    /** Published */
+    status?: boolean | number
     /** Table */
     table?: TableGenqlSelection
     /** Add a title to your block */
@@ -1917,6 +2006,8 @@ export interface ParagraphTextGenqlSelection{
     id?: boolean | number
     /** The paragraphs entity language code. */
     langcode?: LanguageGenqlSelection
+    /** Published */
+    status?: boolean | number
     /** Text */
     text?: TextGenqlSelection
     __typename?: boolean | number
@@ -1954,20 +2045,10 @@ export interface QueryGenqlSelection{
     info?: SchemaInformationGenqlSelection
     /** Load a Menu by name. */
     menu?: (MenuGenqlSelection & { __args: {
-    /**
-     * Optionally set the response language. Eg en, ja, fr. Setting this langcode
-     * will change the current language of the entire response.
-     */
-    langcode?: (Scalars['String'] | null), 
     /** Internal menu name. Eg MAIN */
     name: MenuAvailable} })
     /** Load a Route by path. */
     route?: (RouteUnionGenqlSelection & { __args: {
-    /**
-     * Optionally set the response language. Eg en, ja, fr. Setting this langcode
-     * will change the current language of the entire response.
-     */
-    langcode?: (Scalars['String'] | null), 
     /** Internal path to load. Eg /about */
     path: Scalars['String']} })
     __typename?: boolean | number
@@ -2190,7 +2271,7 @@ export interface UnsupportedTypeGenqlSelection{
 }
 
 
-/** Views represent collections of curated data from the site. */
+/** Views represent collections of curated data from the CMS. */
 export interface ViewGenqlSelection{
     /** The description of the view. */
     description?: boolean | number
@@ -2534,7 +2615,7 @@ export interface ViewResultUnionGenqlSelection{
     
 
 
-    const MetaTag_possibleTypes: string[] = ['MetaTagLink','MetaTagProperty','MetaTagValue']
+    const MetaTag_possibleTypes: string[] = ['MetaTagLink','MetaTagProperty','MetaTagScript','MetaTagValue']
     export const isMetaTag = (obj?: { __typename?: any } | null): obj is MetaTag => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isMetaTag"')
       return MetaTag_possibleTypes.includes(obj.__typename)
@@ -2582,7 +2663,23 @@ export interface ViewResultUnionGenqlSelection{
     
 
 
-    const MetaTagUnion_possibleTypes: string[] = ['MetaTagLink','MetaTagProperty','MetaTagValue']
+    const MetaTagScript_possibleTypes: string[] = ['MetaTagScript']
+    export const isMetaTagScript = (obj?: { __typename?: any } | null): obj is MetaTagScript => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isMetaTagScript"')
+      return MetaTagScript_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const MetaTagScriptAttributes_possibleTypes: string[] = ['MetaTagScriptAttributes']
+    export const isMetaTagScriptAttributes = (obj?: { __typename?: any } | null): obj is MetaTagScriptAttributes => {
+      if (!obj?.__typename) throw new Error('__typename is missing in "isMetaTagScriptAttributes"')
+      return MetaTagScriptAttributes_possibleTypes.includes(obj.__typename)
+    }
+    
+
+
+    const MetaTagUnion_possibleTypes: string[] = ['MetaTagLink','MetaTagProperty','MetaTagScript','MetaTagValue']
     export const isMetaTagUnion = (obj?: { __typename?: any } | null): obj is MetaTagUnion => {
       if (!obj?.__typename) throw new Error('__typename is missing in "isMetaTagUnion"')
       return MetaTagUnion_possibleTypes.includes(obj.__typename)

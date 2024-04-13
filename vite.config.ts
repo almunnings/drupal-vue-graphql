@@ -23,7 +23,6 @@ export default defineConfig({
   },
 
   server: {
-    https: false,
     hmr: {
       host: 'localhost',
       protocol: 'ws'

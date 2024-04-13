@@ -1,12 +1,5 @@
 <script setup lang="ts">
-const grid = [
-  'border',
-  'rounded',
-  'd-grid',
-  'p-3',
-  'gap-3',
-  'align-content-start'
-]
+const grid = ['border', 'rounded', 'd-grid', 'p-3', 'gap-3', 'align-content-start']
 </script>
 
 <template>

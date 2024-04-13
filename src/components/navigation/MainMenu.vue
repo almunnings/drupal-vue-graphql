@@ -49,11 +49,7 @@ const loading = computed(() => menuStore.loading.get(props.name))
 
       <div class="collapse navbar-collapse" id="mainNav" ref="collapse">
         <ul class="navbar-nav me-auto" v-if="menu">
-          <MainMenuItem
-            :item="item"
-            v-for="item in menu?.items"
-            :key="item.id"
-          />
+          <MainMenuItem :item="item" v-for="item in menu?.items" :key="item.id" />
         </ul>
       </div>
     </div>

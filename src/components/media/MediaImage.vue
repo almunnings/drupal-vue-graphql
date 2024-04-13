@@ -111,12 +111,7 @@ const srcsets = computed(() => {
       </picture>
     </a>
 
-    <figcaption
-      v-if="description"
-      v-html="description"
-      class="figure-caption"
-      v-wysiwyg-links
-    />
+    <figcaption v-if="description" v-html="description" class="figure-caption" v-wysiwyg-links />
   </figure>
 </template>
 

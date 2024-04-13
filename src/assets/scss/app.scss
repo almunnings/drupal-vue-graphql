@@ -1,9 +1,17 @@
 // Custom app css
 
 // Import transitions
-@import "transitions/fade";
+@import 'transitions/fade';
 
-p,ol,ul,table,figure,picture,blockquote,figure,.alert {
+p,
+ol,
+ul,
+table,
+figure,
+picture,
+blockquote,
+figure,
+.alert {
   &:is(:last-child) {
     margin-bottom: 0;
   }

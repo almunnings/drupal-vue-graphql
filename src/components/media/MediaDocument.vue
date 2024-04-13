@@ -36,20 +36,11 @@ const icon = computed(() => getFileIcon(props.media.document))
             {{ title }}
           </h3>
 
-          <a
-            :href="media.document.url"
-            :type="media.document.mime || undefined"
-            download
-          >
+          <a :href="media.document.url" :type="media.document.mime || undefined" download>
             {{ media.document.description || media.document.name }}
           </a>
 
-          <div
-            v-if="description"
-            v-html="description"
-            class="text-muted small"
-            v-wysiwyg-links
-          />
+          <div v-if="description" v-html="description" class="text-muted small" v-wysiwyg-links />
         </div>
         <div class="text-muted small ms-md-2 text-nowrap">
           {{ extension?.toUpperCase() }}, {{ size }}

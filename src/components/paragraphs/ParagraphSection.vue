@@ -29,11 +29,7 @@ const getRegionChildren = (region: string) =>
 </script>
 
 <template>
-  <component
-    :is="layout"
-    v-if="children"
-    class="section border border-info rounded p-4"
-  >
+  <component :is="layout" v-if="children" class="section border border-info rounded p-4">
     <!-- Loop through each region on paragraph and inject into region slot -->
     <template #[region] v-for="region in regions" :key="region">
       <!-- Generate a dynamic component based on child __typename -->

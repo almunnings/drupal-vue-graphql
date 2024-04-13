@@ -36,11 +36,7 @@ onMounted(() => {
           {{ props.paragraph.accordionTitle }}
         </button>
       </h2>
-      <div
-        :id="`accordion-${paragraph.id}`"
-        ref="collapse"
-        class="accordion-collapse collapse"
-      >
+      <div :id="`accordion-${paragraph.id}`" ref="collapse" class="accordion-collapse collapse">
         <div class="accordion-body d-grid gap-3">
           <component
             v-for="child in paragraph.items"

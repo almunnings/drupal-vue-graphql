@@ -11,7 +11,7 @@ defineProps({
 
 <template>
   <div class="alert alert-warning" role="alert">
-    Paragraph type <mark>{{ paragraph.__typename }}</mark> is not implemented in
-    the paragraph resolver.
+    Paragraph type <mark>{{ paragraph.__typename }}</mark> is not implemented in the paragraph
+    resolver.
   </div>
 </template>
